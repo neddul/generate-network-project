@@ -191,6 +191,7 @@ def create_famID(person_nummer):
     return famID
 
 
+
 def random_sampler(start, end, number):
     output = []
     for k in range(number):
@@ -198,36 +199,43 @@ def random_sampler(start, end, number):
         
     return output
 
-
-#basic random creation of the numbers 
-def Sun2000Inr_creator(amount): 
-    number = random_sampler(100,999, amount)
-    alphabet = string.ascii_lowercase
-    random_letters = random.choices(alphabet, k=amount)
-    combined_list = [str(num) + letter for num, letter in zip(number, random_letters)]
-    return combined_list
-
-def create_utbildning(amount):
-
-    #probably not numbers because we save 000 as well --> do we need to make sure it matches --> question matteo, do we have both
-    #or just one each
+def create_utbildning(amount): 
     Sun2000niva_old = random_sampler(10000,99999, amount)
-
-    #numbers of three --> not all numbers are possible but does it really matter?
-    SUN2000Niva = random_sampler(100,999, amount)
-
-
-
-
-    SUN2000Inr = Sun2000Inr_creator(amount)
-
-
-    #name of the groups maybe sample from a file 
-
-
-    #currently groups dont match
-    grupper = pd.read_excel("variable_data/grupper.xlsx", header=None).iloc[:,1]
-    SUN2000Grp = random.choices(grupper, k=amount)
+    utbildning = pd.read_excel("variable_data/utbildning_cleaner.xlsx")
+    #utbildning = utbildning.dropna()
+    indexes = random_sampler(0,len(utbildning)-1, amount)
+    SUN2000Grp = []
+    SUN2000Inr = []
+    SUN2000Niva = []
+    alphabet = string.ascii_lowercase
+    for i in range(len(indexes)):
+        index = indexes[i]
+        SUN2000Grp.append(utbildning.at[index, 'Utbildningsgrupper 2020'])
+        options_inr = utbildning.at[index, 'Inriktningskoder SUN 2020']
+        if isinstance(options_inr , int):
+            random_letters = random.choice(alphabet)
+            if options_inr <100: 
+                options_inr=options_inr+100
+            SUN2000Inr.append(str(options_inr)+ random_letters)
+        else: 
+            options = [item.strip() for item in options_inr.split(',')]
+            SUN2000Inr.append(random.choice(options))
+        options_niv = utbildning.at[index, 'Nivåkoder SUN 2020']
+        if isinstance(options_niv, int) and options_niv>100:
+            SUN2000Niva.append(options_niv)
+        elif isinstance(options_niv, int):
+            SUN2000Niva.append(options_niv*100)
+        else: 
+            options = [item.strip() for item in options_niv.split(',')]
+            selection = random.choice(options)
+            if  isinstance(selection, int) and selection <100:
+                SUN2000Niva.append(selection*100)
+            else: 
+                    
+                SUN2000Niva.append(selection)
+    #examAr is missing as well 
+    
+    #examkommun is different 
     return pd.DataFrame(list(zip(Sun2000niva_old, SUN2000Niva, SUN2000Inr, SUN2000Grp)), 
                         columns=["Sun2000niva_old", "SUN2000Niva", "SUN2000Inr", "SUN2000Grp"])
 
@@ -250,4 +258,5 @@ def create_registration_data(year,amount):
     return registry_data
 
 registration_data = create_registration_data(2005, 10000)
+registration_data.to_csv('testdata.csv')
 print(registration_data.head())
