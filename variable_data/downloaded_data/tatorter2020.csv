@@ -1,4 +1,4 @@
-6,Länskod,Länsnamn,Kommunkod ,Kommunnamn,Tätortskod,Beteckning på tätort,Del av tätort i annan kommun: 1=Ja,Befolkning 2020-12-31,"Andel av total befolkning i kommun 2020-12-31",Landareal i hektar,Andel av total landareal kommun 
+6,Länskod,Länsnamn,Kommunkod,Kommunnamn,Tätortskod,Beteckning på tätort,Del av tätort i annan kommun: 1=Ja,Befolkning 2020-12-31,"Andel av total befolkning i kommun 2020-12-31",Landareal i hektar,Andel av total landareal kommun 
 7,01,Stockholm,0114,Upplands Väsby,0114TB103,Löwenströmska lasarettet,,581,0.012313496100373007,66,0.008837503549805944
 8,01,Stockholm,0114,Upplands Väsby,0114TB107,Båtbyggartorp och Harva,,221,0.004683791115632417,48,0.006383077725084362
 9,01,Stockholm,0115,Vallentuna,0115TB101,Brottby,,248,0.007268677276590756,38,0.0010706508460892935
@@ -1474,7 +1474,6 @@
 1479,17,Värmland,1761,Hammarö,1761TB103,Tye,,335,0.02009839212862971,102,0.017149748703146762
 1480,17,Värmland,1761,Hammarö,1761TB104,Vidöåsen,,290,0.01739860811135109,26,0.0043054013685081645
 1481,17,Värmland,1761,Hammarö,1761TC102,Skoghall,,14489,0.869270458363331,1262,0.21235088710816868
-1482,17,Värmland,1762,Munkfors,1762TC101,Munkfors,1,2908,0.7806711409395973,616,0.04351544996595555
 1483,17,Värmland,1783,Hagfors,1762TC101,Munkfors,1,8,0.0006946253364591474,7,4.041289110772442e-05
 1484,17,Värmland,1763,Forshaga,1763TB101,Deje,,2705,0.2347275251648733,317,0.009114507938696262
 1485,17,Värmland,1763,Forshaga,1763TB102,Dyvelsten,,251,0.021780631725095454,47,0.0013453361595551572
