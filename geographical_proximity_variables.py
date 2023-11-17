@@ -4,6 +4,7 @@ import json
 from datetime import date, timedelta, datetime
 import numpy as np
 import string
+import dateutil.relativedelta
 scbinternal_fastlopnr = {}
 numbers = [str(x) for x in range(10)]
 
@@ -239,6 +240,21 @@ def create_utbildning(amount):
     return pd.DataFrame(list(zip(Sun2000niva_old, SUN2000Niva, SUN2000Inr, SUN2000Grp)), 
                         columns=["Sun2000niva_old", "SUN2000Niva", "SUN2000Inr", "SUN2000Grp"])
 
+def fodelse_ar(personnummer):
+    fodelse_ar = []
+    for i in personnummer:
+        fodelse_ar.append(i[:4])
+    return fodelse_ar
+
+def alder(PersonNr, year):
+    ages = []
+    for personnummer in PersonNr: 
+        today = datetime(year, 11, 1)
+        year, month, day = int(personnummer[:4]), int(personnummer[4:6]), int(personnummer[6:8])
+        birthday = datetime(year, month, day)
+        age = dateutil.relativedelta.relativedelta(today, birthday)
+        ages.append(age.years)
+    return ages
 
 def create_registration_data(year,amount):
  
@@ -250,13 +266,17 @@ def create_registration_data(year,amount):
     #print(data.head())
     utbildning = create_utbildning(amount)
     famID = create_famID(PersonNr)
+    FodelseAr = fodelse_ar(PersonNr)
+    alder_all = alder(PersonNr, year)
     #registry_data_1 = data.join(utbildning)
     registry_data = utbildning.join(children)
     registry_data['PersonNr'] = PersonNr
     registry_data['famID'] = famID
+    registry_data['FodesleAr'] = FodelseAr
+    registry_data['Alder'] =alder_all
 
     return registry_data
 
-registration_data = create_registration_data(2005, 10000)
+registration_data = create_registration_data(2019, 10000)
 registration_data.to_csv('testdata.csv')
 print(registration_data.head())
