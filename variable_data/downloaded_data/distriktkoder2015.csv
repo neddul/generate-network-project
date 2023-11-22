@@ -1,0 +1,3021 @@
+,Distriktskod,Distrikt,Antal områden,Forsamlingskod,Församling,Andel församling
+0,101001.0,Falsterbo,,123305,Skanör-Falsterbo,100
+1,101002.0,Maglarp,,128706,Hammarlöv,99.89
+2,101003.0,Trelleborg,,128706,Hammarlöv,1
+3,101003.0,Trelleborg,,128701,Trelleborg,98.9399999999999
+4,101004.0,Dalköpinge,,128701,Trelleborg,1.42
+5,101004.0,Dalköpinge,,128715,Dalköpinge,98.5799999999999
+6,101005.0,Gislöv,,128715,Dalköpinge,100
+7,101006.0,Kyrkoköpinge,,128701,Trelleborg,0.7
+8,101006.0,Kyrkoköpinge,,128715,Dalköpinge,99.2999999999999
+9,101007.0,Östra Torp,,128721,Källstorp,100
+10,101008.0,Lilla Isie,,128721,Källstorp,99.5499999999999
+11,101009.0,Simlinge,,128715,Dalköpinge,100
+12,101010.0,Södra Åby,,128721,Källstorp,100
+13,101011.0,Hemmesdynge,,128721,Källstorp,100
+14,101012.0,Äspö,,128721,Källstorp,100
+15,101013.0,Lilla Beddinge,,128721,Källstorp,100
+16,101014.0,Tullstorp,,128721,Källstorp,100
+17,101015.0,Skanör,,123305,Skanör-Falsterbo,100
+18,101016.0,Räng,2.0,123305,Skanör-Falsterbo,1.13
+19,,,,123309,Höllviken,98.87
+20,,,,123309,Höllviken,99.93
+21,101017.0,Skegrie,,128706,Hammarlöv,99.9599999999999
+22,101018.0,Bodarp,,128706,Hammarlöv,99.9899999999999
+23,101019.0,Stora Hammar,2.0,123309,Höllviken,100
+24,,,,123309,Höllviken,100
+25,101020.0,Vellinge,,123304,Vellinge-Månstorp,99.95
+26,101021.0,Fuglie,,128706,Hammarlöv,99.98
+27,101022.0,Mellan-Grevie,,123304,Vellinge-Månstorp,99.9899999999999
+28,101023.0,Västra Tommarp,,128706,Hammarlöv,99.8199999999999
+29,101024.0,Västra Vemmerlöv,,128706,Hammarlöv,99.9899999999999
+30,101025.0,Hammarlöv,,128706,Hammarlöv,100
+31,101026.0,Gylle,,128706,Hammarlöv,6.63
+32,101026.0,Gylle,,128715,Dalköpinge,93.3599999999999
+33,101027.0,Bösarp,,128715,Dalköpinge,99.87
+34,101028.0,Östra Grevie,,123304,Vellinge-Månstorp,99.9
+35,101029.0,Alstad,,128731,Anderslöv,99.9699999999999
+36,101030.0,Östra Klagstorp,,128721,Källstorp,100
+37,101031.0,Källstorp,,128721,Källstorp,100
+38,101032.0,Anderslöv,,128715,Dalköpinge,1.32
+39,101032.0,Anderslöv,,128731,Anderslöv,98.67
+40,101033.0,Grönby,,128731,Anderslöv,100
+41,101034.0,Önnarp,,128731,Anderslöv,99.95
+42,101035.0,Västra Vemmenhög,,126406,Skivarp,99.9699999999999
+43,101036.0,Östra Vemmenhög,,126406,Skivarp,99.9699999999999
+44,101037.0,Skivarp,,126406,Skivarp,99.98
+45,101038.0,Svenstorp,,126406,Skivarp,99.9899999999999
+46,101039.0,Gärdslöv,,128731,Anderslöv,99.9899999999999
+47,101040.0,Solberga,,126412,Villie,99.8599999999999
+48,101041.0,Örsjö,,126412,Villie,99.5499999999999
+49,101042.0,Skurup,,126401,Skurup,99.9899999999999
+50,101043.0,Västra Nöbbelöv,,126406,Skivarp,99.92
+51,101044.0,Snårestad,,128605,Ljunits,99.9099999999999
+52,101045.0,Sjörup,,128605,Ljunits,99.95
+53,101046.0,Katslösa,,126412,Villie,99.95
+54,101047.0,Balkåkra,,128605,Ljunits,100
+55,101048.0,Ystad,,128601,Ystad,99.7199999999999
+56,101049.0,Bjäresjö,,128605,Ljunits,99.73
+57,101050.0,Hedeskoga,,128614,Sövestadsbygden,99.5999999999999
+58,101051.0,Bromma,,128614,Sövestadsbygden,100
+59,101052.0,Öja,,128611,Stora Köpinge,99.87
+60,101053.0,Stora Herrestad,,128611,Stora Köpinge,99.9899999999999
+61,101054.0,Ingelstorp,,128617,Löderup,99.9599999999999
+62,101055.0,Stora Köpinge,,128611,Stora Köpinge,99.98
+63,101056.0,Glemminge,,128617,Löderup,100
+64,101057.0,Tosterup,,127009,Smedstorp,100
+65,101058.0,Valleberga,,128617,Löderup,100
+66,101059.0,Löderup,,128617,Löderup,99.9699999999999
+67,101060.0,Borrby,,129107,Borrby-Östra Hoby,99.9899999999999
+68,101061.0,Hörup,,128617,Löderup,100
+69,101062.0,Hannas,,129115,Hammenhög,100
+70,101063.0,Östra Hoby,,129107,Borrby-Östra Hoby,100
+71,101064.0,Eskilstorp,,123304,Vellinge-Månstorp,100
+72,101065.0,Gessie,,123304,Vellinge-Månstorp,99.51
+73,101066.0,Tygelsjö,,128008,Fosie,6
+74,101066.0,Tygelsjö,,128007,Limhamn,93.9399999999999
+75,101067.0,Hököpinge,,123304,Vellinge-Månstorp,99.98
+76,101068.0,Södra Åkarp,,123304,Vellinge-Månstorp,100
+77,101069.0,Arrie,,123304,Vellinge-Månstorp,99.8299999999999
+78,101070.0,Västra Klagstorp,,128007,Limhamn,99.81
+79,101071.0,Bunkeflo,,128008,Fosie,3.4
+80,101071.0,Bunkeflo,,128016,Hyllie,26.3099999999999
+81,101071.0,Bunkeflo,,128007,Limhamn,70.29
+82,101072.0,Kulladal,,128008,Fosie,3.14
+83,101072.0,Kulladal,,128016,Hyllie,96.8599999999999
+84,101073.0,Oxie,,128016,Hyllie,0.67
+85,101073.0,Oxie,,128010,Husie,5.95
+86,101073.0,Oxie,,128008,Fosie,93.3299999999999
+87,101074.0,Fosie,,128008,Fosie,100
+88,101075.0,Västra Ingelstad,,123304,Vellinge-Månstorp,100
+89,101076.0,Törringe-Västra Kärrstorp,,126307,Värby,1.95
+90,101076.0,Törringe-Västra Kärrstorp,,126301,Svedala,98.0199999999999
+91,101077.0,Svedala,,126301,Svedala,99.89
+92,101078.0,Skabersjö,,126307,Värby,99.9399999999999
+93,101079.0,Börringe,,126301,Svedala,99.98
+94,101080.0,Hyby,,126307,Värby,99.9899999999999
+95,101081.0,Slimminge,,126412,Villie,99.98
+96,101082.0,Villie,2.0,126412,Villie,100
+97,,,,126412,Villie,100
+98,101083.0,Skårby,,128605,Ljunits,100
+99,101084.0,Blentarp,,126505,Blentarp,100
+100,101085.0,Sövde,,126505,Blentarp,99.9899999999999
+101,101086.0,Sövestad,,128614,Sövestadsbygden,99.9899999999999
+102,101087.0,Borrie,,128611,Stora Köpinge,100
+103,101088.0,Högestad,,128614,Sövestadsbygden,99.8599999999999
+104,101089.0,Baldringe,,128614,Sövestadsbygden,100
+105,101090.0,Ramsåsa,,127005,Tomelillabygden,100
+106,101091.0,Övraby,,127009,Smedstorp,100
+107,101092.0,Benestad,,127005,Tomelillabygden,100
+108,101093.0,Ullstorp,,127005,Tomelillabygden,99.98
+109,101094.0,Tomelilla,,127005,Tomelillabygden,100
+110,101095.0,Tryde,,127005,Tomelillabygden,100
+111,101096.0,Kverrestad,,127009,Smedstorp,100
+112,101097.0,Spjutstorp,,127014,Brösarp-Tranås,100
+113,101098.0,Bollerup,,127009,Smedstorp,100
+114,101099.0,Östra Ingelstad,,127009,Smedstorp,100
+115,101100.0,Hammenhög,,129115,Hammenhög,100
+116,101101.0,Vallby,,129115,Hammenhög,99.98
+117,101102.0,Östra Herrestad,,129115,Hammenhög,99.81
+118,101103.0,Smedstorp,,127009,Smedstorp,99.98
+119,101104.0,Stiby,,129111,Stiby,100
+120,101105.0,Bolshög,,129111,Stiby,99.9899999999999
+121,101106.0,Östra Nöbbelöv,,129101,Simrishamn,99.92
+122,101107.0,Östra Tommarp,,129111,Stiby,100
+123,101108.0,Järrestad,2.0,129101,Simrishamn,99.9899999999999
+124,,,,129101,Simrishamn,100
+125,101109.0,Simris,,129101,Simrishamn,100
+126,101110.0,Simrishamn,,129101,Simrishamn,100
+127,101111.0,Gladsax,,129101,Simrishamn,99.79
+128,101112.0,Limhamn,,128016,Hyllie,2.84
+129,101112.0,Limhamn,,128007,Limhamn,97.06
+130,101113.0,Hyllie,,128007,Limhamn,1.08
+131,101113.0,Hyllie,,128016,Hyllie,98.92
+132,101114.0,Eriksfält,,128016,Hyllie,30.69
+133,101114.0,Eriksfält,,128008,Fosie,69.2999999999999
+134,101115.0,Malmö Sankt Johannes,,128002,Malmö S:t Petri,9.69
+135,101115.0,Malmö Sankt Johannes,,128016,Hyllie,27.9699999999999
+136,101115.0,Malmö Sankt Johannes,,128006,Malmö S:t Johannes,62.34
+137,101116.0,Möllevången,,128006,Malmö S:t Johannes,100
+138,101117.0,Slottsstaden,,128002,Malmö S:t Petri,99.8499999999999
+139,101118.0,Malmö Sankt Petri,,128006,Malmö S:t Johannes,7.03
+140,101118.0,Malmö Sankt Petri,,128002,Malmö S:t Petri,92.9699999999999
+141,101119.0,Sofielund,,128006,Malmö S:t Johannes,99.78
+142,101120.0,Västra Skrävlinge,,128010,Husie,25.57
+143,101120.0,Västra Skrävlinge,,128008,Fosie,74.4399999999999
+144,101121.0,Husie,,128010,Husie,99.9599999999999
+145,101122.0,Malmö Sankt Pauli,,128010,Husie,28.46
+146,101122.0,Malmö Sankt Pauli,,128006,Malmö S:t Johannes,71.51
+147,101123.0,Kirseberg,,128010,Husie,45.21
+148,101123.0,Kirseberg,,128002,Malmö S:t Petri,54.6499999999999
+149,101124.0,Burlöv,,123101,Burlöv,99.64
+150,101125.0,Södra Sallerup,,128010,Husie,99.8799999999999
+151,101126.0,Bjärshög,,126307,Värby,99.8199999999999
+152,101127.0,Särslöv,,123006,Uppåkra,99.9399999999999
+153,101128.0,Mölleberga,,123006,Uppåkra,99.87
+154,101129.0,Bara,,126307,Värby,100
+155,101130.0,Tottarp,,123006,Uppåkra,99.6099999999999
+156,101131.0,Görslöv,,123006,Uppåkra,99.81
+157,101132.0,Staffanstorp,,123013,S:t Staffan,99.93
+158,101133.0,Genarp,,126301,Svedala,0.67
+159,101133.0,Genarp,,128120,Genarp,99.2399999999999
+160,101134.0,Kyrkheddinge,,123013,S:t Staffan,100
+161,101135.0,Esarp,,123013,S:t Staffan,99.98
+162,101136.0,Bonderup,,128116,Dalby,99.9699999999999
+163,101137.0,Veberöd,,128121,Veberöd,100
+164,101138.0,Everlöv,,126505,Blentarp,99.9899999999999
+165,101139.0,Ilstorp,,126503,Sjöbo,99.98
+166,101140.0,Björka,,126503,Sjöbo,99.98
+167,101141.0,Södra Åsum,,126503,Sjöbo,99.7999999999999
+168,101142.0,Röddinge,,126510,Lövestad,99.9899999999999
+169,101143.0,Vanstad,,126510,Lövestad,100
+170,101144.0,Tolånga,,126510,Lövestad,99.9899999999999
+171,101145.0,Tranås,,127014,Brösarp-Tranås,100
+172,101146.0,Onslunda,,127014,Brösarp-Tranås,100
+173,101147.0,Lövestad,,126510,Lövestad,100
+174,101148.0,Fågeltofta,,127014,Brösarp-Tranås,100
+175,101149.0,Sankt Olof,,129117,S:t Olof,99.9899999999999
+176,101150.0,Östra Vemmerlöv,,129111,Stiby,99.98
+177,101151.0,Rörum,,129118,Rörum,99.68
+178,101152.0,Södra Mellby,,129119,Kivik,99.9699999999999
+179,101153.0,Lomma,,126201,Lomma,99.9
+180,101154.0,Flädie,,126205,Bjärred,100
+181,101155.0,Fjelie,,126205,Bjärred,99.87
+182,101156.0,Borgeby,,126205,Bjärred,100.01
+183,101157.0,Uppåkra,,123006,Uppåkra,100
+184,101158.0,Knästorp,,123006,Uppåkra,100
+185,101159.0,Lunds Helgeand,,128124,Helgeand,100.01
+186,101160.0,Lunds domkyrkodistrikt,,128101,Lunds domkyrkoförsamling,100
+187,101161.0,Stora Råby,,128125,Lunds östra stadsförsamling,99.9899999999999
+188,101162.0,Lunds Sankt Peters kloster,,128102,S:t Peters kloster,99.93
+189,101163.0,Norra Nöbbelöv,,128105,Norra Nöbbelöv,99.95
+190,101164.0,Lunds Allhelgona,,128104,Lunds Allhelgonaförsamling,100
+191,101165.0,Östra Torn,,128125,Lunds östra stadsförsamling,100
+192,101166.0,Lunds Sankt Hans,,128125,Lunds östra stadsförsamling,99.9899999999999
+193,101167.0,Bjällerup,,123013,S:t Staffan,99.9899999999999
+194,101168.0,Hardeberga,,128113,Södra Sandby,99.93
+195,101169.0,Dalby,,128116,Dalby,99.9699999999999
+196,101170.0,Södra Sandby,,128113,Södra Sandby,99.98
+197,101171.0,Hällestad,,128116,Dalby,99.9699999999999
+198,101172.0,Silvåkra,,128121,Veberöd,99.98
+199,101173.0,Vomb,,128121,Veberöd,99.9899999999999
+200,101174.0,Revinge,,128113,Södra Sandby,99.8599999999999
+201,101175.0,Harlösa,,128513,Löberöd,99.9899999999999
+202,101176.0,Öved,,126511,Vollsjö,99.9899999999999
+203,101177.0,Brandstad,,126511,Vollsjö,100
+204,101178.0,Östra Kärrstorp,,126511,Vollsjö,100
+205,101179.0,Östraby,,126602,Hörby,99.9899999999999
+206,101180.0,Vollsjö,,126511,Vollsjö,100
+207,101181.0,Fränninge,,126511,Vollsjö,99.9899999999999
+208,101182.0,Eljaröd,,127014,Brösarp-Tranås,100
+209,101183.0,Andrarum,,127014,Brösarp-Tranås,99.9899999999999
+210,101184.0,Vitaby,,129117,S:t Olof,0.89
+211,101184.0,Vitaby,,129119,Kivik,99.1099999999999
+212,101185.0,Brösarp,,127014,Brösarp-Tranås,99.9899999999999
+213,101186.0,Ravlunda,,127014,Brösarp-Tranås,2.14
+214,101186.0,Ravlunda,,129119,Kivik,97.84
+215,101187.0,Barsebäck,,126110,Hofterup,0.91
+216,101187.0,Barsebäck,,126112,Löddebygden,99.0999999999999
+217,101188.0,Löddeköpinge,,126112,Löddebygden,99.64
+218,101189.0,Hög,,126112,Löddebygden,99.9899999999999
+219,101190.0,Hofterup,,126110,Hofterup,99.9899999999999
+220,101191.0,Västra Karaby,,126110,Hofterup,1.83
+221,101191.0,Västra Karaby,,126103,Västra Karaby,97.9599999999999
+222,101192.0,Dagstorp,,126102,Dagstorp,99.92
+223,101193.0,Lackalänga-Stävie,,126104,Lackalänga-Stävie,99.9599999999999
+224,101194.0,Kävlinge,,126101,Kävlinge,100
+225,101195.0,Torn,,128127,Torn,99.9099999999999
+226,101196.0,Stora Harrie,,126101,Kävlinge,100
+227,101197.0,Södervidinge,,126101,Kävlinge,100.02
+228,101198.0,Lilla Harrie,,126101,Kävlinge,99.7699999999999
+229,101199.0,Virke,,126101,Kävlinge,100
+230,101200.0,Gårdstånga-Holmby,,128513,Löberöd,1.13
+231,101200.0,Gårdstånga-Holmby,,128501,Eslöv,98.7
+232,101201.0,Örtofta,,128501,Eslöv,100
+233,101202.0,Borlunda-Skeglinge,,128501,Eslöv,100
+234,101203.0,Eslöv,,128501,Eslöv,99.8299999999999
+235,101204.0,Skarhult,,128501,Eslöv,100
+236,101205.0,Hammarlunda,2.0,128513,Löberöd,99.8499999999999
+237,,,,128513,Löberöd,99.9899999999999
+238,101206.0,Hurva,,128509,Ringsjö,99.9099999999999
+239,101207.0,Östra Strö,2.0,128501,Eslöv,100
+240,,,,128501,Eslöv,100
+241,101208.0,Gudmuntorp,,126704,Ringsjö,99.95
+242,101209.0,Västerstad,,126602,Hörby,100
+243,101210.0,Högseröd,,128513,Löberöd,100
+244,101211.0,Lyby,,126602,Hörby,100
+245,101212.0,Hörby,2.0,126602,Hörby,100
+246,,,,126602,Hörby,100
+247,101213.0,Långaröd,,126602,Hörby,100
+248,101214.0,Östra Sallerup,,126602,Hörby,100
+249,101215.0,Hörröd,,129029,Degeberga-Everöd,100
+250,101216.0,Huaröd,,129029,Degeberga-Everöd,100
+251,101217.0,Maglehem,,127014,Brösarp-Tranås,4.21
+252,101217.0,Maglehem,,129029,Degeberga-Everöd,95.75
+253,101218.0,Degeberga,,129029,Degeberga-Everöd,100
+254,101219.0,Vittskövle,,129029,Degeberga-Everöd,100
+255,101220.0,Sankt Ibb,,128201,Landskrona,99.79
+256,101221.0,Landskrona,,128204,Häljarp,3.86
+257,101221.0,Landskrona,,128201,Landskrona,96.14
+258,101222.0,Tofta,,128204,Häljarp,99.7
+259,101223.0,Härslöv,,128201,Landskrona,99.87
+260,101224.0,Saxtorp,,128204,Häljarp,100
+261,101225.0,Annelöv,,128204,Häljarp,99.8499999999999
+262,101226.0,Billeberga,,121408,Billeberga-Sireköpinge,99.9399999999999
+263,101227.0,Källs Nöbbelöv,,121402,Svalöv,4.11
+264,101227.0,Källs Nöbbelöv,,121410,Teckomatorp,95.89
+265,101228.0,Asmundtorp,,128204,Häljarp,99.92
+266,101229.0,Sireköpinge,,121408,Billeberga-Sireköpinge,99.95
+267,101230.0,Tirup,,121402,Svalöv,100
+268,101231.0,Norrvidinge,,121410,Teckomatorp,99.9899999999999
+269,101232.0,Norra Skrävlinge,,128511,Marieholm,5.1
+270,101232.0,Norra Skrävlinge,,121402,Svalöv,10.32
+271,101232.0,Norra Skrävlinge,,121410,Teckomatorp,84.5799999999999
+272,101233.0,Reslöv,,128511,Marieholm,99.98
+273,101234.0,Östra Karaby,,128511,Marieholm,100
+274,101235.0,Felestad,,121402,Svalöv,99.9899999999999
+275,101236.0,Västra Strö,,128502,Östra Onsjö,100
+276,101237.0,Torrlösa,,121402,Svalöv,100
+277,101238.0,Trollenäs,,128501,Eslöv,2.34
+278,101238.0,Trollenäs,,128502,Östra Onsjö,97.6599999999999
+279,101239.0,Bosarp,,128502,Östra Onsjö,100
+280,101240.0,Bosjökloster,2.0,126702,Höör,1.25
+281,,,,126704,Ringsjö,98.7399999999999
+282,,,,126704,Ringsjö,99.8499999999999
+283,101241.0,Stehag,,128502,Östra Onsjö,99.9899999999999
+284,101242.0,Fulltofta,,126602,Hörby,100
+285,101243.0,Södra Rörum,,126602,Hörby,100
+286,101244.0,Äspinge,,126602,Hörby,100
+287,101245.0,Svensköp,,126602,Hörby,100
+288,101246.0,Linderöd,,129033,Linderöd,100
+289,101247.0,Östra Sönnarslöv,,129029,Degeberga-Everöd,100
+290,101248.0,Västra Vram,,129032,Västra och Östra Vram,100
+291,101249.0,Östra Vram,,129032,Västra och Östra Vram,100
+292,101250.0,Everöd,,129029,Degeberga-Everöd,99.9899999999999
+293,101251.0,Lyngsjö,,129029,Degeberga-Everöd,100
+294,101252.0,Köpinge,,129008,Köpinge,100
+295,101253.0,Åhus,,129015,Åhus,99.93
+296,101254.0,Raus,,128303,Raus,99.9
+297,101255.0,Glumslöv,,128201,Landskrona,0.65
+298,101255.0,Glumslöv,,128316,Kvistofta,1.06
+299,101255.0,Glumslöv,,128207,Kvistofta,98.29
+300,101256.0,Kvistofta,,128316,Kvistofta,99.9699999999999
+301,101257.0,Fjärestad,,128316,Kvistofta,100
+302,101258.0,Bårslöv,,128316,Kvistofta,99.9899999999999
+303,101259.0,Ottarp,,128314,Landskrona,99.75
+304,101260.0,Halmstad,,121405,Kågeröd-Röstånga,99.98
+305,101261.0,Ekeby,,126004,Ekeby,99.9399999999999
+306,101262.0,Svalöv,,121402,Svalöv,100
+307,101263.0,Kågeröd,2.0,121402,Svalöv,8.13
+308,,,,121405,Kågeröd-Röstånga,91.8599999999999
+309,,,,121405,Kågeröd-Röstånga,99.7399999999999
+310,101264.0,Konga,,121402,Svalöv,1.79
+311,101264.0,Konga,,121405,Kågeröd-Röstånga,98.2
+312,101265.0,Ask,,121405,Kågeröd-Röstånga,100
+313,101266.0,Billinge,,128502,Östra Onsjö,99.9899999999999
+314,101267.0,Röstånga,,121405,Kågeröd-Röstånga,99.9899999999999
+315,101268.0,Munkarp,,126702,Höör,99.98
+316,101269.0,Höör,,126702,Höör,99.9699999999999
+317,101270.0,Hallaröd,,126702,Höör,100
+318,101271.0,Häglinge,,129315,Sösdala,99.9899999999999
+319,101272.0,Tjörnarp,,126702,Höör,99.9
+320,101273.0,Äsphult,,129003,Äsphult,100
+321,101274.0,Djurröd,,129005,Träne-Djurröd,100
+322,101275.0,Träne,,129005,Träne-Djurröd,100
+323,101276.0,Skepparslöv,,129007,Vä-Skepparslöv,100
+324,101277.0,Vä,,129007,Vä-Skepparslöv,100
+325,101278.0,Norra Åsum,,129002,Norra Åsum,100
+326,101279.0,Rinkaby,,129025,Gustav Adolf-Rinkaby,100
+327,101280.0,Gustav Adolf,,129025,Gustav Adolf-Rinkaby,100
+328,101281.0,Nymö,,129024,Fjälkinge-Nymö,100
+329,101282.0,Trolle-Ljungby,2.0,129023,Bäckaskog,100
+330,,,,129023,Bäckaskog,100
+331,101283.0,Helsingborgs Gustav Adolf,,128303,Raus,1.03
+332,101283.0,Helsingborgs Gustav Adolf,,128302,Helsingborgs Gustav Adolf,98.9699999999999
+333,101284.0,Helsingborgs Maria,,128302,Helsingborgs Gustav Adolf,2.43
+334,101284.0,Helsingborgs Maria,,128301,Helsingborgs Maria,97.56
+335,101285.0,Filborna,,128317,Filborna,100
+336,101286.0,Välluv,,128309,Kropp,100
+337,101287.0,Frillestad,,128309,Kropp,100
+338,101288.0,Hässlunda,,128309,Kropp,99.87
+339,101289.0,Kropp,,127701,Björnekulla-Västra Broby,1.04
+340,101289.0,Kropp,,128309,Kropp,98.9599999999999
+341,101290.0,Mörarp,3.0,128309,Kropp,99.95
+342,,,,128309,Kropp,100
+343,,,,128309,Kropp,100
+344,101291.0,Risekatslösa,,126001,Bjuv,99.9099999999999
+345,101292.0,Bjuv,,126001,Bjuv,99.7099999999999
+346,101293.0,Norra Vram,2.0,126001,Bjuv,99.7199999999999
+347,,,,126001,Bjuv,100
+348,101294.0,Stenestad,,121405,Kågeröd-Röstånga,99.9899999999999
+349,101295.0,Västra Sönnarslöv,,127601,Klippan,99.9599999999999
+350,101296.0,Riseberga,,127605,Riseberga-Färingtofta,100
+351,101297.0,Färingtofta,,127605,Riseberga-Färingtofta,100
+352,101298.0,Norra Rörum,,126702,Höör,100
+353,101299.0,Norra Mellby,,129315,Sösdala,100
+354,101300.0,Matteröd,,129319,Tyringe,100
+355,101301.0,Brönnestad,,129315,Sösdala,100
+356,101302.0,Nävlinge,,129305,Vinslöv,100
+357,101303.0,Önnestad,,129014,Araslöv,99.9899999999999
+358,101304.0,Vinslöv,,129305,Vinslöv,100
+359,101305.0,Norra Strö,,129014,Araslöv,100
+360,101306.0,Kristianstads Heliga Trefaldighet,,129001,Kristianstads Heliga Trefaldighet,100
+361,101307.0,Färlöv,,129014,Araslöv,100
+362,101308.0,Fjälkestad,,129009,Nosaby,99.9899999999999
+363,101309.0,Nosaby,,129009,Nosaby,100
+364,101310.0,Fjälkinge,,129024,Fjälkinge-Nymö,100
+365,101311.0,Österslöv,,129009,Nosaby,100
+366,101312.0,Kiaby,2.0,129023,Bäckaskog,100
+367,,,,129023,Bäckaskog,100
+368,101313.0,Gualöv,,127201,Ivetofta-Gualöv,99.81
+369,101314.0,Ivetofta,,129023,Bäckaskog,0.95
+370,101314.0,Ivetofta,,127201,Ivetofta-Gualöv,99.0499999999999
+371,101315.0,Ivö,,129023,Bäckaskog,100
+372,101316.0,Allerum,,128301,Helsingborgs Maria,1.5
+373,101316.0,Allerum,,128306,Allerum,98.4699999999999
+374,101317.0,Kattarp,,128305,Välinge-Kattarp,99.98
+375,101318.0,Viken,,128403,Viken,99.65
+376,101319.0,Fleninge,,128307,Fleninge,99.98
+377,101320.0,Västra Broby,,127701,Björnekulla-Västra Broby,99.78
+378,101321.0,Strövelstorp,,129206,Strövelstorp,99.89
+379,101322.0,Björnekulla,,127701,Björnekulla-Västra Broby,99.98
+380,101323.0,Kvidinge,,127703,Kvidinge,99.9899999999999
+381,101324.0,Klippan,,127601,Klippan,99.9899999999999
+382,101325.0,Östra Ljungby,,127607,Östra Ljungby,99.8799999999999
+383,101326.0,Vedby,,127601,Klippan,100
+384,101327.0,Perstorp,,127501,Perstorp,99.9899999999999
+385,101328.0,Västra Torup,,129322,Västra Torup,100
+386,101329.0,Finja,,129319,Tyringe,100
+387,101330.0,Hässleholm,,129301,Hässleholm,100
+388,101331.0,Ignaberga,,129301,Hässleholm,100
+389,101332.0,Stoby,,129301,Hässleholm,100
+390,101333.0,Sörby,,129305,Vinslöv,100
+391,101334.0,Gumlösa,,129305,Vinslöv,100
+392,101335.0,Gryt,,125601,Knislinge-Gryt,99.9899999999999
+393,101336.0,Kviinge,,125603,Kviinge,99.9899999999999
+394,101337.0,Knislinge,,125601,Knislinge-Gryt,100
+395,101338.0,Oppmanna,,129035,Oppmanna,100
+396,101339.0,Näsum,,127203,Näsum,99.9599999999999
+397,101340.0,Höganäs,,128402,Väsby,7.15
+398,101340.0,Höganäs,,128401,Höganäs,92.8599999999999
+399,101341.0,Brunnby,,128404,Brunnby,99.9899999999999
+400,101342.0,Väsby,,128402,Väsby,99.95
+401,101343.0,Jonstorp,2.0,128405,Farhult-Jonstorp,99.9399999999999
+402,,,,128405,Farhult-Jonstorp,99.9899999999999
+403,101344.0,Farhult,,128305,Välinge-Kattarp,0.74
+404,101344.0,Farhult,,128405,Farhult-Jonstorp,99.26
+405,101345.0,Välinge,,128305,Välinge-Kattarp,99.84
+406,101346.0,Ängelholm,,129201,Ängelholm,99.8299999999999
+407,101347.0,Rebbelberga,,129211,Hjärnarp-Tåstarp,1.46
+408,101347.0,Rebbelberga,,129201,Ängelholm,98.3499999999999
+409,101348.0,Höja,,129201,Ängelholm,99.98
+410,101349.0,Össjö,,129205,Munka Ljungby,99.9899999999999
+411,101350.0,Tåstarp,,129211,Hjärnarp-Tåstarp,99.9099999999999
+412,101351.0,Munka Ljungby,,129205,Munka Ljungby,99.92
+413,101352.0,Rya,,125702,Rya,99.9899999999999
+414,101353.0,Röke,,129321,Röke,100
+415,101354.0,Hörja,,129319,Tyringe,100
+416,101355.0,Vankiva,,129314,Vankiva,100
+417,101356.0,Farstorp,,129310,Farstorp,100
+418,101357.0,Norra Sandby,,129301,Hässleholm,100
+419,101358.0,Hästveda,,129301,Hässleholm,100
+420,101359.0,Emmislöv,,125606,Broby-Emmislöv,100
+421,101360.0,Östra Broby,,125606,Broby-Emmislöv,100
+422,101361.0,Hjärsås,,125601,Knislinge-Gryt,0.96
+423,101361.0,Hjärsås,,125604,Hjärsås,99.04
+424,101362.0,Vånga,,129034,Vånga,100
+425,101363.0,Barkåkra,,129201,Ängelholm,0.5
+426,101363.0,Barkåkra,,129209,Barkåkra,99.3299999999999
+427,101364.0,Förslöv,,127802,Förslöv-Grevie,100
+428,101365.0,Hjärnarp,,129211,Hjärnarp-Tåstarp,99.9599999999999
+429,101366.0,Tåssjö,,129205,Munka Ljungby,99.9899999999999
+430,101367.0,Örkelljunga,,125701,Örkelljunga,99.9899999999999
+431,101368.0,Skånes Fagerhult,,125703,Skånes-Fagerhult,99.9899999999999
+432,101369.0,Norra Åkarp,,129313,Norra Åkarp,100
+433,101370.0,Vittsjö,,129312,Vittsjö,99.9899999999999
+434,101371.0,Verum,,129311,Verum,100
+435,101372.0,Glimåkra,,125607,Glimåkra,100
+436,101373.0,Västra Karup,,127804,Västra Karup-Hov,100
+437,101374.0,Torekov,,127804,Västra Karup-Hov,8.14
+438,101374.0,Torekov,,127806,Torekov,91.8599999999999
+439,101375.0,Hov,,127804,Västra Karup-Hov,100
+440,101376.0,Grevie,,127802,Förslöv-Grevie,99.9099999999999
+441,101377.0,Båstad,,127801,Båstad-Östra Karup,99.9699999999999
+442,101378.0,Visseltofta,,127301,Osby-Visseltofta,100
+443,101379.0,Osby,,127301,Osby-Visseltofta,100
+444,101380.0,Loshult,,127303,Loshult,99.9899999999999
+445,101381.0,Örkened,,127302,Örkened,99.9599999999999
+446,102001.0,Sölvesborg,,108301,Sölvesborg,99.9899999999999
+447,102002.0,Ysane,,108301,Sölvesborg,22.39
+448,102002.0,Ysane,,108304,Mjällby,77.5999999999999
+449,102003.0,Mjällby,,108304,Mjällby,100
+450,102004.0,Hasslö,,108018,Nättraby-Hasslö,100
+451,102005.0,Aspö,,108001,Karlskrona stadsförsamling,3.3
+452,102005.0,Aspö,,108004,Aspö,96.68
+453,102006.0,Sturkö,,108001,Karlskrona stadsförsamling,2.95
+454,102006.0,Sturkö,,108011,Sturkö,97.03
+455,102007.0,Torhamn,,108010,Torhamn,100
+456,102008.0,Gammalstorp,,108301,Sölvesborg,99.9899999999999
+457,102009.0,Elleholm,,108206,Mörrum-Elleholm,100
+458,102010.0,Mörrum,,108206,Mörrum-Elleholm,99.9899999999999
+459,102011.0,Karlshamn,,108201,Karlshamn,99.9399999999999
+460,102012.0,Listerby,,108101,Ronneby,100
+461,102013.0,Förkärla,,108101,Ronneby,100
+462,102014.0,Nättraby,,108018,Nättraby-Hasslö,99.9899999999999
+463,102015.0,Karlskrona stadsdistrikt,,108006,Lyckå,0.93
+464,102015.0,Karlskrona stadsdistrikt,,108001,Karlskrona stadsförsamling,99.0699999999999
+465,102016.0,Ramdala,2.0,108012,Ramdala,99.68
+466,,,,108012,Ramdala,99.9899999999999
+467,102017.0,Jämshög,,106002,Jämshög,99.9899999999999
+468,102018.0,Asarum,,108205,Asarum,99.9599999999999
+469,102019.0,Hällaryd,,108203,Hällaryd,99.95
+470,102020.0,Åryd,,108203,Hällaryd,2.56
+471,102020.0,Åryd,,108204,Åryd,97.43
+472,102021.0,Bräkne-Hoby,,108110,Bräkne-Hoby,99.9899999999999
+473,102022.0,Ronneby,,108101,Ronneby,100
+474,102023.0,Edestad,2.0,108101,Ronneby,100
+475,,,,108101,Ronneby,100
+476,102024.0,Hjortsberga,,108101,Ronneby,100
+477,102025.0,Lösen,,108006,Lyckå,100
+478,102026.0,Augerum,2.0,108006,Lyckå,100
+479,,,,108006,Lyckå,100
+480,102027.0,Jämjö,,108009,Jämjö,99.9899999999999
+481,102028.0,Kristianopel,,108008,Kristianopel,100
+482,102029.0,Kyrkhult,,106003,Kyrkhult,99.98
+483,102030.0,Ringamåla,,108202,Ringamåla,99.98
+484,102031.0,Backaryd,,108101,Ronneby,100
+485,102032.0,Tving,,108101,Ronneby,3.55
+486,102032.0,Tving,,108015,Fridlevstad,96.45
+487,102033.0,Fridlevstad,2.0,108015,Fridlevstad,100
+488,,,,108015,Fridlevstad,100
+489,102034.0,Rödeby,,108014,Rödeby,100
+490,102035.0,Flymen,,108006,Lyckå,100
+491,102036.0,Öljehult,,108101,Ronneby,99.9899999999999
+492,102037.0,Eringsboda,,108101,Ronneby,100
+493,102038.0,Sillhövda,,108015,Fridlevstad,100
+494,103001.0,Ås,,084008,Sydöland,100
+495,103002.0,Ventlinge,,084008,Sydöland,100
+496,103003.0,Södra Möckleby,,084008,Sydöland,100
+497,103004.0,Gräsgård,,084008,Sydöland,100
+498,103005.0,Segerstad,,084008,Sydöland,99.95
+499,103006.0,Smedby,,084008,Sydöland,99.95
+500,103007.0,Kastlösa,,084003,Mörbylånga-Kastlösa,100
+501,103008.0,Hulterstad,,084005,Hulterstad-Stenåsa,99.89
+502,103009.0,Mörbylånga,,084001,Resmo-Vickleby,0.84
+503,103009.0,Mörbylånga,,084003,Mörbylånga-Kastlösa,99.1599999999999
+504,103010.0,Resmo,,084001,Resmo-Vickleby,100
+505,103011.0,Stenåsa,,084005,Hulterstad-Stenåsa,99.5799999999999
+506,103012.0,Vickleby,,084001,Resmo-Vickleby,99.9899999999999
+507,103013.0,Sandby,,084016,"Norra Möckleby, Sandby och Gårdby",99.9699999999999
+508,103014.0,Torslunda,,084015,Torslunda,99.8299999999999
+509,103015.0,Gårdby,2.0,084016,"Norra Möckleby, Sandby och Gårdby",99.9899999999999
+510,,,,084016,"Norra Möckleby, Sandby och Gårdby",100
+511,103016.0,Norra Möckleby,,084016,"Norra Möckleby, Sandby och Gårdby",99.9899999999999
+512,103017.0,Algutsrum,,084015,Torslunda,3.46
+513,103017.0,Algutsrum,,084014,Algutsrum,96.51
+514,103018.0,Glömminge,,084013,Glömminge,99.8199999999999
+515,103019.0,Runsten,,088510,"Gärdslösa, Långlöt och Runsten",100
+516,103020.0,Långlöt,,088509,Räpplinge-Högsrum,1.38
+517,103020.0,Långlöt,,088510,"Gärdslösa, Långlöt och Runsten",98.62
+518,103021.0,Högsrum,,088510,"Gärdslösa, Långlöt och Runsten",5.03
+519,103021.0,Högsrum,,088509,Räpplinge-Högsrum,94.9699999999999
+520,103022.0,Gärdslösa,,088510,"Gärdslösa, Långlöt och Runsten",99.7199999999999
+521,103023.0,Bredsättra,,088507,Köpingsvik,99.9599999999999
+522,103024.0,Räpplinge,,088507,Köpingsvik,1.83
+523,103024.0,Räpplinge,,088509,Räpplinge-Högsrum,98.14
+524,103025.0,Borgholm,,088507,Köpingsvik,3.98
+525,103025.0,Borgholm,,088501,Borgholm,96.01
+526,103026.0,Köping,,088507,Köpingsvik,99.65
+527,103027.0,Egby,,088502,Föra-Alböke-Löt,0.6
+528,103027.0,Egby,,088507,Köpingsvik,99.4
+529,103028.0,Löt,,088502,Föra-Alböke-Löt,99.68
+530,103029.0,Alböke,,088502,Föra-Alböke-Löt,100
+531,103030.0,Föra,,088514,Nordöland,1.18
+532,103030.0,Föra,,088502,Föra-Alböke-Löt,98.8199999999999
+533,103031.0,Persnäs,,088514,Nordöland,100
+534,103032.0,Källa,,088514,Nordöland,100
+535,103033.0,Högby,,088514,Nordöland,100
+536,103034.0,Böda,,088514,Nordöland,100
+537,104001.0,Östra Karup,,127801,Båstad-Östra Karup,99.9699999999999
+538,104002.0,Hasslöv,,138103,Hasslöv-Våxtorp,99.9899999999999
+539,104003.0,Skummeslöv,,138101,Laholm,0.62
+540,104003.0,Skummeslöv,,138105,Skummeslöv,99.37
+541,104004.0,Våxtorp,,138103,Hasslöv-Våxtorp,100
+542,104005.0,Ränneslöv,,138107,Ränneslöv-Ysby,99.8499999999999
+543,104006.0,Hishult,,138106,Hishult,99.9899999999999
+544,104007.0,Laholm,,138101,Laholm,99.34
+545,104008.0,Ysby,,138101,Laholm,2.56
+546,104008.0,Ysby,,138107,Ränneslöv-Ysby,97.4399999999999
+547,104009.0,Knäred,,138109,Knäred,99.9699999999999
+548,104010.0,Eldsberga,,138003,Snöstorp,99.93
+549,104011.0,Trönninge,,138002,Martin Luther,3.61
+550,104011.0,Trönninge,,138003,Snöstorp,96.39
+551,104012.0,Veinge-Tjärby,,138111,Veinge-Tjärby,99.93
+552,104013.0,Harplinge,,138011,Harplinge,99.98
+553,104014.0,Söndrum,2.0,138009,Söndrum-Vapnö,99.5199999999999
+554,,,,138009,Söndrum-Vapnö,100.02
+555,104015.0,Halmstads Martin Luther,,138002,Martin Luther,100
+556,104016.0,Halmstads Sankt Nikolai,,138002,Martin Luther,2.19
+557,104016.0,Halmstads Sankt Nikolai,,138001,S:t Nikolai,97.81
+558,104017.0,Vapnö,,138009,Söndrum-Vapnö,100
+559,104018.0,Snöstorp,,138003,Snöstorp,100
+560,104019.0,Övraby,,138001,S:t Nikolai,100
+561,104020.0,Tönnersjö,,138003,Snöstorp,100
+562,104021.0,Steninge,,138012,Steninge,99.92
+563,104022.0,Holm,,138001,S:t Nikolai,100
+564,104023.0,Kvibille,,138019,Enslöv,3.39
+565,104023.0,Kvibille,,138015,Slättåkra-Kvibille,96.5999999999999
+566,104024.0,Rävinge,,138014,Getinge-Rävinge,99.9899999999999
+567,104025.0,Getinge,,138014,Getinge-Rävinge,100
+568,104026.0,Oskarström,,138005,Oskarström,100
+569,104027.0,Breared,,138003,Snöstorp,100
+570,104028.0,Enslöv,,138019,Enslöv,100
+571,104029.0,Falkenberg,,138201,Falkenberg,99.95
+572,104030.0,Eftra,,138206,Susedalen,100
+573,104031.0,Slöinge,,138206,Susedalen,100
+574,104032.0,Skrea,,138202,Skrea,99.9899999999999
+575,104033.0,Asige,,138015,Slättåkra-Kvibille,1.63
+576,104033.0,Asige,,138014,Getinge-Rävinge,2.73
+577,104033.0,Asige,,138206,Susedalen,95.6299999999999
+578,104034.0,Slättåkra,,138015,Slättåkra-Kvibille,99.8299999999999
+579,104035.0,Torup,,131501,Torup,99.9399999999999
+580,104036.0,Stafsinge,,138208,Stafsinge,99.7399999999999
+581,104037.0,Morup,,138208,Stafsinge,1.23
+582,104037.0,Morup,,138209,Morup,98.3499999999999
+583,104038.0,Vinberg,,138213,Vessige,0.95
+584,104038.0,Vinberg,,138211,Vinberg-Ljungby,99.01
+585,104039.0,Årstad,,138206,Susedalen,99.8499999999999
+586,104040.0,Ljungby,,138211,Vinberg-Ljungby,99.81
+587,104041.0,Alfshög,,138213,Vessige,99.9899999999999
+588,104042.0,Abild,,138206,Susedalen,100
+589,104043.0,Vessige,,138206,Susedalen,2.6
+590,104043.0,Vessige,,138213,Vessige,97.4
+591,104044.0,Tvååker,,138311,Tvååker,99.9099999999999
+592,104045.0,Spannarp,,138312,Spannarp,99.9899999999999
+593,104046.0,Dagsås,,138310,Sibbarp-Dagsås,100
+594,104047.0,Askome,,138213,Vessige,99.5699999999999
+595,104048.0,Sibbarp,,138310,Sibbarp-Dagsås,99.9899999999999
+596,104049.0,Köinge,,138217,Okome,99.9899999999999
+597,104050.0,Okome,,138223,Ullared,0.54
+598,104050.0,Okome,,138217,Okome,99.4599999999999
+599,104051.0,Drängsered,,131501,Torup,100
+600,104052.0,Krogsered,,138219,Krogsered,100
+601,104053.0,Kinnared,,131501,Torup,100
+602,104054.0,Varberg,,138302,Träslöv,1.27
+603,104054.0,Varberg,,138301,Varberg,98.73
+604,104055.0,Träslöv,,138311,Tvååker,1.59
+605,104055.0,Träslöv,,138302,Träslöv,98.4099999999999
+606,104056.0,Hunnestad,,138305,Himledalen,100
+607,104057.0,Lindberg,,138313,Lindberga,100
+608,104058.0,Grimeton,,138305,Himledalen,100
+609,104059.0,Gödestad,,138305,Himledalen,100
+610,104060.0,Rolfstorp,,138305,Himledalen,100
+611,104061.0,Svartrå,,138223,Ullared,1.14
+612,104061.0,Svartrå,,138217,Okome,98.8599999999999
+613,104062.0,Gällared,,138219,Krogsered,8.27999999999999
+614,104062.0,Gällared,,138218,Gällared,91.54
+615,104063.0,Ullared,,138223,Ullared,100
+616,104064.0,Gunnarp,,138220,Gunnarp,100
+617,104065.0,Torpa,,138313,Lindberga,100
+618,104066.0,Ås,,138320,Värö-Stråvalla,1.71
+619,104066.0,Ås,,138313,Lindberga,5.17
+620,104066.0,Ås,,138319,Veddige-Kungsäter,93.1299999999999
+621,104067.0,Valinge,,138313,Lindberga,100
+622,104068.0,Stamnared,,138313,Lindberga,99.9599999999999
+623,104069.0,Skällinge,,138305,Himledalen,100
+624,104070.0,Sällstorp,,138319,Veddige-Kungsäter,100
+625,104071.0,Nösslinge,,138222,Källsjö,1.44
+626,104071.0,Nösslinge,,138305,Himledalen,98.56
+627,104072.0,Källsjö,,138222,Källsjö,100
+628,104073.0,Fagered,,138223,Ullared,0.59
+629,104073.0,Fagered,,138224,Älvsered,1.97
+630,104073.0,Fagered,,138221,Fagered,97.4099999999999
+631,104074.0,Värö,,138320,Värö-Stråvalla,100
+632,104075.0,Stråvalla,,138320,Värö-Stråvalla,99.9899999999999
+633,104076.0,Veddige,,138319,Veddige-Kungsäter,100
+634,104077.0,Landa,,138407,Landa,99.9699999999999
+635,104078.0,Frillesås,,138406,Frillesås,99.8599999999999
+636,104079.0,Onsala,,138414,Onsala,99.8799999999999
+637,104080.0,Ölmevalla,,138408,Ölmevalla,99.9599999999999
+638,104081.0,Idala,,138410,Idala,100
+639,104082.0,Gällinge,,138409,Gällinge,100
+640,104083.0,Förlanda,,138412,Fjärås-Förlanda,100
+641,104084.0,Vallda,,138405,Släp,1.94
+642,104084.0,Vallda,,138404,Vallda,97.5199999999999
+643,104085.0,Kungsbacka,,138401,Kungsbacka-Hanhals,99.4899999999999
+644,104086.0,Hanhals,,138401,Kungsbacka-Hanhals,99.9699999999999
+645,104087.0,Släp,,138415,Kullavik,42.68
+646,104087.0,Släp,,138405,Släp,57.1599999999999
+647,104088.0,Tölö,2.0,138402,Tölö,99.92
+648,,,,138402,Tölö,99.9899999999999
+649,104089.0,Fjärås,,138412,Fjärås-Förlanda,99.9899999999999
+650,104090.0,Lindome,,148103,Lindome,99.9399999999999
+651,104091.0,Älvsåker,,138403,Älvsåker,99.84
+652,105001.0,Markaryd,,076701,Markaryd,100
+653,105002.0,Tingsås,,076307,Urshult,0.85
+654,105002.0,Tingsås,,076301,Tingsås,99.15
+655,105003.0,Gullabo,,083401,Gullabo,99.8199999999999
+656,105004.0,Torsås,,083402,Torsås,100
+657,105005.0,Söderåkra,,083404,Söderåkra,99.98
+658,105006.0,Halltorp,,088011,Halltorp-Voxtorp,100
+659,105007.0,Traryd,,076703,Traryd,100
+660,105008.0,Hallaryd,,076505,Göteryd,2.18
+661,105008.0,Hallaryd,,076507,Hallaryd,97.8199999999999
+662,105009.0,Göteryd,,076505,Göteryd,99.8799999999999
+663,105010.0,Älmhult,,076506,Pjätteryd,3.03
+664,105010.0,Älmhult,,076501,Älmhult,96.8299999999999
+665,105011.0,Härlunda,,076502,Härlunda,99.79
+666,105012.0,Almundsryd,,076302,Almundsryd,100
+667,105013.0,Urshult,,076307,Urshult,99.9899999999999
+668,105014.0,Södra Sandsjö,,076305,Södra Sandsjö,99.9899999999999
+669,105015.0,Älmeboda,,076303,Älmeboda,100
+670,105016.0,Långasjö,,086204,Långasjö,100
+671,105017.0,Vissefjärda,,086202,Vissefjärda,99.9899999999999
+672,105018.0,Karlslunda,,088013,Karlslunda-Mortorp,100
+673,105019.0,Arby,,088009,Arby-Hagby,100
+674,105020.0,Voxtorp,,088009,Arby-Hagby,6.14
+675,105020.0,Voxtorp,,088011,Halltorp-Voxtorp,93.8599999999999
+676,105021.0,Hagby,,088008,Ljungby,1.79
+677,105021.0,Hagby,,088009,Arby-Hagby,98.2099999999999
+678,105022.0,Hinneryd,,076702,Hinneryd,99.9699999999999
+679,105023.0,Pjätteryd,,076506,Pjätteryd,100
+680,105024.0,Stenbrohult,,076504,Stenbrohult,99.9899999999999
+681,105025.0,Virestad,,076503,Virestad,99.98
+682,105026.0,Västra Torsås,,076411,Västra Torsås,99.9899999999999
+683,105027.0,Väckelsång,,076306,Väckelsång,100
+684,105028.0,Linneryd,,076304,Linneryd,99.7
+685,105029.0,Emmaboda,,086201,Emmaboda,99.87
+686,105030.0,Oskar,,088108,Oskar,100
+687,105031.0,Mortorp,,088013,Karlslunda-Mortorp,100
+688,105032.0,Hossmo,,088008,Ljungby,1.05
+689,105032.0,Hossmo,,088015,Kalmar S:t Johannes,7.34
+690,105032.0,Hossmo,,088004,Hossmo,91.6099999999999
+691,105033.0,Kalmar Sankt Johannes,,088015,Kalmar S:t Johannes,100
+692,105034.0,Kalmar domkyrkodistrikt,,088015,Kalmar S:t Johannes,13.42
+693,105034.0,Kalmar domkyrkodistrikt,,088001,Kalmar domkyrkoförsamling,86.5799999999999
+694,105035.0,Vrå,,078115,Vrå,99.9899999999999
+695,105036.0,Torpa,,078114,Torpa,99.9399999999999
+696,105037.0,Nöttja,,078107,Södra Ljunga,99.98
+697,105038.0,Hamneda,,078107,Södra Ljunga,100
+698,105039.0,Södra Ljunga,,078107,Södra Ljunga,99.7099999999999
+699,105040.0,Agunnaryd,,078102,Agunnaryd,99.89
+700,105041.0,Skatelöv,2.0,076409,Vislanda,1.04
+701,,,,076410,Skatelöv,98.92
+702,,,,076410,Skatelöv,100
+703,105042.0,Kalvsvik,,076410,Skatelöv,8.23
+704,105042.0,Kalvsvik,,078012,Kalvsvik,91.7699999999999
+705,105043.0,Jät,,078008,Ingelstad,99.9899999999999
+706,105044.0,Uråsa,,078008,Ingelstad,100
+707,105045.0,Östra Torsås,,078008,Ingelstad,100
+708,105046.0,Nöbbele,,078008,Ingelstad,100
+709,105047.0,Ljuder,,076104,Ljuder,100
+710,105048.0,Algutsboda,,086203,Algutsboda,99.92
+711,105049.0,Örsjö,,088106,Örsjö,100
+712,105050.0,Nybro,,088105,Madesjö,1.86
+713,105050.0,Nybro,,088101,Nybro-S:t Sigfrid,98.14
+714,105051.0,Sankt Sigfrid,2.0,088101,Nybro-S:t Sigfrid,99.9599999999999
+715,105051.0,Sankt Sigfrid,2.0,088101,Nybro-S:t Sigfrid,99.9599999999999
+716,105052.0,Ljungby,,088015,Kalmar S:t Johannes,0.91
+717,105052.0,Ljungby,,088008,Ljungby,98.9899999999999
+718,105053.0,Dörby,,088008,Ljungby,0.62
+719,105053.0,Dörby,,088003,Dörby,99.3299999999999
+720,105054.0,Förlösa-Kläckeberga,,088005,Ryssby,2.77
+721,105054.0,Förlösa-Kläckeberga,,088018,Två systrar,3.23
+722,105054.0,Förlösa-Kläckeberga,,088006,Åby,11.82
+723,105054.0,Förlösa-Kläckeberga,,088002,Förlösa-Kläckeberga,82.1599999999999
+724,105055.0,Kalmar Heliga Korset,,088001,Kalmar domkyrkoförsamling,1.78
+725,105055.0,Kalmar Heliga Korset,,088017,S:ta Birgitta,3.61
+726,105055.0,Kalmar Heliga Korset,,088016,Heliga Korset,94.5999999999999
+727,105056.0,Kalmar Sankta Birgitta,,088017,S:ta Birgitta,100
+728,105057.0,Kalmar Två systrar,,088017,S:ta Birgitta,1.43
+729,105057.0,Kalmar Två systrar,,088018,Två systrar,98.5199999999999
+730,105058.0,Lidhult,,078116,Lidhult,100
+731,105059.0,Annerstad,,078114,Torpa,1.8
+732,105059.0,Annerstad,,078112,Annerstad,98.1899999999999
+733,105060.0,Kånna,,078107,Södra Ljunga,99.98
+734,105061.0,Vislanda,,076409,Vislanda,99.98
+735,105062.0,Blädinge,,076408,Blädinge,99.98
+736,105063.0,Vederslöv,,078015,Vederslöv,100
+737,105064.0,Tävelsås,,078013,Tävelsås,99.98
+738,105065.0,Dänningelanda,,078001,Växjö stads- och domkyrkoförsamling,10.35
+739,105065.0,Dänningelanda,,078015,Vederslöv,89.17
+740,105066.0,Teleborg,,078001,Växjö stads- och domkyrkoförsamling,99.9599999999999
+741,105067.0,Hovmantorp,,076102,Hovmantorp,99.9099999999999
+742,105068.0,Lessebo,,076101,Lessebo,99.6599999999999
+743,105069.0,Ekeberga,,076103,Ekeberga,100
+744,105070.0,Madesjö,,088105,Madesjö,99.53
+745,105071.0,Kristvalla,,088104,Kristvalla,100
+746,105072.0,Åby,,088005,Ryssby,1.07
+747,105072.0,Åby,,088006,Åby,98.9
+748,105073.0,Femsjö,,131506,Femsjö,99.87
+749,105074.0,Odensjö,,078117,Odensjö,100
+750,105075.0,Angelstad,,078111,Angelstad,99.92
+751,105076.0,Ljungby,,078120,Ljungby Maria,35.9699999999999
+752,105076.0,Ljungby,,078101,Ljungby,64.01
+753,105077.0,Tutaryd,,078104,Tutaryd,99.9899999999999
+754,105078.0,Ryssby,,078104,Tutaryd,0.6
+755,105078.0,Ryssby,,078103,Ryssby,99.39
+756,105079.0,Hjortsberga-Kvenneberga,,076401,Alvesta,100
+757,105080.0,Alvesta,,076401,Alvesta,99.9899999999999
+758,105081.0,Öja,,078018,Öjaby,1.15
+759,105081.0,Öja,,078016,Gemla,98.8499999999999
+760,105082.0,Bergunda,,078001,Växjö stads- och domkyrkoförsamling,9.78999999999999
+761,105082.0,Bergunda,,078016,Gemla,11.19
+762,105082.0,Bergunda,,078018,Öjaby,78.9399999999999
+763,105083.0,Växjö domkyrkodistrikt,,078001,Växjö stads- och domkyrkoförsamling,99.9599999999999
+764,105084.0,Öjaby,,078018,Öjaby,99.9
+765,105085.0,Skogslyckan,,078001,Växjö stads- och domkyrkoförsamling,99.98
+766,105086.0,Hemmesjö-Tegnaby,,078020,Gårdsby,0.9
+767,105086.0,Hemmesjö-Tegnaby,,078008,Ingelstad,1.48
+768,105086.0,Hemmesjö-Tegnaby,,078007,Hemmesjö-Furuby,97.62
+769,105087.0,Furuby,,078007,Hemmesjö-Furuby,100
+770,105088.0,Herråkra,,076003,Lenhovda-Herråkra,100
+771,105089.0,Hälleberga,,088105,Madesjö,0.52
+772,105089.0,Hälleberga,,088109,Hälleberga,99.48
+773,105090.0,Bäckebo,,088103,Bäckebo,100
+774,105091.0,Ryssby,,088005,Ryssby,99.98
+775,105092.0,Färgaryd,,131504,Långaryd,1.4
+776,105092.0,Färgaryd,,131505,Färgaryd,98.5999999999999
+777,105093.0,Södra Unnaryd,,131507,Unnaryd,100
+778,105094.0,Bolmsö,,078118,Bolmsö,100
+779,105095.0,Berga,,078108,Berga,99.9599999999999
+780,105096.0,Tannåker,,078119,Tannåker,100
+781,105097.0,Vittaryd,,078110,Vittaryd,99.9899999999999
+782,105098.0,Dörarp,,078109,Dörarp,99.98
+783,105099.0,Rydaholm,,078108,Berga,1.07
+784,105099.0,Rydaholm,,068312,Rydaholm,98.92
+785,105100.0,Mistelås,,076407,Mistelås,99.9899999999999
+786,105101.0,Lekaryd,,076401,Alvesta,100
+787,105102.0,Härlöv,,078018,Öjaby,1.36
+788,105102.0,Härlöv,,076401,Alvesta,98.64
+789,105103.0,Växjö Maria,,078001,Växjö stads- och domkyrkoförsamling,99.84
+790,105104.0,Ör,,078018,Öjaby,100
+791,105105.0,Ormesberga,,078018,Öjaby,100
+792,105106.0,Tjureda,,078021,Söraby,100
+793,105107.0,Gårdsby,,078020,Gårdsby,99.93
+794,105108.0,Dädesjö,,078006,Dädesjö,100
+795,105109.0,Lenhovda,,076003,Lenhovda-Herråkra,100
+796,105110.0,Älghult,,076005,Älghult,100
+797,105111.0,Kråksmåla,,088102,Kråksmåla,99.65
+798,105112.0,Ålem,,086103,Ålem,100
+799,105113.0,Gryteryd,,066210,Burseryd,100
+800,105114.0,Långaryd,,131504,Långaryd,99.7099999999999
+801,105115.0,Jälluntofta,,131507,Unnaryd,100
+802,105116.0,Kållerstad,,066216,Västbo Sankt Sigfrid,100
+803,105117.0,Ås,,066216,Västbo Sankt Sigfrid,100
+804,105118.0,Torskinge,,066216,Västbo Sankt Sigfrid,1.01
+805,105118.0,Torskinge,,068306,Forshedabygden,98.9899999999999
+806,105119.0,Dannäs,,068306,Forshedabygden,100
+807,105120.0,Hånger,,068306,Forshedabygden,100
+808,105121.0,Tånnö,,068309,Tånnö,99.98
+809,105122.0,Voxtorp,,068310,Voxtorp,100
+810,105123.0,Slätthög,,076406,Slätthög,100
+811,105124.0,Moheda,,076405,Moheda,99.9099999999999
+812,105125.0,Berg,,078024,Lammhult,100
+813,105126.0,Tolg,,078021,Söraby,100
+814,105127.0,Söraby,,078021,Söraby,99.9899999999999
+815,105128.0,Drev,,078003,Sjösås,99.95
+816,105129.0,Sjösås,,078003,Sjösås,99.89
+817,105130.0,Långemåla,,082102,Högsby,3.33
+818,105130.0,Långemåla,,082103,Långemåla,96.67
+819,105131.0,Mönsterås,,086103,Ålem,0.61
+820,105131.0,Mönsterås,,086101,Mönsterås,99.39
+821,105132.0,Södra Hestra,2.0,066210,Burseryd,100
+822,,,,066210,Burseryd,100
+823,105133.0,Reftele,,066216,Västbo Sankt Sigfrid,99.9899999999999
+824,105134.0,Bredaryd,,068302,Bredaryd,99.93
+825,105135.0,Forsheda,,068303,Kulltorp,1.84
+826,105135.0,Forsheda,,068306,Forshedabygden,98.1599999999999
+827,105136.0,Kärda,,068306,Forshedabygden,99.9899999999999
+828,105137.0,Gällaryd,,068311,Gällaryd,99.98
+829,105138.0,Aneboda,,078024,Lammhult,100
+830,105139.0,Asa,,078024,Lammhult,100
+831,105140.0,Hornaryd,,078003,Sjösås,100
+832,105141.0,Ramkvilla,,068521,Lannaskede,100
+833,105142.0,Nottebäck,,076004,Nottebäck,99.9899999999999
+834,105143.0,Åseda,,076001,Åseda,100
+835,105144.0,Fagerhult,,082104,Fagerhult,100
+836,105145.0,Fågelfors,,082101,Fågelfors,100
+837,105146.0,Högsby,,082102,Högsby,99.9899999999999
+838,105147.0,Fliseryd,,086102,Fliseryd,100
+839,105148.0,Burseryd,,066210,Burseryd,100
+840,105149.0,Villstad,2.0,066209,Villstad,99.56
+841,105149.0,Villstad,2.0,066209,Villstad,100
+842,105150.0,Kulltorp,,068303 och 061704,Kulltorp och Kulltorp,17 och 83
+843,105151.0,Värnamo,,068301,Värnamo,99.7999999999999
+844,105152.0,Fryele,,068313,Nydala-Fryele,100
+845,105153.0,Hjälmseryd,,068406,Hjälmseryd,99.95
+846,105154.0,Nydala,,068313,Nydala-Fryele,100
+847,105155.0,Stockaryd,,068408,Hultsjö,0.53
+848,105155.0,Stockaryd,,068407,Stockaryd,99.2199999999999
+849,105156.0,Hultsjö,,068407,Stockaryd,0.65
+850,105156.0,Hultsjö,,068408,Hultsjö,99.3499999999999
+851,105157.0,Fröderyd,,068521,Lannaskede,100
+852,105158.0,Bäckaby,,068521,Lannaskede,100
+853,105159.0,Södra Solberga,,068509,Korsberga,99.9899999999999
+854,105160.0,Korsberga,,068509,Korsberga,99.51
+855,105161.0,Lemnhult,,068514,"Nye, Näshult och Stenberga",1.51
+856,105161.0,Lemnhult,,068509,Korsberga,98.4899999999999
+857,105162.0,Näshult,,068514,"Nye, Näshult och Stenberga",100
+858,105163.0,Virserum,,086005,Virserum,99.9599999999999
+859,105164.0,Döderhult,,088203,Misterhult,15.7799999999999
+860,105164.0,Döderhult,,088205,Döderhult,84.2099999999999
+861,105165.0,Oskarshamn,,088201,Oskarshamn,26.84
+862,105165.0,Oskarshamn,,088203,Misterhult,34.3699999999999
+863,105165.0,Oskarshamn,,088205,Döderhult,38.7999999999999
+864,105166.0,Bosebo,,066202,Våthult,1.2
+865,105166.0,Bosebo,,066203,Bosebo,98.7999999999999
+866,105167.0,Våthult,,066202,Våthult,99.9899999999999
+867,105168.0,Gislaved,,066204,Anderstorp,0.54
+868,105168.0,Gislaved,,066201,Gislaved,99.4599999999999
+869,105169.0,Anderstorp,,066204,Anderstorp,99.9699999999999
+870,105170.0,Gnosjö,,061705,Gnosjö,100
+871,105171.0,Kävsjö,,061703,Kävsjö,99.9899999999999
+872,105172.0,Hagshult,,066503,Skillingaryd,100
+873,105173.0,Vrigstad,,068403,Vrigstad-Hylletofta,99.98
+874,105174.0,Hjärtlanda,,068401,Sävsjö,100
+875,105175.0,Skepperstad,,068401,Sävsjö,100
+876,105176.0,Lannaskede,,068521,Lannaskede,100
+877,105177.0,Myresjö,,068520,Nävelsjö,1.95
+878,105177.0,Myresjö,,068521,Lannaskede,98.0499999999999
+879,105178.0,Bäckseda,,068501,Vetlanda,2.6
+880,105178.0,Bäckseda,,068503,Bäckseda,97.4
+881,105179.0,Nye,,068514,"Nye, Näshult och Stenberga",99.8599999999999
+882,105180.0,Stenberga,,068514,"Nye, Näshult och Stenberga",100
+883,105181.0,Skirö,,068514,"Nye, Näshult och Stenberga",6.03
+884,105181.0,Skirö,,068515,Alseda,93.9699999999999
+885,105182.0,Tveta,,086005,Virserum,0.58
+886,105182.0,Tveta,,086008,Mörlunda-Tveta,99.42
+887,105183.0,Mörlunda,,086008,Mörlunda-Tveta,99.9899999999999
+888,105184.0,Källeryd,,061701,Källeryd,99.98
+889,105185.0,Norra Hestra,,066208,Norra Hestra,100
+890,105186.0,Åsenhöga,,061702,Åsenhöga,99.9899999999999
+891,105187.0,Åker,,066503,Skillingaryd,99.9399999999999
+892,105188.0,Tofteryd,,066503,Skillingaryd,100
+893,105189.0,Svenarum,,068209,Malmbäck,1.01
+894,105189.0,Svenarum,,066506,Svenarum,98.98
+895,105190.0,Hylletofta,,068403,Vrigstad-Hylletofta,99.9899999999999
+896,105191.0,Sävsjö,,068401,Sävsjö,100
+897,105192.0,Nävelsjö,,068520,Nävelsjö,100
+898,105193.0,Näsby,,068504,Näsby,100
+899,105194.0,Vetlanda,,068501,Vetlanda,99.45
+900,105195.0,Alseda,,068515,Alseda,100
+901,105196.0,Ökna,,068515,Alseda,100
+902,105197.0,Järeda,,086004,Järeda,100
+903,105198.0,Målilla-Gårdveda,,086003,Målilla med Gårdveda,100
+904,105199.0,Kristdala,,088205,Döderhult,99.95
+905,105200.0,Öreryd,,066208,Norra Hestra,99.9899999999999
+906,105201.0,Valdshult,,066208,Norra Hestra,100
+907,105202.0,Stengårdshult,,066208,Norra Hestra,100
+908,105203.0,Byarum,,066501,Byarum-Bondstorp,100
+909,105204.0,Bringetofta,,068401,Sävsjö,0.59
+910,105204.0,Bringetofta,,068204,Bringetofta,99.4
+911,105205.0,Norra Sandsjö,,068203,Norra Sandsjö,99.9699999999999
+912,105206.0,Björkö,,068501,Vetlanda,0.94
+913,105206.0,Björkö,,068519,Björkö,98.75
+914,105207.0,Mellby,,068608,Mellby,100
+915,105208.0,Skede,,068501,Vetlanda,1.19
+916,105208.0,Skede,,068515,Alseda,98.81
+917,105209.0,Kråkshult,,068515,Alseda,1.34
+918,105209.0,Kråkshult,,068602,Hässleby-Kråkshult,98.6599999999999
+919,105210.0,Karlstorp,,068515,Alseda,100
+920,105211.0,Hultsfred,,086001,Hultsfred,100
+921,105212.0,Lönneberga,,086002,Lönneberga,100
+922,105213.0,Vena,,086006,Vena,100
+923,105214.0,Tuna,,088409,Tuna,99.9899999999999
+924,105215.0,Misterhult,,088205,Döderhult,0.55
+925,105215.0,Misterhult,,088303,Gladhammar-Västrum,0.91
+926,105215.0,Misterhult,,088203,Misterhult,98.54
+927,105216.0,Norra Unnaryd,,068021,Norra Mo,100
+928,105217.0,Bondstorp,,066501,Byarum-Bondstorp,99.9899999999999
+929,105218.0,Ödestugu,,068017,Ödestugu,100
+930,105219.0,Malmbäck,,068209,Malmbäck,99.98
+931,105220.0,Almesåkra,,068210,Almesåkra,99.98
+932,105221.0,Nässjö,,068201,Nässjö,99.98
+933,105222.0,Höreda,,068609,Höreda,99.5199999999999
+934,105223.0,Hult,,068606,Hult,100
+935,105224.0,Edshult,,068606,Hult,0.92
+936,105224.0,Edshult,,068607,Edshult,99.0799999999999
+937,105225.0,Ingatorp,,068606,Hult,3.43
+938,105225.0,Ingatorp,,068605,Ingatorp-Bellö,96.39
+939,105226.0,Bellö,,068605,Ingatorp-Bellö,99.98
+940,105227.0,Hässleby,,068602,Hässleby-Kråkshult,100
+941,105228.0,Pelarne,,088404,Pelarne,99.9699999999999
+942,105229.0,Vimmerby,,088401,Vimmerby,100
+943,105230.0,Hjorted,,088315,Hjorted,100
+944,105231.0,Mulseryd,,068021,Norra Mo,100
+945,105232.0,Angerdshestra,,068021,Norra Mo,100
+946,105233.0,Månsarp,,068019,Månsarp,100
+947,105234.0,Norrahammar,,068008,Norrahammar,100
+948,105235.0,Barnarp,,068016,Barnarp,99.95
+949,105236.0,Rogberga,,068015,Rogberga-Öggestorp,100
+950,105237.0,Forserum,,068209,Malmbäck,0.93
+951,105237.0,Forserum,,068207,Barkeryd-Forserum,99.06
+952,105238.0,Öggestorp,,068015,Rogberga-Öggestorp,99.98
+953,105239.0,Barkeryd,,068207,Barkeryd-Forserum,99.87
+954,105240.0,Norra Solberga,,068201,Nässjö,0.99
+955,105240.0,Norra Solberga,,068205,Norra Solberga-Flisby,99.01
+956,105241.0,Eksjö,,068606,Hult,1.37
+957,105241.0,Eksjö,,068601,Eksjö,98.6099999999999
+958,105242.0,Rumskulla,,088403,Rumskulla,100
+959,105243.0,Frödinge,,088406,Locknevi,0.68
+960,105243.0,Frödinge,,088405,Frödinge,99.3199999999999
+961,105244.0,Gladhammar,,088302,Törnsfall,3.41
+962,105244.0,Gladhammar,,088303,Gladhammar-Västrum,96.5799999999999
+963,105245.0,Västrum,,088303,Gladhammar-Västrum,100
+964,105246.0,Bottnaryd,,068021,Norra Mo,100
+965,105247.0,Jönköpings Sofia,,068001,Jönköpings Sofia-Järstorp,100
+966,105248.0,Järstorp,,068001,Jönköpings Sofia-Järstorp,100
+967,105249.0,Ljungarum,,068002,Jönköpings Kristina-Ljungarum,100
+968,105250.0,Jönköpings Kristina,,068002,Jönköpings Kristina-Ljungarum,99.87
+969,105251.0,Hakarp,,068005,Huskvarna,7.13
+970,105251.0,Hakarp,,068006,Hakarp,92.87
+971,105252.0,Huskvarna,,068006,Hakarp,4.65
+972,105252.0,Huskvarna,,068005,Huskvarna,95.3499999999999
+973,105253.0,Lekeryd,,068014,Lekeryd,100
+974,105254.0,Järsnäs,,068014,Lekeryd,99.9899999999999
+975,105255.0,Flisby,,068205,Norra Solberga-Flisby,99.9899999999999
+976,105256.0,Bälaryd,,060402,Aneby,100
+977,105257.0,Bredestad,,060402,Aneby,100
+978,105258.0,Askeryd,,060403,Askeryd,100
+979,105259.0,Södra Vi,,088408,Södra Vi-Djursdala,100
+980,105260.0,Djursdala,,088408,Södra Vi-Djursdala,100
+981,105261.0,Locknevi,,088406,Locknevi,99.9899999999999
+982,105262.0,Blackstad,,088314,Hallingeberg-Blackstad,100
+983,105263.0,Hallingeberg,,088314,Hallingeberg-Blackstad,100
+984,105264.0,Törnsfall,,088302,Törnsfall,100
+985,105265.0,Västervik,,088302,Törnsfall,0.74
+986,105265.0,Västervik,,088301,Västervik,99.25
+987,105266.0,Bankeryd,,068001,Jönköpings Sofia-Järstorp,1.59
+988,105266.0,Bankeryd,,068020,Bankeryd,98.4
+989,105267.0,Svarttorp,,068014,Lekeryd,99.9899999999999
+990,105268.0,Skärstad,,068006,Hakarp,0.74
+991,105268.0,Skärstad,,068010,Skärstad-Ölmstad,99.26
+992,105269.0,Haurida,,060408,Haurida-Vireda,100.01
+993,105270.0,Lommaryd,,060406,Lommaryd,99.9599999999999
+994,105271.0,Marbäck,,060405,Frinnaryd,0.91
+995,105271.0,Marbäck,,060402,Aneby,99.0799999999999
+996,105272.0,Odensvi,,088312,Odensvi,99.9899999999999
+997,105273.0,Gamleby,,088311,Gamleby,100
+998,105274.0,Lofta,,088310,Lofta,100
+999,105275.0,Loftahammar,,088309,Loftahammar,99.9899999999999
+1000,105276.0,Ölmstad,,068009,Visingsö,16.2399999999999
+1001,105276.0,Ölmstad,,068010,Skärstad-Ölmstad,83.76
+1002,105277.0,Vireda,,060408,Haurida-Vireda,99.68
+1003,105278.0,Frinnaryd,,060405,Frinnaryd,100
+1004,105279.0,Visingsö,,068009,Visingsö,100
+1005,105280.0,Gränna,,068009,Visingsö,39.6899999999999
+1006,105280.0,Gränna,,068007,Gränna,59.8299999999999
+1007,105281.0,Adelöv,,068703,Linderås,0.69
+1008,105281.0,Adelöv,,068702,Adelöv,99.31
+1009,105282.0,Linderås,,068702,Adelöv,0.94
+1010,105282.0,Linderås,,068703,Linderås,99.06
+1011,105283.0,Säby,,068701,Säby,100
+1012,105284.0,Dalhem,,088306,Dalhem,100
+1013,105285.0,Överum,,088307,Överum,99.9899999999999
+1014,105286.0,Västra Ed,,088308,Västra Ed,99.9899999999999
+1015,105287.0,Ukna,,088308,Västra Ed,1.52
+1016,105287.0,Ukna,,088305,Ukna,98.48
+1017,105288.0,Östra Ed,,056301,Valdemarsvik,100
+1018,105289.0,Gärdserum,,056101,Åtvid,99.9899999999999
+1019,105290.0,Tryserum,,056301,Valdemarsvik,99.9899999999999
+1020,105291.0,Hannäs,,056101,Åtvid,100
+1021,106001.0,Sundre,,098089,Hoburg,100
+1022,106002.0,Vamlingbo,,098089,Hoburg,100
+1023,106003.0,Hamra,,098089,Hoburg,100
+1024,106004.0,Öja,,098089,Hoburg,100
+1025,106005.0,Näs,,098084,Havdhem,99.9899999999999
+1026,106006.0,Fide,,098084,Havdhem,0.63
+1027,106006.0,Fide,,098089,Hoburg,99.37
+1028,106007.0,Grötlingbo,,098076,"Alva, Hemse och Rone",10.31
+1029,106007.0,Grötlingbo,,098084,Havdhem,89.6899999999999
+1030,106008.0,Hablingbo,,098084,Havdhem,99.9899999999999
+1031,106009.0,Havdhem,,098084,Havdhem,100
+1032,106010.0,Silte,,098084,Havdhem,99.65
+1033,106011.0,Sproge,,098081,Levide,0.57
+1034,106011.0,Sproge,,098084,Havdhem,0.73
+1035,106011.0,Sproge,,098064,Sproge,98.7
+1036,106012.0,Eke,,098084,Havdhem,99.9599999999999
+1037,106013.0,Rone,,098076,"Alva, Hemse och Rone",99.8199999999999
+1038,106014.0,Alva,,098084,Havdhem,0.58
+1039,106014.0,Alva,,098076,"Alva, Hemse och Rone",99.42
+1040,106015.0,Hemse,,098076,"Alva, Hemse och Rone",100
+1041,106016.0,Burs,,098076,"Alva, Hemse och Rone",1.71
+1042,106016.0,Burs,,098073,Stånga-Burs,98.28
+1043,106017.0,Eksta,,098063,Eksta,99.87
+1044,106018.0,Levide,,098081,Levide,99.62
+1045,106019.0,Fröjel,,098062,Fröjel,99.9399999999999
+1046,106020.0,Fardhem,2.0,098080,Gerum,99.8499999999999
+1047,,,,098079,Fardhem,99.9899999999999
+1048,106021.0,Linde,2.0,098076,"Alva, Hemse och Rone",2.17
+1049,,,,098075,Linde,97.8299999999999
+1050,,,,098074,Lojsta,100
+1051,106022.0,Gerum,2.0,098062,Fröjel,0.58
+1052,,,,098079,Fardhem,4.79
+1053,,,,098080,Gerum,95.2
+1054,,,,098080,Gerum,99.01
+1055,106023.0,Lojsta,,098080,Gerum,0.58
+1056,106023.0,Lojsta,,098074,Lojsta,99.4099999999999
+1057,106024.0,Stånga,,098074,Lojsta,0.59
+1058,106024.0,Stånga,,098065,Garde,1.02
+1059,106024.0,Stånga,,098073,Stånga-Burs,98.39
+1060,106025.0,När,,098073,Stånga-Burs,1.19
+1061,106025.0,När,,098071,När-Lau,98.81
+1062,106026.0,Lye,,098065,Garde,99.9899999999999
+1063,106027.0,Lau,2.0,098065,Garde,100
+1064,,,,098071,När-Lau,100
+1065,106028.0,Alskog,,098071,När-Lau,4.91
+1066,106028.0,Alskog,,098065,Garde,95.0699999999999
+1067,106029.0,Klinte,,098062,Fröjel,1.36
+1068,106029.0,Klinte,,098061,Klinte,98.64
+1069,106030.0,Sanda,,098057,"Sanda, Västergarn och Mästerby",99.76
+1070,106031.0,Hejde,,098074,Lojsta,1.42
+1071,106031.0,Hejde,,098060,Hejde,98.4699999999999
+1072,106032.0,Guldrupe,,098040,Vänge,100
+1073,106033.0,Etelhem,,098065,Garde,99.98
+1074,106034.0,Garde,,098065,Garde,100
+1075,106035.0,Buttle,,098040,Vänge,100
+1076,106036.0,Ala,,098047,Östergarn,99.9599999999999
+1077,106037.0,Ardre,,098065,Garde,99.95
+1078,106038.0,Gammelgarn,,098047,Östergarn,99.95
+1079,106039.0,Västergarn,,098057,"Sanda, Västergarn och Mästerby",99.9599999999999
+1080,106040.0,Mästerby,,098050,"Vall, Hogrän och Atlingbo",1.11
+1081,106040.0,Mästerby,,098057,"Sanda, Västergarn och Mästerby",98.8299999999999
+1082,106041.0,Eskelhem,,098055,Eskelhem-Tofta,99.92
+1083,106042.0,Hogrän,,098048,Stenkumla,0.68
+1084,106042.0,Hogrän,,098050,"Vall, Hogrän och Atlingbo",99.3199999999999
+1085,106043.0,Väte,,098059,Väte,99.53
+1086,106044.0,Viklau,,098040,Vänge,100
+1087,106045.0,Atlingbo,,098050,"Vall, Hogrän och Atlingbo",99.6299999999999
+1088,106046.0,Björke,,098035,Roma,1.23
+1089,106046.0,Björke,,098036,Björke,98.76
+1090,106047.0,Vänge,,098040,Vänge,100
+1091,106048.0,Sjonhem,,098040,Vänge,100
+1092,106049.0,Halla,,098040,Vänge,99.62
+1093,106050.0,Ganthem,,098047,Östergarn,1.69
+1094,106050.0,Ganthem,,098040,Vänge,3.29
+1095,106050.0,Ganthem,,098029,Dalhem,95.0199999999999
+1096,106051.0,Kräklingbo,,098047,Östergarn,99.9899999999999
+1097,106052.0,Anga,,098047,Östergarn,99.92
+1098,106053.0,Norrlanda,,098025,Gothem,100
+1099,106054.0,Östergarn,,098047,Östergarn,100
+1100,106055.0,Tofta,2.0,098055,Eskelhem-Tofta,99.98
+1101,,,,098055,Eskelhem-Tofta,100
+1102,106056.0,Stenkumla,,098055,Eskelhem-Tofta,0.55
+1103,106056.0,Stenkumla,,098050,"Vall, Hogrän och Atlingbo",0.57
+1104,106056.0,Stenkumla,,098048,Stenkumla,98.8799999999999
+1105,106057.0,Västerhejde,,098048,Stenkumla,100
+1106,106058.0,Träkumla,,098033,Follingbo,1.48
+1107,106058.0,Träkumla,,098048,Stenkumla,98.53
+1108,106059.0,Vall,,098050,"Vall, Hogrän och Atlingbo",100
+1109,106060.0,Akebäck,,098034,Akebäck,99.98
+1110,106061.0,Roma,,098035,Roma,99.9599999999999
+1111,106062.0,Follingbo,,098033,Follingbo,99.9599999999999
+1112,106063.0,Barlingbo,,098030,Barlingbo,99.9699999999999
+1113,106064.0,Dalhem,,098029,Dalhem,100
+1114,106065.0,Ekeby,,098025,Gothem,0.99
+1115,106065.0,Ekeby,,098029,Dalhem,99
+1116,106066.0,Hörsne-Bara,,098029,Dalhem,99.9899999999999
+1117,106067.0,Gothem,,098025,Gothem,99.9599999999999
+1118,106068.0,Visby domkyrkodistrikt,,098001,Visby domkyrkoförsamling,99.87
+1119,106069.0,Endre,,098033,Follingbo,1.41
+1120,106069.0,Endre,,098031,Endre,97.9099999999999
+1121,106070.0,Hejdeby,,098032,Hejdeby,99.9599999999999
+1122,106071.0,Bro,,098018,Väskinde,100
+1123,106072.0,Källunge,,098029,Dalhem,0.54
+1124,106072.0,Källunge,,098025,Gothem,98.9899999999999
+1125,106073.0,Fole,,098032,Hejdeby,0.67
+1126,106073.0,Fole,,098018,Väskinde,99.3299999999999
+1127,106074.0,Vallstena,,098025,Gothem,100
+1128,106075.0,Bäl,,098018,Väskinde,99.9699999999999
+1129,106076.0,Boge,,098025,Gothem,6.32
+1130,106076.0,Boge,,098002,Othem-Boge,93.6599999999999
+1131,106077.0,Väskinde,,098018,Väskinde,99.81
+1132,106078.0,Lummelunda,,098015,Stenkyrka,99.8599999999999
+1133,106079.0,Martebo,,098015,Stenkyrka,100
+1134,106080.0,Lokrume,2.0,098018,Väskinde,99.9899999999999
+1135,,,,098018,Väskinde,100
+1136,106081.0,Hejnum,2.0,098018,Väskinde,99.9899999999999
+1137,,,,098018,Väskinde,100
+1138,106082.0,Tingstäde,,098015,Stenkyrka,99.9899999999999
+1139,106083.0,Othem,,098002,Othem-Boge,99.84
+1140,106084.0,Hellvi,,098005,"Bunge, Rute och Fleringe",0.97
+1141,106084.0,Hellvi,,098010,Forsa,99.03
+1142,106085.0,Stenkyrka,,098010,Forsa,1.29
+1143,106085.0,Stenkyrka,,098015,Stenkyrka,98.7099999999999
+1144,106086.0,Hangvar,,098010,Forsa,100
+1145,106087.0,Lärbro,,098010,Forsa,100
+1146,106088.0,Rute,,098005,"Bunge, Rute och Fleringe",99.7999999999999
+1147,106089.0,Bunge,,098005,"Bunge, Rute och Fleringe",99.84
+1148,106090.0,Hall,,098010,Forsa,100
+1149,106091.0,Fleringe,,098005,"Bunge, Rute och Fleringe",99.9
+1150,106092.0,Fårö,,098005,"Bunge, Rute och Fleringe",0.77
+1151,106092.0,Fårö,,098004,Fårö,99.23
+1152,107001.0,Grimmared,,138305,Himledalen,2.53
+1153,107001.0,Grimmared,,138319,Veddige-Kungsäter,97.4699999999999
+1154,107002.0,Karl Gustav,,138319,Veddige-Kungsäter,100
+1155,107003.0,Älvsered,,138224,Älvsered,100
+1156,107004.0,Mårdaklev,,146506,Kindaholm,100
+1157,107005.0,Kalv,,146506,Kindaholm,100
+1158,107006.0,Istorp,,146315,Istorp,99.98
+1159,107007.0,Kungsäter,,138319,Veddige-Kungsäter,100
+1160,107008.0,Gunnarsjö,,138319,Veddige-Kungsäter,100
+1161,107009.0,Älekulla,,146316,Älekulla,100
+1162,107010.0,Mjöbäck,,146503,Mjöbäck-Holsljunga,100
+1163,107011.0,Östra Frölunda,,146506,Kindaholm,100
+1164,107012.0,Håcksvik,,146506,Kindaholm,99.9699999999999
+1165,107013.0,Sjötofta,,145201,Tranemo,99.9699999999999
+1166,107014.0,Horred,,146314,Horred,99.9899999999999
+1167,107015.0,Surteby-Kattunga,,146312,Västra Mark,100
+1168,107016.0,Öxnevalla,,146313,Öxnevalla,99.89
+1169,107017.0,Torestorp,,146316,Älekulla,0.74
+1170,107017.0,Torestorp,,146317,Torestorp,99.26
+1171,107018.0,Öxabäck,,146318,Öxabäck,100
+1172,107019.0,Holsljunga,,146503,Mjöbäck-Holsljunga,99.76
+1173,107020.0,Örsås,,146506,Kindaholm,1.99
+1174,107020.0,Örsås,,146501,Svenljungabygden,98.01
+1175,107021.0,Revesjö,,146501,Svenljungabygden,100
+1176,107022.0,Ambjörnarp,,145201,Tranemo,100
+1177,107023.0,Mossebo,,145201,Tranemo,100
+1178,107024.0,Tostared,,146312,Västra Mark,100
+1179,107025.0,Fotskäl,,146312,Västra Mark,100
+1180,107026.0,Berghem,,146312,Västra Mark,99.9899999999999
+1181,107027.0,Hajom,,146312,Västra Mark,99.5699999999999
+1182,107028.0,Örby-Skene,,146303,Örby-Skene,100
+1183,107029.0,Kinna,,146301,Kinna,100
+1184,107030.0,Redslared,,146512,Sexdrega,5.41
+1185,107030.0,Redslared,,146501,Svenljungabygden,94.59
+1186,107031.0,Skephult,,146307,Fritsla-Skephult,99.9899999999999
+1187,107032.0,Roasjö,,146512,Sexdrega,100
+1188,107033.0,Svenljunga-Ullasjö,,146501,Svenljungabygden,100
+1189,107034.0,Tranemo,,145201,Tranemo,100
+1190,107035.0,Södra Åsarp,,145206,Länghem,99.9899999999999
+1191,107036.0,Nittorp,,145208,Dalstorp,99.9899999999999
+1192,107037.0,Ljungsarp,,145208,Dalstorp,99.98
+1193,107038.0,Styrsö,,148037,Styrsö,99.93
+1194,107039.0,Näset,,148041,Näset,100
+1195,107040.0,Askim,,148036,Askim,99.9699999999999
+1196,107041.0,Kållered,,148102,Kållered,99.84
+1197,107042.0,Sätila,,146304,Sätila,99.8799999999999
+1198,107043.0,Hyssna,,146305,Hyssna,99.84
+1199,107044.0,Fritsla,,146307,Fritsla-Skephult,100
+1200,107045.0,Seglora,,149019,Seglora,100
+1201,107046.0,Kinnarumma,,149020,Kinnarumma,100
+1202,107047.0,Sexdrega,,146512,Sexdrega,100
+1203,107048.0,Ljushult,,149008,Sexdrega,99.9899999999999
+1204,107049.0,Länghem,,145206,Länghem,100
+1205,107050.0,Hillared,,146512,Sexdrega,100
+1206,107051.0,Månstad,,145201,Tranemo,0.69
+1207,107051.0,Månstad,,145206,Länghem,99.31
+1208,107052.0,Hulared,,145208,Dalstorp,100
+1209,107053.0,Dalstorp,,145208,Dalstorp,100
+1210,107054.0,Ölsremma,,145208,Dalstorp,99.9899999999999
+1211,107055.0,Tynnered,,148024,Tynnered,100
+1212,107056.0,Västra Frölunda,,148022,Västra Frölunda,99.9699999999999
+1213,107057.0,Älvsborg,,148023,Älvsborg,99.98
+1214,107058.0,Högsbo,,148021,Högsbo,100
+1215,107059.0,Annedal,,148009,Göteborgs Annedal,99.9399999999999
+1216,107060.0,Göteborgs Karl Johan,,148013,Göteborgs Carl Johan,100
+1217,107061.0,Masthugget,,148012,Göteborgs Masthugg,100.03
+1218,107062.0,Göteborgs Oscar Fredrik,,148011,Göteborgs Oscar Fredrik,99.9899999999999
+1219,107063.0,Haga,,148010,Göteborgs Haga,100
+1220,107064.0,Göteborgs Vasa,,148007,Göteborgs Vasa,100
+1221,107065.0,Fässberg,,148101,Fässberg,99.9599999999999
+1222,107066.0,Stensjön,,148104,Stensjön,99.73
+1223,107067.0,Råda,,140103,Råda,99.89
+1224,107068.0,Johanneberg,,148008,Göteborgs Johanneberg,99.9399999999999
+1225,107069.0,Örgryte,,148016,Örgryte,99.8799999999999
+1226,107070.0,Landvetter,,140102,Landvetter,100
+1227,107071.0,Björketorp,,140104,Björketorp,99.9899999999999
+1228,107072.0,Härryda,,140101,Härryda,100
+1229,107073.0,Bollebygd,,144302,Bollebygd,99.9899999999999
+1230,107074.0,Borås Caroli,,149001,Borås Caroli,99.9899999999999
+1231,107075.0,Borås Gustav Adolf,,149002,Borås Gustav Adolf,100
+1232,107076.0,Toarp,,149006,Toarp,99.98
+1233,107077.0,Dannike,,149007,Länghem,99.9899999999999
+1234,107078.0,Tvärred,,149116,Åsunden,100
+1235,107079.0,Finnekumla,,149116,Åsunden,100
+1236,107080.0,Södra Säm,,149116,Åsunden,100
+1237,107081.0,Gällstad,,149116,Åsunden,100
+1238,107082.0,Grönahög,,149116,Åsunden,100
+1239,107083.0,Lundby,,148013,Göteborgs Carl Johan,0.53
+1240,107083.0,Lundby,,148017,Lundby,28.34
+1241,107083.0,Lundby,,148028,Torslanda-Björlanda,70.98
+1242,107084.0,Biskopsgården,,148028,Torslanda-Björlanda,20.73
+1243,107084.0,Biskopsgården,,148017,Lundby,79.2699999999999
+1244,107085.0,Brämaregården,,148017,Lundby,99.4
+1245,107086.0,Göteborgs domkyrkodistrikt,,148001,Domkyrkoförsamlingen i Göteborg,99.75
+1246,107087.0,Tuve,,148017,Lundby,14.15
+1247,107087.0,Tuve,,148031,Tuve-Säve,85.6599999999999
+1248,107088.0,Göteborgs Sankt Pauli,,148033,Göteborgs S:t Pauli,100
+1249,107089.0,Björkekärr,,148038,Björkekärr,100
+1250,107090.0,Härlanda,,148006,Härlanda,99.9899999999999
+1251,107091.0,Nylöse,,148004,Nylöse,99.8599999999999
+1252,107092.0,Sävedalen,,140203,Sävedalen,100
+1253,107093.0,Kortedala,,148005,Kortedala,100
+1254,107094.0,Bergsjön,,148032,Bergsjön,99.7099999999999
+1255,107095.0,Angered,,148034,Angered,99.98
+1256,107096.0,Partille,,140204,Furulund,33.78
+1257,107096.0,Partille,,140201,Partille,66.2099999999999
+1258,107097.0,Lerum,,144102,Skallsjö,0.67
+1259,107097.0,Lerum,,144101,Lerum,99.28
+1260,107098.0,Skallsjö,,144102,Skallsjö,99.9699999999999
+1261,107099.0,Ödenäs,,148910,Ödenäs,99.9899999999999
+1262,107100.0,Sandhult,,149016,Sandhult,99.5999999999999
+1263,107101.0,Töllsjö,,144301,Töllsjö,99.7699999999999
+1264,107102.0,Brämhult,,149003,Brämhult,100
+1265,107103.0,Fristad-Gingri,,149011,Fristad,100
+1266,107104.0,Rångedala,,149006,Toarp,99.9899999999999
+1267,107105.0,Äspered,,149006,Toarp,99.9899999999999
+1268,107106.0,Södra Ving,,149110,Södra Ving,100
+1269,107107.0,Marbäck,,149116,Åsunden,100
+1270,107108.0,Ulricehamn,,149101,Ulricehamn,99.98
+1271,107109.0,Gullered,,149120,Hössna,100
+1272,107110.0,Hössna,,149120,Hössna,99.89
+1273,107111.0,Strängsered,,149120,Hössna,100
+1274,107112.0,Gunnared,,148034,Angered,99.95
+1275,107113.0,Nödinge,,144001,Nödinge,99.8799999999999
+1276,107114.0,Bergum,,148034,Angered,99.89
+1277,107115.0,Stora Lundby,,144103,Stora Lundby,99.9599999999999
+1278,107116.0,Hemsjö,,148909,Hemsjö,100
+1279,107117.0,Skogsbygden,,144208,Nårunga,100
+1280,107118.0,Bredared,,149015,Bredared,100
+1281,107119.0,Vänga,,149011,Fristad,99.9899999999999
+1282,107120.0,Tärby,,149110,Södra Ving,0.95
+1283,107120.0,Tärby,,149011,Fristad,99.0499999999999
+1284,107121.0,Borgstena,,149011,Fristad,100
+1285,107122.0,Varnum,,149110,Södra Ving,99.9699999999999
+1286,107123.0,Härna,,149110,Södra Ving,99.9899999999999
+1287,107124.0,Fänneslunda,,149110,Södra Ving,100
+1288,107125.0,Timmele,,149120,Hössna,0.51
+1289,107125.0,Timmele,,149129,Timmele,99.48
+1290,107126.0,Hällstad,,149105,Hällstad,100
+1291,107127.0,Dalum,,149128,Redväg,100
+1292,107128.0,Liared,,149128,Redväg,100
+1293,107129.0,Knätte,,149128,Redväg,100
+1294,107130.0,Böne,,149128,Redväg,100
+1295,107131.0,Kölingared,,149128,Redväg,100
+1296,107132.0,Bjurbäck,,064203,Mullsjö-Sandhem,100
+1297,107133.0,Habo,,064301,Habo,99.9899999999999
+1298,107134.0,Starrkärr,,144005,Starrkärr-Kilanda,100
+1299,107135.0,Kilanda,,144005,Starrkärr-Kilanda,99.9099999999999
+1300,107136.0,Östad,,144104,Östad,99.98
+1301,107137.0,Alingsås,,148901,Alingsås,99.9899999999999
+1302,107138.0,Hol,,144206,Hol,100
+1303,107139.0,Horla,,144206,Hol,99.9899999999999
+1304,107140.0,Siene,,144206,Hol,99.95
+1305,107141.0,Nårunga,,144208,Nårunga,99.7
+1306,107142.0,Tämta,,149011,Fristad,100
+1307,107143.0,Ljur,,144208,Nårunga,100.01
+1308,107144.0,Ornunga,,144210,Asklanda,99.84
+1309,107145.0,Asklanda,,144210,Asklanda,99.9899999999999
+1310,107146.0,Vesene,,146618,Hov,100
+1311,107147.0,Molla,,146618,Hov,100
+1312,107148.0,Grude,,146618,Hov,100
+1313,107149.0,Hov,,146618,Hov,99.95
+1314,107150.0,Od,,146617,Östra Gäsene,99.98
+1315,107151.0,Murum,,149105,Hällstad,100
+1316,107152.0,Alboga,,146617,Östra Gäsene,100
+1317,107153.0,Broddarp,,146617,Östra Gäsene,100
+1318,107154.0,Möne,,149105,Hällstad,100
+1319,107155.0,Kärråkra,,149105,Hällstad,100
+1320,107156.0,Öra,,146617,Östra Gäsene,100
+1321,107157.0,Börstig,,149951,Åsarp,99.9699999999999
+1322,107158.0,Blidsberg,,149128,Redväg,100
+1323,107159.0,Humla,,149128,Redväg,100
+1324,107160.0,Kölaby,,149128,Redväg,99.9899999999999
+1325,107161.0,Åsarp,,149951,Åsarp,99.9099999999999
+1326,107162.0,Sandhem,,064203,Mullsjö-Sandhem,99.7399999999999
+1327,107163.0,Nykyrka,,064203,Mullsjö-Sandhem,100
+1328,107164.0,Gustav Adolf,,064302,Gustav Adolf,99.9899999999999
+1329,107165.0,Skepplanda,,144003,Skepplanda-Hålanda,100
+1330,107166.0,Sankt Peder,2.0,144003,Skepplanda-Hålanda,6.32
+1331,,,,146204,Lödöse,93.68
+1332,,,,146204,Lödöse,99.92
+1333,107167.0,Hålanda,,146204,Lödöse,0.85
+1334,107167.0,Hålanda,,144005,Starrkärr-Kilanda,4.18
+1335,107167.0,Hålanda,,144003,Skepplanda-Hålanda,94.9699999999999
+1336,107168.0,Långared,,144003,Skepplanda-Hålanda,0.86
+1337,107168.0,Långared,,148908,Bjärke,99.14
+1338,107169.0,Lena-Bergstena,,144201,Lena,99.9399999999999
+1339,107170.0,Fullestad,,144201,Lena,99.98
+1340,107171.0,Kullings-Skövde,,144214,Algutstorp,99.98
+1341,107172.0,Algutstorp,,144214,Algutstorp,100
+1342,107173.0,Kvinnestad,,144210,Asklanda,100
+1343,107174.0,Landa,,144214,Algutstorp,100
+1344,107175.0,Remmene,,146602,Herrljunga landsbygdsförs,100
+1345,107176.0,Bråttensby,,146602,Herrljunga landsbygdsförs,100
+1346,107177.0,Södra Björke,,146607,Hudene,99.9399999999999
+1347,107178.0,Jällby,,146607,Hudene,99.98
+1348,107179.0,Herrljunga,,146606,Herrljunga,99.59
+1349,107180.0,Hudene,,146607,Hudene,100
+1350,107181.0,Skölvene,,146607,Hudene,99.9899999999999
+1351,107182.0,Eriksberg,,146617,Östra Gäsene,100
+1352,107183.0,Källunga,,146607,Hudene,99.9699999999999
+1353,107184.0,Mjäldrunga,,146617,Östra Gäsene,99.9899999999999
+1354,107185.0,Jäla,,149905,Floby,99.98
+1355,107186.0,Brismene,,149916,Kinneved,99.98
+1356,107187.0,Grolanda,,149905,Floby,100
+1357,107188.0,Kinneved,,149916,Kinneved,99.9899999999999
+1358,107189.0,Vårkumla,,149916,Kinneved,99.98
+1359,107190.0,Vistorp,,149928,Yllestad,99.9099999999999
+1360,107191.0,Yllestad,,064203,Mullsjö-Sandhem,1.38
+1361,107191.0,Yllestad,,149928,Yllestad,98.6099999999999
+1362,107192.0,Vartofta-Åsaka,,149928,Yllestad,100
+1363,107193.0,Näs,,149928,Yllestad,99.92
+1364,107194.0,Kymbo,,149812,Valstad,100
+1365,107195.0,Utvängstorp,,064203,Mullsjö-Sandhem,99.9599999999999
+1366,107196.0,Härja,,149803,Hökensås,100
+1367,107197.0,Vättak,,149812,Valstad,99.9599999999999
+1368,107198.0,Brandstorp,,064302,Gustav Adolf,1.37
+1369,107198.0,Brandstorp,,064303,Brandstorp,98.42
+1370,107199.0,Tunge,,146204,Lödöse,100
+1371,107200.0,Ale-Skövde,,146204,Lödöse,99.9899999999999
+1372,107201.0,Fuxerna,,146201,Fuxerna-Åsbräcka,99.9899999999999
+1373,107202.0,Upphärad,,148805,Upphärad,99.92
+1374,107203.0,Erska,,148908,Bjärke,100
+1375,107204.0,Lagmansered,,148808,Bjärke,99.9099999999999
+1376,107205.0,Stora Mellby,,148908,Bjärke,99.93
+1377,107206.0,Magra,,148908,Bjärke,99.54
+1378,107207.0,Fåglum,,144504,Essunga,100
+1379,107208.0,Kyrkås,,144504,Essunga,100
+1380,107209.0,Södra Härene,,144214,Algutstorp,99.9899999999999
+1381,107210.0,Eggvena,,146602,Herrljunga landsbygdsförs,100
+1382,107211.0,Barne-Åsaka,2.0,144504,Essunga,100
+1383,,,,144507,Lekåsa-Barne Åsaka,100
+1384,107212.0,Lekåsa,2.0,144507,Lekåsa-Barne Åsaka,100
+1385,,,,144507,Lekåsa-Barne Åsaka,100
+1386,107213.0,Eling,,147014,Vedum,100
+1387,107214.0,Fölene,,146602,Herrljunga landsbygdsförs,99.9399999999999
+1388,107215.0,Bitterna,,147014,Vedum,99.9899999999999
+1389,107216.0,Hällestad,,149905,Floby,99.9699999999999
+1390,107217.0,Larv,,147014,Vedum,0.63
+1391,107217.0,Larv,,147024,Larv,99.37
+1392,107218.0,Trävattna,,149905,Floby,100
+1393,107219.0,Floby,,149905,Floby,100
+1394,107220.0,Göteve,,149905,Floby,100
+1395,107221.0,Sörby,,149905,Floby,100
+1396,107222.0,Gökhem,,149905,Floby,100
+1397,107223.0,Luttra,,149901,Falköping,99.9599999999999
+1398,107224.0,Slöta,,149924,Slöta-Karleby,99.9899999999999
+1399,107225.0,Marka,,149902,Mösseberg,99.9399999999999
+1400,107226.0,Falköping,,149902,Mösseberg,17.8299999999999
+1401,107226.0,Falköping,,149901,Falköping,82.15
+1402,107227.0,Karleby,,149924,Slöta-Karleby,99.98
+1403,107228.0,Kälvene,,149928,Yllestad,99.9599999999999
+1404,107229.0,Skörstorp,,149921,Åslebygden,99.64
+1405,107230.0,Hångsdala,2.0,149812,Valstad,99.9899999999999
+1406,,,,149812,Valstad,100
+1407,107231.0,Mularp,,149921,Åslebygden,99.95
+1408,107232.0,Åsle,,149921,Åslebygden,100
+1409,107233.0,Östra Gerum,,149812,Valstad,99.9399999999999
+1410,107234.0,Valstad,,149812,Valstad,100
+1411,107235.0,Suntak,,149812,Valstad,100
+1412,107236.0,Velinga,,149803,Hökensås,99.84
+1413,107237.0,Dimbo-Ottravad,2.0,149816,Varv,100
+1414,,,,149816,Varv,100
+1415,107238.0,Baltak,,149801,Tidaholm,99.59
+1416,107239.0,Daretorp,,149803,Hökensås,99.87
+1417,107240.0,Södra Fågelås,,149706,Fågelås,99.9899999999999
+1418,107241.0,Åsbräcka,,146201,Fuxerna-Åsbräcka,99.9699999999999
+1419,107242.0,Fors,,148807,Fors-Rommele,99.9899999999999
+1420,107243.0,Rommele,2.0,148805,Upphärad,0.72
+1421,,,,148807,Fors-Rommele,99.2699999999999
+1422,,,,148807,Fors-Rommele,99.92
+1423,107244.0,Gärdhem,,148804,Gärdhem,99.9399999999999
+1424,107245.0,Väne-Åsaka,,148803,Åsaka-Björke,100
+1425,107246.0,Bäreberg,,144502,Främmestad-Bäreberg,100
+1426,107247.0,Främmestad,,144502,Främmestad-Bäreberg,100
+1427,107248.0,Malma,,144502,Främmestad-Bäreberg,0.53
+1428,107248.0,Malma,,144501,Fridhem,99.4699999999999
+1429,107249.0,Essunga,,144504,Essunga,100
+1430,107250.0,Södra Kedum,,147010,Ryda,100
+1431,107251.0,Naum,,147010,Ryda,99.9899999999999
+1432,107252.0,Laske-Vedum,,147014,Vedum,100
+1433,107253.0,Södra Lundby,,147014,Vedum,100
+1434,107254.0,Längjum,,147024,Larv,100
+1435,107255.0,Önum,,147001,Vara,99.9699999999999
+1436,107256.0,Tråvad,,147001,Vara,0.51
+1437,107256.0,Tråvad,,147024,Larv,99.4899999999999
+1438,107257.0,Edsvära,,147029,Kvänum,100
+1439,107258.0,Ullene,,149905,Floby,100
+1440,107259.0,Vilske-Kleva,,149902,Mösseberg,0.63
+1441,107259.0,Vilske-Kleva,,149905,Floby,99.3499999999999
+1442,107260.0,Norra Vånga,,147029,Kvänum,99.98
+1443,107261.0,Östra Tunhem,,149941,Gudhem,100
+1444,107262.0,Friggeråker,,149941,Gudhem,8.11999999999999
+1445,107262.0,Friggeråker,,149902,Mösseberg,91.78
+1446,107263.0,Torbjörntorp,,149902,Mösseberg,99.9699999999999
+1447,107264.0,Ugglum,2.0,149941,Gudhem,100
+1448,,,,149941,Gudhem,100.02
+1449,107265.0,Bjurum,,149941,Gudhem,100
+1450,107266.0,Gudhem,,149902,Mösseberg,1.07
+1451,107266.0,Gudhem,,149941,Gudhem,98.93
+1452,107267.0,Håkantorp,,149947,Hornborga,100
+1453,107268.0,Tiarp,,149921,Åslebygden,100
+1454,107269.0,Valtorp,,149947,Hornborga,99.81
+1455,107270.0,Högstena,,149933,Dala-Borgunda-Högstena,99.9099999999999
+1456,107271.0,Södra Kyrketorp,,149934,Stenstorp,99.93
+1457,107272.0,Segerstad,2.0,149947,Hornborga,99.98
+1458,,,,149505,Varnhem,100
+1459,107273.0,Dala,,149933,Dala-Borgunda-Högstena,99.81
+1460,107274.0,Varv,,149816,Varv,100
+1461,107275.0,Kungslena,,149816,Varv,100
+1462,107276.0,Acklinga,,149816,Varv,99.9899999999999
+1463,107277.0,Hömb,,149816,Varv,99.9899999999999
+1464,107278.0,Tidaholm,,149801,Tidaholm,99.79
+1465,107279.0,Fröjered,,149807,Fröjered,99.89
+1466,107280.0,Norra Fågelås,,149706,Fågelås,100
+1467,107281.0,Trollhättan,,148801,Trollhättan,99.84
+1468,107282.0,Lextorp,,148809,Lextorp,99.95
+1469,107283.0,Götalunden,,148810,Götalunden,99.92
+1470,107284.0,Västra Tunhem,,148703,Gestad,0.91
+1471,107284.0,Västra Tunhem,,148707,Vänersnäs,2.8
+1472,107284.0,Västra Tunhem,,148709,Västra Tunhem,96.23
+1473,107285.0,Norra Björke,,148803,Åsaka-Björke,99.98
+1474,107286.0,Trökörna,,144410,Trökörna,100
+1475,107287.0,Flo,,144408,Flo,100
+1476,107288.0,Längnum,,144412,Fridhem,100
+1477,107289.0,Hyringa,,144412,Fridhem,100
+1478,107290.0,Tengene,,144409,Tengene,99.9899999999999
+1479,107291.0,Bjärby,,144403,Särestad,99.89
+1480,107292.0,Flakeberg,,144403,Särestad,99.98
+1481,107293.0,Ryda,,147010,Ryda,100
+1482,107294.0,Vara,,147010,Ryda,1.04
+1483,107294.0,Vara,,147001,Vara,98.9599999999999
+1484,107295.0,Sparlösa,,147004,Levene,100
+1485,107296.0,Levene,,147004,Levene,100
+1486,107297.0,Skarstad,,147001,Vara,99.6899999999999
+1487,107298.0,Long,,147004,Levene,100
+1488,107299.0,Fyrunga,,147029,Kvänum,100
+1489,107300.0,Uvered,2.0,149403,Järpås,100
+1490,,,,149403,Järpås,100
+1491,107301.0,Hällum,,147001,Vara,99.6299999999999
+1492,107302.0,Jung,,147029,Kvänum,99.9899999999999
+1493,107303.0,Kvänum,,147029,Kvänum,100
+1494,107304.0,Öttum,,147029,Kvänum,100
+1495,107305.0,Vinköl,,149516,Ardala,99.9599999999999
+1496,107306.0,Marum-Gerum,,149516,Ardala,100
+1497,107307.0,Broddetorp,2.0,149504,Eggby-Öglunda,100
+1498,,,,149947,Hornborga,100
+1499,107308.0,Bjärka-Härlunda,,149516,Ardala,99.98
+1500,107309.0,Stenum,,149516,Ardala,2.14
+1501,107309.0,Stenum,,149508,Axvall,97.8599999999999
+1502,107310.0,Brunnhem,2.0,149601,Skövde,99.7999999999999
+1503,,,,149934,Stenstorp,99.9399999999999
+1504,107311.0,Stenstorp,2.0,149601,Skövde,99.54
+1505,,,,149934,Stenstorp,99.98
+1506,107312.0,Häggum,,149608,Skultorp,100
+1507,107313.0,Borgunda,,149933,Dala-Borgunda-Högstena,99.9699999999999
+1508,107314.0,Vreten,,149615,Värsås-Varola-Vreten,99.98
+1509,107315.0,Sjogerstad-Rådene,,149608,Skultorp,100
+1510,107316.0,Norra Kyrketorp,,149608,Skultorp,100
+1511,107317.0,Hagelberg,,149608,Skultorp,99.9699999999999
+1512,107318.0,Fridene,,149708,Korsberga-Fridene,99.89
+1513,107319.0,Korsberga,,149708,Korsberga-Fridene,99.98
+1514,107320.0,Varola,,149615,Värsås-Varola-Vreten,100
+1515,107321.0,Värsås,,149615,Värsås-Varola-Vreten,99.98
+1516,107322.0,Hjo,,149706,Fågelås,1.1
+1517,107322.0,Hjo,,149701,Hjo,98.9
+1518,107323.0,Mofalla,,149704,Mofalla,99.98
+1519,107324.0,Väne-Ryr,,148701,Vänersborg och Väne-Ryr,99.9099999999999
+1520,107325.0,Vänersborg,,148703,Gestad,0.76
+1521,107325.0,Vänersborg,,148706,Frändefors,1.9
+1522,107325.0,Vänersborg,,148701,Vänersborg och Väne-Ryr,97.2999999999999
+1523,107326.0,Sal,,144408,Flo,100
+1524,107327.0,Ås,,144408,Flo,100
+1525,107328.0,Särestad,,144403,Särestad,100
+1526,107329.0,Karaby,2.0,149431,Örslösa,100
+1527,,,,149431,Örslösa,100
+1528,107330.0,Håle,,144403,Särestad,100
+1529,107331.0,Slädene,,147004,Levene,100
+1530,107332.0,Täng,,144403,Särestad,100
+1531,107333.0,Häggesled,,149403,Järpås,99.9899999999999
+1532,107334.0,Lavad,,149431,Örslösa,100
+1533,107335.0,Gillstad,,149431,Örslösa,100
+1534,107336.0,Järpås,,149403,Järpås,100
+1535,107337.0,Härjevad,,149424,Sävare,100.01
+1536,107338.0,Trässberg,,149424,Sävare,100
+1537,107339.0,Kållands-Åsaka,2.0,149405,Kållands-Råda,100
+1538,,,,149405,Kållands-Råda,100
+1539,107340.0,Saleby,,149424,Sävare,99.9899999999999
+1540,107341.0,Skallmeja,,149516,Ardala,100
+1541,107342.0,Norra Härene,,149424,Sävare,100
+1542,107343.0,Hasslösa,,149424,Sävare,100
+1543,107344.0,Lindärva,,149424,Sävare,100
+1544,107345.0,Synnerby,,149516,Ardala,100
+1545,107346.0,Skara domkyrkodistrikt,,149501,Skara domkyrkoförsamling,100
+1546,107347.0,Händene,,149516,Ardala,100
+1547,107348.0,Norra Ving,,149508,Axvall,100
+1548,107349.0,Skärv,,149508,Axvall,100
+1549,107350.0,Skånings-Åsaka,,149508,Axvall,99.9899999999999
+1550,107351.0,Norra Lundby,,149505,Varnhem,100
+1551,107352.0,Varnhem,,149601,Skövde,3.22
+1552,107352.0,Varnhem,,149505,Varnhem,96.78
+1553,107353.0,Våmb,2.0,149947,Hornborga,14.19
+1554,,,,149601,Skövde,85.81
+1555,,,,149601,Skövde,99.9899999999999
+1556,107354.0,Eggby-Istrum,,149504,Eggby-Öglunda,99.98
+1557,107355.0,Öglunda,,149504,Eggby-Öglunda,100
+1558,107356.0,Skövde,,149601,Skövde,100
+1559,107357.0,Forsby,,149614,Sventorp-Forsby,100
+1560,107358.0,Ryd,,149601,Skövde,100
+1561,107359.0,Sventorp,,149614,Sventorp-Forsby,99.9899999999999
+1562,107360.0,Tibro,,147201,Tibro,99.9899999999999
+1563,107361.0,Grevbäck,,149701,Hjo,100
+1564,107362.0,Brevik,,144604,Undenäs,6.76
+1565,107362.0,Brevik,,144602,Brevik,93.2399999999999
+1566,107363.0,Vänersnäs,,148703,Gestad,2.88
+1567,107363.0,Vänersnäs,,148707,Vänersnäs,97.12
+1568,107364.0,Tun,,149431,Örslösa,100
+1569,107365.0,Friel,,149431,Örslösa,100
+1570,107366.0,Tådene,,149431,Örslösa,100
+1571,107367.0,Tranum,,149431,Örslösa,100
+1572,107368.0,Norra Kedum,,149431,Örslösa,100
+1573,107369.0,Mellby,,149405,Kållands-Råda,99.9899999999999
+1574,107370.0,Väla,,149431,Örslösa,99.9899999999999
+1575,107371.0,Örslösa,,149431,Örslösa,99.9899999999999
+1576,107372.0,Råda,,149405,Kållands-Råda,99.92
+1577,107373.0,Hovby,,149424,Sävare,99.9699999999999
+1578,107374.0,Sävare,,149424,Sävare,99.98
+1579,107375.0,Lidköping,,149401,Lidköping,99.9399999999999
+1580,107376.0,Hangelösa,2.0,147112,Källby,99.9899999999999
+1581,,,,147112,Källby,100
+1582,107377.0,Skeby,,149424,Sävare,4.76
+1583,107377.0,Skeby,,147112,Källby,95.0799999999999
+1584,107378.0,Broby,,147112,Källby,100
+1585,107379.0,Ova,,147113,Husaby,100
+1586,107380.0,Skälvum,,147113,Husaby,99.98
+1587,107381.0,Källby,,147112,Källby,100
+1588,107382.0,Husaby,,147113,Husaby,99.9
+1589,107383.0,Ledsjö,,147109,Ledsjö,100
+1590,107384.0,Götene,,147102,Götene,100
+1591,107385.0,Vättlösa,,147102,Götene,99.98
+1592,107386.0,Holmestad,,147102,Götene,99.8599999999999
+1593,107387.0,Lerdala,,149624,Berg,99.9899999999999
+1594,107388.0,Berg,2.0,149624,Berg,99.67
+1595,,,,149624,Berg,100
+1596,107389.0,Timmersdala,,149624,Berg,100
+1597,107390.0,Säter,,149620,Frösve,99.9699999999999
+1598,107391.0,Frösve,,149620,Frösve,99.7399999999999
+1599,107392.0,Binneberg,,149620,Frösve,100
+1600,107393.0,Horn,3.0,149620,Frösve,99.9599999999999
+1601,,,,149620,Frösve,99.9899999999999
+1602,,,,149624,Berg,100
+1603,107394.0,Locketorp,2.0,149614,Sventorp-Forsby,3.59
+1604,,,,149617,Väring,96.4099999999999
+1605,,,,149617,Väring,100
+1606,107395.0,Väring,3.0,149617,Väring,99.9399999999999
+1607,,,,149617,Väring,99.9899999999999
+1608,,,,149617,Väring,100
+1609,107396.0,Götlunda,,149627,Götlunda,99.98
+1610,107397.0,Ransberg,,147202,Ransberg,99.9899999999999
+1611,107398.0,Mölltorp,,144604,Undenäs,3.69
+1612,107398.0,Mölltorp,,144603,Mölltorp,96.31
+1613,107399.0,Karlsborg,,144604,Undenäs,7.72
+1614,107399.0,Karlsborg,,144601,Karlsborg,92.28
+1615,107400.0,Söne,,149431,Örslösa,99.9099999999999
+1616,107401.0,Skalunda,,149413,Sunnersberg,100
+1617,107402.0,Gösslunda,,149413,Sunnersberg,99.9899999999999
+1618,107403.0,Rackeby,,149413,Sunnersberg,100
+1619,107404.0,Strö,,149413,Sunnersberg,100
+1620,107405.0,Sunnersberg,,149413,Sunnersberg,100
+1621,107406.0,Västerplana,,147118,Kinnekulle,100
+1622,107407.0,Kinne-Kleva och Sil,,147101,Kleva-Sil,99.9899999999999
+1623,107408.0,Medelplana,,147118,Kinnekulle,100
+1624,107409.0,Österplana,,147118,Kinnekulle,100
+1625,107410.0,Kestad,,147118,Kinnekulle,100
+1626,107411.0,Kinne-Vedum,,147102,Götene,99.9899999999999
+1627,107412.0,Fullösa,,147118,Kinnekulle,100
+1628,107413.0,Lugnås,,149312,Lugnås,99.9599999999999
+1629,107414.0,Böja,2.0,149624,Berg,99.9399999999999
+1630,,,,149624,Berg,100.01
+1631,107415.0,Ek,,149303,Ullervad,100
+1632,107416.0,Låstad,,149303,Ullervad,100
+1633,107417.0,Odensåker,2.0,149303,Ullervad,100
+1634,,,,149624,Berg,100
+1635,107418.0,Tidavad,2.0,149303,Ullervad,100
+1636,,,,149624,Berg,100
+1637,107419.0,Flistad,2.0,149627,Götlunda,100
+1638,,,,149627,Götlunda,100.01
+1639,107420.0,Ekby,2.0,149624,Berg,3.33
+1640,,,,149303,Ullervad,96.67
+1641,,,,149303,Ullervad,99.9699999999999
+1642,107421.0,Sveneby,,147307,Fägre,100
+1643,107422.0,Vad,2.0,149627,Götlunda,100
+1644,,,,149627,Götlunda,100
+1645,107423.0,Bällefors,,147307,Fägre,99.9899999999999
+1646,107424.0,Hjälstad,,147307,Fägre,100
+1647,107425.0,Mo,,147307,Fägre,100
+1648,107426.0,Ekeskog,,147307,Fägre,100
+1649,107427.0,Beateberg,,147202,Ransberg,1.16
+1650,107427.0,Beateberg,,147307,Fägre,98.84
+1651,107428.0,Otterstad,,149413,Sunnersberg,100
+1652,107429.0,Forshem,,149312,Lugnås,0.68
+1653,107429.0,Forshem,,147118,Kinnekulle,99.31
+1654,107430.0,Bredsäter,,149312,Lugnås,100
+1655,107431.0,Björsäter,,149301,Mariestad,0.82
+1656,107431.0,Björsäter,,149312,Lugnås,99.18
+1657,107432.0,Leksberg,,149301,Mariestad,99.9399999999999
+1658,107433.0,Ullervad,,149303,Ullervad,99.9699999999999
+1659,107434.0,Utby,,149303,Ullervad,100
+1660,107435.0,Mariestad,,149301,Mariestad,100
+1661,107436.0,Trästena,,147307,Fägre,100
+1662,107437.0,Bäck,,147302,Fredsberg-Bäck,99.93
+1663,107438.0,Fägre,,147307,Fägre,99.7199999999999
+1664,107439.0,Halna,,147301,Töreboda,99.9099999999999
+1665,107440.0,Töreboda,,147302,Fredsberg-Bäck,2
+1666,107440.0,Töreboda,,147301,Töreboda,98
+1667,107441.0,Undenäs,,144604,Undenäs,100
+1668,107442.0,Berga,,149318,Lyrestad,99.9899999999999
+1669,107443.0,Hassle,2.0,149318,Lyrestad,99.9
+1670,,,,149318,Lyrestad,100
+1671,107444.0,Färed,,149318,Lyrestad,100
+1672,107445.0,Enåsa,,149318,Lyrestad,100
+1673,107446.0,Fredsberg,,147302,Fredsberg-Bäck,99.8499999999999
+1674,107447.0,Älgarås,,147313,Hova-Älgarås,99.9699999999999
+1675,107448.0,Tived,,186002,Finnerödja-Tived,100
+1676,107449.0,Torsö,2.0,149301,Mariestad,100
+1677,,,,149301,Mariestad,100
+1678,107450.0,Lyrestad,,149318,Lyrestad,100
+1679,107451.0,Hova,,144702,Hova-Älgarås,100
+1680,107452.0,Finnerödja,,186002,Finnerödja-Tived,100
+1681,107453.0,Amnehärad,,144701,Amnehärad,100
+1682,108001.0,Västra Ryd,,068606,Hult,0.67
+1683,108001.0,Västra Ryd,,051204,Västra Ryd,99.3199999999999
+1684,108002.0,Sund,,051203,Sund-Svinhult,100
+1685,108003.0,Svinhult,,051203,Sund-Svinhult,100
+1686,108004.0,Norra Vi,,051201,Norra Ydre,100
+1687,108005.0,Tidersrum,,051301,Tidersrum,100
+1688,108006.0,Horn,,051304,Horn,99.53
+1689,108007.0,Hycklinge,,051305,Hycklinge,99.98
+1690,108008.0,Torpa,,051201,Norra Ydre,100
+1691,108009.0,Asby,,051204,Västra Ryd,0.62
+1692,108009.0,Asby,,051201,Norra Ydre,99.3799999999999
+1693,108010.0,Kisa,,051302,Kisa,99.9899999999999
+1694,108011.0,Blåvik,,056002,Boxholm,100
+1695,108012.0,Malexander,,056002,Boxholm,100
+1696,108013.0,Västra Eneby,,051302,Kisa,1.02
+1697,108013.0,Västra Eneby,,051303,Västra Eneby,98.98
+1698,108014.0,Hägerstad,,051309,Rimforsa,100
+1699,108015.0,Oppeby,,051309,Rimforsa,100
+1700,108016.0,Ödeshög,,050902,Ödeshög,100
+1701,108017.0,Trehörna,,050902,Ödeshög,100
+1702,108018.0,Ulrika,,058012,Ulrika,99.98
+1703,108019.0,Tjärstad,,051309,Rimforsa,99.9899999999999
+1704,108020.0,Kättilstad,,051309,Rimforsa,100
+1705,108021.0,Åtvid,,056101,Åtvid,100
+1706,108022.0,Stora Åby,,050902,Ödeshög,100
+1707,108023.0,Heda,2.0,050902,Ödeshög,100
+1708,108023.0,Heda,2.0,050902,Ödeshög,100
+1709,108024.0,Rök,,050902,Ödeshög,100
+1710,108025.0,Rinna,,056002,Boxholm,99.9599999999999
+1711,108026.0,Ekeby,,056002,Boxholm,100
+1712,108027.0,Åsbo,,056002,Boxholm,100
+1713,108028.0,Västra Harg,,058616,Östra Tollstad,1.3
+1714,108028.0,Västra Harg,,058614,Västra Harg,98.6299999999999
+1715,108029.0,Nykil,,058011,Nykil-Gammalkil,99.9899999999999
+1716,108030.0,Gammalkil,2.0,058011,Nykil-Gammalkil,100
+1717,,,,058011,Nykil-Gammalkil,100
+1718,108031.0,Vårdnäs,,058009,Vårdnäs,99.9899999999999
+1719,108032.0,Yxnerum,,056101,Åtvid,100
+1720,108033.0,Valdemarsvik,,056301,Valdemarsvik,99.9899999999999
+1721,108034.0,Gryt,,056301,Valdemarsvik,99.9899999999999
+1722,108035.0,Västra Tollstad,,050902,Ödeshög,100
+1723,108036.0,Svanshals,,058612,Väderstad,0.58
+1724,108036.0,Svanshals,,050902,Ödeshög,99.42
+1725,108037.0,Väversunda,,058408,Dal,100
+1726,108038.0,Väderstad,,050902,Ödeshög,0.58
+1727,108038.0,Väderstad,,058612,Väderstad,99.42
+1728,108039.0,Kumla,,058612,Väderstad,100
+1729,108040.0,Appuna,,058612,Väderstad,99.95
+1730,108041.0,Hogstad,,058601,Mjölby,2.51
+1731,108041.0,Hogstad,,058612,Väderstad,97.34
+1732,108042.0,Mjölby,,058601,Mjölby,99.68
+1733,108043.0,Högby,,058601,Mjölby,99.9899999999999
+1734,108044.0,Sya,,058614,Västra Harg,0.95
+1735,108044.0,Sya,,058616,Östra Tollstad,1.51
+1736,108044.0,Sya,,058618,Veta,97.53
+1737,108045.0,Östra Tollstad,,058616,Östra Tollstad,99.59
+1738,108046.0,Veta,,058601,Mjölby,0.81
+1739,108046.0,Veta,,058618,Veta,98.98
+1740,108047.0,Sjögestad,,058018,Vikingstad,99.98
+1741,108048.0,Vikingstad,,058011,Nykil-Gammalkil,1.67
+1742,108048.0,Vikingstad,,058018,Vikingstad,98.3299999999999
+1743,108049.0,Skeda,,058010,Skeda,100
+1744,108050.0,Slaka,,058004,Slaka,100
+1745,108051.0,Berga,,058033,Linköpings Berga,100
+1746,108052.0,Vist,,058008,Vist,100
+1747,108053.0,Landeryd,,058003,Landeryd,99.75
+1748,108054.0,Grebo,,056101,Åtvid,100
+1749,108055.0,Värna,,056101,Åtvid,100
+1750,108056.0,Bankekind,,058024,Åkerbo,100
+1751,108057.0,Björsäter,,056101,Åtvid,100
+1752,108058.0,Ringarum,,056301,Valdemarsvik,0.59
+1753,108058.0,Ringarum,,056302,Ringarum,99.4
+1754,108059.0,Börrum,,058201,Söderköping S:t Anna,100
+1755,108060.0,Rogslösa,,058408,Dal,100
+1756,108061.0,Källstad,,058408,Dal,100
+1757,108062.0,Herrestad,2.0,058408,Dal,99.89
+1758,,,,058408,Dal,100
+1759,108063.0,Örberga,,058408,Dal,100
+1760,108064.0,Strå,,058401,Vadstena,99.7099999999999
+1761,108065.0,Hov,,058401,Vadstena,99.9699999999999
+1762,108066.0,Vadstena,,058401,Vadstena,99.98
+1763,108067.0,Orlunda,,058411,Aska,99.9699999999999
+1764,108068.0,Bjälbo,,058603,Skänninge,99.87
+1765,108069.0,Skänninge,,058603,Skänninge,99.9899999999999
+1766,108070.0,Allhelgona,2.0,058603,Skänninge,99.9399999999999
+1767,,,,058603,Skänninge,100
+1768,108071.0,Fivelstad,,058324,Aska,99.98
+1769,108072.0,Vallerstad,,058603,Skänninge,99.9899999999999
+1770,108073.0,Herrberga,,058618,Veta,100
+1771,108074.0,Järstad,,058618,Veta,0.7
+1772,108074.0,Järstad,,058603,Skänninge,99.2999999999999
+1773,108075.0,Normlösa,,058603,Skänninge,99.84
+1774,108076.0,Viby,,058618,Veta,0.7
+1775,108076.0,Viby,,058018,Vikingstad,1.18
+1776,108076.0,Viby,,058617,Viby,98.12
+1777,108077.0,Skeppsås,,058603,Skänninge,99.9699999999999
+1778,108078.0,Västerlösa,,058018,Vikingstad,100
+1779,108079.0,Rappestad,,058018,Vikingstad,100
+1780,108080.0,Kärna,,058005,Kärna,100
+1781,108081.0,Björkeberg,,058018,Vikingstad,100
+1782,108082.0,Ledberg,,058018,Vikingstad,4.93
+1783,108082.0,Ledberg,,058005,Kärna,95.0699999999999
+1784,108083.0,Ryd,,058036,Linköpings Ryd,100
+1785,108084.0,Linköpings domkyrkodistrikt,,058037,Gottfridsberg,17.1
+1786,108084.0,Linköpings domkyrkodistrikt,,058033,Linköpings Berga,20.42
+1787,108084.0,Linköpings domkyrkodistrikt,,058001,Linköpings domkyrkoförsamling,62.4799999999999
+1788,108085.0,Johannelund,,058034,Linköpings Johannelund,99.9899999999999
+1789,108086.0,Kaga,,058005,Kärna,100
+1790,108087.0,Linköpings Sankt Lars,,058002,Linköpings S:t Lars,100
+1791,108088.0,Skäggetorp,,058035,Linköpings Skäggetorp,100
+1792,108089.0,Vårdsberg,,058024,Åkerbo,99.9699999999999
+1793,108090.0,Törnevalla,,058024,Åkerbo,100
+1794,108091.0,Askeby,,058024,Åkerbo,100
+1795,108092.0,Örtomta,,058024,Åkerbo,99.9899999999999
+1796,108093.0,Östra Ryd,,058204,Östra Ryd,100
+1797,108094.0,Gårdeby,,058204,Östra Ryd,100
+1798,108095.0,Drothem,,058201,Söderköping S:t Anna,99.9899999999999
+1799,108096.0,Skönberga,,058201,Söderköping S:t Anna,100
+1800,108097.0,Mogata,,058201,Söderköping S:t Anna,100
+1801,108098.0,Skällvik,,058201,Söderköping S:t Anna,100
+1802,108099.0,Sankt Anna,,058201,Söderköping S:t Anna,100
+1803,108100.0,Nässja,,058408,Dal,100
+1804,108101.0,Hagebyhöga,,058411,Aska,99.9699999999999
+1805,108102.0,Västra Stenby,,058324,Aska,99.9899999999999
+1806,108103.0,Varv och Styra,,058324,Aska,100
+1807,108104.0,Ask,,058309,Fornåsa,100
+1808,108105.0,Fornåsa,2.0,058309,Fornåsa,99.9699999999999
+1809,,,,058309,Fornåsa,100
+1810,108106.0,Älvestad,,058309,Fornåsa,100
+1811,108107.0,Klockrike,,058306,Borensberg,1.04
+1812,108107.0,Klockrike,,058307,Klockrike,98.9599999999999
+1813,108108.0,Lönsås,,058309,Fornåsa,100
+1814,108109.0,Ekebyborna,,058309,Fornåsa,100
+1815,108110.0,Flistad,,058019,Vreta kloster,100
+1816,108111.0,Vreta kloster,,058019,Vreta kloster,100
+1817,108112.0,Rystad,,058024,Åkerbo,100
+1818,108113.0,Östra Harg,,058024,Åkerbo,100
+1819,108114.0,Östra Skrukeby,,058024,Åkerbo,100
+1820,108115.0,Gistad,,058024,Åkerbo,100
+1821,108116.0,Lillkyrka,,058024,Åkerbo,100
+1822,108117.0,Skärkind,,058105,Norrköpings Borg,100
+1823,108118.0,Kimstad,,058105,Norrköpings Borg,100
+1824,108119.0,Västra Husby,,058204,Östra Ryd,99.9699999999999
+1825,108120.0,Söderköpings Sankt Laurentii,,058201,Söderköping S:t Anna,100
+1826,108121.0,Tingstad,,058106,Norrköpings S:t Johannes,100
+1827,108122.0,Å,,058119,Västra Vikbolandet,100
+1828,108123.0,Tåby,,058119,Västra Vikbolandet,100
+1829,108124.0,Kuddby,,058119,Västra Vikbolandet,99.62
+1830,108125.0,Östra Ny,,058119,Västra Vikbolandet,2.64
+1831,108125.0,Östra Ny,,058127,Jonsberg,97.3599999999999
+1832,108126.0,Rönö,,058127,Jonsberg,100
+1833,108127.0,Jonsberg,,058127,Jonsberg,99.62
+1834,108128.0,Motala,,058301,Motala,100
+1835,108129.0,Brunneby,,058306,Borensberg,99.98
+1836,108130.0,Kristberg,,058306,Borensberg,100
+1837,108131.0,Ljung,,058019,Vreta kloster,100
+1838,108132.0,Stjärnorp,,058019,Vreta kloster,99.9899999999999
+1839,108133.0,Vånga,,058105,Norrköpings Borg,99.9899999999999
+1840,108134.0,Kullerstad,,058105,Norrköpings Borg,100
+1841,108135.0,Borg,,058105,Norrköpings Borg,99.9099999999999
+1842,108136.0,Vrinnevi,,058105,Norrköpings Borg,99.98
+1843,108137.0,Norrköpings Sankt Johannes,,058106,Norrköpings S:t Johannes,100
+1844,108138.0,Norrköpings Sankt Olai,,058102,Norrköpings S:t Olof,99.9399999999999
+1845,108139.0,Norrköpings Matteus,,058102,Norrköpings S:t Olof,99.98
+1846,108140.0,Östra Eneby,,058104,Kolmården,100
+1847,108141.0,Styrstad,,058106,Norrköpings S:t Johannes,100
+1848,108142.0,Furingstad,,058119,Västra Vikbolandet,100
+1849,108143.0,Norrköpings Hedvig,,058102,Norrköpings S:t Olof,100
+1850,108144.0,Dagsberg,,058119,Västra Vikbolandet,100
+1851,108145.0,Konungsund,,058119,Västra Vikbolandet,100
+1852,108146.0,Östra Stenby,,058119,Västra Vikbolandet,100
+1853,108147.0,Östra Husby,,058125,Östra Husby,100
+1854,108148.0,Häradshammar,,058125,Östra Husby,99.9099999999999
+1855,108149.0,Västra Ny,,058301,Motala,1.09
+1856,108149.0,Västra Ny,,058303,Västra Ny,98.9
+1857,108150.0,Svärtinge,,058104,Kolmården,99.93
+1858,108151.0,Kvillinge,,058104,Kolmården,100
+1859,108152.0,Krokek,,058104,Kolmården,100
+1860,108153.0,Kvarsebo,,058104,Kolmården,99.92
+1861,108154.0,Godegård,,058304,Godegård,99.9899999999999
+1862,108155.0,Tjällmo,,058322,Tjällmo,99.9899999999999
+1863,108156.0,Hällestad,,056201,Finspång,99.9899999999999
+1864,108157.0,Risinge,,056201,Finspång,100
+1865,108158.0,Simonstorp,,058104,Kolmården,100
+1866,108159.0,Regna,,056201,Finspång,100
+1867,108160.0,Skedevi,,056201,Finspång,99.9399999999999
+1868,109001.0,Öckerö,,140701,Öckerö,99.8499999999999
+1869,109002.0,Torslanda,,148028,Torslanda-Björlanda,99.7699999999999
+1870,109003.0,Brunnsbo,,148017,Lundby,0.57
+1871,109003.0,Brunnsbo,,148020,Backa,99.23
+1872,109004.0,Björlanda,,148017,Lundby,6.3
+1873,109004.0,Björlanda,,148028,Torslanda-Björlanda,93.5699999999999
+1874,109005.0,Backa,,148020,Backa,99.9899999999999
+1875,109006.0,Bäckebol,,148031,Tuve-Säve,0.73
+1876,109006.0,Bäckebol,,148020,Backa,99.06
+1877,109007.0,Torsby,,148205,Torsby,99.9399999999999
+1878,109008.0,Harestad,,148204,Harestad,99.5199999999999
+1879,109009.0,Säve,,148020,Backa,8.6
+1880,109009.0,Säve,,148031,Tuve-Säve,91.28
+1881,109010.0,Ytterby,,148201,Kungälv-Ytterby,99.8499999999999
+1882,109011.0,Rödbo,,148031,Tuve-Säve,99.84
+1883,109012.0,Kungälv,,148201,Kungälv-Ytterby,99.89
+1884,109013.0,Lycke,,148203,Marstrand,2.19
+1885,109013.0,Lycke,,148206,Lycke,97.7999999999999
+1886,109014.0,Klädesholmen,,141903,Rönnäng,99.5499999999999
+1887,109015.0,Marstrand,,148203,Marstrand,100
+1888,109016.0,Rönnäng,,141903,Rönnäng,99.9099999999999
+1889,109017.0,Hålta,,148210,Hålta,99.8599999999999
+1890,109018.0,Kareby,,148209,Kareby,99.93
+1891,109019.0,Solberga,,141505,Jörlanda,0.63
+1892,109019.0,Solberga,,148211,Solberga,99.3499999999999
+1893,109020.0,Romelanda,,148208,Romelanda,100
+1894,109021.0,Stenkyrka,,141902,Stenkyrka,99.7199999999999
+1895,109022.0,Klövedal,,141905,Klövedal,99.7199999999999
+1896,109023.0,Valla,,141901,Valla,99.9599999999999
+1897,109024.0,Jörlanda,,141505,Jörlanda,99.8499999999999
+1898,109025.0,Spekeröd,,141505,Jörlanda,1.95
+1899,109025.0,Spekeröd,,141504,Spekeröd-Ucklum,98.0499999999999
+1900,109026.0,Käringön,,142110,Morlanda,100
+1901,109027.0,Mollösund,,142110,Morlanda,100
+1902,109028.0,Tegneby,,142101,Tegneby,99.6299999999999
+1903,109029.0,Stala,,142103,Stala,99.8299999999999
+1904,109030.0,Norum,,141502,Norum,99.9
+1905,109031.0,Långelanda,,142104,Långelanda,99.92
+1906,109032.0,Ödsmål,,141503,Ödsmål,99.98
+1907,109033.0,Ucklum,,141504,Spekeröd-Ucklum,100
+1908,109034.0,Västerlanda,,146206,Västerlanda,99.9899999999999
+1909,109035.0,Gullholmen,,142110,Morlanda,99.9899999999999
+1910,109036.0,Skaftö,,148403,Skaftö,99.9699999999999
+1911,109037.0,Morlanda,,142101,Tegneby,0.52
+1912,109037.0,Morlanda,,142110,Morlanda,99.4399999999999
+1913,109038.0,Röra,,142101,Tegneby,1.28
+1914,109038.0,Röra,,142102,Röra,98.7199999999999
+1915,109039.0,Myckleby,,142105,Myckleby,99.92
+1916,109040.0,Ljung,,148503,Ljungskile,100
+1917,109041.0,Resteröd,,148503,Ljungskile,99.95
+1918,109042.0,Grinneröd,,148503,Ljungskile,100
+1919,109043.0,Hjärtum,,146207,Hjärtum,99.9699999999999
+1920,109044.0,Dragsmark,,148509,Bokenäset,99.78
+1921,109045.0,Lysekil,,148401,Lysekil,99.93
+1922,109046.0,Lyse,,148403,Skaftö,0.8
+1923,109046.0,Lyse,,148402,Lyse,99.01
+1924,109047.0,Torp,,142106,Torp,99.9599999999999
+1925,109048.0,Bokenäs,,148509,Bokenäset,99.93
+1926,109049.0,Högås,,148509,Bokenäset,99.79
+1927,109050.0,Forshälla,,148503,Ljungskile,99.93
+1928,109051.0,Smögen,,142701,Södra Sotenäs,100
+1929,109052.0,Malmön,,142701,Södra Sotenäs,99.98
+1930,109053.0,Kungshamn,,142701,Södra Sotenäs,100
+1931,109054.0,Askum,,142701,Södra Sotenäs,99.7999999999999
+1932,109055.0,Bro,,148404,Bro,100
+1933,109056.0,Brastad,,148405,Brastad,99.9899999999999
+1934,109057.0,Skredsvik,,148509,Bokenäset,99.98
+1935,109058.0,Herrestad,,148510,Herrestad,99.95
+1936,109059.0,Bäve,,148512,Bäve,37.99
+1937,109059.0,Bäve,,148513,Dalaberg,61.8699999999999
+1938,109060.0,Uddevalla,,148503,Ljungskile,0.76
+1939,109060.0,Uddevalla,,148501,Uddevalla,98.8599999999999
+1940,109061.0,Lane-Ryr,,148511,Lane-Ryr,99.98
+1941,109062.0,Hunnebostrand,,142705,Hunnebostrand,99.87
+1942,109063.0,Tossene,,142701,Södra Sotenäs,0.79
+1943,109063.0,Tossene,,142706,Tossene,99.1899999999999
+1944,109064.0,Foss,,143001,Foss,99.84
+1945,109065.0,Fjällbacka,,143507,Fjällbacka,99.98
+1946,109066.0,Svenneby,,143509,Svenneby,99.78
+1947,109067.0,Bottna,,143508,Bottna,99.9899999999999
+1948,109068.0,Bärfendal,,143005,Svarteborg-Bärfendal,100
+1949,109069.0,Håby,,143008,Sörbygden,1.89
+1950,109069.0,Håby,,143001,Foss,98.1099999999999
+1951,109070.0,Svarteborg,,143005,Svarteborg-Bärfendal,100
+1952,109071.0,Hede,,143008,Sörbygden,99.98
+1953,109072.0,Kville,,143506,Kville,99.9399999999999
+1954,109073.0,Sanne,,143008,Sörbygden,100
+1955,109074.0,Tanum,,143502,Tanum,99.9899999999999
+1956,109075.0,Mo,,143504,Naverstad-Mo,100
+1957,109076.0,Krokstad,,143008,Sörbygden,100
+1958,109077.0,Lur,,143503,Lur,99.9899999999999
+1959,109078.0,Naverstad,,143504,Naverstad-Mo,99.9899999999999
+1960,109079.0,Tjärnö,,148601,Strömstad,43.49
+1961,109079.0,Tjärnö,,148602,Skee-Tjärnö,56.5
+1962,109080.0,Skee,,148602,Skee-Tjärnö,99.9899999999999
+1963,109081.0,Strömstad,,148601,Strömstad,99.9899999999999
+1964,109082.0,Näsinge,,148606,Idefjorden,100
+1965,109083.0,Hogdal,,148606,Idefjorden,99.7999999999999
+1966,109084.0,Lommeland,,148606,Idefjorden,99.9899999999999
+1967,110001.0,Valbo-Ryr,,143001,Foss,100
+1968,110002.0,Torp,,143901,Färgelanda,100
+1969,110003.0,Ödeborg,,143901,Färgelanda,100
+1970,110004.0,Frändefors,,148703,Gestad,0.75
+1971,110004.0,Frändefors,,148706,Frändefors,99.25
+1972,110005.0,Gestad,,148703,Gestad,99.9899999999999
+1973,110006.0,Färgelanda,,143901,Färgelanda,100
+1974,110007.0,Sundals-Ryr,,148705,Sundals-Ryr,99.98
+1975,110008.0,Brålanda,,148704,Brålanda,99.6099999999999
+1976,110009.0,Bolstad,,146103,Bolstad,99.98
+1977,110010.0,Högsäter,,143904,Järbo-Råggärd,1.98
+1978,110010.0,Högsäter,,143908,Högsäter,98.0199999999999
+1979,110011.0,Erikstad,,146103,Bolstad,99.9699999999999
+1980,110012.0,Ör,,146103,Bolstad,0.55
+1981,110012.0,Ör,,146107,Ör,99.34
+1982,110013.0,Grinstad,,146109,Skållerud,1.03
+1983,110013.0,Grinstad,,146103,Bolstad,98.7399999999999
+1984,110014.0,Järn,,146109,Skållerud,5.08
+1985,110014.0,Järn,,146101,Holm,94.89
+1986,110015.0,Rännelanda,,143907,Rännelanda-Lerdal,100
+1987,110016.0,Lerdal,,143907,Rännelanda-Lerdal,100
+1988,110017.0,Råggärd,,143904,Järbo-Råggärd,100
+1989,110018.0,Järbo,,146009,Bäcke-Ödskölt,1.06
+1990,110018.0,Järbo,,143904,Järbo-Råggärd,98.9399999999999
+1991,110019.0,Gunnarsnäs,,146107,Ör,99.79
+1992,110020.0,Dalskog,,146107,Ör,99.7999999999999
+1993,110021.0,Holm,,146101,Holm,99.4099999999999
+1994,110022.0,Gesäter,,143803,Dals-Ed,100
+1995,110023.0,Rölanda,,143803,Dals-Ed,100
+1996,110024.0,Bäcke,,146009,Bäcke-Ödskölt,100
+1997,110025.0,Ödskölt,,146009,Bäcke-Ödskölt,100
+1998,110026.0,Skållerud,,146109,Skållerud,99.89
+1999,110027.0,Ånimskog,,149201,Åmål,100
+2000,110028.0,Töftedal,,143803,Dals-Ed,99.98
+2001,110029.0,Dals-Ed,,143803,Dals-Ed,100
+2002,110030.0,Tisselskog,,146006,Steneby-Tisselskog,99.9899999999999
+2003,110031.0,Steneby,,146006,Steneby-Tisselskog,100
+2004,110032.0,Fröskog,,149201,Åmål,100
+2005,110033.0,Tösse-Tydje,,149201,Åmål,100
+2006,110034.0,Håbol,,143803,Dals-Ed,100
+2007,110035.0,Åmål,,149201,Åmål,100
+2008,110036.0,Ärtemark,,146001,Ärtemark,100
+2009,110037.0,Laxarby,,146003,Laxarby-Vårvik,100
+2010,110038.0,Edsleskog,,149201,Åmål,99.9699999999999
+2011,110039.0,Mo,,149201,Åmål,99.9899999999999
+2012,110040.0,Nössemark,,143803,Dals-Ed,99.9699999999999
+2013,110041.0,Torrskog,,146005,Torrskog,100
+2014,110042.0,Vårvik,,146003,Laxarby-Vårvik,100
+2015,211001.0,Hammar,,188205,Hammar,100
+2016,211002.0,Askersund,,188201,Askersund,100
+2017,211003.0,Bo,,186104,Sköllersta,100
+2018,211004.0,Ramundeboda,,186001,Ramundeboda,99.9899999999999
+2019,211005.0,Snavlunda,,188204,Snavlunda,100
+2020,211006.0,Lerbäck,,188203,Lerbäck,100
+2021,211007.0,Svennevad,,186104,Sköllersta,100
+2022,211008.0,Skagershult,,186004,Skagershult,100
+2023,211009.0,Tångeråsa,,181405,Edsberg,100
+2024,211010.0,Viby,,186102,Viby,99.5499999999999
+2025,211011.0,Hallsberg,,186101,Hallsberg,99.9899999999999
+2026,211012.0,Asker,,188015,Asker,100
+2027,211013.0,Nysund,,186201,Degerfors-Nysund,99.9899999999999
+2028,211014.0,Hardemo,,186101,Hallsberg,0.8
+2029,211014.0,Hardemo,,188102,Hardemo,99.1899999999999
+2030,211015.0,Hackvad,,181405,Edsberg,99.9599999999999
+2031,211016.0,Edsberg,,181405,Edsberg,99.9899999999999
+2032,211017.0,Kräcklinge,,181405,Edsberg,99.98
+2033,211018.0,Kumla,,188101,Kumla,99.9599999999999
+2034,211019.0,Ekeby,,188101,Kumla,0.52
+2035,211019.0,Ekeby,,188103,Ekeby,99.45
+2036,211020.0,Sköllersta,,186104,Sköllersta,100
+2037,211021.0,Lännäs,,188014,Lännäs,100
+2038,211022.0,Kvistbro,,181402,Knista,99.9699999999999
+2039,211023.0,Knista,2.0,181402,Knista,99.9899999999999
+2040,,,,181402,Knista,100
+2041,211024.0,Hidinge,,181402,Knista,99.98
+2042,211025.0,Vintrosa,,188008,Tysslinge,99.9
+2043,211026.0,Täby,,181405,Edsberg,2.39
+2044,211026.0,Täby,,188005,Mosjö-Täby,97.5999999999999
+2045,211027.0,Mosjö,,188005,Mosjö-Täby,99.93
+2046,211028.0,Adolfsberg,,188031,Adolfsberg,99.87
+2047,211029.0,Gällersta,,188016,Kvismare,100
+2048,211030.0,Örebro Nikolai,2.0,188001,Örebro Nikolai,100
+2049,,,,188016,Kvismare,100
+2050,211031.0,Almby,,188004,Almby,100
+2051,211032.0,Norrbyås,,188016,Kvismare,100
+2052,211033.0,Stora Mellösa,,188016,Kvismare,100
+2053,211034.0,Tysslinge,,188008,Tysslinge,99.9899999999999
+2054,211035.0,Gräve,,188031,Adolfsberg,2.05
+2055,211035.0,Gräve,,188008,Tysslinge,97.95
+2056,211036.0,Längbro,,188003,Längbro,100
+2057,211037.0,Örebro Mikael,,188030,Mikael,100
+2058,211038.0,Örebro Olaus Petri,,188002,Örebro Olaus Petri,100
+2059,211039.0,Hovsta,,188013,Axberg,100
+2060,211040.0,Rinkaby,,188027,Glanshammar,100
+2061,211041.0,Glanshammar,,188027,Glanshammar,100
+2062,211042.0,Lillkyrka-Ödeby,2.0,188027,Glanshammar,99.9899999999999
+2063,,,,188027,Glanshammar,100
+2064,211043.0,Götlunda,,198401,Arbogabygden,100
+2065,211044.0,Kil,,188013,Axberg,99.9899999999999
+2066,211045.0,Axberg,,188013,Axberg,100
+2067,212001.0,Oxelösund,,048101,Oxelösund,99.9699999999999
+2068,212002.0,Lunda,,048007,Kiladalen,100
+2069,212003.0,Tunaberg,,048005,Tunaberg,100
+2070,212004.0,Kila,,048007,Kiladalen,99.9099999999999
+2071,212005.0,Tuna,,048007,Kiladalen,99.79
+2072,212006.0,Bergshammar,,048007,Kiladalen,99.9599999999999
+2073,212007.0,Nyköpings Sankt Nicolai,,048002,Nyköping,99.9699999999999
+2074,212008.0,Nyköpings Alla Helgona,,048002,Nyköping,100
+2075,212009.0,Svärta,,048002,Nyköping,99.9899999999999
+2076,212010.0,Tystberga-Bälinge,,048020,Tystbergabygden,99.79
+2077,212011.0,Torö,,019204,Ösmo-Torö,100
+2078,212012.0,Björkvik,,048302,Björkvik,99.9899999999999
+2079,212013.0,Vrena,,048010,Stigtomta-Vrena,100
+2080,212014.0,Stigtomta,,048010,Stigtomta-Vrena,99.9399999999999
+2081,212015.0,Runtuna,,048019,Rönö,99.9899999999999
+2082,212016.0,Västerljung,,048802,Trosa,100
+2083,212017.0,Trosa-Vagnhärad,,048802,Trosa,100
+2084,212018.0,Östra Vingåker,,048301,Katrineholmsbygden,100
+2085,212019.0,Nävertorp,,048301,Katrineholmsbygden,100
+2086,212020.0,Stora Malm,,048301,Katrineholmsbygden,100
+2087,212021.0,Lerbo,,048301,Katrineholmsbygden,100
+2088,212022.0,Bettna,,048208,Bettna,99.9899999999999
+2089,212023.0,Blacksta,,048208,Bettna,100
+2090,212024.0,Råby-Rönö och Ripsa,,048019,Rönö,100
+2091,212025.0,Årdala,,048208,Bettna,100
+2092,212026.0,Lid,,048019,Rönö,100
+2093,212027.0,Ludgo-Spelvik,,048019,Rönö,100
+2094,212028.0,Lästringe,,048020,Tystbergabygden,99.9899999999999
+2095,212029.0,Trosa stadsdistrikt,,048802,Trosa,100
+2096,212030.0,Mörkö,,018110,Hölö-Mörkö,100
+2097,212031.0,Ösmo,,019204,Ösmo-Torö,100
+2098,212032.0,Nynäshamn,,019201,Nynäshamn,99.9699999999999
+2099,212033.0,Utö,,013605,Dalarö-Ornö-Utö,100
+2100,212034.0,Västra Vingåker,,042801,Västra Vingåker,100
+2101,212035.0,Katrineholm,,048301,Katrineholmsbygden,100
+2102,212036.0,Sköldinge,,048301,Katrineholmsbygden,100
+2103,212037.0,Vadsbro,,048208,Bettna,100
+2104,212038.0,Forsa,,048208,Bettna,100
+2105,212039.0,Flen,,048201,"Flen, Helgesta-Hyltinge",99.9899999999999
+2106,212040.0,Helgesta-Hyltinge,,046104,Daga,1.03
+2107,212040.0,Helgesta-Hyltinge,,048201,"Flen, Helgesta-Hyltinge",98.9699999999999
+2108,212041.0,Björnlunda,,046104,Daga,99.9699999999999
+2109,212042.0,Frustuna,,046101,Frustuna,99.98
+2110,212043.0,Vårdinge,,018106,Vårdinge,100
+2111,212044.0,Hölö,,018110,Hölö-Mörkö,100
+2112,212045.0,Sorunda,,019202,Sorunda,99.9899999999999
+2113,212046.0,Muskö,,013606,Västerhaninge-Muskö,100
+2114,212047.0,Ornö,,013605,Dalarö-Ornö-Utö,100
+2115,212048.0,Österåker,,042802,Österåker,99.9599999999999
+2116,212049.0,Julita,,048301,Katrineholmsbygden,99.95
+2117,212050.0,Floda,,048301,Katrineholmsbygden,100
+2118,212051.0,Mellösa,,048207,Mellösa,99.9899999999999
+2119,212052.0,Lilla Malma,,048205,Dunker-Lilla Malma,99.9899999999999
+2120,212053.0,Gryt,,046104,Daga,100
+2121,212054.0,Gåsinge-Dillnäs,,046104,Daga,100
+2122,212055.0,Överjärna,,018108,Ytterjärna,5.29
+2123,212055.0,Överjärna,,018107,Överjärna,94.7099999999999
+2124,212056.0,Ytterjärna,,018108,Ytterjärna,99.9899999999999
+2125,212057.0,Grödinge,,012702,Grödinge,99.9699999999999
+2126,212058.0,Västerhaninge,,013606,Västerhaninge-Muskö,99.9899999999999
+2127,212059.0,Österhaninge,,013605,Dalarö-Ornö-Utö,45.56
+2128,212059.0,Österhaninge,,013601,Österhaninge,54.43
+2129,212060.0,Nämdö,,012003,"Djurö, Möja och Nämdö",100
+2130,212061.0,Näshulta,,048417,Näshulta,99.98
+2131,212062.0,Ärla,,048420,Stenkvista-Ärla,99.93
+2132,212063.0,Dunker,,048205,Dunker-Lilla Malma,99.9899999999999
+2133,212064.0,Åker,,048606,Åker-Länna,99.9899999999999
+2134,212065.0,Mariefred,,048604,Mariefred,99.98
+2135,212066.0,Turinge,,018107,Överjärna,0.58
+2136,212066.0,Turinge,,018108,Ytterjärna,1.09
+2137,212066.0,Turinge,,014001,Turinge-Taxinge,98.3199999999999
+2138,212067.0,Taxinge,,014001,Turinge-Taxinge,99.9899999999999
+2139,212068.0,Tveta,,018101,Södertälje,99.9899999999999
+2140,212069.0,Västertälje,,018101,Södertälje,100
+2141,212070.0,Södertälje,,018101,Södertälje,100
+2142,212071.0,Östertälje,,018102,Östertälje,99.98
+2143,212072.0,Salem,,012801,Salem,99.9399999999999
+2144,212073.0,Tullinge,,012701,Botkyrka,99.9899999999999
+2145,212074.0,Tumba,,012701,Botkyrka,100
+2146,212075.0,Flemingsberg,,012604,Flemingsberg,100
+2147,212076.0,Huddinge,,012601,Huddinge,99.9099999999999
+2148,212077.0,Trångsund,,012602,Trångsund-Skogås,99.78
+2149,212078.0,Tyresö,,013801,Tyresö,99.95
+2150,212079.0,Dalarö,,013605,Dalarö-Ornö-Utö,100
+2151,212080.0,Västermo,,048413,Västra Rekarne,100
+2152,212081.0,Öja,,048413,Västra Rekarne,100
+2153,212082.0,Gillberga,,048413,Västra Rekarne,99.9699999999999
+2154,212083.0,Lista,,048413,Västra Rekarne,100
+2155,212084.0,Husby-Rekarne,,048418,Husby-Rekarne,99.9699999999999
+2156,212085.0,Stenkvista,,048420,Stenkvista-Ärla,100
+2157,212086.0,Länna,,048606,Åker-Länna,100
+2158,212087.0,Härad,,048614,Vårfruberga-Härad,99.9899999999999
+2159,212088.0,Toresund,,048607,Stallarholmen,100
+2160,212089.0,Enhörna,,018104,Enhörna,100
+2161,212090.0,Botkyrka,,012701,Botkyrka,100
+2162,212091.0,Huddinge Sankt Mikael,,012601,Huddinge,1.58
+2163,212091.0,Huddinge Sankt Mikael,,012603,S:t Mikael,98.26
+2164,212092.0,Skärholmen,,018040,Skärholmen,99.64
+2165,212093.0,Vantör,,018023,Vantör,99.5199999999999
+2166,212094.0,Farsta,,018025,Farsta,99.7999999999999
+2167,212095.0,Skarpnäck,,018036,Skarpnäck,99.8799999999999
+2168,212096.0,Brännkyrka,,018034,Enskede-Årsta,4.44
+2169,212096.0,Brännkyrka,,018039,Hägersten,6.1
+2170,212096.0,Brännkyrka,,018021,Brännkyrka,89.2399999999999
+2171,212097.0,Enskede,,018034,Enskede-Årsta,99.9899999999999
+2172,212098.0,Hägersten,,018021,Brännkyrka,10.19
+2173,212098.0,Hägersten,,018039,Hägersten,89.7999999999999
+2174,212099.0,Högalid,,018014,Högalid,99.75
+2175,212100.0,Stockholms Katarina,,018001,Stockholms domkyrkoförsamling,0.5
+2176,212100.0,Stockholms Katarina,,018015,Katarina,99.5
+2177,212101.0,Stockholms Maria Magdalena,,018001,Stockholms domkyrkoförsamling,3.06
+2178,212101.0,Stockholms Maria Magdalena,,018013,Maria Magdalena,96.92
+2179,212102.0,Stockholms Sofia,,018201,Nacka,0.68
+2180,212102.0,Stockholms Sofia,,018001,Stockholms domkyrkoförsamling,1.98
+2181,212102.0,Stockholms Sofia,,018011,Oscar,2.98
+2182,212102.0,Stockholms Sofia,,018017,Sofia,94.1099999999999
+2183,212103.0,Saltsjöbaden,,018202,Saltsjöbaden,99.6299999999999
+2184,212104.0,Nacka,,018201,Nacka,99.5699999999999
+2185,212105.0,Kung Karl,,196001,Kungsör,100
+2186,212106.0,Torpa,,196001,Kungsör,100
+2187,212107.0,Råby-Rekarne,,048410,Hällby församling med Tumbo och Råby-Rekarne,100
+2188,212108.0,Hällby,,048410,Hällby församling med Tumbo och Råby-Rekarne,100
+2189,212109.0,Tumbo,,048410,Hällby församling med Tumbo och Råby-Rekarne,100
+2190,212110.0,Eskilstuna Fors,,048402,Eskilstuna,100
+2191,212111.0,Eskilstuna Kloster,,048402,Eskilstuna,100
+2192,212112.0,Torshälla,,048403,Torshälla,99.9899999999999
+2193,212113.0,Kafjärden,,048421,Kafjärden,99.7999999999999
+2194,212114.0,Strängnäs domkyrkodistrikt,,048601,Strängnäs domkyrkoförsamling med Aspö,99.9899999999999
+2195,212115.0,Överselö,,048607,Stallarholmen,99.9399999999999
+2196,212116.0,Ytterselö,,048607,Stallarholmen,100
+2197,212117.0,Vårfruberga,,048614,Vårfruberga-Härad,99.9899999999999
+2198,212118.0,Aspö,,048601,Strängnäs domkyrkoförsamling med Aspö,99.9899999999999
+2199,213001.0,Eskilsäter,,178504,Södra Värmlandsnäs,100
+2200,213002.0,Millesvik,,178504,Södra Värmlandsnäs,100
+2201,213003.0,Ölserud,,178504,Södra Värmlandsnäs,100
+2202,213004.0,Botilsäter,,178504,Södra Värmlandsnäs,99.7
+2203,213005.0,Södra Råda,,144701,Amnehärad,100
+2204,213006.0,Rudskoga,,178103,Rudskoga,99.75
+2205,213007.0,Tveta,,178501,Säffle,2.01
+2206,213007.0,Tveta,,178502,Tveta,97.98
+2207,213008.0,Säffle,,178501,Säffle,99.92
+2208,213009.0,Södra Ny-Huggenäs,,178508,Ny-Huggenäs,99.67
+2209,213010.0,Visnums-Kil,,178104,Visnums-Kil,99.7699999999999
+2210,213011.0,Visnum,,178105,Visnum,99.9599999999999
+2211,213012.0,Svanskog,,178511,Svanskog,99.9
+2212,213013.0,Kila,,178510,Kila,99.9899999999999
+2213,213014.0,Bro,,178503,Bro,100
+2214,213015.0,Degerfors,,186201,Degerfors-Nysund,100
+2215,213016.0,Trankil,,176506,Trankil,99.9899999999999
+2216,213017.0,Blomskog,,176505,Blomskog,100
+2217,213018.0,Sillerud,,176502,Sillerud,100
+2218,213019.0,Långserud,,178511,Svanskog,1.34
+2219,213019.0,Långserud,,178512,Långserud,98.65
+2220,213020.0,Ed,,176403,Ed-Borgvik,99.98
+2221,213021.0,Segerstad,,178009,Nor-Segerstad,100
+2222,213022.0,Hammarö,,176101,Hammarö,100
+2223,213023.0,Väse,,176101,Hammarö,12.44
+2224,213023.0,Väse,,178003,Väse-Fågelvik,87.5499999999999
+2225,213024.0,Kristinehamn,,178101,Kristinehamn,99.9099999999999
+2226,213025.0,Västra Fågelvik,,176507,Västra Fågelvik,99.9899999999999
+2227,213026.0,Silbodal,,176501,Silbodal,100
+2228,213027.0,Gillberga,,178509,Gillberga,99.67
+2229,213028.0,Borgvik,,176403,Ed-Borgvik,100
+2230,213029.0,Grums,,176401,Grums,99.73
+2231,213030.0,Västerstrand,,178011,Västerstrand,99.9099999999999
+2232,213031.0,Nor,,178009,Nor-Segerstad,100
+2233,213032.0,Karlstads domkyrkodistrikt,,178001,Karlstads domkyrkoförsamling,99.8199999999999
+2234,213033.0,Norrstrand,,178002,Norrstrand,99.9399999999999
+2235,213034.0,Östra Fågelvik,2.0,178003,Väse-Fågelvik,99.9699999999999
+2236,,,,178003,Väse-Fågelvik,100
+2237,213035.0,Ölme,,178105,Visnum,1.8
+2238,213035.0,Ölme,,178106,Ölme,98.1599999999999
+2239,213036.0,Bjurtjärn,,176001,Storfors,99.9899999999999
+2240,213037.0,Karlskoga,,188301,Karlskoga,100
+2241,213038.0,Holmedal,,176503,Holmedal-Karlanda,99.9899999999999
+2242,213039.0,Glava,,178405,Glava,99.9899999999999
+2243,213040.0,Stavnäs,,178403,Stavnäs-Högerud,99.98
+2244,213041.0,Värmskog,,176404,Värmskog,99.8799999999999
+2245,213042.0,Grava,,178008,Grava,99.9599999999999
+2246,213043.0,Forshaga,,176301,Forshaga-Munkfors,99.9899999999999
+2247,213044.0,Alster,,178003,Väse-Fågelvik,1.41
+2248,213044.0,Alster,,178006,Alster-Nyedsbygden,98.28
+2249,213045.0,Lungsund,,176001,Storfors,100
+2250,213046.0,Töcksmark,,176508,Töcksmark,100
+2251,213047.0,Karlanda,,176503,Holmedal-Karlanda,100
+2252,213048.0,Högerud,,178403,Stavnäs-Högerud,99.64
+2253,213049.0,Boda,,171503,Boda,100
+2254,213050.0,Frykerud,,178001,Karlstads domkyrkoförsamling,0.61
+2255,213050.0,Frykerud,,171502,Frykerud,99.2999999999999
+2256,213051.0,Stora Kil,,171501,Stora Kil,99.9599999999999
+2257,213052.0,Nedre Ullerud,,176301,Forshaga-Munkfors,100
+2258,213053.0,Storfors,,176001,Storfors,100
+2259,213054.0,Östervallskog,,176509,Östervallskog,100
+2260,213055.0,Älgå,,178409,Älgå,99.98
+2261,213056.0,Arvika stadsdistrikt,,178401,Arvika Östra,100
+2262,213057.0,Arvika landsdistrikt,,178402,Arvika Västra,99.9899999999999
+2263,213058.0,Brunskog,,178411,Brunskog,99.9899999999999
+2264,213059.0,Övre Ullerud,,176202,Forshaga-Munkfors,0.62
+2265,213059.0,Övre Ullerud,,176301,Forshaga-Munkfors,99.3799999999999
+2266,213060.0,Nyed,,178006,Alster-Nyedsbygden,100
+2267,213061.0,Brattfors,,178201,Filipstad,100
+2268,213062.0,Kroppa,,178201,Filipstad,99.9
+2269,213063.0,Järnskog,,173003,Järnskog-Skillingmark,99.9899999999999
+2270,213064.0,Köla,,173005,Köla,99.9899999999999
+2271,213065.0,Ny,,178408,Ny,99.9899999999999
+2272,213066.0,Mangskog,,178410,Mangskog,99.9599999999999
+2273,213067.0,Västra Ämtervik,,176602,Västra Ämtervik,99.98
+2274,213068.0,Östra Ämtervik,,176603,Östra Ämtervik,100
+2275,213069.0,Älvsbacka,,178006,Alster-Nyedsbygden,99.9899999999999
+2276,213070.0,Filipstad,,178201,Filipstad,100
+2277,213071.0,Skillingmark,,173003,Järnskog-Skillingmark,99.9399999999999
+2278,213072.0,Gunnarskog,,178407,Gunnarskog,99.9899999999999
+2279,213073.0,Ransäter,,176202,Forshaga-Munkfors,100
+2280,213074.0,Munkfors,,176202,Forshaga-Munkfors,100
+2281,213075.0,Sunnemo,,178304,Norra Råda-Sunnemo,99.98
+2282,213076.0,Eda,,173001,Eda,99.9899999999999
+2283,213077.0,Gräsmark,2.0,176604,Gräsmark,100
+2284,213077.0,Gräsmark,2.0,176604,Gräsmark,100
+2285,213078.0,Sunne,,176601,Sunne,99.93
+2286,213079.0,Norra Råda,,178304,Norra Råda-Sunnemo,100
+2287,213080.0,Nordmark,,178201,Filipstad,100
+2288,213081.0,Gåsborn,,178201,Filipstad,100
+2289,213082.0,Lysvik,,176605,Lysvik,100
+2290,213083.0,Hagfors,,178301,Hagfors-Gustav Adolf,99.9899999999999
+2291,213084.0,Bogen,,178407,Gunnarskog,99.9899999999999
+2292,213085.0,Gustav Adolf,,178301,Hagfors-Gustav Adolf,100
+2293,213086.0,Rämmen,,178201,Filipstad,100
+2294,213087.0,Lekvattnet,,173702,Lekvattnet,99.9899999999999
+2295,213088.0,Fryksände,2.0,173701,Fryksände,99.6099999999999
+2296,,,,173701,Fryksände,100
+2297,213089.0,Ekshärad,,178302,Ekshärad,100
+2298,213090.0,Östmark,,173705,Östmark,100
+2299,213091.0,Vitsand,,173703,Vitsand,100
+2300,213092.0,Norra Ny,,173708,Övre Älvdal,100
+2301,213093.0,Nyskoga,,173708,Övre Älvdal,100
+2302,213094.0,Södra Finnskoga,,173708,Övre Älvdal,99.98
+2303,213095.0,Dalby,,173708,Övre Älvdal,100
+2304,213096.0,Norra Finnskoga,,173708,Övre Älvdal,99.9899999999999
+2305,214001.0,Arboga landsdistrikt,2.0,198401,Arbogabygden,100
+2306,,,,198401,Arbogabygden,100
+2307,214002.0,Viker,,188404,Nora bergslagsförsamling,100
+2308,214003.0,Arboga stadsdistrikt,,198401,Arbogabygden,99.9899999999999
+2309,214004.0,Björskog,,198304,Malma,0.7
+2310,214004.0,Björskog,,196001,Kungsör,99.2999999999999
+2311,214005.0,Nora,,188404,Nora bergslagsförsamling,99.9899999999999
+2312,214006.0,Ervalla,,188013,Axberg,99.9599999999999
+2313,214007.0,Näsby,,188504,Näsby,100
+2314,214008.0,Fellingsbro,,188505,Fellingsbro,99.9899999999999
+2315,214009.0,Medåker,,198401,Arbogabygden,99.9899999999999
+2316,214010.0,Himmeta-Bro,,196001,Kungsör,1.12
+2317,214010.0,Himmeta-Bro,,198304,Malma,98.8799999999999
+2318,214011.0,Köping,,198301,Köpingsbygden,99.9899999999999
+2319,214012.0,Kungs-Barkarö,,196001,Kungsör,100
+2320,214013.0,Kolbäck,,196101,Hallstahammar-Kolbäck,99.9899999999999
+2321,214014.0,Rytterne,,198010,Västerås-Barkarö,5.62
+2322,214014.0,Rytterne,,198020,Rytterne,94.37
+2323,214015.0,Barkarö,,198010,Västerås-Barkarö,99.9699999999999
+2324,214016.0,Grythyttan,,186302,Grythyttan,100
+2325,214017.0,Lindesberg,,188502,Linde bergslag,99.9899999999999
+2326,214018.0,Västra Skedvi,,198304,Malma,99.98
+2327,214019.0,Kolsva,,198304,Malma,100
+2328,214020.0,Munktorp,,198301,Köpingsbygden,99.6599999999999
+2329,214021.0,Berg,,196101,Hallstahammar-Kolbäck,100
+2330,214022.0,Säby,,196101,Hallstahammar-Kolbäck,100
+2331,214023.0,Hallstahammar,,196101,Hallstahammar-Kolbäck,100
+2332,214024.0,Dingtuna,,198009,Dingtuna-Lillhärad,99.9599999999999
+2333,214025.0,Lundby,,198002,Västerås Lundby,99.98
+2334,214026.0,Västerås domkyrkodistrikt,,198001,Västerås domkyrkoförsamling,99.87
+2335,214027.0,Kärrbo,,198011,Kungsåra,99.9899999999999
+2336,214028.0,Viksäng,,198024,Viksäng,99.6299999999999
+2337,214029.0,Irsta,,198011,Kungsåra,100
+2338,214030.0,Ängsö,,198011,Kungsåra,100
+2339,214031.0,Kungsåra,,198011,Kungsåra,100
+2340,214032.0,Järnboås,,188404,Nora bergslagsförsamling,100
+2341,214033.0,Guldsmedshyttan,,188503,Guldsmedshyttan,100
+2342,214034.0,Hed,,190402,Skinnskatteberg med Hed och Gunnilbo,100
+2343,214035.0,Odensvi,,198301,Köpingsbygden,100
+2344,214036.0,Sura,,190701,Sura-Ramnäs,99.98
+2345,214037.0,Lillhärad,,198009,Dingtuna-Lillhärad,99.9899999999999
+2346,214038.0,Skerike,,198022,Skerike,99.8499999999999
+2347,214039.0,Gideonsberg,,198023,Önsta,1.87
+2348,214039.0,Gideonsberg,,198025,Gideonsberg,98.0199999999999
+2349,214040.0,Önsta,,198023,Önsta,99.9599999999999
+2350,214041.0,Badelunda,,198003,Västerås Badelunda,99.73
+2351,214042.0,Hubbo,,198016,Tillberga,99.9899999999999
+2352,214043.0,Tillberga,,198016,Tillberga,100
+2353,214044.0,Tortuna,,198016,Tillberga,100
+2354,214045.0,Björksta,,198011,Kungsåra,100
+2355,214046.0,Ramsberg,,188502,Linde bergslag,100
+2356,214047.0,Gunnilbo,,190402,Skinnskatteberg med Hed och Gunnilbo,99.98
+2357,214048.0,Skultuna,,198007,Norrbo,100
+2358,214049.0,Haraker,,198007,Norrbo,99.9899999999999
+2359,214050.0,Romfartuna,,198007,Norrbo,100
+2360,214051.0,Sevalla,,198016,Tillberga,100
+2361,214052.0,Hällefors,,186301,Hällefors-Hjulsjö,99.9899999999999
+2362,214053.0,Hjulsjö,,186301,Hällefors-Hjulsjö,99.9399999999999
+2363,214054.0,Skinnskatteberg,,190402,Skinnskatteberg med Hed och Gunnilbo,100
+2364,214055.0,Ramnäs,,190701,Sura-Ramnäs,100
+2365,214056.0,Fläckebo,,198102,Västerfärnebo-Fläckebo,100
+2366,214057.0,Kumla,,198007,Norrbo,0.74
+2367,214057.0,Kumla,,198106,Kumla,99.0799999999999
+2368,214058.0,Ljusnarsberg,,186401,Ljusnarsberg,100
+2369,214059.0,Västanfors,,198201,Västanfors-Västervåla,100
+2370,214060.0,Västervåla,,198201,Västanfors-Västervåla,100
+2371,214061.0,Västerfärnebo,,198102,Västerfärnebo-Fläckebo,99.9599999999999
+2372,214062.0,Kila,,198107,Kila,99.6299999999999
+2373,214063.0,Sala,,198101,Sala,100
+2374,214064.0,Grängesberg,,208503,Gränge-Säfsnäs,99.9899999999999
+2375,214065.0,Karbenning,,196201,Norberg-Karbenning,100
+2376,214066.0,Norberg,,196201,Norberg-Karbenning,99.59
+2377,214067.0,Möklinta,,198108,Möklinta,100
+2378,215001.0,Ekerö,,012503,Ekerö,100
+2379,215002.0,Lovö,,012504,Lovö,100
+2380,215003.0,Essinge,,018019,Västermalm,100
+2381,215004.0,Ingarö,,012006,Gustavsberg-Ingarö,99.9599999999999
+2382,215005.0,Djurö,,012003,"Djurö, Möja och Nämdö",100
+2383,215006.0,Adelsö,,012501,Adelsö-Munsö,100
+2384,215007.0,Munsö,,012501,Adelsö-Munsö,100
+2385,215008.0,Färingsö,,012509,Färingsö,100
+2386,215009.0,Hässelby,,018038,Hässelby,99.98
+2387,215010.0,Viksjö,,012304,Järfälla,99.9699999999999
+2388,215011.0,Vällingby,,018031,Vällingby,99.9699999999999
+2389,215012.0,Västerled,,018029,Västerled,99.9899999999999
+2390,215013.0,Bromma,,018027,Bromma,99.9
+2391,215014.0,Spånga,,018041,Spånga-Kista,100
+2392,215015.0,Barkarby,,012304,Järfälla,99.9899999999999
+2393,215016.0,Sundbyberg,,018301,Sundbyberg,99.84
+2394,215017.0,Kista,,018041,Spånga-Kista,99.92
+2395,215018.0,Stockholms Sankt Göran,,018019,Västermalm,99.98
+2396,215019.0,Kungsholmen,,018014,Högalid,4.13
+2397,215019.0,Kungsholmen,,018019,Västermalm,95.5199999999999
+2398,215020.0,Stockholms domkyrkodistrikt,,018015,Katarina,0.61
+2399,215020.0,Stockholms domkyrkodistrikt,,018011,Oscar,1.44
+2400,215020.0,Stockholms domkyrkodistrikt,,018001,Stockholms domkyrkoförsamling,97.9399999999999
+2401,215021.0,Stockholms Sankt Matteus,,018007,S:t Matteus,100
+2402,215022.0,Stockholms Gustav Vasa,,018006,Gustav Vasa,100.01
+2403,215023.0,Stockholms Adolf Fredrik,,018005,Adolf Fredrik,100
+2404,215024.0,Råsunda,,018401,Solna,100
+2405,215025.0,Stockholms Sankt Johannes,,018004,S:t Johannes,100
+2406,215026.0,Stockholms Hedvig Eleonora,,018010,Hedvig Eleonora,100
+2407,215027.0,Stockholms Oscar,,018011,Oscar,99.7699999999999
+2408,215028.0,Stockholms Engelbrekt,,018601,Lidingö,0.59
+2409,215028.0,Stockholms Engelbrekt,,016201,Danderyd,2.29
+2410,215028.0,Stockholms Engelbrekt,,018009,Engelbrekt,97.12
+2411,215029.0,Solna,,018401,Solna,99.98
+2412,215030.0,Danderyd,,016201,Danderyd,99.98
+2413,215031.0,Lidingö,,018601,Lidingö,99.7199999999999
+2414,215032.0,Boo,,018203,Boo,99.8299999999999
+2415,215033.0,Vaxholm,,018601,Lidingö,2.19
+2416,215033.0,Vaxholm,,018701,Vaxholm,97.75
+2417,215034.0,Gustavsberg,,012006,Gustavsberg-Ingarö,99.9899999999999
+2418,215035.0,Värmdö,,012001,Värmdö,99.9699999999999
+2419,215036.0,Kungs-Husby,,038114,Veckholm,100
+2420,215037.0,Torsvi,,038114,Veckholm,100
+2421,215038.0,Veckholm,2.0,038114,Veckholm,100
+2422,,,,038114,Veckholm,100
+2423,215039.0,Låssa,,013901,Bro,100
+2424,215040.0,Kungsängen-Västra Ryd,,013903,Kungsängen-Västra Ryd,100
+2425,215041.0,Kallhäll,,012304,Järfälla,100
+2426,215042.0,Jakobsberg,,012304,Järfälla,100
+2427,215043.0,Sollentuna,,018041,Spånga-Kista,0.56
+2428,215043.0,Sollentuna,,016301,Sollentuna,99.43
+2429,215044.0,Fresta,,011403,Fresta,99.93
+2430,215045.0,Täby,,016001,Täby,99.89
+2431,215046.0,Österåker-Östra Ryd,,011702,Österåker-Östra Ryd,99.7999999999999
+2432,215047.0,Möja,,012003,"Djurö, Möja och Nämdö",100
+2433,215048.0,Teda,,038105,Tillinge och Södra Åsunda,100
+2434,215049.0,Enköpings-Näs,,038105,Tillinge och Södra Åsunda,100
+2435,215050.0,Svinnegarn,,038105,Tillinge och Södra Åsunda,100
+2436,215051.0,Vallby,,038111,Boglösa,99.9699999999999
+2437,215052.0,Lillkyrka,2.0,038111,Boglösa,100
+2438,,,,038111,Boglösa,100
+2439,215053.0,Boglösa,,038111,Boglösa,100
+2440,215054.0,Villberga,,038117,Villberga,100
+2441,215055.0,Hacksta,,038117,Villberga,100
+2442,215056.0,Löt,,038117,Villberga,100
+2443,215057.0,Kalmar,,030501,Kalmar-Yttergran,99.9899999999999
+2444,215058.0,Bro,,030501,Kalmar-Yttergran,2.56
+2445,215058.0,Bro,,013901,Bro,97.4399999999999
+2446,215059.0,Yttergran,,030501,Kalmar-Yttergran,100
+2447,215060.0,Håbo-Tibble,,013901,Bro,100
+2448,215061.0,Ed,,011401,Ed,99.9899999999999
+2449,215062.0,Hammarby,,011402,Hammarby,99.95
+2450,215063.0,Norrsunda-Skånela,,019108,Norrsunda,99.5499999999999
+2451,215064.0,Vallentuna,,011501,Vallentuna,99.95
+2452,215065.0,Angarn,,011507,Össeby,99.9899999999999
+2453,215066.0,Vada,,011507,Össeby,99.9899999999999
+2454,215067.0,Össeby-Garn,,011507,Össeby,99.98
+2455,215068.0,Roslags-Kulla och Ljusterö,,011703,Ljusterö-Kulla,100
+2456,215069.0,Bred,,038107,Sparrsätra-Bred,99.9899999999999
+2457,215070.0,Sparrsätra,,038105,Tillinge och Södra Åsunda,1.44
+2458,215070.0,Sparrsätra,,038107,Sparrsätra-Bred,98.56
+2459,215071.0,Tillinge,,038105,Tillinge och Södra Åsunda,100
+2460,215072.0,Enköping,,038101,Enköping,99.84
+2461,215073.0,Härkeberga,,038117,Villberga,100
+2462,215074.0,Litslena,,038117,Villberga,100
+2463,215075.0,Husby-Sjutolft,,038117,Villberga,100
+2464,215076.0,Övergran,,030503,Övergran,99.9899999999999
+2465,215077.0,Hjälsta,,038130,Lagunda,100
+2466,215078.0,Kulla,,038130,Lagunda,100
+2467,215079.0,Håtuna,,013901,Bro,100
+2468,215080.0,Sigtuna Sankt Per,,019101,Sigtuna,100
+2469,215081.0,Häggeby,,030504,Häggeby,100
+2470,215082.0,Sigtuna,,019101,Sigtuna,100
+2471,215083.0,Sigtuna Sankt Olof,,019112,Valsta,2.52
+2472,215083.0,Sigtuna Sankt Olof,,019101,Sigtuna,97.4699999999999
+2473,215084.0,Valsta,,019106,Husby-Ärlinghundra,6.21
+2474,215084.0,Valsta,,019112,Valsta,93.79
+2475,215085.0,Haga,,019101,Sigtuna,99.9899999999999
+2476,215086.0,Husby-Ärlinghundra och Odensala,,019112,Valsta,0.81
+2477,215086.0,Husby-Ärlinghundra och Odensala,,019101,Sigtuna,2.39
+2478,215086.0,Husby-Ärlinghundra och Odensala,,019106,Husby-Ärlinghundra,96.7999999999999
+2479,215087.0,Markim,,011501,Vallentuna,100
+2480,215088.0,Orkesta,,011501,Vallentuna,100
+2481,215089.0,Frösunda,,011501,Vallentuna,99.9899999999999
+2482,215090.0,Kårsta,,011507,Össeby,100
+2483,215091.0,Riala,,018826,Riala,99.9899999999999
+2484,215092.0,Rö,,018812,"Husby, Skederid och Rö",100
+2485,215093.0,Länna,,018825,Länna,100
+2486,215094.0,Blidö,,018824,Blidö,100
+2487,215095.0,Simtuna,,038131,Fjärdhundra,100
+2488,215096.0,Frösthult,,038131,Fjärdhundra,99.6099999999999
+2489,215097.0,Härnevi,,038131,Fjärdhundra,100
+2490,215098.0,Torstuna,,038131,Fjärdhundra,100
+2491,215099.0,Långtora,,038130,Lagunda,100
+2492,215100.0,Biskopskulla,,038130,Lagunda,100
+2493,215101.0,Fröslunda,,038130,Lagunda,100
+2494,215102.0,Nysätra,,038130,Lagunda,100
+2495,215103.0,Giresta,,038130,Lagunda,100
+2496,215104.0,Fittja,,038130,Lagunda,100
+2497,215105.0,Gryta,,038130,Lagunda,99.9899999999999
+2498,215106.0,Balingsta,,038009,Balingsta,100
+2499,215107.0,Holm,,038130,Lagunda,100
+2500,215108.0,Skokloster,,030505,Skokloster,99.89
+2501,215109.0,Västeråker,,038010,Västeråker,100
+2502,215110.0,Dalby,,038011,Dalby,100
+2503,215111.0,Vassunda,,033006,Vassunda,99.95
+2504,215112.0,Knivsta,,033001,Knivsta,99.9399999999999
+2505,215113.0,Alsike,,033005,Alsike,99.7399999999999
+2506,215114.0,Östuna,,033002,Östuna,99.93
+2507,215115.0,Skepptuna,,019109,Skepptuna,99.9099999999999
+2508,215116.0,Husby-Långhundra,,033003,Husby-Långhundra,99.9899999999999
+2509,215117.0,Gottröra,,018814,Gottröra,100
+2510,215118.0,Närtuna,,018815,Närtuna,99.9899999999999
+2511,215119.0,Rimbo,,018810,Rimbo,100
+2512,215120.0,Skederid,,018812,"Husby, Skederid och Rö",100
+2513,215121.0,Husby-Sjuhundra,,018812,"Husby, Skederid och Rö",99.9899999999999
+2514,215122.0,Frötuna,,018823,Frötuna,99.9899999999999
+2515,215123.0,Rådmansö,,018822,Rådmansö,100
+2516,215124.0,Tärna,,038131,Fjärdhundra,0.94
+2517,215124.0,Tärna,,198105,Tärna,99.06
+2518,215125.0,Altuna,,038131,Fjärdhundra,100
+2519,215126.0,Österunda,,038131,Fjärdhundra,99.98
+2520,215127.0,Skogs-Tibble,,038014,Norra Hagunda,100
+2521,215128.0,Hagby,2.0,038007,Hagby,100
+2522,,,,038007,Hagby,100
+2523,215129.0,Ramsta,,038008,Ramsta,100
+2524,215130.0,Vänge,,038014,Norra Hagunda,99.98
+2525,215131.0,Uppsala-Näs,,038012,Uppsala-Näs,100
+2526,215132.0,Gottsunda,,038038,Gottsunda,99.92
+2527,215133.0,Läby,,038014,Norra Hagunda,99.9899999999999
+2528,215134.0,Uppsala Helga Trefaldighet,,038002,Helga Trefaldighet,100
+2529,215135.0,Uppsala domkyrkodistrikt,,038001,Uppsala domkyrkoförsamling,100
+2530,215136.0,Danmark,,038005,Danmark-Funbo,99.9899999999999
+2531,215137.0,Lagga,,038005,Danmark-Funbo,1.33
+2532,215137.0,Lagga,,033004,Lagga,98.67
+2533,215138.0,Funbo,,038005,Danmark-Funbo,100
+2534,215139.0,Fasterna,,018814,Gottröra,13.46
+2535,215139.0,Fasterna,,018809,Fasterna,86.54
+2536,215140.0,Lohärad,,018817,Lohärad,99.9899999999999
+2537,215141.0,Malsta,,018801,Norrtälje-Malsta,100
+2538,215142.0,Norrtälje,,018801,Norrtälje-Malsta,99.98
+2539,215143.0,Estuna,,018818,Estuna och Söderby-Karl,100
+2540,215144.0,Roslags-Bro,,018820,Roslagsbro-Vätö,100
+2541,215145.0,Vätö,,018803,Väddö och Björkö-Arholma,1.49
+2542,215145.0,Vätö,,018820,Roslagsbro-Vätö,98.51
+2543,215146.0,Norrby,,198104,Norrby,99.9599999999999
+2544,215147.0,Västerlövsta,,033101,Västerlövsta,99.64
+2545,215148.0,Vittinge,,033104,Vittinge,100
+2546,215149.0,Åland,,038014,Norra Hagunda,100
+2547,215150.0,Järlåsa,,038014,Norra Hagunda,99.6099999999999
+2548,215151.0,Jumkil,,038021,Bälingebygden,100
+2549,215152.0,Börje,,038021,Bälingebygden,100
+2550,215153.0,Åkerby,4.0,038021,Bälingebygden,100
+2551,,,,038021,Bälingebygden,100
+2552,,,,038021,Bälingebygden,100
+2553,,,,038021,Bälingebygden,100
+2554,215154.0,Gamla Uppsala,,038025,Ärentuna,18.8
+2555,215154.0,Gamla Uppsala,,038003,Gamla Uppsala,81.2
+2556,215155.0,Vaksala,,038004,Vaksala,100
+2557,215156.0,Rasbo,,038041,Rasbo,100
+2558,215157.0,Almunge,,038031,Almunge,100
+2559,215158.0,Knutby,,038028,Knutby-Bladåker,99.9599999999999
+2560,215159.0,Edsbro,,018808,Edsbro-Ununge,100
+2561,215160.0,Ununge,,018808,Edsbro-Ununge,99.7199999999999
+2562,215161.0,Söderby-Karl,,018818,Estuna och Söderby-Karl,99.9899999999999
+2563,215162.0,Björkö-Arholma,,018803,Väddö och Björkö-Arholma,100
+2564,215163.0,Huddunge,,033102,Huddunge,100
+2565,215164.0,Bälinge,,038021,Bälingebygden,99.89
+2566,215164.0,Bälinge,,038021,Bälingebygden,100
+2567,215165.0,Skuttunge,2.0,033107,Harbo,1.67
+2568,,,,038021,Bälingebygden,47.85
+2569,,,,038022,Skuttunge,50.4799999999999
+2570,,,,038022,Skuttunge,99.9399999999999
+2571,215166.0,Ärentuna,,038025,Ärentuna,100
+2572,215167.0,Lena,,038024,Lena,100
+2573,215168.0,Rasbokil,,038042,Rasbokil,100
+2574,215169.0,Stavby,,038039,Stavby,100
+2575,215170.0,Tuna,,038040,Tuna,99.95
+2576,215171.0,Faringe,,038030,Faringe,100
+2577,215172.0,Bladåker,,038028,Knutby-Bladåker,99.9899999999999
+2578,215173.0,Väddö,,018803,Väddö och Björkö-Arholma,100
+2579,215174.0,Enåker,,033105,Nora,8.03999999999999
+2580,215174.0,Enåker,,033103,Enåker,91.9099999999999
+2581,215175.0,Harbo,,033102,Huddunge,2.18
+2582,215175.0,Harbo,,033107,Harbo,97.3799999999999
+2583,215176.0,Björklinge,,038026,Björklinge,99.8599999999999
+2584,215177.0,Viksta,2.0,038027,Viksta,99.76
+2585,,,,038027,Viksta,100
+2586,215178.0,Tensta,,038024,Lena,1.92
+2587,215178.0,Tensta,,038023,Tensta,97.5799999999999
+2588,215179.0,Alunda,,038209,Alunda,100
+2589,215180.0,Ekeby,,038210,Ekeby,99.68
+2590,215181.0,Edebo,,018805,Häverö-Edebo-Singö,100
+2591,215182.0,Häverö,,018805,Häverö-Edebo-Singö,100
+2592,215183.0,Nora,,033105,Nora,100
+2593,215184.0,Östervåla,,033106,Östervåla,99.9899999999999
+2594,215185.0,Vendel,,036003,Vendel-Tegelsmora,100
+2595,215186.0,Dannemora,,038213,Dannemorabygden,99.9899999999999
+2596,215187.0,Morkarla,,038213,Dannemorabygden,100
+2597,215188.0,Hökhuvud,,038211,Skäfthammar-Hökhuvud,100
+2598,215189.0,Skäfthammar,,038211,Skäfthammar-Hökhuvud,100
+2599,215190.0,Harg,,038204,Frösåker,100
+2600,215191.0,Singö,,038207,Öregrund-Gräsö,9.59
+2601,215191.0,Singö,,018805,Häverö-Edebo-Singö,90.4099999999999
+2602,215192.0,Tierp,2.0,036005,Tierp-Söderfors,99.92
+2603,,,,036005,Tierp-Söderfors,100
+2604,215193.0,Tegelsmora,,036003,Vendel-Tegelsmora,100
+2605,215194.0,Film,,038213,Dannemorabygden,100
+2606,215195.0,Valö,,038204,Frösåker,100
+2607,215196.0,Östhammar,,038204,Frösåker,100
+2608,215197.0,Börstil,,038207,Öregrund-Gräsö,0.5
+2609,215197.0,Börstil,,038204,Frösåker,99.5
+2610,215198.0,Söderfors,,036005,Tierp-Söderfors,100
+2611,215199.0,Tolfta,,036001,Tolfta,99.9899999999999
+2612,215200.0,Österlövsta,,036008,Hållnäs-Österlövsta,100
+2613,215201.0,Forsmark,,038204,Frösåker,100
+2614,215202.0,Öregrund,,038207,Öregrund-Gräsö,100
+2615,215203.0,Gräsö,,038207,Öregrund-Gräsö,100
+2616,215204.0,Älvkarleby,,031902,Älvkarleby-Skutskär,100
+2617,215205.0,Västland,,036007,Västland,99.9899999999999
+2618,215206.0,Hållnäs,,036008,Hållnäs-Österlövsta,100
+2619,215207.0,Skutskär,,031902,Älvkarleby-Skutskär,99.98
+2620,217001.0,Söderbärke,,206102,Söderbärke,100
+2621,217002.0,Säfsnäs,,208503,Gränge-Säfsnäs,99.9899999999999
+2622,217003.0,Ludvika,,208503,Gränge-Säfsnäs,1.65
+2623,217003.0,Ludvika,,208501,Ludvika,98.3299999999999
+2624,217004.0,Norrbärke,,206101,Norrbärke,100
+2625,217005.0,Avesta,,208401,Avesta,99.89
+2626,217006.0,Grangärde,,208503,Gränge-Säfsnäs,100
+2627,217007.0,Grytnäs,,208406,Grytnäs,99.95
+2628,217008.0,Folkärna,,208406,Grytnäs,0.63
+2629,217008.0,Folkärna,,208404,Folkärna,99.3599999999999
+2630,217009.0,Silvberg,,208201,Säterbygden,100
+2631,217010.0,Säter,,208201,Säterbygden,100
+2632,217011.0,Hedemora,,208301,Hedemora-Garpenberg,100
+2633,217012.0,Garpenberg,,208301,Hedemora-Garpenberg,99.9899999999999
+2634,217013.0,By,,208403,By,99.9899999999999
+2635,217014.0,Äppelbo,,202101,Järna med Nås och Äppelbo,99.9899999999999
+2636,217015.0,Nås,,202101,Järna med Nås och Äppelbo,99.9399999999999
+2637,217016.0,Floda,,202603,Floda,99.9899999999999
+2638,217017.0,Gustafs,3.0,208201,Säterbygden,99.9899999999999
+2639,,,,208201,Säterbygden,100
+2640,,,,208201,Säterbygden,100
+2641,217018.0,Malung,,202302,Malung,100
+2642,217019.0,Järna,,202101,Järna med Nås och Äppelbo,100
+2643,217020.0,Gagnef,,202602,Gagnef,99.9899999999999
+2644,217021.0,Mockfjärd,3.0,202601,Mockfjärd,100
+2645,,,,202602,Gagnef,100
+2646,,,,202602,Gagnef,100
+2647,217022.0,Stora Tuna,,208102,Stora Tuna,99.98
+2648,217023.0,Torsång,2.0,208103,Torsång,99.9899999999999
+2649,,,,208103,Torsång,100
+2650,217024.0,Stora Skedvi,,208201,Säterbygden,100
+2651,217025.0,Husby,,208303,Husby,99.92
+2652,217026.0,Djura,3.0,202902,Djura,99.9
+2653,,,,202901,Leksand,99.9899999999999
+2654,,,,202901,Leksand,100
+2655,217027.0,Aspeboda,,208004,Aspeboda,99.62
+2656,217028.0,Falu Kristine,,208001,Falu Kristine,99.98
+2657,217029.0,Vika,,208006,Vika-Hosjö,100
+2658,217030.0,Hosjö,,208006,Vika-Hosjö,99.98
+2659,217031.0,Ål,,202903,Ål,99.89
+2660,217032.0,Stora Kopparberg,,208003,Stora Kopparberg,100
+2661,217033.0,Grycksbo,,202903,Ål,0.53
+2662,217033.0,Grycksbo,,208002,Grycksbo,99.45
+2663,217034.0,Sundborn,,208007,Sundborn,99.9899999999999
+2664,217035.0,Siljansnäs,2.0,202904,Siljansnäs,99.31
+2665,,,,202904,Siljansnäs,100
+2666,217036.0,Leksand,,208011,Bjursås,0.6
+2667,217036.0,Leksand,,202904,Siljansnäs,3.26
+2668,217036.0,Leksand,,202901,Leksand,95.6299999999999
+2669,217037.0,Bjursås,2.0,202903,Ål,0.71
+2670,,,,208011,Bjursås,99.2699999999999
+2671,,,,208011,Bjursås,99.75
+2672,217038.0,Venjan,,206201,Mora,100
+2673,217039.0,Sollerön,,206201,Mora,100
+2674,217040.0,Svärdsjö,,208008,Svärdsjö,100
+2675,217041.0,Enviken,,208010,Enviken,100
+2676,217042.0,Lima,,202303,Lima-Transtrand,100
+2677,217043.0,Mora,3.0,206201,Mora,100
+2678,,,,206201,Mora,100
+2679,,,,206201,Mora,100
+2680,217044.0,Boda,3.0,203103,Boda,99.98
+2681,,,,203103,Boda,100
+2682,,,,203103,Boda,100
+2683,217045.0,Rättvik,,203103,Boda,6.07
+2684,217045.0,Rättvik,,203101,Rättvik,93.93
+2685,217046.0,Våmhus,3.0,206201,Mora,100
+2686,,,,206201,Mora,100
+2687,,,,206201,Mora,100
+2688,217047.0,Transtrand,,202303,Lima-Transtrand,100
+2689,217048.0,Orsa,,203402,Orsa,100
+2690,217049.0,Ore,,203104,Ore,100
+2691,217050.0,Älvdalen,,203902,Älvdalen,100
+2692,217051.0,Särna,,203905,Idre-Särna,99.9899999999999
+2693,217052.0,Hamra,,216103,Los-Hamra,100
+2694,217053.0,Idre,,203905,Idre-Särna,99.9899999999999
+2695,316001.0,Österfärnebo,,218104,Årsunda-Österfärnebo,99.9899999999999
+2696,316002.0,Hedesunda,,218004,Hedesunda,100
+2697,316003.0,Torsåker,,210402,Torsåker,100
+2698,316004.0,Årsunda,,218104,Årsunda-Österfärnebo,100
+2699,316005.0,Hofors,,210401,Hofors,100
+2700,316006.0,Ovansjö,,218102,Ovansjö,99.8299999999999
+2701,316007.0,Sandviken,,218101,Sandviken,99.9
+2702,316008.0,Valbo,,218006,Valbo,99.9599999999999
+2703,316009.0,Gävle Tomas,,218001,Gävle Heliga Trefaldighet,100
+2704,316010.0,Gävle Staffan,,218002,Gävle Staffan,99.98
+2705,316011.0,Bomhus,,218009,Bomhus,100
+2706,316012.0,Järbo,,218103,Järbo,99.9899999999999
+2707,316013.0,Gävle Maria,,218008,Gävle Maria,100
+2708,316014.0,Gävle Heliga Trefaldighet,,218001,Gävle Heliga Trefaldighet,100
+2709,316015.0,Hille,,218005,Hille,99.93
+2710,316016.0,Åmot,,210102,Ockelbo,100
+2711,316017.0,Ockelbo,,210102,Ockelbo,100
+2712,316018.0,Hamrånge,,218003,Hamrånge,99.9899999999999
+2713,318001.0,Lingbo,,210102,Ockelbo,100
+2714,318002.0,Skog,,218203,Skog,99.84
+2715,318003.0,Bollnäs,,218303,Bollnäs,99.98
+2716,318004.0,Hanebo,,218306,Hanebo-Segersta,99.9399999999999
+2717,318005.0,Ljusne,,218201,Söderhamn,0.8
+2718,318005.0,Ljusne,,218204,Ljusne,99.2
+2719,318006.0,Alfta,,212101,Alfta-Ovanåker,100
+2720,318007.0,Segersta,,218306,Hanebo-Segersta,100
+2721,318008.0,Bergvik,,218206,Mo-Bergvik,100
+2722,318009.0,Mo,,218206,Mo-Bergvik,100
+2723,318010.0,Söderala,,218205,Söderala,99.5499999999999
+2724,318011.0,Sandarne,,218202,Sandarne,99.9899999999999
+2725,318012.0,Söderhamn,3.0,218201,Söderhamn,99.8599999999999
+2726,,,,218201,Söderhamn,99.9399999999999
+2727,,,,218201,Söderhamn,100
+2728,318013.0,Voxna,,212101,Alfta-Ovanåker,100
+2729,318014.0,Rengsjö,,218303,Bollnäs,0.79
+2730,318014.0,Rengsjö,,218304,Rengsjö,99.2099999999999
+2731,318015.0,Norrala,,218209,Norrala-Trönö,99.8599999999999
+2732,318016.0,Ovanåker,,212101,Alfta-Ovanåker,100
+2733,318017.0,Trönö,,218209,Norrala-Trönö,100
+2734,318018.0,Undersvik,,218309,Arbrå-Undersvik,99.95
+2735,318019.0,Arbrå,,218309,Arbrå-Undersvik,99.9399999999999
+2736,318020.0,Enånger,,218405,Enånger-Njutånger,100
+2737,318021.0,Hudiksvall,2.0,218405,Enånger-Njutånger,2.76
+2738,,,,218401,Hudiksvallsbygden,97.2399999999999
+2739,,,,218401,Hudiksvallsbygden,100
+2740,318022.0,Järvsö,,216107,Järvsö,100
+2741,318023.0,Njutånger,,218405,Enånger-Njutånger,99.9599999999999
+2742,318024.0,Idenor,,218401,Hudiksvallsbygden,100
+2743,318025.0,Los,,216103,Los-Hamra,99.9899999999999
+2744,318026.0,Forsa,,218411,Forsa-Hög,100
+2745,318027.0,Hälsingtuna,,218401,Hudiksvallsbygden,100
+2746,318028.0,Rogsta,,218401,Hudiksvallsbygden,100
+2747,318029.0,Färila,,216104,Färila-Kårböle,99.9699999999999
+2748,318030.0,Delsbo,,218408,Delsbo,99.9699999999999
+2749,318031.0,Hög,,218411,Forsa-Hög,99.93
+2750,318032.0,Ängersjö,,236109,"Ytterhogdal, Överhogdal och Ängersjö",99.9899999999999
+2751,318033.0,Norrbo,,218409,Bjuråker-Norrbo,100
+2752,318034.0,Ilsbo,,213205,Bergsjö,100
+2753,318035.0,Harmånger,,213202,Harmånger-Jättendal,100
+2754,318036.0,Kårböle,,216104,Färila-Kårböle,100
+2755,318037.0,Ljusdal,2.0,216101,Ljusdal-Ramsjö,100
+2756,,,,216104,Färila-Kårböle,100
+2757,318038.0,Bjuråker,,218408,Delsbo,2.53
+2758,318038.0,Bjuråker,,218409,Bjuråker-Norrbo,97.4699999999999
+2759,318039.0,Bergsjö,,213205,Bergsjö,100
+2760,318040.0,Jättendal,,213202,Harmånger-Jättendal,99.9699999999999
+2761,318041.0,Gnarp,,213204,Gnarp,99.9899999999999
+2762,318042.0,Ytterhogdal,,236109,"Ytterhogdal, Överhogdal och Ängersjö",100
+2763,318043.0,Ramsjö,2.0,216101,Ljusdal-Ramsjö,100
+2764,,,,216101,Ljusdal-Ramsjö,100
+2765,318044.0,Hassela,,213205,Bergsjö,99.98
+2766,319001.0,Lillhärdal,,236101,Svegsbygden,100
+2767,319002.0,Sveg,,236101,Svegsbygden,100
+2768,319003.0,Älvros,,236101,Svegsbygden,99.9399999999999
+2769,319004.0,Linsell,,236101,Svegsbygden,100
+2770,319005.0,Överhogdal,,236109,"Ytterhogdal, Överhogdal och Ängersjö",100
+2771,319006.0,Tännäs,,236107,Tännäs-Ljusnedal,100
+2772,319007.0,Hede,,236105,Hedebygden,100
+2773,319008.0,Vemdalen,,236105,Hedebygden,100
+2774,319009.0,Ljusnedal,,236107,Tännäs-Ljusnedal,100
+2775,319010.0,Storsjö,,232605,Hedebygden,99.9899999999999
+2776,320001.0,Attmar,,228109,Attmar,100
+2777,320002.0,Njurunda,,228110,Njurunda,100
+2778,320003.0,Tuna,,228108,Tuna,100
+2779,320004.0,Sundsvalls Gustav Adolf,,228101,Sundsvall,100
+2780,320005.0,Skönsmon,,228101,Sundsvall,100
+2781,320006.0,Haverö,,226002,Borgsjö-Haverö,100
+2782,320007.0,Torp,,226004,Torp,100
+2783,320008.0,Stöde,,228107,Stöde,100
+2784,320009.0,Selånger,,228106,Selånger,100
+2785,320010.0,Skön,,228103,Skön,100
+2786,320011.0,Alnö,,228104,Alnö,100
+2787,320012.0,Tynderö,,226204,Tynderö,99.9899999999999
+2788,320013.0,Borgsjö,,226002,Borgsjö-Haverö,100
+2789,320014.0,Sättna,,228105,Sättna,100
+2790,320015.0,Timrå,,226201,Timrå,99.9899999999999
+2791,320016.0,Hässjö,,226203,Hässjö,100
+2792,320017.0,Indal,,228111,Indal,100
+2793,320018.0,Holm,,228112,Holm,100
+2794,320019.0,Ljustorp,,226202,Ljustorp,100
+2795,320020.0,Liden,,228113,Liden,100
+2796,321001.0,Häggdånger,,228003,Häggdånger,99.9899999999999
+2797,321002.0,Härnösands domkyrkodistrikt,,228001,Härnösands domkyrkoförsamling,100
+2798,321003.0,Stigsjö,,228004,Stigsjö,99.9899999999999
+2799,321004.0,Säbrå,,228006,Säbrå,99.87
+2800,321005.0,Hemsö,,228007,Hemsö,100
+2801,321006.0,Viksjö,,228005,Viksjö,100
+2802,321007.0,Högsjö,,228006,Säbrå,1.5
+2803,321007.0,Högsjö,,228002,Högsjö,98.5
+2804,321008.0,Gudmundrå,,228201,Gudmundrå,99.9
+2805,321009.0,Nora,,228202,Nora-Skog,100
+2806,321010.0,Graninge,,228303,Graninge,100
+2807,321011.0,Ytterlännäs,,228211,Ytterlännäs,99.9899999999999
+2808,321012.0,Bjärtrå,,228207,Bjärtrå,100
+2809,321013.0,Skog,,228202,Nora-Skog,100
+2810,321014.0,Nordingrå,,228204,Nordingrå,100
+2811,321015.0,Dal,,228209,Dal,100
+2812,321016.0,Torsåker,2.0,228210,Torsåker,99.8199999999999
+2813,,,,228210,Torsåker,100
+2814,321017.0,Ullånger,,228206,Ullånger,100
+2815,321018.0,Vibyggerå,,228205,Vibyggerå,100
+2816,321019.0,Långsele,,228304,Långsele,100
+2817,321020.0,Sollefteå,,228301,Sollefteå,99.9899999999999
+2818,321021.0,Multrå,,228302,Multrå-Sånga,99.98
+2819,321022.0,Sånga,,228302,Multrå-Sånga,100
+2820,321023.0,Överlännäs,,228312,Överlännäs,100
+2821,321024.0,Styrnäs,,228208,Styrnäs,100
+2822,321025.0,Nätra,,228407,Nätra,99.9599999999999
+2823,321026.0,Helgum,,228307,Helgum,99.9899999999999
+2824,321027.0,Ed,,228305,Ed,100
+2825,321028.0,Boteå,,228208,Styrnäs,1.73
+2826,321028.0,Boteå,,228311,Boteå,98.26
+2827,321029.0,Edsele,,228315,Ramsele-Edsele,100
+2828,321030.0,Skorped,,228405,Skorped,100
+2829,321031.0,Sidensjö,,228406,Sidensjö,100
+2830,321032.0,Örnsköldsvik,,228401,Örnsköldsvik,99.62
+2831,321033.0,Själevad,,228408,Själevad,99.9899999999999
+2832,321034.0,Arnäs,,228402,Arnäs,99.9899999999999
+2833,321035.0,Resele,,228306,Resele,100
+2834,321036.0,Mo,,228409,Mo,99.9699999999999
+2835,321037.0,Grundsunda,,228410,Grundsunda,100
+2836,321038.0,Ramsele,,228315,Ramsele-Edsele,100
+2837,321039.0,Ådals-Liden,,228308,Ådals-Liden,100
+2838,321040.0,Gideå,,228411,Gideå-Trehörningsjö,100
+2839,321041.0,Anundsjö,,228404,Anundsjö,100
+2840,321042.0,Nordmaling,,240102,Nordmaling,99.9899999999999
+2841,321043.0,Fjällsjö,,231307,Bodum,9.3
+2842,321043.0,Fjällsjö,,231306,Fjällsjö,90.7
+2843,321044.0,Junsele,,228309,Junsele,100
+2844,321045.0,Björna,,228412,Björna,100
+2845,321046.0,Trehörningsjö,,228411,Gideå-Trehörningsjö,100
+2846,321047.0,Bodum,,231307,Bodum,100
+2847,321048.0,Bjurholm,,240301,Bjurholm,100
+2848,321049.0,Tåsjö,,231308,Tåsjö,100
+2849,322001.0,Rätan,,232608,Rätan-Klövsjö,100
+2850,322002.0,Klövsjö,,236105,Hedebygden,0.66
+2851,322002.0,Klövsjö,,232608,Rätan-Klövsjö,99.34
+2852,322003.0,Berg,,232601,Berg,100
+2853,322004.0,Bodsjö,,230506,"Revsund, Sundsjö, Bodsjö",99.95
+2854,322005.0,Bräcke,,230501,Bräcke-Nyhem,99.9899999999999
+2855,322006.0,Åsarna,2.0,232606,Åsarne,99.9899999999999
+2856,,,,232606,Åsarne,100
+2857,322007.0,Revsund,,230506,"Revsund, Sundsjö, Bodsjö",100
+2858,322008.0,Hällesjö,,230503,Hällesjö-Håsjö,100
+2859,322009.0,Myssjö,,232603,Oviken-Myssjö,100
+2860,322010.0,Hackås,2.0,232602,Hackås,100
+2861,322010.0,Hackås,2.0,232602,Hackås,100
+2862,322011.0,Nyhem,,230501,Bräcke-Nyhem,100
+2863,322012.0,Oviken,,232103,Västra Storsjöbygden,1.21
+2864,322012.0,Oviken,,232603,Oviken-Myssjö,98.79
+2865,322013.0,Näs,2.0,232602,Hackås,100
+2866,,,,238004,Näs,100
+2867,322014.0,Lockne,,238005,Lockne,100
+2868,322015.0,Sundsjö,,230506,"Revsund, Sundsjö, Bodsjö",100
+2869,322016.0,Håsjö,,230301,Ragunda,3.09
+2870,322016.0,Håsjö,,230503,Hällesjö-Håsjö,96.9099999999999
+2871,322017.0,Fors,,230302,Fors,99.98
+2872,322018.0,Marby,,232103,Västra Storsjöbygden,100
+2873,322019.0,Sunne,,232602,Hackås,1.15
+2874,322019.0,Sunne,,238002,"Frösö, Sunne och Norderö",98.8499999999999
+2875,322020.0,Marieby,2.0,238006,Marieby,100
+2876,,,,238007,Brunflo,100
+2877,322021.0,Brunflo,3.0,238007,Brunflo,99.9899999999999
+2878,,,,238007,Brunflo,100
+2879,,,,238007,Brunflo,100
+2880,322022.0,Undersåker,,232105,Undersåker,99.8199999999999
+2881,322023.0,Hallen,,232103,Västra Storsjöbygden,100
+2882,322024.0,Norderö,,238002,"Frösö, Sunne och Norderö",99.9399999999999
+2883,322025.0,Frösö,2.0,238002,"Frösö, Sunne och Norderö",99.8599999999999
+2884,,,,238002,"Frösö, Sunne och Norderö",100
+2885,322026.0,Östersund,,238001,Östersund,99.7999999999999
+2886,322027.0,Kyrkås,,238009,Häggenås-Lit-Kyrkås,99.9599999999999
+2887,322028.0,Stugun,,230304,Stugun,99.9899999999999
+2888,322029.0,Ragunda,,230301,Ragunda,99.7199999999999
+2889,322030.0,Mörsil,,232103,Västra Storsjöbygden,100
+2890,322031.0,Mattmar,2.0,232103,Västra Storsjöbygden,99.9899999999999
+2891,,,,232103,Västra Storsjöbygden,100
+2892,322032.0,Rödön,3.0,230901,Rödön,99.95
+2893,,,,230903,Aspås,100
+2894,,,,230906,Föllingebygden,100
+2895,322033.0,Ås,,230904,Ås,100
+2896,322034.0,Näskott,3.0,230902,Näskott,99.9399999999999
+2897,,,,230908,Offerdal,100
+2898,,,,230910,Alsen,100
+2899,322035.0,Lit,,238009,Häggenås-Lit-Kyrkås,100
+2900,322036.0,Åre,,232101,Åre,99.9899999999999
+2901,322037.0,Alsen,,230910,Alsen,99.9899999999999
+2902,322038.0,Aspås,2.0,230903,Aspås,99.9899999999999
+2903,,,,230903,Aspås,100
+2904,322039.0,Häggenås,,238009,Häggenås-Lit-Kyrkås,100
+2905,322040.0,Borgvattnet,,230301,Ragunda,1.06
+2906,322040.0,Borgvattnet,,230303,Borgvattnet,98.9399999999999
+2907,322041.0,Hammerdal,,231304,Hammerdal,100
+2908,322042.0,Kall,,232104,Kall,99.98
+2909,322043.0,Offerdal,,230906,Föllingebygden,1.27
+2910,322043.0,Offerdal,,230908,Offerdal,98.7199999999999
+2911,322044.0,Föllinge,,230906,Föllingebygden,100
+2912,322045.0,Gåxsjö,,231303,Gåxsjö,100
+2913,322046.0,Laxsjö,,230906,Föllingebygden,100
+2914,322047.0,Hotagen,,231305,Frostviken,2.72
+2915,322047.0,Hotagen,,230906,Föllingebygden,97.28
+2916,322048.0,Ström,,231301,Ström-Alanäs,99.7999999999999
+2917,322049.0,Alanäs,,231301,Ström-Alanäs,100
+2918,322050.0,Frostviken,,231305,Frostviken,99.98
+2919,323001.0,Hörnefors,,248007,Hörnefors,99.98
+2920,323002.0,Teg,,248004,Teg,99.8799999999999
+2921,323003.0,Holmsund,,248009,Sävar-Holmön,6.17
+2922,323003.0,Holmsund,,248006,Holmsund,93.8299999999999
+2923,323004.0,Holmön,,248009,Sävar-Holmön,100
+2924,323005.0,Ålidhem,,248009,Sävar-Holmön,5.75
+2925,323005.0,Ålidhem,,248005,Ålidhem,94.2399999999999
+2926,323006.0,Vännäs,,246001,Vännäs,100
+2927,323007.0,Umeå landsdistrikt,,248001,Umeå stadsförsamling,0.98
+2928,323007.0,Umeå landsdistrikt,,248002,Umeå landsförsamling,99.0199999999999
+2929,323008.0,Umeå Maria,,248011,Umeå Maria,100
+2930,323009.0,Umeå stadsdistrikt,,248001,Umeå stadsförsamling,99.9899999999999
+2931,323010.0,Tavelsjö,,248003,Tavelsjö,99.87
+2932,323011.0,Sävar,,248009,Sävar-Holmön,99.98
+2933,323012.0,Bygdeå,,240901,Bygdeå,100
+2934,323013.0,Vindeln,,240401,Vindeln,99.98
+2935,323014.0,Robertsfors,,240901,Bygdeå,100
+2936,323015.0,Nysätra,,240901,Bygdeå,100
+2937,323016.0,Lövånger,,248210,Lövånger,99.89
+2938,323017.0,Åmsele,,240401,Vindeln,100
+2939,323018.0,Burträsk,,248211,Burträsk,100
+2940,323019.0,Kalvträsk,,248211,Burträsk,100
+2941,323020.0,Bureå,,248204,Skellefteå landsförsamling,1.2
+2942,323020.0,Bureå,,248203,Bureå,98.7999999999999
+2943,323021.0,Skellefteå landsdistrikt,2.0,248201,Skellefteå S:t Olov,12.71
+2944,,,,248204,Skellefteå landsförsamling,87.29
+2945,,,,248204,Skellefteå landsförsamling,99.9899999999999
+2946,323022.0,Skellefteå Sankt Örjan,,248203,Bureå,6.32
+2947,323022.0,Skellefteå Sankt Örjan,,248202,Skellefteå S:t Örjan,93.68
+2948,323023.0,Skellefteå Sankt Olov,,248207,Byske-Fällfors,0.87
+2949,323023.0,Skellefteå Sankt Olov,,248202,Skellefteå S:t Örjan,1.04
+2950,323023.0,Skellefteå Sankt Olov,,248201,Skellefteå S:t Olov,97.92
+2951,323024.0,Norsjö,,241702,Norsjö,100
+2952,323025.0,Boliden,,248205,Jörn-Boliden,100
+2953,323026.0,Kågedalen,,248207,Byske-Fällfors,0.8
+2954,323026.0,Kågedalen,,248206,Kågedalen,99.14
+2955,323027.0,Fällfors,,248207,Byske-Fällfors,100
+2956,323028.0,Byske,,248207,Byske-Fällfors,99.98
+2957,323029.0,Jörn,,248205,Jörn-Boliden,99.9699999999999
+2958,324001.0,Fredrika,,246301,Åsele-Fredrika,100
+2959,324002.0,Åsele,,246301,Åsele-Fredrika,100
+2960,324003.0,Örträsk,,248101,Lycksele,100
+2961,324004.0,Dorotea,,242501,Dorotea-Risbäck,100
+2962,324005.0,Risbäck,,242501,Dorotea-Risbäck,99.6899999999999
+2963,324006.0,Lycksele,,248101,Lycksele,100
+2964,324007.0,Vilhelmina,,246201,Vilhelmina,100
+2965,324008.0,Stensele,3.0,242101,Stensele,99.9899999999999
+2966,,,,242101,Stensele,100
+2967,,,,242101,Stensele,100
+2968,324009.0,Björksele,,248101,Lycksele,100
+2969,324010.0,Gargnäs,,242201,Sorsele,100
+2970,324011.0,Malå,,241801,Malå,100
+2971,324012.0,Tärna,,242103,Tärna,99.9899999999999
+2972,324013.0,Arvidsjaur,,250502,Arvidsjaur,100
+2973,324014.0,Sorsele,,242201,Sorsele,100
+2974,324015.0,Arjeplog,,250602,Arjeplog,100
+2975,324016.0,Vuollerim,,251002,Jokkmokk,100
+2976,324017.0,Jokkmokk,,251002,Jokkmokk,100
+2977,324018.0,Hakkas,,252301,Gällivare,100
+2978,324019.0,Gällivare,,252301,Gällivare,100
+2979,324020.0,Malmberget,,252306,Malmberget,100
+2980,324021.0,Porjus,,251002,Jokkmokk,99.9899999999999
+2981,324022.0,Nilivaara,,252301,Gällivare,100
+2982,324023.0,Vittangi,,258402,Vittangi,99.9899999999999
+2983,324024.0,Jukkasjärvi,,258401,Jukkasjärvi,100
+2984,324025.0,Karesuando,,258403,Karesuando,99.9899999999999
+2985,325001.0,Hortlax,,258103,Piteå,5.67
+2986,325001.0,Hortlax,,258102,Hortlax,94.3299999999999
+2987,325002.0,Piteå stadsdistrikt,4.0,258103,Piteå,100
+2988,,,,258103,Piteå,100
+2989,,,,258103,Piteå,100
+2990,,,,258103,Piteå,100
+2991,325003.0,Piteå landsdistrikt,2.0,258103,Piteå,100
+2992,,,,258103,Piteå,100
+2993,325004.0,Norrfjärden,,258105,Norrfjärden,100
+2994,325005.0,Örnäset,2.0,258003,Nederluleå,0.61
+2995,,,,258002,Luleå domkyrkoförsamling,99.39
+2996,,,,258002,Luleå domkyrkoförsamling,100
+2997,325006.0,Nederluleå,,258003,Nederluleå,100
+2998,325007.0,Luleå domkyrkodistrikt,,258002,Luleå domkyrkoförsamling,99.9099999999999
+2999,325008.0,Älvsby,,256002,Älvsby,99.9
+3000,325009.0,Sävast,,258204,Sävast,99.9899999999999
+3001,325010.0,Överluleå,,258201,Överluleå,99.9599999999999
+3002,325011.0,Nedertorneå-Haparanda,,258301,Haparanda,100
+3003,325012.0,Råneå,,258004,Råneå,99.9599999999999
+3004,325013.0,Töre,,251402,Töre,100
+3005,325014.0,Nederkalix,,251401,Nederkalix,100
+3006,325015.0,Edefors,,258203,Edefors,100
+3007,325016.0,Gunnarsbyn,,258202,Gunnarsbyn,100
+3008,325017.0,Karl Gustav,,258301,Haparanda,99.98
+3009,325018.0,Hietaniemi,2.0,251801,Övertorneå,99.95
+3010,,,,251801,Övertorneå,100
+3011,325019.0,Överkalix,,251301,Överkalix,99.9899999999999
+3012,325020.0,Övertorneå,,251801,Övertorneå,99.98
+3013,325021.0,Svanstein,2.0,251801,Övertorneå,100
+3014,,,,251801,Övertorneå,100
+3015,325022.0,Korpilombolo,,252101,Pajala,100
+3016,325023.0,Tärendö,,252101,Pajala,100
+3017,325024.0,Pajala,,252101,Pajala,100
+3018,325025.0,Junosuando,,252101,Pajala,100
+3019,325026.0,Muonionalusta,,252101,Pajala,99.9899999999999
