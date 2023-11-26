@@ -11,7 +11,7 @@ def random_sampler(start, end, number):
 
 def generate_education(amount): 
     Sun2000niva_old = random_sampler(10000,99999, amount)
-    utbildning = pd.read_excel("variable_data/utbildning_cleaner.xlsx")
+    utbildning = pd.read_csv("variable_data/utbildning_cleaner.csv")
     #utbildning = utbildning.dropna()
     indexes = random_sampler(0,len(utbildning)-1, amount)
     SUN2000Grp = []
@@ -47,4 +47,4 @@ def generate_education(amount):
     
     #examkommun is different 
     return pd.DataFrame(list(zip(Sun2000niva_old, SUN2000Niva, SUN2000Inr, SUN2000Grp)), 
-                        columns=["Sun2000niva_old", "SUN2000Niva", "SUN2000Inr", "SUN2000Grp"])
+                        columns=["Sun2000niva_old", "SUN2000niva", "SUN2000Inr", "SUN2000Grp"])

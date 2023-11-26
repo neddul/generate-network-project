@@ -50,7 +50,6 @@ def alder(personnummer, death_date):
 # Sex (Male/Female) - based on 2022 statistics 10.52 million people, 5.3 million men & 5.22 million women so assign 50.38% of the values as M and 49.62% as F.
 def kon(personnummer):
     secondlast_digit = int(personnummer[-2])
-    print(secondlast_digit)
     woman = [0,2,4,6,8] 
     if secondlast_digit in woman:
         return 2
@@ -107,21 +106,14 @@ def fodelse_tid(personnummer):
 # - For a person who was born in Sweden, the parent is assumed to be born in Sweden
 # - For a person who was born abroad, the parent is assumed to be born abroad
 def utl_sv_bakg(fodelselandnamn, fodelselandnamnfar, fodelselandnamnmor):
-    born_abroad = False
-    if fodelselandnamn != 'Sweden':
-        born_abroad = True
-    if fodelselandnamnfar != 'Sweden' or fodelselandnamnmor != 'Sweden':
-        has_foreign_parents = True
-    
-    if born_abroad:
-        return 11 
-    elif has_foreign_parents:
-        if born_abroad and has_foreign_parents:
-            return 12 
-        else:
-            return 21 
-    else:
+    if not fodelselandnamn == 'Sweden' and not fodelselandnamnfar == 'Sweden' and not fodelselandnamnmor == 'Sweden':
+        return 11
+    elif fodelselandnamn == 'Sweden' and not fodelselandnamnfar == 'Sweden' and not fodelselandnamnmor == 'Sweden':
+        return 12
+    elif fodelselandnamn == 'Sweden' and fodelselandnamnfar == 'Sweden' and  fodelselandnamnmor == 'Sweden':
         return 22
+    else:
+        return 21
 
 import pandas as pd
 

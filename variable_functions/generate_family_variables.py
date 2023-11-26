@@ -1,150 +1,367 @@
 import random
-import numpy as np
 import pandas as pd
 
-already_existing_personnumbers = {'0'}
+from datetime import date, timedelta
+numbers = [str(x) for x in range(10)]
 
-def person_nummer_creation(amount, sample_year): 
-    test_date1, test_date2 = date(1900, 1, 1), date(sample_year-16, 1, 1)
-    res_dates = [test_date1]
+taken_social_security_numbers = {'0'}
+
+def choose_item_with_normal_distribution(item_list, mean, std_dev):
+    list_length = len(item_list)
+
+    # Generating a random index based on normal distribution
+    index = int(random.gauss(mean, std_dev))
+
+    # Ensuring the index is within the bounds of the list
+    index = max(0, min(index, list_length - 1))
+
+    # Returning the chosen item
+    return item_list[index]
+
+
+def birth_dates(startyear, stopyear): #startyear and stopyear should be strings, like "20000101"
+    start_date = date.fromisoformat(startyear)
+    end_date = date.fromisoformat(stopyear)
+
+    date_list = [start_date + timedelta(days=x) for x in range((end_date - start_date).days + 1)]
+    return date_list
+
+def person_nummer_creation(sample_year, start_date="19250101", stop_year="", gender=3):
+    if stop_year == "":
+        end_date = str(sample_year-16) #People need to be atleast 16 to legally live alone in Sweden
+        end_date = end_date + "0101"
+        possible_birthdays  = birth_dates(start_date, end_date)
+    else:
+        possible_birthdays  = birth_dates(start_date, stop_year)
  
-    # loop to get each date till end date
-    while test_date1 != test_date2:
-        test_date1 += timedelta(days=1)
-        res_dates.append(test_date1)
-    res = random.choices(res_dates, k=amount)
-
-    person_nummer = []
-    for i in range(amount):
-        number = '0'
-        while number in already_existing_personnumbers:
-            #not perfect for now
-            rand_num = random.randint(1000, 9999) 
-            num_string = str(rand_num)
-            current = res[i]
-            current_string = current.strftime("%Y%m%d-")
-            number = current_string + num_string
-            
-        # printing 
-        already_existing_personnumbers.add(number)
-        person_nummer.append(number)
-    return person_nummer
-
-
-def create_children(amount, sample_year):
-    #distribution of children: #amount of children per person
-
-    mean = 1.16  # Mean of the normal distribution -- lower than what is given as it most likely is not an actual normal
-    stddev = 3  # Standard deviation of the normal distribution
-    lower_bound = 0.0  # Minimum value (never below 0)
-
-    # Generate num_samples samples from a standard normal distribution
-    samples = np.random.normal(loc=mean, scale=stddev, size=amount)
-
-    # Discretize the samples by rounding to the nearest integer
-    discretized_samples = np.round(samples).astype(int)
-    #no samples below 0
-    discretized_samples[discretized_samples < 0] = 0
-    #create variables
-    barn0_3 = []
-    barn4_6 = []
-    barn7_10 = []
-    barn11_15 = []
-    barn16_17 = []
-    barn18plus= []
-    barn18_19 = []
-    barn20plus = []
-    if sample_year < 2005:
-        options = ["barn0_3", "barn4_6", "barn7_10", "barn11_15", "barn16_17", "barn18plus"]
-    else: 
-        options = ["barn0_3", "barn4_6", "barn7_10", "barn11_15", "barn16_17", "barn18_19", "barn20plus"]
-    for i in range(len(discretized_samples)):
-        count = discretized_samples[i]
-        barn0_3.append(0)
-        barn4_6.append(0)
-        barn7_10.append(0)
-        barn11_15.append(0)
-        barn16_17.append(0)
-        barn18plus.append(0)
-        barn18_19.append(0)
-        barn20plus.append(0)
-        if count >0:
-            children = random.choices(options, k= count)
-            #make sure people dont have too many children
-            for c in children:
-                if c == "barn0_3": 
-                    barn0_3[-1] += 1
-                elif c == "barn4_6":
-                    barn4_6[-1] += 1
-                elif c == "barn7_10":
-                    barn7_10[-1] += 1
-                elif c == "barn11_15":
-                    barn11_15[-1] += 1
-                elif c == "barn16_17":
-                    barn16_17[-1] += 1
-                elif c == "barn18plus":
-                    barn18plus[-1] += 1
-                elif c == "barn18_19":
-                    barn18_19[-1] += 1
-                elif c=="barn20plus":
-                    barn20plus[-1] += 1   
-                    
-    return pd.DataFrame(list(zip(barn0_3, barn4_6, barn7_10, barn11_15, barn16_17, barn18plus, barn18_19, barn20plus)), 
-                        columns=["barn0_3", "barn4_6", "barn7_10", "barn11_15", "barn16_17", "barn18plus", "barn18_19", "barn20plus"])
-
-def create_date_object(date_string):
-    date_format = "%Y%m%d"
-    date_object = datetime.strptime(date_string[:8], date_format)
-
-    return date_object
-
-
-#shuffle group --> currently not taking into account where they live --> we should do 
-#everyone is their own family
-def create_famID(person_nummer): 
+    mean = len(possible_birthdays) / 2
+    std_dev = len(possible_birthdays) / 3
     
-    # Define the minimum and maximum group size
-    min_group_size = 1
-    max_group_size = 4
 
-    # Shuffle the list randomly
-    #random.shuffle(person_nummer)
+    social_security_number = '0'
+    while social_security_number in taken_social_security_numbers:
+        #not perfect for now
+        if gender == 2: # Girl
+            last_4 = random.choices(numbers, k=2)
+            digits = ["0", "2", "4", "6", "8"]
+            last_4 = last_4 + random.choice(digits)
+            last_4 = last_4 + random.choice(numbers)
+        elif gender == 1: # Guy
+            last_4 = random.choices(numbers, k=2)
+            digits = ["1", "3", "5", "7", "9"]
+            last_4 = last_4 + random.choice(digits)
+            last_4 = last_4 + random.choice(numbers)
+        else: # Guy or girl
+            last_4 = random.choices(numbers, k=4)
+        birthday = choose_item_with_normal_distribution(possible_birthdays, mean, std_dev)
+        birthdate = birthday.strftime("%Y%m%d-")
+        social_security_number = birthdate
+        for d in last_4:
+            social_security_number += d
 
-    # Create random groups with random group sizes
-    groups = []
-    famID= []
-    while person_nummer:
-        group_size = random.randint(min_group_size, max_group_size)
-        group = person_nummer[:group_size]
-        person_nummer = person_nummer[group_size:]
-        groups.append(group)
+    taken_social_security_numbers.add(social_security_number)
+    return social_security_number
 
-    for group in groups: 
-            
-        birthdays = [create_date_object(date) for date in group]
-        oldest = birthdays.index(min(birthdays))
-        for i in range(len(birthdays)):
-            famID.append(group[oldest])
-    return famID
+def create_children(sample_year, PersonNr, is_kid=False):
+    barn = {
+        'Barn0_3' : [0],
+        'Barn4_6' : [0],
+        'Barn7_10' : [0],
+        'Barn11_15' : [0],
+        'Barn16_17' : [0],
+    }
+    if sample_year < 2005:
+        barn['Barn18plus'] = [0]
+    else: 
+        barn['Barn18_19'] = [0]
+        barn['Barn20plus'] = [0]
+    #roughly 68% of households are childless 
+    # https://www.scb.se/hitta-statistik/statistik-efter-amne/befolkning/befolkningens-sammansattning/befolkningsstatistik/pong/statistiknyhet/befolkningsstatistik-helaret-20222/
+    keys = list(barn.keys())
+    if random.randint(1,100) > 65:
+        mean = 1.81  # Mean of the normal distribution 
+        stddev = 1.3  # Standard deviation of the normal distribution
+        number_of_kids = abs(int(random.gauss(mean, stddev)))
+        if number_of_kids == 0:
+            number_of_kids = 1
 
-from datetime import date, timedelta, datetime
+        for _ in range(number_of_kids):
+            person_age = int(sample_year) - int(PersonNr[:4])
+            min_age = (person_age - 60) if person_age > 60 else 0 #Max age to get newborns is 60
+            max_age = person_age - 15
+            kid_age = random.randint(min_age, max_age)
+            kid_age_t = (kid_age - min_age) / ((max_age - min_age))
+            kid_age_t = kid_age_t * kid_age_t
+            kid_age = int(kid_age_t * (max_age - min_age) + min_age)
+            if kid_age <= 3:
+                barn['Barn0_3'][0] +=1
+            elif kid_age < 7:
+                barn['Barn4_6'][0] +=1
+            elif kid_age < 11:
+                barn['Barn7_10'][0] +=1
+            elif kid_age < 16:
+                barn['Barn11_15'][0] +=1
+            elif kid_age < 18:
+                barn['Barn16_17'][0] +=1
+            elif 'Barn18plus' in keys and kid_age >= 18:
+                barn['Barn18plus'][0] += 1
+            elif not 'Barn18plus' in keys and kid_age < 20:
+                barn['Barn18_19'][0] +=1
+            elif not 'Barn18plus' in keys and kid_age >= 20:
+                barn['Barn20plus'][0] +=1
+        
+        for key in keys: #No more than 3 kids per category
+            if barn[key][0] > 3:
+                barn[key][0] = 3
+
+    if 'Barn18plus' in keys:
+        barn = {
+            'Barn0_3'       : barn['Barn0_3'],
+            'Barn4_6'       : barn['Barn4_6'],
+            'Barn7_10'      : barn['Barn7_10'],
+            'Barn11_15'     : barn['Barn11_15'],
+            'Barn16_17'     : barn['Barn16_17'],
+            'Barn18plus'    : barn['Barn18plus'],
+            'Barn18_19'     : [None],
+            'Barn20plus'    : [None]
+               }
+    else:
+        barn = {
+            'Barn0_3'       : barn['Barn0_3'],
+            'Barn4_6'       : barn['Barn4_6'],
+            'Barn7_10'      : barn['Barn7_10'],
+            'Barn11_15'     : barn['Barn11_15'],
+            'Barn16_17'     : barn['Barn16_17'],
+            'Barn18plus'    : [None],
+            'Barn18_19'     : barn['Barn18_19'],
+            'Barn20plus'    : barn['Barn20plus']
+               }
+    if is_kid and 'Barn18plus' in keys:
+        barn = {
+            'Barn0_3'       : [0],
+            'Barn4_6'       : [0],
+            'Barn7_10'      : [0],
+            'Barn11_15'     : [0],
+            'Barn16_17'     : [0],
+            'Barn18plus'    : [0],
+            'Barn18_19'     : [None],
+            'Barn20plus'    : [None]
+               }
+    if is_kid and not 'Barn18plus' in keys:
+        barn = {
+            'Barn0_3'       : [0],
+            'Barn4_6'       : [0],
+            'Barn7_10'      : [0],
+            'Barn11_15'     : [0],
+            'Barn16_17'     : [0],
+            'Barn18plus'    : [None],
+            'Barn18_19'     : [0],
+            'Barn20plus'    : [0]
+               }
+    return pd.DataFrame.from_dict(barn)
 
 from variable_functions.generate_educational_variables import generate_education
 
-def generate_family(year,amount):
- 
-    PersonNr= person_nummer_creation(amount, year) 
-    children = create_children(amount, year)
+def make_kid_family_frame(PersonNr, FamId, is_Kid, sample_year):
+    kids = create_children(sample_year, PersonNr, is_kid=is_Kid)
+    utbildning = generate_education(1)
+    data = pd.DataFrame()
+    data = utbildning.join(kids)
+    data['PersonNr'] = PersonNr
+    data['FamId'] = FamId
+    return data
 
-    utbildning = generate_education(amount) 
-    # famID = create_famID(PersonNr)
-    registry_data = pd.DataFrame()
+def create_kids_data(sample_year, FamId, kids):
+    big_kids = pd.DataFrame(columns=['Barn0_3', 'Barn4_6', 'Barn7_10', 'Barn11_15', 'Barn16_17', 'Barn18plus', 'Barn18_19', 'Barn20plus', 'PersonNr', 'FamId'])
+    no_kids = [kids.loc[0, 'Barn16_17'], kids.loc[0, 'Barn18plus'], kids.loc[0, 'Barn18_19'], kids.loc[0, 'Barn20plus']]
+    no_kids = [0 if item is None else item for item in no_kids]
+    # print(no_kids)
+    #Barn16-17
+    if no_kids[0] == 2: 
+        if random.randint(1,100) > 95: #Twins
+            age = random.randint(16,17)
+            year_born = sample_year-age
+            kid1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}1231")
+            kid2 = person_nummer_creation(sample_year, start_date=kid1[:8], stop_year=kid1[:8])
+        else: #One kid is 16, the other is 17
+            year_born = sample_year-17
+            kid1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}0630") # First kid born jan - june year 1
+            kid2 = person_nummer_creation(sample_year, start_date=f"{year_born+1}0401", stop_year=f"{year_born+1}1231") # Second kid born atleast 10 months later
+        big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(kid2, FamId, is_Kid=True, sample_year=sample_year)])
+    elif no_kids[0] == 3: 
+        if random.randint(1,100) > 40: #Twins
+            age = random.randint(16,17)
+            if age == 16:
+                year_born = sample_year-age
+                kid1 = person_nummer_creation(sample_year, start_date=f"{year_born-1}0101", stop_year=f"{year_born-1}0630") # First kid born jan - june year 1    
+                twin1 = person_nummer_creation(sample_year, start_date=f"{year_born}0401", stop_year=f"{year_born}1231") #Twins born atleast 10 months later
+                twin2 = person_nummer_creation(sample_year, start_date=twin1[:8], stop_year=twin1[:8])
+            else:
+                year_born = sample_year-age
+                twin1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}0430") #Twins born jan - june
+                twin2 = person_nummer_creation(sample_year, start_date=twin1[:8], stop_year=twin1[:8])
+                kid1 = person_nummer_creation(sample_year, start_date=f"{year_born+1}0401", stop_year=f"{year_born+1}1231") # Third kid born atleast 10 months later    
+            big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(twin1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(twin2, FamId, is_Kid=True, sample_year=sample_year)])
+        else: #One kid is 16, the other is 17
+            age = 17
+            year_born = sample_year-age
+            kid1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}0210") # First kid born jan - feb year 1
+            kid2 = person_nummer_creation(sample_year, start_date=f"{year_born}1201", stop_year=f"{year_born+1}0130") # Second kid born atleast 10 months later
+            kid3 = person_nummer_creation(sample_year, start_date=f"{year_born+1}1101", stop_year=f"{year_born+1}1231") # Third kid born atleast 10 months later
+            big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(kid2, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(kid3, FamId, is_Kid=True, sample_year=sample_year)])
+    elif no_kids[0] == 1:
+        age = 17
+        year_born = sample_year-age
+        kid1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born+1}1231") # Single kid can be born any date as long as they are 16-17
+        big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year)])
 
+    #Barn18plus Make better
+    if no_kids[1] == 1:
+        age = 18
+        year_born = sample_year-age
+        kid1 = person_nummer_creation(sample_year, start_date=f"{year_born-7}0101", stop_year=f"{year_born}1231") # Single kid can be ages 18-25
+        big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year)])
+    elif no_kids[1] == 2:
+        age = 18
+        year_born = sample_year-age
+        kid1 = person_nummer_creation(sample_year, start_date=f"{year_born-1}0101", stop_year=f"{year_born}0330") # Single kid can be born any date as long as they are 16-17
+        kid2 = person_nummer_creation(sample_year, start_date=f"{year_born-3}0101", stop_year=f"{year_born-2}0330") # Single kid can be born any date as long as they are 16-17
+        big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(kid2, FamId, is_Kid=True, sample_year=sample_year)])
+    elif no_kids[1] == 3:
+        if random.randint(1,100) > 95: #Twins
+            twin_age = random.randint(18,23)
+            if twin_age < 20: # Twins are youngest
+                year_born = sample_year-twin_age
+                kid1 = person_nummer_creation(sample_year, start_date=f"{year_born-3}0101", stop_year=f"{year_born-2}0630") # First kid born earlier than twins 
+                twin1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}1231") #Twins born jan - dec 1.5 years later
+                twin2 = person_nummer_creation(sample_year, start_date=twin1[:8], stop_year=twin1[:8])
+            else:
+                year_born = sample_year-twin_age
+                twin1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}1231") #Twins born atleast 10 months later
+                twin2 = person_nummer_creation(sample_year, start_date=twin1[:8], stop_year=twin1[:8])
+                kid1 = person_nummer_creation(sample_year, start_date=f"{year_born+1}0601", stop_year=f"{year_born+2}1231") # First kid born jan - june year 1    
+            big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(twin1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(twin2, FamId, is_Kid=True, sample_year=sample_year)])
+        else:
+            year_born = sample_year-18
+            kid1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born+1}1231") # First kid born earlier than twins 
+            kid2 = person_nummer_creation(sample_year, start_date=f"{year_born+2}0101", stop_year=f"{year_born+3}1231") # First kid born earlier than twins 
+            kid3 = person_nummer_creation(sample_year, start_date=f"{year_born+4}0101", stop_year=f"{year_born+5}1231") # First kid born earlier than twins 
+        big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(kid2, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(kid3, FamId, is_Kid=True, sample_year=sample_year)])
+    
+    #Barn18_19
+    if no_kids[2] == 2: 
+        if random.randint(1,100) > 95: #Twins
+            age = random.randint(18,19)
+            year_born = sample_year-age
+            kid1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}1231")
+            kid2 = person_nummer_creation(sample_year, start_date=kid1[:8], stop_year=kid1[:8])
+        else: #One kid is 16, the other is 17
+            year_born = sample_year-19
+            kid1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}0630") # First kid born jan - june year 1
+            kid2 = person_nummer_creation(sample_year, start_date=f"{year_born+1}0401", stop_year=f"{year_born+1}1231") # Second kid born atleast 10 months later
+        big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(kid2, FamId, is_Kid=True, sample_year=sample_year)])
+    elif no_kids[2] == 3: 
+        if random.randint(1,100) > 40: #Twins
+            age = random.randint(18,19)
+            if age == 18:
+                year_born = sample_year-age
+                kid1 = person_nummer_creation(sample_year, start_date=f"{year_born-1}0101", stop_year=f"{year_born-1}0630") # First kid born jan - june year 1    
+                twin1 = person_nummer_creation(sample_year, start_date=f"{year_born}0401", stop_year=f"{year_born}1231") #Twins born atleast 10 months later
+                twin2 = person_nummer_creation(sample_year, start_date=twin1[:8], stop_year=twin1[:8])
+            else:
+                year_born = sample_year-age
+                twin1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}0430") #Twins born jan - june
+                twin2 = person_nummer_creation(sample_year, start_date=twin1[:8], stop_year=twin1[:8])
+                kid1 = person_nummer_creation(sample_year, start_date=f"{year_born+1}0401", stop_year=f"{year_born+1}1231") # Third kid born atleast 10 months later    
+            big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(twin1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(twin2, FamId, is_Kid=True, sample_year=sample_year)])
+        else: #One kid is 18, the other is 19
+            age = 19
+            year_born = sample_year-age
+            kid1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}0210") # First kid born jan - feb year 1
+            kid2 = person_nummer_creation(sample_year, start_date=f"{year_born}1201", stop_year=f"{year_born+1}0130") # Second kid born atleast 10 months later
+            kid3 = person_nummer_creation(sample_year, start_date=f"{year_born+1}1101", stop_year=f"{year_born+1}1231") # Third kid born atleast 10 months later
+            big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(kid2, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(kid3, FamId, is_Kid=True, sample_year=sample_year)])
+    elif no_kids[2] == 1:
+        age = 19
+        year_born = sample_year-age
+        kid1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born+1}1231") # Single kid can be born any date as long as they are 16-17
+        big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year)])
 
-    registry_data = utbildning.join(children)
-    registry_data['PersonNr'] = PersonNr 
-    registry_data['famID'] = PersonNr #FIX ME
+    #Barn20plus Make better
+    if no_kids[3] == 1:
+        age = 20
+        year_born = sample_year-age
+        kid1 = person_nummer_creation(sample_year, start_date=f"{year_born-6}0101", stop_year=f"{year_born}1231") # Possible ages is 20-26
+        big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year)])
+    elif no_kids[3] == 2:
+        age = 20
+        year_born = sample_year-age
+        kid1 = person_nummer_creation(sample_year, start_date=f"{year_born-1}0101", stop_year=f"{year_born}0330") # Single kid can be born any date as long as they are 16-17
+        kid2 = person_nummer_creation(sample_year, start_date=f"{year_born-3}0101", stop_year=f"{year_born-2}0330") # Single kid can be born any date as long as they are 16-17
+        big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(kid2, FamId, is_Kid=True, sample_year=sample_year)])
+    elif no_kids[3] == 3:
+        if random.randint(1,100) > 95: #Twins
+            twin_age = random.randint(20,25)
+            if twin_age < 22: # Twins are youngest
+                year_born = sample_year-twin_age
+                kid1 = person_nummer_creation(sample_year, start_date=f"{year_born-3}0101", stop_year=f"{year_born-2}0630") # First kid born earlier than twins 
+                kid2 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}1231") #Twins born jan - dec 1.5 years later
+                kid3 = person_nummer_creation(sample_year, start_date=kid2[:8], stop_year=kid2[:8])
+            else:
+                year_born = sample_year-twin_age
+                kid2 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}1231") #Twins born atleast 10 months later
+                kid3 = person_nummer_creation(sample_year, start_date=kid2[:8], stop_year=kid2[:8])
+                kid1 = person_nummer_creation(sample_year, start_date=f"{year_born+1}0601", stop_year=f"{year_born+2}1231") # First kid born jan - june year 1    
+            big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(kid2, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(kid3, FamId, is_Kid=True, sample_year=sample_year)])
+        else:
+            year_born = sample_year-20
+            kid1 = person_nummer_creation(sample_year, start_date=f"{year_born-1}0101", stop_year=f"{year_born}1231") # First kid born earlier than twins 
+            kid2 = person_nummer_creation(sample_year, start_date=f"{year_born-3}0101", stop_year=f"{year_born-2}1231") # First kid born earlier than twins 
+            kid3 = person_nummer_creation(sample_year, start_date=f"{year_born-5}0101", stop_year=f"{year_born-4}1231") # First kid born earlier than twins 
+        big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(kid2, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(kid3, FamId, is_Kid=True, sample_year=sample_year)])
 
+    return big_kids
 
-    return registry_data
+def create_spouse(FamId, kids_info):
+    spouse_age = int(FamId[:4]) + 7 #The spouse will be as old as the partner or at most 7 years younger
+    PersonNr = person_nummer_creation(1, start_date=FamId[:8], stop_year=f"{spouse_age}1231")
+    utbildning = generate_education(1)
+    data = pd.DataFrame()
+    data = utbildning.join(kids_info)
+    data['PersonNr'] = PersonNr
+    data['FamId'] = FamId
+    return data
 
+def create_family(personnummer, sample_year):
+    kids_info = create_children(sample_year, personnummer)
+    kids_frames = create_kids_data(sample_year, personnummer, kids_info) #dataframe
+    #columns=['Barn0_3', 'Barn4_6', 'Barn7_10', 'Barn11_15', 'Barn16_17', 'Barn18plus', 'Barn18_19', 'Barn20plus', 'PersonNr', 'FamId']
+    data = pd.DataFrame()
+    if len(kids_frames) == 0:
+        if random.randint(1,100) > 60: # Probability someone is living alone
+            spouse = create_spouse(personnummer, kids_info)
+        else:
+            spouse = None
+    else:
+        min_family_size = 0
+        family_size = random.randint(min_family_size, len(kids_frames)+1) #Bigger family, more likley there's a spouse in the household
+        if family_size > 1:
+            spouse = create_spouse(personnummer, kids_info)
+        else:
+            spouse = None
+    utbildning = generate_education(1)
+    data = utbildning.join(kids_info)
+    data['PersonNr'] = personnummer
+    data['FamId'] = personnummer
+    if type(spouse) == None:
+        data = pd.concat([data, kids_frames])
+    else:
+        data = pd.concat([data, spouse, kids_frames])
+    return data
+
+def generate_family(amount, sample_year):
+    family_data = pd.DataFrame(columns=['PersonNr','Barn0_3', 'Barn4_6', 'Barn7_10', 'Barn11_15', 'Barn16_17', 'Barn18plus', 'Barn18_19', 'Barn20plus', 'FamId'])
+    for _ in range(amount):
+        PersonNr = person_nummer_creation(sample_year)
+        family_data = pd.concat([family_data, create_family(PersonNr, sample_year)])
+    return family_data

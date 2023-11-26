@@ -1,0 +1,86 @@
+,Kod,Utbildningsgrupper 2020,Nivåkoder SUN 2020,Inriktningskoder SUN 2020
+0,01Z,Folkskoleutbildning och motsvarande,1,"010a, 010x"
+1,02Z,Grundskoleutbildning och motsvarande,2,"010a, 010x"
+2,03A,"Samhällsvetenskaplig, social och humanistisk gymnasieutbildning",3,"010a, 010b, 010x"
+3,03N,Naturvetenskaplig gymnasieutbildning,"3, 413",010c
+4,13Z,Gymnasial utbildning inom pedagogik och lärarutbildning,3,1
+5,14P,"Minst 30 högskolepoäng inom pedagogik och lärarutbildning, ej examen"," 412, 522, 532",1
+6,15B,Förskollärarutbildning," 527, 537, 547, 557","143a, 143c, 143d, 143e"
+7,15F,Fritidspedagogutbildning," 527, 537, 547, 557",143b
+8,15G,Lärarutbildning för grundskolans tidiga åldrar," 527, 537, 547, 557",144
+9,15H,"Ämneslärarutbildning, allmänna ämnen"," 547, 557",145
+10,15P,Lärarutbildning i praktisk-estetiska ämnen," 417, 527, 537, 547, 557","146g, 146h, 146i, 146j, 146k, 146l"
+11,15S,Speciallärar- och specialpedagogutbildning," 527, 537, 547, 557","149a, 149d"
+12,15V,Yrkeslärarutbildning," 417, 527, 537, 547, 557","146a, 146b, 146c, 146d, 146e, 146f, 146x"
+13,23E,Estetisk utbildning på gymnasial nivå,3,210a
+14,23M,Gymnasial utbildning för medieproduktion,3,213
+15,24P,"Minst 30 högskolepoäng inom humaniora och konst, ej examen","412, 522, 532",210b
+16,25H,Humanistisk högskoleutbildning (minst 3 år)," 538, 557, 687","211b, 212c, 222, 229"
+17,25K,Konstnärlig eftergymnasial utbildning," 4, 5, 6 ","211c, 212c, 213"
+18,25M,"Medieproduktion, eftergymnasial utbildning"," 4, 5,6 ",213
+19,25T,Teologisk eftergymnasial utbildning (minst 3 år)," 536, 556, 633",221
+20,33E,Ekonomisk gymnasieutbildning," 312, 322, 332, 336",340a
+21,33H,Yrkesinriktad utbildning på gymnasial nivå inom handel och administration,3,388b
+22,34P,"Minst 30 högskolepoäng inom samhällsvetenskap, ekonomi och juridik, ej examen"," 412, 522, 532",3
+23,35B,Biblioteks- och informationsvetenskaplig högskoleutbildning (minst 3 år)," 536, 556, 666",322
+24,35E,Ekonomutbildning (högskoleutbildning minst 3 år)," 537, 557, 677","314, 340"
+25,35F,"Högskoleutbildning inom organisation, administration och förvaltning (minst 3 år)"," 539, 559, 699",345
+26,35J,Juridisk högskoleutbildning (minst 3 år)," 538, 558, 688",380
+27,35M,Journalist- och medieutbildning (eftergymnasial)," 413, 513,613 ",321
+28,35P,Högskoleutbildning i psykologi och psykoterapi (minst 3 år)," 533, 553, 633",311
+29,35S,Samhälls- och beteendevetenskaplig högskoleutbildning (minst 3 år)," 531, 551, 611",312
+30,43Z,"Yrkesinriktad gymnasieutbildning inom naturvetenskap, matematik och IKT",3,4
+31,44P,"Minst 30 högskolepoäng inom naturvetenskap, matematik och IKT ej examen"," 412, 522, 532",4
+32,45D,Programmerar- och systemerarutbildning (eftergymnasial),"4,5,6",481a
+33,45N,Naturvetenskaplig högskoleutbildning (minst 3 år)," 531, 551, 6","42, 44, 46, 481b"
+34,53A,"Tekniskt gymnasium, 1-3 år"," 312, 322, 326, 332, 336",5
+35,53B,Gymnasieutbildning inom bygg,333,582e
+36,53E,Gymnasieutbildning inom elektro- och datateknik,331,"522e, 523e"
+37,53F,Gymnasieutbildning inom fordonsteknik,330,525
+38,53K,Gymnasieutbildning inom textil- och konfektionsteknik,329,542
+39,53L,Gymnasieutbildning inom livsmedel,328,541
+40,53P,Gymnasieutbildning inom processteknik,327,"542d, 543d, 543e, 543f"
+41,53R,Gymnasieutbildning inom energi och VVS,325,"522d, 582f"
+42,53T,Gymnasieutbildning inom träteknik,324,543c
+43,53V,Gymnasieutbildning inom verkstadsteknik,323,521
+44,54P,"Minst 30 högskolepoäng inom teknik och tillverkning, ej examen"," 412, 522, 532",5
+45,55A,Arkitekt- och landskapsarkitektutbildning," 547, 55, 6","581c, 581d"
+46,55C,"Civilingenjörsutbildning inom samhällsbyggnad, byggnadsteknik och miljöteknik"," 547, 55, 6","527a, 527x, 581e"
+47,55D,"Civilingenjörsutbildning inom maskin, fordon, farkost och industriell ekonomi"," 547, 55, 6","521a, 521x, 525a, 525x, 526a, 526x"
+48,55E,"Civilingenjörsutbildning inom elektroteknik, teknisk fysik och datateknik"," 547, 55, 6","520a, 520x, 522a, 522x, 523a-523b, 523x"
+49,55F,"Civilingenjörsutbildning inom kemi- och bioteknik, material- och geoteknik"," 547, 55, 6","524a, 524x, 540a, 540x, 541a, 541x, 542a, 542x, 543a, 543x, 544a, 544x, 549z"
+50,55G,Övrig civilingenjörsutbildning," 547, 55, 6","529a, 529x"
+51,55H,"Ingenjörsutbildning inom samhällsbyggnad, byggnadsteknik och miljöteknik (eftergymnasial)"," 413, 527, 536, 537, 546","527b, 527x, 580b, 580x, 581b, 581x, 582b, 582x, 589z"
+52,55I,"Ingenjörsutbildning inom maskin, fordon, farkost och industriell ekonomi  (eftergymnasial)"," 413, 527, 536, 537, 546","521b, 525b, 526b"
+53,55J,"Ingenjörsutbildning inom elektroteknik, teknisk fysik och datateknik (eftergymnasial)"," 413, 527, 536, 537, 546","520b, 520x, 522b, 522d, 522x, 523c, 523d, 523e, 523f, 523x"
+54,55K,"Ingenjörsutbildning inom kemi- och bioteknik, material- och geoteknik (eftergymnasial)"," 413, 527, 536, 537, 546","524b, 524c, 524d, 524x, 540b, 540x, 541b, 541x, 542b, 542x, 543b, 543c, 543x, 544b, 544x, 549z"
+55,55L,Övrig ingenjörsutbildning (eftergymnasial)," 413, 527, 536, 537, 546","529b, 529x"
+56,63Z,Gymnasial utbildning inom lant- och skogsbruk samt djursjukvård,3,"621c, 622c, 623c, 640b"
+57,64P,"Minst 30 högskolepoäng inom lant- och skogsbruk samt djursjukvård, ej examen"," 412, 522, 532",6
+58,65J,Lantbruksvetenskaplig högskoleutbildning (minst 3 år)," 53-55, 6","620, 621, 622"
+59,65S,Skogsbruksvetenskaplig högskoleutbildning (minst 3 år)," 53-55, 6",623
+60,65V,Veterinärutbildning," 557, 6","640a, 640x"
+61,73B,Gymnasial utbildning med inriktning mot barn och ungdom,3,761
+62,73O,Omvårdnads- och omsorgsutbildning på gymnasial nivå,3,"723o, 723p, 723q, 723r, 723s, 723t, 723u, 723v, 723w, 723x, 762a 762b, 762c, 762x"
+63,73T,Tandvårdsutbildning på gymnasial nivå,3,"724d, 724e, 724f, 724g, 724h, 724i, 724j, 724k, 724l, 724m, 724n, 724o, 724x"
+64,74P,"Minst 30 högskolepoäng inom hälso- o sjukvård och social omsorg, ej examen"," 412, 522, 532",7
+65,75A,Apotekarutbildning," 54, 55, 6","727a, 727x"
+66,75B,Arbetsterapeututbildning," 4, 5",726b
+67,75D,Biomedicinsk analytikerutbildning," 4, 5 ",725d
+68,75F,Fritidsledarutbildning (eftergymnasial)," 4, 5 ",761c
+69,75H,Läkarutbildning," 557, 6",721
+70,75J,Receptarieutbildning," 4, 5 ",727b
+71,75L,Fysioterapeututbildning," 4, 5",726a
+72,75N,Sjuksköterskeutbildning," 4, 5 ","723a, 723b, 723c, 723d, 723e, 723f, 723g, 723h, 723i, 723j. 723k, 723l 723m, 723n, 725f"
+73,75O,Social service- och omsorgsutbildning," 4, 5 ","762a, 762b, 762c"
+74,75P,Socionomutbildning,5,762d
+75,75T,Tandhygienistutbildning," 4, 5 ",724d
+76,75V,Tandläkarutbildning," 557, 6","724a, 724b, 724c, 724x"
+77,83R,Hotell- och restaurangutbildning på gymnasial nivå,3,811
+78,83T,Transportutbildning på gymnasial nivå,3,840
+79,84P,"Minst 30 högskolepoäng inom tjänster, ej examen"," 412, 522, 532",8
+80,85M,Militär utbildning på eftergymnasial nivå," 4, 5, 6",863
+81,85P,Polisutbildning,5,861a
+82,85T,Transportutbildning på eftergymnasial nivå,"4, 5",840
+83,93Z,"Gymnasial utbildning, okänd inriktning",3,999
+84,95Z,"Eftergymnasial utbildning, okänd inriktning"," 4,5,6",999
