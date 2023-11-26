@@ -76,7 +76,7 @@ def generate_company(personnummer, kommunnamn, lansnamn, prefix="", yrkstallning
     if no_income:
         work_data = {
                         f'{prefix}PeOrgNr'   : [None],
-                        f'{prefix}Cfar_nr'   : [None],
+                        f'{prefix}CfarNr'    : [None],
                         f'{prefix}AstNr'     : [None],
                         f'{prefix}AstKommun' : [None],
                         f'{prefix}AstLan'    : [None],
@@ -90,7 +90,7 @@ def generate_company(personnummer, kommunnamn, lansnamn, prefix="", yrkstallning
         AstNr = generate_AstNr_LISA()
         work_data = {
                         f'{prefix}PeOrgNr'   : [PeOrgNr],
-                        f'{prefix}Cfar_nr'   : [Cfar_Nr],
+                        f'{prefix}CfarNr'    : [Cfar_Nr],
                         f'{prefix}AstNr'     : [AstNr],
                         f'{prefix}AstKommun' : [kommunnamn],
                         f'{prefix}AstLan'    : [lansnamn],
@@ -101,7 +101,6 @@ def generate_company(personnummer, kommunnamn, lansnamn, prefix="", yrkstallning
 
 def generate_work(personnummer, county, economicstatus, yrkstallning):
     Kommun = ggv.generate_municipal(county)
-    no_prefix_working_ties = generate_company(personnummer, Kommun, county, yrkstallning=str(yrkstallning))
     if economicstatus[0] > 0:
         Kommun = ggv.generate_municipal(county)
         prefix_working_ties1 = generate_company(personnummer, Kommun, county, prefix="KU1", yrkstallning="1") #Yrkstallning hardcoded needs FIX
@@ -119,6 +118,34 @@ def generate_work(personnummer, county, economicstatus, yrkstallning):
     else:
         prefix_working_ties3 = generate_company(personnummer, Kommun, county, prefix="KU3", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
     
-    working_data = pd.concat([no_prefix_working_ties, prefix_working_ties1, prefix_working_ties2, prefix_working_ties3], axis=1)
+    biggest_income = economicstatus.index(max(economicstatus))
+    
+
+    if biggest_income == 0:
+        biggest_data = {
+            'CfarNr_LISA' : [prefix_working_ties1.loc[0, 'KU1CfarNr']],
+            'ArbstId' : [str(prefix_working_ties1.loc[0, 'KU1CfarNr'])+str(prefix_working_ties1.loc[0, 'KU1AstNr'])+str(prefix_working_ties1.loc[0, 'KU1AstKommun'])+str(prefix_working_ties1.loc[0, 'KU1PeOrgNr'])],
+            'AstNr_LISA' : [prefix_working_ties1.loc[0, 'KU1AstNr']],
+            'AstKommun' : [prefix_working_ties1.loc[0, 'KU1AstKommun']],
+            'AstLan' : [prefix_working_ties1.loc[0, 'KU1AstLan']]
+        }
+    elif biggest_income == 1:
+        biggest_data = {
+            'CfarNr_LISA' : [prefix_working_ties2.loc[0, 'KU2CfarNr']],
+            'ArbstId' : [str(prefix_working_ties2.loc[0, 'KU2CfarNr'])+str(prefix_working_ties2.loc[0, 'KU2AstNr'])+str(prefix_working_ties2.loc[0, 'KU2AstKommun'])+str(prefix_working_ties2.loc[0, 'KU2PeOrgNr'])],
+            'AstNr_LISA' : [prefix_working_ties2.loc[0, 'KU2AstNr']],
+            'AstKommun' : [prefix_working_ties2.loc[0, 'KU2AstKommun']],
+            'AstLan' : [prefix_working_ties2.loc[0, 'KU2AstLan']]
+        }
+    else:
+        biggest_data = {
+            'CfarNr_LISA' : [prefix_working_ties3.loc[0, 'KU3CfarNr']],
+            'ArbstId' : [str(prefix_working_ties3.loc[0, 'KU3CfarNr'])+str(prefix_working_ties3.loc[0, 'KU3AstNr'])+str(prefix_working_ties3.loc[0, 'KU3AstKommun'])+str(prefix_working_ties3.loc[0, 'KU3PeOrgNr'])],
+            'AstNr_LISA' : [prefix_working_ties3.loc[0, 'KU3AstNr']],
+            'AstKommun' : [prefix_working_ties3.loc[0, 'KU3AstKommun']],
+            'AstLan' : [prefix_working_ties3.loc[0, 'KU3AstLan']]
+        }
+
+    working_data = pd.concat([pd.DataFrame.from_dict(biggest_data), prefix_working_ties1, prefix_working_ties2, prefix_working_ties3], axis=1)
     return working_data
 

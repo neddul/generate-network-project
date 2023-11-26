@@ -96,7 +96,6 @@ def generate_total_incomes(KU1lnk, KU2lnk, KU3lnk):
     incomes = np.random.lognormal(mean=mu, sigma=sigma, size=len(KU1lnk))
     incomes = np.clip(incomes, 0, 1014000)
     incomes = incomes.astype(int) 
-    print()
     Raks_SummaInk = []
     for i in range(0,len(incomes)):
         if incomes[i] < KU1lnk[i]+KU2lnk[i]+KU3lnk[i]:
