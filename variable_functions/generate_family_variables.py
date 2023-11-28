@@ -29,7 +29,7 @@ def birth_dates(startyear, stopyear): #startyear and stopyear should be strings,
 def person_nummer_creation(sample_year, start_date="19250101", stop_year="", gender=3):
     if stop_year == "":
         end_date = str(sample_year-16) #People need to be atleast 16 to legally live alone in Sweden
-        end_date = end_date + "0101"
+        end_date = end_date + "1231"
         possible_birthdays  = birth_dates(start_date, end_date)
     else:
         possible_birthdays  = birth_dates(start_date, stop_year)
@@ -81,8 +81,8 @@ def create_children(sample_year, PersonNr, is_kid=False):
     if random.randint(1,100) > 65:
         mean = 1.81  # Mean of the normal distribution 
         stddev = 1.3  # Standard deviation of the normal distribution
-        number_of_kids = abs(int(random.gauss(mean, stddev)))
-        if number_of_kids == 0:
+        number_of_kids = int(random.gauss(mean, stddev))
+        if number_of_kids < 1:
             number_of_kids = 1
 
         for _ in range(number_of_kids):
@@ -243,9 +243,9 @@ def create_kids_data(sample_year, FamId, kids):
             big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(twin1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(twin2, FamId, is_Kid=True, sample_year=sample_year)])
         else:
             year_born = sample_year-18
-            kid1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born+1}1231") # First kid born earlier than twins 
-            kid2 = person_nummer_creation(sample_year, start_date=f"{year_born+2}0101", stop_year=f"{year_born+3}1231") # First kid born earlier than twins 
-            kid3 = person_nummer_creation(sample_year, start_date=f"{year_born+4}0101", stop_year=f"{year_born+5}1231") # First kid born earlier than twins 
+            kid1 = person_nummer_creation(sample_year, start_date=f"{year_born-1}0101", stop_year=f"{year_born}1231") # First kid born earlier than twins 
+            kid2 = person_nummer_creation(sample_year, start_date=f"{year_born-3}0101", stop_year=f"{year_born-2}1231") # First kid born earlier than twins 
+            kid3 = person_nummer_creation(sample_year, start_date=f"{year_born-5}0101", stop_year=f"{year_born-4}1231") # First kid born earlier than twins 
         big_kids = pd.concat([big_kids, make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(kid2, FamId, is_Kid=True, sample_year=sample_year), make_kid_family_frame(kid3, FamId, is_Kid=True, sample_year=sample_year)])
     
     #Barn18_19

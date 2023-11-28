@@ -9,7 +9,7 @@ def generate_person(sample_year=2019):
     data2 = pd.DataFrame(columns=[  'PersonNr', 'Lan', 'Kommun', 'Forsamling', 'Distriktskod', 'FastLopNr', 'FastBet',
                                     'Barn0_3', 'Barn4_6', 'Barn7_10', 'Barn11_15', 'Barn16_17',
                                     'Barn18plus', 'Barn18_19', 'Barn20plus', 'FamId', 
-                                    'Sun2000niva_old','SUN2000Niva', 'SUN2000Inr', 'SUN2000Grp',
+                                    'Sun2000niva_old','SUN2000niva', 'SUN2000Inr', 'SUN2000Grp',
                                     'CfarNr_LISA', 'ArbstId', 'AstNr_LISA', 'AstKommun', 'AstLan',
                                     'KU1PeOrgNr', 'KU1CfarNr', 'KU1AstNr', 'KU1AstKommun', 'KU1AstLan',
                                     'KU1YrkStalln', 'KU2PeOrgNr', 'KU2CfarNr', 'KU2AstNr', 'KU2AstKommun',
@@ -63,5 +63,5 @@ def generate_data(amount, sample_year=2019):
     for _ in range(amount):
         person = generate_person(sample_year)
         data = pd.concat([data, person])
-    
+    data = data.reset_index(drop=True)
     return data
