@@ -1,11 +1,11 @@
 import pandas as pd
-from variable_functions.generate_demographic_variables import generate_demographic
-from variable_functions.generate_economic_variables import generate_economic
-from variable_functions.generate_family_variables import generate_family
-from variable_functions.generate_geographical_variables import generate_geographical
-from variable_functions.generate_work_variables import generate_work
+from generate_demographic_variables import generate_demographic
+from generate_economic_variables import generate_economic
+from generate_family_variables import generate_family
+from generate_geographical_variables import generate_geographical
+from generate_work_variables import generate_work
 
-def generate_person(sample_year=2019):
+def generate_person(sample_year=2019, utbildning=""):
     data2 = pd.DataFrame(columns=[  'PersonNr', 'Lan', 'Kommun', 'Forsamling', 'Distriktskod', 'FastLopNr', 'FastBet',
                                     'Barn0_3', 'Barn4_6', 'Barn7_10', 'Barn11_15', 'Barn16_17',
                                     'Barn18plus', 'Barn18_19', 'Barn20plus', 'FamId', 
@@ -22,9 +22,10 @@ def generate_person(sample_year=2019):
                                     'Raks_SummaInk', 'Raks_Huvudanknytning', 'Raks_EtablGrad', 'Raks_Forvink'
                                  ])
     
-    family = generate_family(1, sample_year)
+    family = generate_family(sample_year, utbildning)
     Geographical = generate_geographical()
     Lan = Geographical.loc[0, 'Lan']
+    data2 = []
 
     for i, row in family.iterrows():
         PersonNr = row['PersonNr']
@@ -39,9 +40,10 @@ def generate_person(sample_year=2019):
         Work = generate_work(PersonNr, Lan, income, yrks)
         t = pd.DataFrame()
         t = pd.concat([Family, Geographical, Demographic, Economic, Work], axis=1)
-        data2 = pd.concat([data2, t], ignore_index=True)
+        data2.append(t)
+    data3 = pd.concat(data2, ignore_index=True)
 
-    return data2
+    return data3
 
 def generate_data(amount, sample_year=2019): 
     """
@@ -59,10 +61,14 @@ def generate_data(amount, sample_year=2019):
         dataframe with data for all variables.
 
     """
+    utbildning = pd.read_csv("../variable_data/downloaded_data/utbildning_cleaner.csv")
+    people = []
     data = pd.DataFrame()
     for _ in range(amount):
-        person = generate_person(sample_year)
-        data = pd.concat([data, person])
+        person = generate_person(sample_year, utbildning)
+        people.append(person)
+    
+    data = pd.concat(people)
     data = data.reset_index(drop=True)
     return data
 

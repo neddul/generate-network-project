@@ -9,9 +9,9 @@ def random_sampler(start, end, number):
         
     return output
 
-def generate_education(amount): 
+def generate_education(amount, utbildning): 
     Sun2000niva_old = random_sampler(10000,99999, amount)
-    utbildning = pd.read_csv("./variable_data/downloaded_data/utbildning_cleaner.csv")
+    #utbildning = pd.read_csv("../variable_data/downloaded_data/utbildning_cleaner.csv")
     #utbildning = utbildning.dropna()
     indexes = random_sampler(0,len(utbildning)-1, amount)
     SUN2000Grp = []
@@ -46,5 +46,15 @@ def generate_education(amount):
     #examAr is missing as well 
     
     #examkommun is different 
+
+    data = {
+            'Sun2000niva_old' : Sun2000niva_old,
+            'SUN2000niva' : SUN2000Niva,
+            'SUN2000Inr' : SUN2000Inr,
+            'SUN2000Grp' : SUN2000Grp
+    }
+    return pd.DataFrame(data)
+
+
     return pd.DataFrame(list(zip(Sun2000niva_old, SUN2000Niva, SUN2000Inr, SUN2000Grp)), 
                         columns=["Sun2000niva_old", "SUN2000niva", "SUN2000Inr", "SUN2000Grp"])

@@ -4,16 +4,16 @@ import json
 scbinternal_fastlopnr = {}
 numbers = [str(x) for x in range(10)]
 
-with open('./variable_data/selfmade_dictionaries/county_dict.json', 'r') as json_file:
+with open('../variable_data/selfmade_dictionaries/county_dict.json', 'r') as json_file:
     counties_with_municipals = json.load(json_file)
 
-with open('./variable_data/selfmade_dictionaries/tatorter_in_municipals_dict.json', 'r') as json_file:
+with open('../variable_data/selfmade_dictionaries/tatorter_in_municipals_dict.json', 'r') as json_file:
     tatorter_in_municipals = json.load(json_file)
 
-with open('./variable_data/selfmade_dictionaries/forsamling_dict.json', 'r') as json_file:
+with open('../variable_data/selfmade_dictionaries/forsamling_dict.json', 'r') as json_file:
     forsamlingar_in_municipals = json.load(json_file)
 
-with open('./variable_data/selfmade_dictionaries/district_codes_from_Forsamling_dict.json', 'r') as json_file:
+with open('../variable_data/selfmade_dictionaries/district_codes_from_Forsamling_dict.json', 'r') as json_file:
     districtcodes_from_Forsamling = json.load(json_file)
 
 
@@ -75,5 +75,5 @@ def generate_geographical():
                             'FastLopNr'     : [FastLopNr],
                             'FastBet'       : [FastBet]
                           }
-    data = pd.DataFrame.from_dict(geographical_data)
+    data = pd.DataFrame(geographical_data)
     return data

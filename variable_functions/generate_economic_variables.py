@@ -163,7 +163,7 @@ def generate_economic(amount,sample_year):
         'Raks_EtablGrad'        : Raks_EtablGrad,
         'Raks_Forvink'          : Raks_Forvink
                         }    
-    data = pd.DataFrame.from_dict(employment_data)
+    data = pd.DataFrame(employment_data)
     return data
 
 #generate_demographic_economic(20,2019)
