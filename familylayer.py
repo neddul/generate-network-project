@@ -1,15 +1,15 @@
 import pandas as pd
 from itertools import combinations
 
-small_testdata = pd.read_csv("30_people_data.csv")
+small_testdata = pd.read_csv("pretty_good_family_data.csv")
 
 
 def find_parent_child_relationship(subset):
     parent_relationships = []
-    parents = subset[(subset['Barn18plus']>0) |  (subset['Barn16_17'] >0 )  | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )]
+    #also checking for 15, as some 15 year olds have been present in the data
+    parents = subset[(subset['Barn18plus']>0) | (subset['Barn11_15']>0) | (subset['Barn16_17'] >0 )  | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )]
     #not checking if the children is actually fitting the exact category
-    children = subset[subset['Alder'] >= 16]
-    print(children)
+    children = subset[subset['Alder'] >= 15]
     #to create siblings
     dfs_to_concat = []
     for _, parent in parents.iterrows():
@@ -102,8 +102,11 @@ def find_grandparents_aunts(family_connections):
         # Find rows where 'Personnr1' in the original dataframe matches 'personNr2' in the current row
         matching_rows = parent_rows[parent_rows['personNr2'] == parent_row['personNr1']]
         
-        matching_rows_auntsuncles = sibling_rows[(sibling_rows['personNr2'] == parent_row['personNr1']) |(sibling_rows['personNr1'] == parent_row['personNr1'])]
+        matching_rows_auntsuncles_1 = sibling_rows[(sibling_rows['personNr2'] == parent_row['personNr1']) ]
+        matching_rows_auntsuncles_2 = sibling_rows[(sibling_rows['personNr1'] == parent_row['personNr1'])]
         # Iterate through matching rows and add to the result dataframe
+
+        
         if not matching_rows.empty:
             for _, matching_row in matching_rows.iterrows():
 
@@ -119,10 +122,13 @@ def find_grandparents_aunts(family_connections):
                 })
         
         
-        if not matching_rows_auntsuncles.empty:
-            for _, matching_row in matching_rows_auntsuncles.iterrows():
+        if not matching_rows_auntsuncles_1.empty:
+            for _, matching_row in matching_rows_auntsuncles_1.iterrows():
 
         #aunts and uncles
+
+        #issue we dont know if in this case it should be person nr 1 or 2 
+
                 grandparents_list.append({
                     'personNr1': matching_row['personNr1'],
                     'personNr2': parent_row['personNr2'],
@@ -131,6 +137,23 @@ def find_grandparents_aunts(family_connections):
                 grandparents_list.append({
                     'personNr1': parent_row['personNr2'],
                     'personNr2': matching_row['personNr1'],
+                    'connection': "niece/newphew of"
+                })
+        if not matching_rows_auntsuncles_2.empty:
+            for _, matching_row in matching_rows_auntsuncles_2.iterrows():
+
+        #aunts and uncles
+
+        #issue we dont know if in this case it should be person nr 1 or 2 
+
+                grandparents_list.append({
+                    'personNr1': matching_row['personNr2'],
+                    'personNr2': parent_row['personNr2'],
+                    'connection': "aunt/uncle of"
+                })
+                grandparents_list.append({
+                    'personNr1': parent_row['personNr2'],
+                    'personNr2': matching_row['personNr2'],
                     'connection': "niece/newphew of"
                 })
 
@@ -182,28 +205,33 @@ def find_cousines(family_connections):
         matching_rows = parent_rows[parent_rows['personNr1'] == aunt_uncle_row['personNr1']]
         
         for _, matching_row in matching_rows.iterrows():
-            cousines = cousines.append({
-                'personNr1': matching_row['personNr2'],
-                'personNr2': aunt_uncle_row['personNr2'],
-                'connection': "cousins"
-            }, ignore_index=True)
+
+            existing_cousin = cousines[
+                ((cousines['personNr1'] == matching_row['personNr2']) & (cousines['personNr2'] == aunt_uncle_row['personNr2'])) |
+                ((cousines['personNr1'] == aunt_uncle_row['personNr2']) & (cousines['personNr2'] == matching_row['personNr2']))
+            ]
+            if existing_cousin.empty:
+                cousines = cousines.append({
+                    'personNr1': matching_row['personNr2'],
+                    'personNr2': aunt_uncle_row['personNr2'],
+                    'connection': "cousins"
+                }, ignore_index=True)
             
     return cousines
 
 def create_family_layer(registry_data):
     connections = pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
     for family in registry_data['FamId'].unique():
-        # Filter rows where 'famID' has the current value
-        subset = registry_data[registry_data['FamId'] == family]
+        # Filter rows where 'famID' has the current value and reduce data to only the needed columns for this case
+        subset = registry_data[registry_data['FamId'] == family][['PersonNr', 'Barn18plus', 'Barn11_15', 'Barn16_17', 'Barn18_19', 'Barn20plus', 'Alder' ]]
         # Check if each row has a value greater than or equal to 0 in the 'your_column' column
-        print(subset)
         if len(subset)> 1: 
             #will there be an option to check which year, we are working on
 
             #work on child-parent relationship 
             #parents = subset[(subset['Barn18plus'] > 0) | (subset['Barn16_17'] >0 ) | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )].any(axis=1)
-            parents = subset[(subset['Barn18plus']>0) |  (subset['Barn16_17'] >0 )  | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )]
-            print(parents)
+            parents = subset[(subset['Barn18plus']>0) | (subset['Barn11_15']>0) |  (subset['Barn16_17'] >0 )  | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )]
+            
             if len(parents)> 0:
                 output = find_parent_child_relationship(subset)
 
@@ -233,8 +261,31 @@ def create_family_layer(registry_data):
         connections = pd.concat([connections] + [cousine_connections], ignore_index=True)
     
 
-    connections.to_csv('network.csv')
+    connections.to_csv('network_gooddata.csv')
     return connections
 
 create_family_layer(small_testdata)
 
+
+
+
+#ideas:
+
+#co parent children together and not the same famId --> need to think of order to calculate 30 years
+#do it year by year and update (?) --> how do prevent not recalculating every thing(?) for efficiency
+# every following year will take the established connectings from the previous year as input
+# are we going to connect back (?)
+
+# 
+# extension will need extra code for ex partners /co parent
+# but independent functions should work nonetheless --> just way to optimize the famID dependent one with the previous established ones
+# then run it reoccurent --> best network will be 1990 or we are going to add time stamps
+# which connections can we connect back --> siblings(?), younger children (?), grandparents (?)
+# how to deal with data
+# test code on more data --> should be something we should be doing soon
+# 
+
+#next steps:
+# run code on more data(?)
+# optimizing and correcting code for one year  --> check barns age speficially ) --> fix mistake on data , double saving of some connections
+# expanding code for 30 years
