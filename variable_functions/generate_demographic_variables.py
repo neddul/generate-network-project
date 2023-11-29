@@ -146,4 +146,4 @@ def generate_demographic(PersonNr):
         'FodelseLandnamnFar'    : [dad],
         'UtlSvBakg'             : [utl_sv_bakg(me,dad,mom)] 
                        }
-    return pd.DataFrame.from_dict(demographic_data)
+    return pd.DataFrame(demographic_data)
