@@ -2,6 +2,7 @@ import random
 import pandas as pd
 
 from datetime import date, timedelta
+import datetime
 numbers = [str(x) for x in range(10)]
 
 taken_social_security_numbers = {'0'}
@@ -18,26 +19,64 @@ def choose_item_with_normal_distribution(item_list, mean, std_dev):
     # Returning the chosen item
     return item_list[index]
 
+def birth_dates(startyear="19250101", stopyear=""):
+    if type(stopyear) == int:
+        end_date = date.fromisoformat(f"{stopyear-16}1231")
+    else:
+        end_date = date.fromisoformat(stopyear)
 
-def birth_dates(startyear, stopyear): #startyear and stopyear should be strings, like "20000101"
+
     start_date = date.fromisoformat(startyear)
-    end_date = date.fromisoformat(stopyear)
 
     date_list = [start_date + timedelta(days=x) for x in range((end_date - start_date).days + 1)]
+    # print(len(date_list))
     return date_list
 
-def person_nummer_creation(sample_year, start_date="19250101", stop_year="", gender=3):
+def get_date(start_date = '19250101', stop_date='20230101'):
+    # datetime for start date
+    start_year = int(start_date[:4])
+    start_month = int(start_date[4:6])
+    start_day = int(start_date[6:8])
+    start = datetime.datetime(start_year, start_month, start_day)
+
+    # datetime for stop date
+    stop_year = int(stop_date[:4])
+    stop_month = int(stop_date[4:6])
+    stop_day = int(stop_date[6:8])
+    stop = datetime.datetime(stop_year, stop_month, stop_day)
+
+    # take random amount of days after the starting date
+    max_days = (stop - start).days
+    mean = max_days/2
+    std = max_days/3
+    days_after_start = random.gauss(mean, std)
+
+    # check if the gauss distribution picked a date outside of the range
+    if days_after_start > max_days:
+        days_after_start = max_days
+    elif days_after_start < 0:
+        days_after_start = 0
+
+    date = start + datetime.timedelta(days = days_after_start)
+    date_as_string = (str(date.year).rjust(4) + str(date.month).rjust(2) + str(date.day).rjust(2)).replace(' ','0')
+    date_as_string = date_as_string + "-"
+    return date_as_string
+
+# for _ in range(100):
+#     print(get_date())
+
+def person_nummer_creation(sample_year, start_date="19250101", stop_year="", gender=3, existing_list=""):        
     if stop_year == "":
         end_date = str(sample_year-16) #People need to be atleast 16 to legally live alone in Sweden
         end_date = end_date + "1231"
-        possible_birthdays  = birth_dates(start_date, end_date)
+        # possible_birthdays  = birth_dates(start_date, end_date)
     else:
-        possible_birthdays  = birth_dates(start_date, stop_year)
+        end_date = stop_year
+        # possible_birthdays  = birth_dates(start_date, stop_year)
  
-    mean = len(possible_birthdays) / 2
-    std_dev = len(possible_birthdays) / 3
+    # mean = len(possible_birthdays) / 2
+    # std_dev = len(possible_birthdays) / 3
     
-
     social_security_number = '0'
     while social_security_number in taken_social_security_numbers:
         #not perfect for now
@@ -53,8 +92,9 @@ def person_nummer_creation(sample_year, start_date="19250101", stop_year="", gen
             last_4 = last_4 + random.choice(numbers)
         else: # Guy or girl
             last_4 = random.choices(numbers, k=4)
-        birthday = choose_item_with_normal_distribution(possible_birthdays, mean, std_dev)
-        birthdate = birthday.strftime("%Y%m%d-")
+        # birthday = choose_item_with_normal_distribution(possible_birthdays, mean, std_dev)
+        # birthdate = birthday.strftime("%Y%m%d-")
+        birthdate = get_date(start_date, end_date)
         social_security_number = birthdate
         for d in last_4:
             social_security_number += d
@@ -160,7 +200,7 @@ def create_children(sample_year, PersonNr, is_kid=False):
                }
     return pd.DataFrame.from_dict(barn)
 
-from variable_functions.generate_educational_variables import generate_education
+from .generate_educational_variables import generate_education
 
 def make_kid_family_frame(PersonNr, FamId, is_Kid, sample_year):
     kids = create_children(sample_year, PersonNr, is_kid=is_Kid)
@@ -359,9 +399,13 @@ def create_family(personnummer, sample_year):
         data = pd.concat([data, spouse, kids_frames])
     return data
 
+
+
 def generate_family(amount, sample_year):
     family_data = pd.DataFrame(columns=['PersonNr','Barn0_3', 'Barn4_6', 'Barn7_10', 'Barn11_15', 'Barn16_17', 'Barn18plus', 'Barn18_19', 'Barn20plus', 'FamId'])
+    # birthdates = birth_dates(stopyear=sample_year)
     for _ in range(amount):
         PersonNr = person_nummer_creation(sample_year)
         family_data = pd.concat([family_data, create_family(PersonNr, sample_year)])
     return family_data
+

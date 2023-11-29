@@ -65,3 +65,9 @@ def generate_data(amount, sample_year=2019):
         data = pd.concat([data, person])
     data = data.reset_index(drop=True)
     return data
+
+if __name__ == "__main__":
+    print("This is the main part of the script")
+    a = generate_data(1000)
+    print(len(a))
+

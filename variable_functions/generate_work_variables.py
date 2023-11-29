@@ -1,9 +1,5 @@
 import random
 import pandas as pd
-from variable_functions.generate_demographic_variables import generate_demographic
-from variable_functions.generate_economic_variables import generate_economic
-from variable_functions.generate_family_variables import generate_family
-from variable_functions.generate_geographical_variables import generate_geographical
 import variable_functions.generate_geographical_variables as ggv
 
 numbers = [str(x) for x in range(10)]
