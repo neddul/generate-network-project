@@ -1,52 +1,75 @@
 import pandas as pd
 from itertools import combinations
+from tqdm import tqdm
 
-small_testdata = pd.read_csv("pretty_good_family_data.csv")
-
+small_testdata = pd.read_csv("100k_rows.csv")
+#small_testdata = pd.read_csv("pretty_good_family_data.csv")
+#def create_inner_family_relationships():
 
 def find_parent_child_relationship(subset):
     parent_relationships = []
     #also checking for 15, as some 15 year olds have been present in the data
-    parents = subset[(subset['Barn18plus']>0) | (subset['Barn11_15']>0) | (subset['Barn16_17'] >0 )  | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )]
-    #not checking if the children is actually fitting the exact category
-    children = subset[subset['Alder'] >= 15]
+    #parents = subset[(subset['Barn18plus']>0) | (subset['Barn11_15']>0) | (subset['Barn16_17'] >0 )  | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )]
+
+    #probably a more elegant way to do this, but this is to make sure we match parent with a child in a right age group
+
+    #could maybe be stored outside of this
+    age_conditions_parents = [
+    ('parents_18plus', subset['Barn18plus'] > 0),
+    ('parents11_15', subset['Barn11_15'] > 0),
+    ('parents16_17', subset['Barn16_17'] > 0),
+    ('parents18_19', subset['Barn18_19'] > 0),
+    ('parents_20plus', subset['Barn20plus'] > 0),
+]
+    #children = subset[subset['Alder'] >= 15]
+    age_conditions_children = [
+    ('children_18plus', subset['Alder'] >= 18),
+    ('children11_15', subset['Alder'].between(11, 15)),
+    ('children16_17', subset['Alder'].between(16, 17)),
+    ('children18_19', subset['Alder'].between(18, 19)),
+    ('children_20plus', subset['Alder'] >= 20),
+]
     #to create siblings
     dfs_to_concat = []
-    for _, parent in parents.iterrows():
-            age_difference = parent["Alder"] - children["Alder"]
-            eligible_children = children[age_difference > 15]
-            if not eligible_children.empty:
-            
-            
-            # Assuming "Kön" is a column indicating gender
-            #gender = 'mother' if parent['Kön'] == 'female' else 'father'
-            
-                # Create DataFrame for each parent-child relationship
-                child_data = {'personNr1': eligible_children["PersonNr"].tolist(),
-                              'personNr2': parent["PersonNr"],
-                              'connection': "child of"}
+    for (parent_label, parent_condition), (children_label, children_condition) in zip(age_conditions_parents, age_conditions_children):
+        parents = subset[parent_condition]
+        children = subset[children_condition]
+        if not children.empty and not parents.empty:
+            for _, parent in parents.iterrows():
+                    age_difference = parent["Alder"] - children["Alder"]
+                    eligible_children = children[age_difference > 15]
+                    if not eligible_children.empty:
+                    
+                    
+                    # Assuming "Kön" is a column indicating gender
+                    #gender = 'mother' if parent['Kön'] == 'female' else 'father'
+                    
+                        # Create DataFrame for each parent-child relationship
+                        child_data = {'personNr1': eligible_children["PersonNr"].tolist(),
+                                    'personNr2': parent["PersonNr"],
+                                    'connection': "child of"}
 
-                parent_data = {'personNr1': parent["PersonNr"],
-                               'personNr2': eligible_children["PersonNr"].tolist(),
-                               'connection': "parent of"}
+                        parent_data = {'personNr1': parent["PersonNr"],
+                                    'personNr2': eligible_children["PersonNr"].tolist(),
+                                    'connection': "parent of"}
 
-                parent_relationships.extend([pd.DataFrame(child_data), pd.DataFrame(parent_data)])
-                #print(eligible_children)
-                if len(eligible_children)>1:
-                    personNr2_list = eligible_children['PersonNr'].tolist()
-                    personNr2_list = sorted(personNr2_list)
+                        parent_relationships.extend([pd.DataFrame(child_data), pd.DataFrame(parent_data)])
+                        #print(eligible_children)
+                        if len(eligible_children)>1:
+                            personNr2_list = eligible_children['PersonNr'].tolist()
+                            personNr2_list = sorted(personNr2_list)
 
-                    if len(personNr2_list) == 2:
-                        # If length is 2, create a single row with 'siblings' as the connection
-                        row_data = pd.DataFrame([{'personNr1': personNr2_list[0], 'personNr2': personNr2_list[1], 'connection': 'siblings'}])
-                        dfs_to_concat.extend([pd.DataFrame(row_data)])
-                        
-                    elif len(personNr2_list) > 2:
-                        # If length is greater than 2, create rows for all combinations
-                        for pair in combinations(personNr2_list, 2):
-                            row_data = pd.DataFrame([{'personNr1': pair[0], 'personNr2': pair[1], 'connection': 'siblings'}])
-                            dfs_to_concat.extend([pd.DataFrame(row_data)])
-                   
+                            if len(personNr2_list) == 2:
+                                # If length is 2, create a single row with 'siblings' as the connection
+                                row_data = pd.DataFrame([{'personNr1': personNr2_list[0], 'personNr2': personNr2_list[1], 'connection': 'siblings'}])
+                                dfs_to_concat.extend([pd.DataFrame(row_data)])
+                                
+                            elif len(personNr2_list) > 2:
+                                # If length is greater than 2, create rows for all combinations
+                                for pair in combinations(personNr2_list, 2):
+                                    row_data = pd.DataFrame([{'personNr1': pair[0], 'personNr2': pair[1], 'connection': 'siblings'}])
+                                    dfs_to_concat.extend([pd.DataFrame(row_data)])
+                    
                 
 
     if parent_relationships:
@@ -83,7 +106,11 @@ def find_relationships(subset, current_connections):
             #add check for amount of children (?)
 
             #checking if they might be siblings 
-            siblings_possible = (((current_connections['personNr1'] == person1) & (current_connections['personNr2'] == person2) & (current_connections['connection'] == "siblings")) | ((current_connections['personNr1'] == person2) & (current_connections['personNr2'] == person1) & (current_connections['connection'] == "siblings")) ).any()
+
+            if not current_connections.empty:
+                siblings_possible = (((current_connections['personNr1'] == person1) & (current_connections['personNr2'] == person2) & (current_connections['connection'] == "siblings")) | ((current_connections['personNr1'] == person2) & (current_connections['personNr2'] == person1) & (current_connections['connection'] == "siblings")) ).any()
+            else:
+                siblings_possible=False
             #add check for amount of children (?)
             if age_difference <= 13 and siblings_possible==False:
                 row_data = pd.DataFrame([{'personNr1':person1 , 'personNr2': person2, 'connection': "partner of"}])
@@ -98,7 +125,7 @@ def find_grandparents_aunts(family_connections):
     grandparents_list = []
     parent_rows = family_connections[family_connections['connection'] == 'parent of']
     sibling_rows = family_connections[family_connections['connection'] == 'siblings']
-    for _, parent_row in parent_rows.iterrows():
+    for _, parent_row in tqdm(parent_rows.iterrows(), total=len(parent_rows), desc="Finding Grandparents, aunts, uncles"):
         # Find rows where 'Personnr1' in the original dataframe matches 'personNr2' in the current row
         matching_rows = parent_rows[parent_rows['personNr2'] == parent_row['personNr1']]
         
@@ -123,7 +150,6 @@ def find_grandparents_aunts(family_connections):
         
         
         if not matching_rows_auntsuncles_1.empty:
-            print(matching_rows_auntsuncles_1)
             for _, matching_row in matching_rows_auntsuncles_1.iterrows():
 
         #aunts and uncles
@@ -141,7 +167,6 @@ def find_grandparents_aunts(family_connections):
                     'connection': "niece/newphew of"
                 })
         if not matching_rows_auntsuncles_2.empty:
-            print(matching_rows_auntsuncles_2)
             for _, matching_row in matching_rows_auntsuncles_2.iterrows():
 
         #aunts and uncles
@@ -203,7 +228,7 @@ def find_cousines(family_connections):
     
     aunt_uncle_rows = aunt_uncle_rows.reset_index(drop=True)
     parent_rows = parent_rows.reset_index(drop=True)
-    for _, aunt_uncle_row in aunt_uncle_rows.iterrows():
+    for _, aunt_uncle_row in tqdm(aunt_uncle_rows.iterrows(), total=len(aunt_uncle_rows), desc="Finding cousins"):
         matching_rows = parent_rows[parent_rows['personNr1'] == aunt_uncle_row['personNr1']]
         
         for _, matching_row in matching_rows.iterrows():
@@ -223,7 +248,7 @@ def find_cousines(family_connections):
 
 def create_family_layer(registry_data):
     connections = pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
-    for family in registry_data['FamId'].unique():
+    for family in tqdm(registry_data['FamId'].unique(), desc="Processing families"):
         # Filter rows where 'famID' has the current value and reduce data to only the needed columns for this case
         subset = registry_data[registry_data['FamId'] == family][['PersonNr', 'Barn18plus', 'Barn11_15', 'Barn16_17', 'Barn18_19', 'Barn20plus', 'Alder' ]]
         # Check if each row has a value greater than or equal to 0 in the 'your_column' column
@@ -233,14 +258,14 @@ def create_family_layer(registry_data):
             #work on child-parent relationship 
             #parents = subset[(subset['Barn18plus'] > 0) | (subset['Barn16_17'] >0 ) | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )].any(axis=1)
             parents = subset[(subset['Barn18plus']>0) | (subset['Barn11_15']>0) |  (subset['Barn16_17'] >0 )  | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )]
-            
+            output = []
             if len(parents)> 0:
                 output = find_parent_child_relationship(subset)
 
                 connections = pd.concat([connections, output])
 
-            #work on the partner relationship
-            relationships = find_relationships(subset, connections)
+            #work on the partner relationship --> we are using the output here to reduce the running time
+            relationships = find_relationships(subset, pd.DataFrame(output))
             connections = pd.concat([connections, relationships])
             
 
@@ -252,7 +277,7 @@ def create_family_layer(registry_data):
 
     #grandparent/ aunts/uncles / niece .. /cousin relationship
 
-    
+    #can add progress bars here --> but rather quick
     grandparents_connections = find_grandparents_aunts(connections)
     if not grandparents_connections.empty:
         connections = pd.concat([connections] + [grandparents_connections], ignore_index=True)
@@ -263,7 +288,7 @@ def create_family_layer(registry_data):
         connections = pd.concat([connections] + [cousine_connections], ignore_index=True)
     
 
-    connections.to_csv('network_gooddata.csv')
+    connections.to_csv('network_100k.csv')
     return connections
 
 create_family_layer(small_testdata)
@@ -306,4 +331,7 @@ create_family_layer(small_testdata)
 
 #variable name configuration file
 # preprocessing for the possible variables in the year
-# give out time updates, how far we are 
+
+
+# only use recently created siblings in the loob --> maybe not optimal for using more years, but for one year should reduce time by a good bit
+#double check if first check is length to make it faster
