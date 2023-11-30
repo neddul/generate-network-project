@@ -1,12 +1,13 @@
 import pandas as pd
 from itertools import combinations
 from tqdm import tqdm
+import sys
 
-small_testdata = pd.read_csv("100k_rows.csv")
-#small_testdata = pd.read_csv("pretty_good_family_data.csv")
+#small_testdata = pd.read_csv("100k_rows.csv")
+small_testdata = pd.read_csv("pretty_good_family_data.csv")
 #def create_inner_family_relationships():
 
-def find_parent_child_relationship(subset):
+def find_parent_child_relationship(subset, current_year):
     parent_relationships = []
     #also checking for 15, as some 15 year olds have been present in the data
     #parents = subset[(subset['Barn18plus']>0) | (subset['Barn11_15']>0) | (subset['Barn16_17'] >0 )  | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )]
@@ -14,24 +15,37 @@ def find_parent_child_relationship(subset):
     #probably a more elegant way to do this, but this is to make sure we match parent with a child in a right age group
 
     #could maybe be stored outside of this
-    age_conditions_parents = [
-    ('parents_18plus', subset['Barn18plus'] > 0),
-    ('parents11_15', subset['Barn11_15'] > 0),
-    ('parents16_17', subset['Barn16_17'] > 0),
-    ('parents18_19', subset['Barn18_19'] > 0),
-    ('parents_20plus', subset['Barn20plus'] > 0),
-]
-    #children = subset[subset['Alder'] >= 15]
-    age_conditions_children = [
-    ('children_18plus', subset['Alder'] >= 18),
-    ('children11_15', subset['Alder'].between(11, 15)),
-    ('children16_17', subset['Alder'].between(16, 17)),
-    ('children18_19', subset['Alder'].between(18, 19)),
-    ('children_20plus', subset['Alder'] >= 20),
-]
+    if current_year <=2004:
+        age_conditions_parents = [
+        ('parents_18plus', subset['Barn18plus'] > 0),
+        ('parents11_15', subset['Barn11_15'] > 0),
+        ('parents16_17', subset['Barn16_17'] > 0),
+        ]
+        #children = subset[subset['Alder'] >= 15]
+        age_conditions_children = [
+        ('children_18plus', subset['Alder'] >= 18),
+        ('children11_15', subset['Alder'].between(11, 15)),
+        ('children16_17', subset['Alder'].between(16, 17)),
+        ]
+    
+    else: 
+
+        age_conditions_parents = [
+        ('parents11_15', subset['Barn11_15'] > 0),
+        ('parents16_17', subset['Barn16_17'] > 0),
+        ('parents18_19', subset['Barn18_19'] > 0),
+        ('parents_20plus', subset['Barn20plus'] > 0),
+        ]
+        #children = subset[subset['Alder'] >= 15]
+        age_conditions_children = [
+        ('children11_15', subset['Alder'].between(11, 15)),
+        ('children16_17', subset['Alder'].between(16, 17)),
+        ('children18_19', subset['Alder'].between(18, 19)),
+        ('children_20plus', subset['Alder'] >= 20),  
+        ]
     #to create siblings
     dfs_to_concat = []
-    for (parent_label, parent_condition), (children_label, children_condition) in zip(age_conditions_parents, age_conditions_children):
+    for (_, parent_condition), (_, children_condition) in zip(age_conditions_parents, age_conditions_children):
         parents = subset[parent_condition]
         children = subset[children_condition]
         if not children.empty and not parents.empty:
@@ -246,8 +260,19 @@ def find_cousines(family_connections):
             
     return cousines
 
-def create_family_layer(registry_data):
+def create_family_layer(registry_data, current_year):
     connections = pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
+
+    #fix for column names for now 
+    if 'LopNr' in registry_data.columns and 'LopNr_FamId' in registry_data.columns:
+        # Create a dictionary for column name mapping
+        column_mapping = {'LopNr': 'PersonNr', 'LopNr_FamID': 'FamId'}
+
+        # Use the rename method to rename columns
+        registry_data.rename(columns=column_mapping, inplace=True)
+
+
+
     for family in tqdm(registry_data['FamId'].unique(), desc="Processing families"):
         # Filter rows where 'famID' has the current value and reduce data to only the needed columns for this case
         subset = registry_data[registry_data['FamId'] == family][['PersonNr', 'Barn18plus', 'Barn11_15', 'Barn16_17', 'Barn18_19', 'Barn20plus', 'Alder' ]]
@@ -257,10 +282,14 @@ def create_family_layer(registry_data):
 
             #work on child-parent relationship 
             #parents = subset[(subset['Barn18plus'] > 0) | (subset['Barn16_17'] >0 ) | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )].any(axis=1)
-            parents = subset[(subset['Barn18plus']>0) | (subset['Barn11_15']>0) |  (subset['Barn16_17'] >0 )  | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )]
+
+            if current_year <=2004:
+                parents = subset[(subset['Barn18plus']>0) | (subset['Barn11_15']>0) |  (subset['Barn16_17'] >0 )  ]
+            else:
+                parents = subset[(subset['Barn11_15']>0) |  (subset['Barn16_17'] >0 )  | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )]
             output = []
             if len(parents)> 0:
-                output = find_parent_child_relationship(subset)
+                output = find_parent_child_relationship(subset, current_year)
 
                 connections = pd.concat([connections, output])
 
@@ -288,10 +317,20 @@ def create_family_layer(registry_data):
         connections = pd.concat([connections] + [cousine_connections], ignore_index=True)
     
 
-    connections.to_csv('network_100k.csv')
+    connections.to_csv('network_gooddata.csv')
     return connections
 
-create_family_layer(small_testdata)
+
+if len(sys.argv) < 2:
+    print("Missing argument: input file name")
+    sys.exit(-1)
+input_file_name = sys.argv[1]
+
+data = pd.read_csv(input_file_name)
+
+
+#needs to be changed to data again to run through command line --> also the year
+create_family_layer(data, current_year= 1990)
 
 
 
@@ -313,25 +352,15 @@ create_family_layer(small_testdata)
 # 
 
 #next steps:
-# run code on more data(?)
-# optimizing and correcting code for one year  --> check barns age speficially ) --> fix mistake on data , double saving of some connections
+# optimizing and correcting code for one year  --> fix mistake on data , double saving of some connections
 # expanding code for 30 years
-
-
-#some people categorized as simpling when they are partners --> issue living together with grandparents
 
 #how to handle death data -> how is it in the real data 
 #check edge cases -->
-
-
-#first step tomorrow: fix check childrens age --> probably fixes the other mistakes
 
 
 #suggestions Matteo: 
 
 #variable name configuration file
 # preprocessing for the possible variables in the year
-
-
-# only use recently created siblings in the loob --> maybe not optimal for using more years, but for one year should reduce time by a good bit
-#double check if first check is length to make it faster
+# encoporate matteos changes
