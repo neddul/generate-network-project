@@ -123,6 +123,7 @@ def find_grandparents_aunts(family_connections):
         
         
         if not matching_rows_auntsuncles_1.empty:
+            print(matching_rows_auntsuncles_1)
             for _, matching_row in matching_rows_auntsuncles_1.iterrows():
 
         #aunts and uncles
@@ -140,6 +141,7 @@ def find_grandparents_aunts(family_connections):
                     'connection': "niece/newphew of"
                 })
         if not matching_rows_auntsuncles_2.empty:
+            print(matching_rows_auntsuncles_2)
             for _, matching_row in matching_rows_auntsuncles_2.iterrows():
 
         #aunts and uncles
@@ -289,3 +291,19 @@ create_family_layer(small_testdata)
 # run code on more data(?)
 # optimizing and correcting code for one year  --> check barns age speficially ) --> fix mistake on data , double saving of some connections
 # expanding code for 30 years
+
+
+#some people categorized as simpling when they are partners --> issue living together with grandparents
+
+#how to handle death data -> how is it in the real data 
+#check edge cases -->
+
+
+#first step tomorrow: fix check childrens age --> probably fixes the other mistakes
+
+
+#suggestions Matteo: 
+
+#variable name configuration file
+# preprocessing for the possible variables in the year
+# give out time updates, how far we are 
