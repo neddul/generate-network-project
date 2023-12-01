@@ -15,6 +15,7 @@ def find_parent_child_relationship(subset, current_year):
     #probably a more elegant way to do this, but this is to make sure we match parent with a child in a right age group
 
     #could maybe be stored outside of this
+    print(current_year)
     if current_year <=2004:
         age_conditions_parents = [
         ('parents_18plus', subset['Barn18plus'] > 0),
@@ -29,6 +30,7 @@ def find_parent_child_relationship(subset, current_year):
         ]
     
     else: 
+        print("wrong")
 
         age_conditions_parents = [
         ('parents11_15', subset['Barn11_15'] > 0),
@@ -260,13 +262,14 @@ def find_cousines(family_connections):
             
     return cousines
 
-def create_family_layer(registry_data, current_year):
+def create_family_layer(registry_data, current_year=1990):
+    current_year = int(current_year)
     connections = pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
 
     #fix for column names for now 
     if 'LopNr' in registry_data.columns and 'LopNr_FamId' in registry_data.columns:
         # Create a dictionary for column name mapping
-        column_mapping = {'LopNr': 'PersonNr', 'LopNr_FamID': 'FamId'}
+        column_mapping = {'LopNr': 'PersonNr', 'LopNr_FamId': 'FamId'}
 
         # Use the rename method to rename columns
         registry_data.rename(columns=column_mapping, inplace=True)
@@ -363,4 +366,3 @@ create_family_layer(data, current_year= 1990)
 
 #variable name configuration file
 # preprocessing for the possible variables in the year
-# encoporate matteos changes
