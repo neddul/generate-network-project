@@ -1,6 +1,6 @@
 def merge_dictionaries(dictionary1, dictionary2):
-    dictionary2.update(dictionary1)
-    return dictionary2
+    dictionary1.update(dictionary2)
+    return dictionary1
 
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
@@ -142,23 +142,21 @@ def generate_demographic(PersonNr, sample_year):
     dad  = fodelse_landnamn()
 
     demographic_data = {
-        'FodelseAr'             : [FodelseAr],
-        'DodDatum'              : [DodDatum],
-        'Alder'                 : [Alder],          #2019 is the last year
-        'Kon'                   : [kon(PersonNr)],
-        'InvUtvLand'            : [inv_utv_land()],
-        'InvUtvManad'           : [InvUtvManad],
-        'PostTyp'               : [post_typ()],
-        'FodelseLandnamn'       : [me],
-        'FodelseTidMor'         : [fodelse_tid('198201028936')], #Arbitrary needs to be fixed
-        'FodelseLandnamnMor'    : [mom],
-        'FodelseTidFar'         : [fodelse_tid('197901028936')], #Arbitrary needs to be fixed
-        'FodelseLandnamnFar'    : [dad],
-        'UtlSvBakg'             : [utl_sv_bakg(me,dad,mom)] 
+        'FodelseAr'             : FodelseAr,
+        'DodDatum'              : DodDatum,
+        'Alder'                 : Alder,          #2019 is the last year
+        'Kon'                   : kon(PersonNr),
+        'InvUtvLand'            : inv_utv_land(),
+        'InvUtvManad'           : InvUtvManad,
+        'PostTyp'               : post_typ(),
+        'FodelseLandnamn'       : me,
+        'FodelseTidMor'         : fodelse_tid('198201028936'), #Arbitrary needs to be fixed
+        'FodelseLandnamnMor'    : mom,
+        'FodelseTidFar'         : fodelse_tid('197901028936'), #Arbitrary needs to be fixed
+        'FodelseLandnamnFar'    : dad,
+        'UtlSvBakg'             : utl_sv_bakg(me,dad,mom) 
                        }
     return demographic_data
-
-
 
 
 
@@ -244,6 +242,7 @@ def generate_employment_statuses(amount,sample_year):
 
     return SyssStat
 
+
 def generate_workingtime(SyssStat):
     #1 = 0 hours, 2 = 1 – 15 hours, 3 = 16 – 19 hours, 4 = 20 – 34 hours, 5 = 35 – w hours, 9 = Uppgift
     ArbTid = []
@@ -256,6 +255,7 @@ def generate_workingtime(SyssStat):
         else:
             ArbTid.append(" ")
     return ArbTid 
+
 
 def generate_job(ArbTid):
     #0 = Persons without control duties 1 = Sailors 
@@ -304,8 +304,8 @@ def generate_income(ArbTid):
                 KU2lnk.append(0)
                 KU3lnk.append(0)
             
-
     return KU1lnk, KU2lnk, KU3lnk
+
 
 def generate_total_incomes(KU1lnk, KU2lnk, KU3lnk):
     
@@ -326,6 +326,7 @@ def generate_total_incomes(KU1lnk, KU2lnk, KU3lnk):
                    
     return Raks_SummaInk
 
+
 def generate_labor_connection(YrkStalln):
     Raks_EtablGrad = []
     for i in YrkStalln:
@@ -336,6 +337,7 @@ def generate_labor_connection(YrkStalln):
             
     return Raks_EtablGrad   
 
+
 def generate_Forvink(Raks_SummaInk):
     Raks_Forvink = []
     for i in Raks_SummaInk:
@@ -344,6 +346,7 @@ def generate_Forvink(Raks_SummaInk):
         else:
             Raks_Forvink.append(0)
     return Raks_Forvink
+
 
 def generate_main_labor_connection(YrkStalln):
     Raks_Huvudanknytning = []
@@ -431,6 +434,8 @@ def generate_economic(sample_year,amount=1):
 
 
 
+
+
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
@@ -440,6 +445,7 @@ def generate_economic(sample_year,amount=1):
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
+
 
 import random
 import string
@@ -546,7 +552,6 @@ def generate_education(amount=1):
 
 
 
-
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
@@ -557,14 +562,11 @@ def generate_education(amount=1):
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
 
+
 import random
 import pandas as pd
 import datetime
-
 numbers = [str(x) for x in range(10)]
-
-taken_social_security_numbers = {'0'}
-
 def get_date(start_date = '19250101', stop_date='20191231'):
     # datetime for start date
     start = datetime.date.fromisoformat(start_date)
@@ -585,9 +587,11 @@ def get_date(start_date = '19250101', stop_date='20191231'):
         days_after_start = 0
 
     date = start + datetime.timedelta(days = days_after_start)
-    date = date.isoformat().replace('-','') + "-"
+    date = date.isoformat().replace('-','')
     return date
 
+
+taken_social_security_numbers = {'0'}
 def person_nummer_creation(sample_year, start_date="19250101", stop_year="", gender=3):        
     if stop_year == "":
         end_date = str(sample_year-16) #People need to be atleast 16 to legally live alone in Sweden
@@ -595,8 +599,7 @@ def person_nummer_creation(sample_year, start_date="19250101", stop_year="", gen
     else:
         end_date = stop_year
  
-    social_security_number = '0'
-    while social_security_number in taken_social_security_numbers:
+    while True:
         if gender == 2: # Girl
             last_4 = random.choices(numbers, k=2)
             digits = ["0", "2", "4", "6", "8"]
@@ -608,14 +611,13 @@ def person_nummer_creation(sample_year, start_date="19250101", stop_year="", gen
             last_4 = last_4 + random.choice(digits)
             last_4 = last_4 + random.choice(numbers)
         else: # Guy or girl
-            last_4 = random.choices(numbers, k=4)
+            last_4 = str(random.randint(10000, 99999))[1:]
         birthdate = get_date(start_date, end_date)
-        social_security_number = birthdate
-        for d in last_4:
-            social_security_number += d
+        social_security_number = birthdate + "-" + last_4
+        if social_security_number not in taken_social_security_numbers:
+            taken_social_security_numbers.add(social_security_number)
+            return social_security_number
 
-    taken_social_security_numbers.add(social_security_number)
-    return social_security_number
 
 def create_children(sample_year, PersonNr, is_kid=False):
     barn = {
@@ -719,6 +721,7 @@ def create_children(sample_year, PersonNr, is_kid=False):
                 for _ in range(3 - len(barn[key])):
                     barn[key].append(-1000)
     return barn
+
 
 def make_kid_family_frame(PersonNr, FamId, is_Kid, sample_year):
     kids = create_children(sample_year, PersonNr, is_kid=is_Kid)
@@ -877,6 +880,7 @@ def create_kids_data(sample_year, FamId, kids_info):
 
     return all_kids
 
+
 def create_spouse(FamId, kids_info):
     spouse_age = int(FamId[:4]) + 7 #The spouse will be as old as the partner or at most 7 years younger
     PersonNr = person_nummer_creation(1,start_date=FamId[:8], stop_year=f"{spouse_age}1231")
@@ -887,17 +891,14 @@ def create_spouse(FamId, kids_info):
     return spouse
 
 
-from itertools import chain
 def generate_family(sample_year):
     PersonNr = person_nummer_creation(sample_year)
-    family_dicts = []
     kids_info = create_children(sample_year, PersonNr)
     utbildning = generate_education()
     data = merge_dictionaries(utbildning, kids_info)
     data['PersonNr'] = PersonNr
     data['FamId'] = PersonNr
-    family_dicts.append(data)
-
+    family_dicts = [data]
 
     kids_frames = create_kids_data(sample_year, PersonNr, kids_info) 
     if len(kids_frames) == 0:
@@ -911,8 +912,14 @@ def generate_family(sample_year):
         if family_size > 1:
             spouse = create_spouse(PersonNr, kids_info)
             family_dicts.append(spouse)
-       
+    
     return family_dicts
+
+
+
+
+
+
 
 
 
@@ -971,15 +978,20 @@ import random
 import pandas as pd
 import json
 scbinternal_fastlopnr = {}
+scbinternal_fastlopnr_values = set([])
+
 
 with open('data/county_dict.json', 'r') as json_file:
     counties_with_municipals = json.load(json_file)
 
+
 with open('data/tatorter_in_municipals_dict.json', 'r') as json_file:
     tatorter_in_municipals = json.load(json_file)
 
+
 with open('data/forsamling_dict.json', 'r') as json_file:
     forsamlingar_in_municipals = json.load(json_file)
+
 
 with open('data/district_codes_from_Forsamling_dict.json', 'r') as json_file:
     districtcodes_from_Forsamling = json.load(json_file)
@@ -988,48 +1000,51 @@ with open('data/district_codes_from_Forsamling_dict.json', 'r') as json_file:
 def generate_syntethic_FastBet(municipal_name):
     tatorter = tatorter_in_municipals[municipal_name]
     tatort = tatorter[random.randint(0, len(tatorter)-1)] #Chooses randomly which "Tätort" the person lives in of the ones available to that municipal
-    number = str(random.randint(1, 400))
-    if random.randint(0, 100) > 30: #It is quite likely that there are numbers followed by the first one
-        number += ":" + str(random.randint(1, 400))
+    number = random.randrange(1000000, 400000000)
+    FastBetNr = str(int(str(number)[1:4]))
+    last3 = str(int(str(number)[4:]))
+    if int(FastBetNr)/4 > 30: #It is quite likely that there are numbers followed by the first one
+        FastBetNr += ":" + last3
 
     FastBet = f"{municipal_name} {tatort} {number}"
     return FastBet
 
-hashing = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 def generate_synthetic_FastLopNr(FastBet):
     if FastBet in scbinternal_fastlopnr: #If there are people in the same new FastBet then they should have the same FastLopNr as well
         return scbinternal_fastlopnr[FastBet]
     else:
-        FastLopNr = "" #If the FastBet does not already exist then we should make a new FastLopNr
-        taken_values = set(scbinternal_fastlopnr.values())
-        hashlen = len(hashing) -1
-        
         while True:
-            for _ in range(5):
-                FastLopNr = FastLopNr + hashing[random.randint(0, hashlen)]
-            if FastLopNr not in taken_values: #Making sure we don't make the same FastLopNr for different FastBet
+            FastLopNr = random.randrange(1000000000, 9999999999) # Limited to 100k households
+            FastLopNr = str(FastLopNr)[1:]
+            if FastLopNr not in scbinternal_fastlopnr_values:
+                scbinternal_fastlopnr_values.add(FastLopNr)
                 scbinternal_fastlopnr[FastBet] = FastLopNr
                 return FastLopNr
+
 
 def generate_synthetic_Distriktskod(Forsamling):
     possible_districts = districtcodes_from_Forsamling[Forsamling]
     return possible_districts[random.randint(0, len(possible_districts)-1)]
+
 
 def generate_county():
     counties = list(counties_with_municipals.keys())
     Lan = counties[random.randint(0, len(counties)-1)] #Chooses a random Lan to begin with
     return Lan
 
+
 def generate_municipal(Lan):
     municipals = counties_with_municipals[Lan]
     Kommun = municipals[random.randint(0, len(municipals)-1)] #Chooses a random Kommun in that county
     return Kommun
 
+
 def generate_forsamling(Kommun):
     forsamlingar = forsamlingar_in_municipals[Kommun]
     Forsamling = forsamlingar[random.randint(0, len(forsamlingar)-1)] #Chooses a random municipal in that county
     return Forsamling
+
 
 def generate_geographical():
     Lan                 = generate_county()
@@ -1080,6 +1095,22 @@ def generate_geographical():
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
@@ -1090,58 +1121,50 @@ def generate_geographical():
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
 
-CfarNumbers = set([])
-def generate_CfarNr_LISA(): #Will generate an arbitrary unique 8 digit number
-    while True:
-        CfarNr_LISA = ""
-        for _ in range(8):
-            CfarNr_LISA = CfarNr_LISA + numbers[random.randint(0, 9)]
-        if CfarNr_LISA not in CfarNumbers:
-            CfarNumbers.add(CfarNr_LISA)
-            return CfarNr_LISA
+
+CfarNumbers = {}
+CfarNumbers_values = set([])
+def generate_CfarNr_LISA(PeOrgNr): #Will generate an arbitrary unique 8 digit number
+    if PeOrgNr in CfarNumbers:
+        return CfarNumbers[PeOrgNr]
+    else:
+        while True:
+            CfarNr_LISA = str(random.randint(100000000, 999999999))
+            if CfarNr_LISA not in CfarNumbers_values:
+                CfarNumbers_values.add(CfarNr_LISA)
+                CfarNumbers[PeOrgNr] = CfarNr_LISA
+                return CfarNr_LISA
+
 
 AstNumbers = set([])
 def generate_AstNr_LISA(): #Gives a number to specify what job the person has, like a contractor, teacher, accountant etc
-    not_allowed_number = ["00000"]
     generate_new_AstNr = random.randint(1,100)
     if generate_new_AstNr > 95: #5% of people have a number in these lines
         special_numbers = ["99980","99981","99982","99983","99984","99985","99986","99987","99988","99989","99990","99991","99992","99993","99994","99996","99998","99999"]
         return special_numbers[random.randint(0,len(special_numbers)-1)]
     else:
-        if generate_new_AstNr > 50 and len(AstNumbers)>0:
-            jobs = list(AstNumbers)
-            return jobs[random.randint(0, len(jobs)-1)]
-        else: 
-            while True:
-                AstNr_LISA = ""
-                for _ in range(5):
-                    AstNr_LISA = AstNr_LISA + numbers[random.randint(0, 9)]
-                if AstNr_LISA not in AstNumbers and AstNr_LISA not in not_allowed_number:
-                    AstNumbers.add(AstNr_LISA)
-                    return AstNr_LISA
+        AstNr_LISA = str(random.randint(100001, 999979))[1:]
+        AstNumbers.add(AstNr_LISA)
+        return AstNr_LISA
 
-PeOrgNumbers = set([])
 
-def generate_PeOrgNr(personnummer):
-    existing_job_numbers = list(PeOrgNumbers)
+PeOrgNumbers = []
+def generate_PeOrgNr(personnummer): # 000000-0000 - 999999-9999
     number = random.randint(0,100)
     if number > 87: #The person is a selfstarter and the organisation number is the person's personnumber
-        PeOrgNumbers.add(personnummer[2:])
+        PeOrgNumbers.append(personnummer[2:])
         return personnummer[2:]
-    number = random.randint(0, len(existing_job_numbers))
-    if number > 50 and len(existing_job_numbers) > 0: # Use an existing job number 
+    number = random.randint(0, len(PeOrgNumbers)-1 if len(PeOrgNumbers) > 0 else 0)
+
+    if number > 50: # Use an existing job number 
+        existing_job_numbers = PeOrgNumbers
         return existing_job_numbers[random.randint(0, len(existing_job_numbers)-1)]
-    else: #Generate a new job
-        while True:
-            PeOrgNr = ""
-            for _ in range(6):
-                PeOrgNr = PeOrgNr + numbers[random.randint(0, 9)]
-            PeOrgNr = PeOrgNr +"-"
-            for _ in range(4):
-                PeOrgNr = PeOrgNr + numbers[random.randint(0, 9)]
-            if PeOrgNr not in PeOrgNumbers:
-                PeOrgNumbers.add(PeOrgNr)
-                return PeOrgNr
+    else: #Generate a new job or accidentaly choose already existing
+        PeOrgNr = str(random.randint(10000000000, 99999999999))
+        PeOrgNr = PeOrgNr[1:7] + "-" + PeOrgNr[7:]
+        PeOrgNumbers.append(PeOrgNr)
+        return PeOrgNr
+
 
 def generate_company(personnummer, kommunnamn, lansnamn, prefix="", yrkstallning="", no_income=False):
     if no_income:
@@ -1155,7 +1178,7 @@ def generate_company(personnummer, kommunnamn, lansnamn, prefix="", yrkstallning
                         }     
     else:
         PeOrgNr = generate_PeOrgNr(personnummer)
-        Cfar_Nr = generate_CfarNr_LISA()
+        Cfar_Nr = generate_CfarNr_LISA(PeOrgNr)
         AstNr = generate_AstNr_LISA()
         work_data = {
                         f'{prefix}PeOrgNr'   : PeOrgNr,
@@ -1166,6 +1189,7 @@ def generate_company(personnummer, kommunnamn, lansnamn, prefix="", yrkstallning
                         f'{prefix}YrkStalln' : yrkstallning,
                         }     
     return work_data
+
 
 def generate_work(personnummer, county, economicstatus):
     Kommun = generate_municipal(county)
@@ -1215,9 +1239,24 @@ def generate_work(personnummer, county, economicstatus):
         }
 
     working_data = merge_dictionaries(merge_dictionaries(merge_dictionaries(biggest_data, prefix_working_ties1), prefix_working_ties2), prefix_working_ties3)
-
-    
+ 
     return working_data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1260,31 +1299,13 @@ def generate_work(personnummer, county, economicstatus):
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
-
-import pandas as pd
 def generate_person(sample_year=2019):
-    # data2 = pd.DataFrame(columns=[  'PersonNr', 'Lan', 'Kommun', 'Forsamling', 'Distriktskod', 'FastLopNr', 'FastBet',
-    #                                 'Barn0_3', 'Barn4_6', 'Barn7_10', 'Barn11_15', 'Barn16_17',
-    #                                 'Barn18plus', 'Barn18_19', 'Barn20plus', 'FamId', 
-    #                                 'Sun2000niva_old','SUN2000niva', 'SUN2000Inr', 'SUN2000Grp',
-    #                                 'CfarNr_LISA', 'ArbstId', 'AstNr_LISA', 'AstKommun', 'AstLan',
-    #                                 'KU1PeOrgNr', 'KU1CfarNr', 'KU1AstNr', 'KU1AstKommun', 'KU1AstLan',
-    #                                 'KU1YrkStalln', 'KU2PeOrgNr', 'KU2CfarNr', 'KU2AstNr', 'KU2AstKommun',
-    #                                 'KU2AstLan', 'KU2YrkStalln', 'KU3PeOrgNr', 'KU3CfarNr', 'KU3AstNr',
-    #                                 'KU3AstKommun', 'KU3AstLan', 'KU3YrkStalln',
-    #                                 'FodelseAr', 'DodDatum', 'Alder', 'Kon', 'InvUtvLand', 'InvUtvManad',
-    #                                 'PostTyp', 'FodelseLandnamn', 'FodelseTidMor', 'FodelseLandnamnMor',
-    #                                 'FodelseTidFar', 'FodelseLandnamnFar', 'UtlSvBakg',
-    #                                 'SyssStat', 'ArbTid', 'YrkStalln', 'KU1lnk', 'KU2lnk', 'KU3lnk',
-    #                                 'Raks_SummaInk', 'Raks_Huvudanknytning', 'Raks_EtablGrad', 'Raks_Forvink'
-    #                              ])
-    
     family_members = generate_family(sample_year)
     Geographical = generate_geographical()
     Lan = Geographical['Lan']
     data = []
-
     for member in family_members:
+        
         PersonNr = member['PersonNr']
 
         Demographic = generate_demographic(PersonNr, sample_year)
@@ -1300,7 +1321,6 @@ def generate_person(sample_year=2019):
 
 
 from itertools import chain
-
 def generate_data(amount, sample_year=2019): 
     """
     Parameters
@@ -1318,24 +1338,80 @@ def generate_data(amount, sample_year=2019):
 
     """
     people = []
+    print(f"{0}/{amount}")
     for i in range(amount):
-        if i % 2000 == 0:
-            print(f"{i}/{amount}")
+        if (i+1) % 10000 == 0:
+            print(f"{i+1}/{amount}")
         household = generate_person(sample_year)
         people.append(household)
 
     data = list(chain(*people)) #Flattens list     
     return data
 
+
+import pandas as pd
 def generate_data_frame(data):
-    return pd.DataFrame(data)
+    return pd.DataFrame(data, columns=[  
+                                    'PersonNr', 'Lan', 'Kommun', 'Forsamling', 'Distriktskod', 'FastLopNr', 'FastBet',
+                                    'Barn0_3', 'Barn4_6', 'Barn7_10', 'Barn11_15', 'Barn16_17',
+                                    'Barn18plus', 'Barn18_19', 'Barn20plus', 'FamId', 
+                                    'Sun2000niva_old','SUN2000niva', 'SUN2000Inr', 'SUN2000Grp',
+                                    'CfarNr_LISA', 'ArbstId', 'AstNr_LISA', 'AstKommun', 'AstLan',
+                                    'KU1PeOrgNr', 'KU1CfarNr', 'KU1AstNr', 'KU1AstKommun', 'KU1AstLan',
+                                    'KU1YrkStalln', 'KU2PeOrgNr', 'KU2CfarNr', 'KU2AstNr', 'KU2AstKommun',
+                                    'KU2AstLan', 'KU2YrkStalln', 'KU3PeOrgNr', 'KU3CfarNr', 'KU3AstNr',
+                                    'KU3AstKommun', 'KU3AstLan', 'KU3YrkStalln',
+                                    'FodelseAr', 'DodDatum', 'Alder', 'Kon', 'InvUtvLand', 'InvUtvManad',
+                                    'PostTyp', 'FodelseLandnamn', 'FodelseTidMor', 'FodelseLandnamnMor',
+                                    'FodelseTidFar', 'FodelseLandnamnFar', 'UtlSvBakg',
+                                    'SyssStat', 'ArbTid', 'YrkStalln', 'KU1lnk', 'KU2lnk', 'KU3lnk',
+                                    'Raks_SummaInk', 'Raks_Huvudanknytning', 'Raks_EtablGrad', 'Raks_Forvink'
+                                 ])
+
+import os
+def chunk_list(input_list, chunk_size=10000):
+    return [input_list[i:i + chunk_size] for i in range(0, len(input_list), chunk_size)]
 
 
+def dict_to_csvs(dict_data, sample_year=1990):
+    sliced_dict_list = chunk_list(dict_data)
+    folder_name = f"synthetic_scb_data_{sample_year}"
+    if not os.path.exists(folder_name):
+        os.makedirs(folder_name)
+
+    i = 1
+    for chunk in sliced_dict_list:
+        data = generate_data_frame(chunk)
+        data.to_csv(os.path.join(folder_name, f"{sample_year}_data_part{i}.csv"), index=False)
+        i +=1
+    
+    return True
+
+def make_dict_for_csv(list_of_dictionaries):
+    keys = ['Barn0_3', 'Barn4_6', 'Barn7_10','Barn11_15', 'Barn16_17', 'Barn18_19', 'Barn18plus', 'Barn20plus']
+    for i in range(len(list_of_dictionaries)):
+        for key in keys:
+            kids_data = list_of_dictionaries[i][key]
+            kids_data = [x for x in kids_data if x >= 0]
+            list_of_dictionaries[i][key] = len(kids_data)
+    return list_of_dictionaries
+
+
+        
+
+
+import copy
 if __name__ == "__main__":
-    print("This is the main part of the script")
-    a = generate_data(20000, sample_year=1990)
-    print(len(a))
+    sample_year = 1990
+    number_of_households = 2000000
+    print(f"Creating data for {number_of_households} households for year {sample_year}")
+    a = generate_data(number_of_households, sample_year)
+    print("Making deep copy to adjust for csv")
+    b = copy.deepcopy(a)
+    print("Adjusting kids columns for csv")
+    b = make_dict_for_csv(b)
 
-    b = generate_data_frame(a)
-    b.to_csv("jarmo.csv")
 
+    print("Turning data into csv(s)")
+    dict_to_csvs(b, sample_year)
+    print("Program finished")
