@@ -1351,7 +1351,19 @@ def generate_data(amount, sample_year=2019):
 
 import pandas as pd
 def generate_data_frame(data):
-    return pd.DataFrame(data, columns=[  
+    original_values = []
+    keys = ['Barn0_3', 'Barn4_6', 'Barn7_10','Barn11_15', 'Barn16_17', 'Barn18_19', 'Barn18plus', 'Barn20plus']
+
+    for i in range(len(data)):
+        t = {}
+        for key in keys:
+            kids_data = data[i][key]
+            t[key] = data[i][key]
+            kids_data = [x for x in kids_data if x >= 0]
+            data[i][key] = len(kids_data)
+        original_values.append(t)
+
+    dataframe = pd.DataFrame(data, columns=[  
                                     'PersonNr', 'Lan', 'Kommun', 'Forsamling', 'Distriktskod', 'FastLopNr', 'FastBet',
                                     'Barn0_3', 'Barn4_6', 'Barn7_10', 'Barn11_15', 'Barn16_17',
                                     'Barn18plus', 'Barn18_19', 'Barn20plus', 'FamId', 
@@ -1367,9 +1379,14 @@ def generate_data_frame(data):
                                     'SyssStat', 'ArbTid', 'YrkStalln', 'KU1lnk', 'KU2lnk', 'KU3lnk',
                                     'Raks_SummaInk', 'Raks_Huvudanknytning', 'Raks_EtablGrad', 'Raks_Forvink'
                                  ])
+    # Revert changes for specified keys
+    for d, original_value in zip(data, original_values):
+        d.update(original_value)
+
+    return dataframe
 
 import os
-def chunk_list(input_list, chunk_size=10000):
+def chunk_list(input_list, chunk_size=20000): 
     return [input_list[i:i + chunk_size] for i in range(0, len(input_list), chunk_size)]
 
 
@@ -1379,39 +1396,24 @@ def dict_to_csvs(dict_data, sample_year=1990):
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
 
+    number_of_times = len(sliced_dict_list)
+    print(f"{0}/{number_of_times}")
     i = 1
     for chunk in sliced_dict_list:
+        if (i+1) % 15 == 0:
+            print(f"{i+1}/{number_of_times}")
         data = generate_data_frame(chunk)
         data.to_csv(os.path.join(folder_name, f"{sample_year}_data_part{i}.csv"), index=False)
         i +=1
     
     return True
 
-def make_dict_for_csv(list_of_dictionaries):
-    keys = ['Barn0_3', 'Barn4_6', 'Barn7_10','Barn11_15', 'Barn16_17', 'Barn18_19', 'Barn18plus', 'Barn20plus']
-    for i in range(len(list_of_dictionaries)):
-        for key in keys:
-            kids_data = list_of_dictionaries[i][key]
-            kids_data = [x for x in kids_data if x >= 0]
-            list_of_dictionaries[i][key] = len(kids_data)
-    return list_of_dictionaries
 
-
-        
-
-
-import copy
 if __name__ == "__main__":
     sample_year = 1990
     number_of_households = 2000000
     print(f"Creating data for {number_of_households} households for year {sample_year}")
     a = generate_data(number_of_households, sample_year)
-    print("Making deep copy to adjust for csv")
-    b = copy.deepcopy(a)
-    print("Adjusting kids columns for csv")
-    b = make_dict_for_csv(b)
-
-
     print("Turning data into csv(s)")
-    dict_to_csvs(b, sample_year)
+    dict_to_csvs(a, sample_year)
     print("Program finished")
