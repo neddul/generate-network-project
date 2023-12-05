@@ -2,11 +2,14 @@ import pandas as pd
 from itertools import combinations
 from tqdm import tqdm
 import sys
+import os
+
+from readmulticsv import directory_of_csv_to_df
 
 import cProfile
 
 #small_testdata = pd.read_csv("100k_rows.csv")
-small_testdata = pd.read_csv("pretty_good_family_data.csv")
+#small_testdata = pd.read_csv("pretty_good_family_data.csv")
 #def create_inner_family_relationships():
 
 def find_parent_child_relationship(subset, current_year):
@@ -101,7 +104,6 @@ def find_relationships(subset, current_connections):
     selected = subset[['PersonNr', 'Alder']]
     if current_connections:
         current_connections = pd.DataFrame(current_connections)
-        siblings = current_connections[current_connections['connection'] == 'parent of']
         connections_exist = True
     else:
         connections_exist = False
@@ -124,7 +126,8 @@ def find_relationships(subset, current_connections):
                 #row_data = pd.DataFrame([{'personNr1':person1 , 'personNr2': person2, 'connection': "partner of"}])
                 #couple_relationships = pd.concat([couple_relationships, row_data])
                 couple_relationships.append({'personNr1': person1, 'personNr2': person2, 'connection': "partner of"})
-               
+
+       
     return couple_relationships
 
 def find_grandparents_aunts(family_connections):
@@ -256,10 +259,8 @@ def find_cousins(family_connections):
             
     return cousins
 
-def create_family_layer(registry_data):
-    #connections = pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
-    connections = []
-    #fix for column names for now 
+def data_preprocessing(registry_data, save_directory): 
+        #fix for column names for now 
     if 'LopNr' in registry_data.columns and 'LopNr_FamId' in registry_data.columns:
         # Create a dictionary for column name mapping
         column_mapping = {'LopNr': 'PersonNr', 'LopNr_FamId': 'FamId'}
@@ -273,37 +274,71 @@ def create_family_layer(registry_data):
     else:
         registry_data = registry_data[['FamId','PersonNr', 'Barn11_15', 'Barn16_17', 'Barn18_19', 'Barn20plus', 'Alder' ]]
         current_year = 2005
+    
 
+    # Specify the batch size (number of groups in each file)
+    batch_size = 30000
+    if not os.path.exists(save_directory):
 
-    #unique_families = registry_data['FamId'].unique()
-    #for family in tqdm(unique_families, desc="Processing families"):
-    grouped_data = registry_data.groupby('FamId')
-    for _, subset in tqdm(grouped_data, desc="Processing families"):
-        # Filter rows where 'famID' has the current value and reduce data to only the needed columns for this case
-
-        #found the line that through the errors 
-        #subset = registry_data[registry_data['FamId'] == family]
-        # Check if each row has a value greater than or equal to 0 in the 'your_column' column
-        if len(subset)> 1: 
-            #will there be an option to check which year, we are working on
-
-            #work on child-parent relationship 
-            #parents = subset[(subset['Barn18plus'] > 0) | (subset['Barn16_17'] >0 ) | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )].any(axis=1)
-            output = []
-            if current_year == 1990:
-               parents_exist = len(subset[(subset['Barn18plus']>0) | (subset['Barn11_15']>0) |  (subset['Barn16_17'] >0 )  ]) > 0
+        # Create a new directory because it does not exist
+        os.makedirs(save_directory)
+    # Iterate through batches and save each batch to a separate file
+    grouped_df = registry_data.groupby('FamId')
+    batch_number = 0
+    for _, batch_data in tqdm(grouped_df, desc="Preprocessing batches"):
+        #print(batch_data)
+        if len(batch_data)> 1: 
+            if batch_number % batch_size == 0:
+                # Create a new file for each batch
+                file_name = os.path.join(save_directory, f'batch_{batch_number // batch_size}.csv')
+                batch_data.to_csv(file_name, index=False)
             else:
-                parents_exist = len(subset[(subset['Barn11_15']>0) |  (subset['Barn16_17'] >0 )  | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )]) > 0
-            if parents_exist:
-                output = find_parent_child_relationship(subset, current_year)
+                # Append to the existing file for the current batch
+                batch_data.to_csv(file_name, mode='a', header=False, index=False)
 
-                #connections = pd.concat([connections, output])
-                if output: 
-                    connections.extend(output)
-            #work on the partner relationship --> we are using the output here to reduce the running time
-            relationships = find_relationships(subset, output)
-            if relationships: 
-                connections.extend(relationships)
+            batch_number += 1
+    
+    return current_year
+
+
+
+def create_family_layer(registry_data):
+    #connections = pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
+    save_directory = 'datastorage_familylayer'
+    connections = []
+    current_year = data_preprocessing(registry_data, save_directory)
+    csv_list = os.listdir(save_directory)
+    for filename in tqdm(csv_list, desc="Processing  batches "): 
+        file_path = os.path.join(save_directory, filename)
+        if os.path.isfile(file_path):
+            filtered_data = pd.read_csv(file_path)
+            grouped_data = filtered_data.groupby('FamId')
+            for _, subset in tqdm(grouped_data, desc="Processing Families"):
+                # Filter rows where 'famID' has the current value and reduce data to only the needed columns for this case
+                #print(subset)
+                #found the line that through the errors 
+                #subset = registry_data[registry_data['FamId'] == family]
+                # Check if each row has a value greater than or equal to 0 in the 'your_column' column
+                #if len(subset)> 1: 
+                    #will there be an option to check which year, we are working on
+
+                    #work on child-parent relationship 
+                    #parents = subset[(subset['Barn18plus'] > 0) | (subset['Barn16_17'] >0 ) | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )].any(axis=1)
+                output = []
+                if current_year == 1990:
+                    parents_exist = len(subset[(subset['Barn18plus']>0) | (subset['Barn11_15']>0) |  (subset['Barn16_17'] >0 )  ]) > 0
+                else:
+                    parents_exist = len(subset[(subset['Barn11_15']>0) |  (subset['Barn16_17'] >0 )  | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )]) > 0
+                if parents_exist:
+                    output = find_parent_child_relationship(subset, current_year)
+
+                    #connections = pd.concat([connections, output])
+                    if output: 
+                        connections.extend(output)
+                #work on the partner relationship --> we are using the output here to reduce the running time
+                relationships = find_relationships(subset, output)
+                if relationships: 
+                    connections.extend(relationships)
 
             
     connections = pd.DataFrame(connections)
@@ -328,7 +363,9 @@ def create_family_layer(registry_data):
         connections = pd.concat([connections] + [cousin_connections], ignore_index=True)
     
 
-    connections.to_csv('network_100k.csv')
+    connections.to_csv('network_full.csv')
+    #os.remove(save_directory)
+    print("The network was created. Please dont forget to remove the temporal files in datastorage_family, before rerunning the script.")
     return connections
 
 
@@ -339,12 +376,13 @@ def create_family_layer(registry_data):
 
 #data = pd.read_csv(input_file_name)
 
-data = pd.read_csv("100k_rows.csv")
+data = directory_of_csv_to_df(path="multiple_year/synthetic_scb_data_1990")
+#data = pd.read_csv("100k_rows.csv")
 
 #needs to be changed to data again to run through command line --> also the year
-#create_family_layer(data)
+create_family_layer(data)
 
-cProfile.run('create_family_layer(data)')
+#cProfile.run('create_family_layer(data)')
 
 
 
@@ -384,3 +422,7 @@ cProfile.run('create_family_layer(data)')
 
 #change everything to a list and then to a dataframe before running the last checks --> easier
 
+#idea read in file, group my famID and save in multiple files as preprocessing 
+
+
+#then loop through the files and then run the final ones on all connections --> can this list just be tracked completely --> still effieicent
