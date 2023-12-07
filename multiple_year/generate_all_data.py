@@ -22,36 +22,37 @@ def fodelse_ar(personnummer):
 # #### 2. DodDatum
 # Date of death (year,month,day)
 import random
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 
 #generate date of death by adding random number of days to the birthday
-def dod_datum(personnummer, end_year=2019):
-    if random.randint(1,100) <= 5:
-        year, month, day = int(personnummer[:4]), int(personnummer[4:6]), int(personnummer[6:8])
-        birthday = datetime.datetime(year, month, day)
-        min_days = 1 #minimum number of days to be added to birthday
-        max_days = (datetime.datetime(end_year, 12, 31) - birthday).days #maximum number of days to be added to birthday (using end of previous year)
-        random_days = random.randint(min_days, max_days)
-        deathday = birthday + timedelta(days=random_days)
-        return str(deathday.strftime('%Y%m%d'))
-    else:
+def dod_datum(sample_year=None):
+    if sample_year == None:
         return None
+    else:
+        if random.randint(1,100) <= 5:
+            start = datetime.datetime(sample_year, 1, 1)
+            min_days = 1 #minimum number of days to be added to birthday
+            max_days = (datetime.datetime(sample_year, 12, 31) - start).days #maximum number of days to be added to birthday (using end of previous year)
+            random_days = random.randint(min_days, max_days)
+            deathday = start + timedelta(days=random_days)
+            return str(deathday.strftime('%Y%m%d'))
+        else:
+            return None
 
 # #### 3. Alder
 # This is the age and can be calculated from birth year in personnummer.
 import dateutil.relativedelta
+import datetime
 
 #calcuate age using birthday from personnummer
-def alder(personnummer, sample_year, death_date):
+def alder(personnummer, sample_year, death_date=None):
     if death_date == None:        
         today = datetime.datetime(sample_year, 12, 31)
     else:
-        year, month, day = int(death_date[:4]), int(death_date[4:6]), int(death_date[6:8])
-        today = datetime.datetime(year, month, day)
+        today = datetime.date.fromisoformat(death_date)
 
-    year, month, day = int(personnummer[:4]), int(personnummer[4:6]), int(personnummer[6:8])
-    birthday = datetime.datetime(year, month, day)
+    birthday = datetime.date.fromisoformat(personnummer[:8])
     age = dateutil.relativedelta.relativedelta(today, birthday)
     years = age.years
     return years
@@ -69,44 +70,72 @@ def kon(personnummer):
 
 # #### 5. InvUtvLand: 
 # In the case of immigration, the information refers to the country from which the person emigrated and in the case of emigration, the country to which the person immigrates.
-def inv_utv_land():
-    countries = ['Sweden', 'India', 'Poland', 'Germany', 'Syria', 'Pakistan', 'Iran', 'Afghanistan', 'Turkey', 'Romania', 'China', 'Iraq', 'Finland', 'USA', 'Russia', 'Netherlands', 'Brazil', 'Denmark', 'UK', 'Italy']
-    random_country = random.choice(countries)
-    return random_country  
+# In 2022 - 50,592 people emigrated from Sweden. (about 0.5% of the population)
+# In 2022 - 102,436 people immigrated to Sweden. (about 1% of the population)
+
+def get_status(): #indicate whether it is emmigration or immigration, to be used in inv_utv_manad and post_typ
+
+    def inv_utv_land():
+        countries = ['India', 'Poland', 'Germany', 'Syria', 'Pakistan', 'Iran', 'Afghanistan', 'Turkey', 'Romania', 'China', 'Iraq', 'Finland', 'USA', 'Russia', 'Netherlands', 'Brazil', 'Denmark', 'UK', 'Italy']
+        prob = random.random()
+
+        if prob < 0.005:
+            inv_utv = random.choice(countries)
+            status = 'Utv' # migrated from Sweden
+        elif prob < 0.01:
+            inv_utv = random.choice(countries)
+            status = 'Inv' # migrated to Sweden
+        else:
+            inv_utv = None
+            status = None
+
+        return inv_utv, status
+    
+    return inv_utv_land()
+
 
 # #### 6. InvUtvManad: 
 # Year and month for immigration to Sweden and year and month for emigration from Sweden.
-def inv_ut_manad(personnummer, end_year):
-    year, month = int(personnummer[:4]), int(personnummer[4:6])
-    date = datetime.datetime(year, month, 1)
-    min_days = 1 #minimum number of days to be added to birthday
-    if end_year == None: 
-        max_days = (datetime.datetime(2019, 12, 31) - date).days #maximum number of days to be added to birthday (using end of previous year)
-    else:
-        max_days = (datetime.datetime(int(end_year[:4]), 12, 31) - date).days #maximum number of days to be added to birthday (using end of previous year)
+def inv_ut_manad(status,personnummer, sample_year, death_date=None):
+    if status != None:
+        year, month = int(personnummer[:4]), int(personnummer[4:6])
+        date = datetime.datetime(year, month, 1)
+        min_days = 1 #minimum number of days to be added to birthday
+        if death_date == None: 
+            max_days = (datetime.datetime(sample_year, 12, 31) - date).days #maximum number of days to be added to birthday (using end of previous year)
+        else:
+            
+            max_days = (datetime.datetime(int(death_date[:4]), 12, 31) - date).days #maximum number of days to be added to birthday (using end of previous year)
+            
+        random_days = random.randint(min_days, max_days)
+        inv_ut_manad = date + timedelta(days=random_days)
         
-    random_days = random.randint(min_days, max_days)
-    inv_ut_manad = date + timedelta(days=random_days)
-    return inv_ut_manad.strftime('%Y-%m')
-
-# #### 7. PostTyp
-def post_typ(): #either immigration or emmigration
-    values = ['Inv', 'Utv']
-    return random.choice(values)
+        return inv_ut_manad.strftime('%Y-%m')
+    else:
+        return None
 
 
 # #### 8. FodelseLandnamn
 # SCB 2022 list - Sweden, India, Poland, Germany, Syria, Pakistan, Iran, Afghanistan, Turkey, Romania, China, Iraq, Finland, USA, Russia, Netherlands, Brazil, Denmark, UK, Italy, Other 
-def fodelse_landnamn():
-    countries = ['Sweden', 'India', 'Poland', 'Germany', 'Syria', 'Pakistan', 'Iran', 'Afghanistan', 'Turkey', 'Romania', 'China', 'Iraq', 'Finland', 'USA', 'Russia', 'Netherlands', 'Brazil', 'Denmark', 'UK', 'Italy']
-    random_country = random.choice(countries)
-    return random_country
+# Foreign-born citizens make up 20.4% of the population (Syria, Iraq, Finland, Poland, Iran)
+# Foreign-background (foreign-born (20.4%) and born in Sweden with both parents born outside of Sweden(6.5%)) make up 26.9%
+# Swedish-background (one foreign-born parent) - 7.8%
 
-# #### 9. FodelseTidMor
+def fodelse_landnamn(): #birth country of everyone residing in Sweden
+
+    countries = ['India', 'Poland', 'Germany', 'Syria', 'Pakistan', 'Iran', 'Afghanistan', 'Turkey', 'Romania', 'China', 'Iraq', 'Finland', 'USA', 'Russia', 'Netherlands', 'Brazil', 'Denmark', 'UK', 'Italy']
+    probability_sweden = 79.60
+    random_number = random.uniform(0, 100)
+    
+    if random_number <= probability_sweden:
+        selected_country = 'Sweden'
+    else:
+        selected_country = random.choice(countries)
+    return selected_country
+
+# #### 9. FodelseTid
 def fodelse_tid(personnummer):
-    year, month, day = int(personnummer[:4]), int(personnummer[4:6]), int(personnummer[6:8])
-    birthday = datetime.datetime(year, month, day)
-    return birthday.date()
+    return personnummer[:8]
 
 
 # #### 13. UtlSVBackg
@@ -125,17 +154,16 @@ def utl_sv_bakg(fodelselandnamn, fodelselandnamnfar, fodelselandnamnmor):
     else:
         return 21
 
-import pandas as pd
-
-def generate_demographic(PersonNr, sample_year):
+def generate_demographic(PersonNr, sample_year, birthdaymom='19820102-8936', birthdaydad='19790102-8936'):
     FodelseAr = fodelse_ar(PersonNr)
-    DodDatum = dod_datum(PersonNr)
-    if not type(DodDatum) == None:
-        Alder = alder(PersonNr, sample_year, DodDatum)
-        InvUtvManad = inv_ut_manad(PersonNr, DodDatum)
-    else:
+    DodDatum = dod_datum() # People can only have died during the sample year and not earlier
+    InvUtvLand, Status = get_status()
+    if DodDatum == None:
         Alder = alder(PersonNr, sample_year)
-        InvUtvManad = inv_ut_manad(PersonNr)
+        InvUtvManad = inv_ut_manad(Status,PersonNr, sample_year)
+    else:
+        Alder = alder(PersonNr, sample_year, DodDatum)
+        InvUtvManad = inv_ut_manad(Status,PersonNr, sample_year, DodDatum)
     
     me   = fodelse_landnamn()
     mom  = fodelse_landnamn()
@@ -146,13 +174,13 @@ def generate_demographic(PersonNr, sample_year):
         'DodDatum'              : DodDatum,
         'Alder'                 : Alder,          #2019 is the last year
         'Kon'                   : kon(PersonNr),
-        'InvUtvLand'            : inv_utv_land(),
+        'InvUtvLand'            : InvUtvLand,
         'InvUtvManad'           : InvUtvManad,
-        'PostTyp'               : post_typ(),
+        'PostTyp'               : Status,
         'FodelseLandnamn'       : me,
-        'FodelseTidMor'         : fodelse_tid('198201028936'), #Arbitrary needs to be fixed
+        'FodelseTidMor'         : fodelse_tid(birthdaymom), #Arbitrary needs to be fixed
         'FodelseLandnamnMor'    : mom,
-        'FodelseTidFar'         : fodelse_tid('197901028936'), #Arbitrary needs to be fixed
+        'FodelseTidFar'         : fodelse_tid(birthdaydad), #Arbitrary needs to be fixed
         'FodelseLandnamnFar'    : dad,
         'UtlSvBakg'             : utl_sv_bakg(me,dad,mom) 
                        }
@@ -618,23 +646,70 @@ def person_nummer_creation(sample_year, start_date="19250101", stop_year="", gen
             taken_social_security_numbers.add(social_security_number)
             return social_security_number
 
+def update_kid_categories(my_dict, kid_info_dict, sample_year):
+    for k,v in kid_info_dict.items():
+        k = int(k)
+        if v > 3:
+            print("Update dict")
+            print(v)
+            print(my_dict)
+        if k >= 0 and k < 4:
+            for _ in range(v):
+                my_dict['Barn0_3'] +=1
+        elif k > 3 and k < 7:
+            for _ in range(v):
+                my_dict['Barn4_6'] +=1
+        elif k > 6 and k < 11:
+            for _ in range(v):
+                my_dict['Barn7_10'] +=1
+        elif k > 10 and k < 16:
+            for _ in range(v):
+                my_dict['Barn11_15'] +=1
+        elif k > 15 and k < 18:
+            for _ in range(v):
+                my_dict['Barn16_17'] +=1
+
+    if sample_year <= 2004:
+        for k,v in kid_info_dict.items():
+            k = int(k)
+            if v > 3:
+                print("Update dict")
+                print(v)
+                print(kid_info_dict)
+            if k > 17: #Barn18plus
+                for _ in range(v):
+                    my_dict['Barn18plus'] += 1
+    else:
+        for k,v in kid_info_dict.items():
+            k = int(k)
+
+            if k > 17 and k < 20: #Barn18_19
+                for _ in range(v):
+                    my_dict['Barn18plus'] += 1
+            elif k > 19: #Barn20plus
+                for _ in range(v):
+                    my_dict['Barn20plus'] += 1
+    return my_dict
+
+
 
 def create_children(sample_year, PersonNr, is_kid=False):
     barn = {
-        'Barn0_3' : [],
-        'Barn4_6' : [],
-        'Barn7_10' : [],
-        'Barn11_15' : [],
-        'Barn16_17' : [],
-    }
-    if sample_year < 2005:
-        barn['Barn18plus'] = []
-    else: 
-        barn['Barn18_19'] = []
-        barn['Barn20plus'] = []
+            'Barn0_3'       : 0,
+            'Barn4_6'       : 0,
+            'Barn7_10'      : 0,
+            'Barn11_15'     : 0,
+            'Barn16_17'     : 0,
+            'Barn18plus'    : 0,
+            'Barn18_19'     : 0,
+            'Barn20plus'    : 0,
+            'kid_info'      : {}
+               }
+    if is_kid:
+        return barn
+
     #roughly 68% of households are childless 
     # https://www.scb.se/hitta-statistik/statistik-efter-amne/befolkning/befolkningens-sammansattning/befolkningsstatistik/pong/statistiknyhet/befolkningsstatistik-helaret-20222/
-    keys = list(barn.keys())
     if random.randint(1,100) > 65:
         mean = 1.81  # Mean of the normal distribution 
         stddev = 1.3  # Standard deviation of the normal distribution
@@ -642,84 +717,31 @@ def create_children(sample_year, PersonNr, is_kid=False):
         if number_of_kids < 1:
             number_of_kids = 1
 
+        person_age = int(sample_year) - int(PersonNr[:4])
+        min_age = (person_age - 60) if person_age > 60 else 0 #Max age to get newborns is 60
+        max_age = person_age - 15
         for _ in range(number_of_kids):
-            person_age = int(sample_year) - int(PersonNr[:4])
-            min_age = (person_age - 60) if person_age > 60 else 0 #Max age to get newborns is 60
-            max_age = person_age - 15
             kid_age = random.randint(min_age, max_age)
             kid_age_t = (kid_age - min_age) / ((max_age - min_age))
             kid_age_t = kid_age_t * kid_age_t
             kid_age = int(kid_age_t * (max_age - min_age) + min_age)
-            if kid_age <= 3:
-                barn['Barn0_3'].append(kid_age)
-            elif kid_age < 7:
-                barn['Barn4_6'].append(kid_age)
-            elif kid_age < 11:
-                barn['Barn7_10'].append(kid_age)
-            elif kid_age < 16:
-                barn['Barn11_15'].append(kid_age)
-            elif kid_age < 18:
-                barn['Barn16_17'].append(kid_age)
-            elif 'Barn18plus' in keys and kid_age >= 18:
-                barn['Barn18plus'].append(kid_age)
-            elif not 'Barn18plus' in keys and kid_age < 20:
-                barn['Barn18_19'].append(kid_age)
-            elif not 'Barn18plus' in keys and kid_age >= 20:
-                barn['Barn20plus'].append(kid_age)
+            if kid_age in barn['kid_info']:
+                barn['kid_info'][kid_age] +=1
+            else:
+                barn['kid_info'][kid_age] = 1
+        for k, v in barn['kid_info'].items(): #No more than 3 kids per age
+            if v > 3:
+                print(number_of_kids)
+                # print("--------------------------------------")
+                # barn = update_kid_categories(barn, barn['kid_info'], sample_year)
+                # print(barn)
+                barn['kid_info'][k] = 3
+                # barn = update_kid_categories(barn, barn['kid_info'], sample_year)
+                # print(barn)
+
         
-        for key in keys: #No more than 3 kids per category
-            if len(barn[key]) > 3:
-                barn[key] = barn[key][2:]
-        
-    if 'Barn18plus' in keys:
-        barn = {
-            'Barn0_3'       : barn['Barn0_3'],
-            'Barn4_6'       : barn['Barn4_6'],
-            'Barn7_10'      : barn['Barn7_10'],
-            'Barn11_15'     : barn['Barn11_15'],
-            'Barn16_17'     : barn['Barn16_17'],
-            'Barn18plus'    : barn['Barn18plus'],
-            'Barn18_19'     : [-1000, -1000, -1000],
-            'Barn20plus'    : [-1000, -1000, -1000]
-               }
-    else:
-        barn = {
-            'Barn0_3'       : barn['Barn0_3'],
-            'Barn4_6'       : barn['Barn4_6'],
-            'Barn7_10'      : barn['Barn7_10'],
-            'Barn11_15'     : barn['Barn11_15'],
-            'Barn16_17'     : barn['Barn16_17'],
-            'Barn18plus'    : [-1000, -1000, -1000],
-            'Barn18_19'     : barn['Barn18_19'],
-            'Barn20plus'    : barn['Barn20plus']
-               }
-    if is_kid and 'Barn18plus' in keys:
-        barn = {
-            'Barn0_3'       : [-1000, -1000, -1000],
-            'Barn4_6'       : [-1000, -1000, -1000],
-            'Barn7_10'      : [-1000, -1000, -1000],
-            'Barn11_15'     : [-1000, -1000, -1000],
-            'Barn16_17'     : [-1000, -1000, -1000],
-            'Barn18plus'    : [-1000, -1000, -1000],
-            'Barn18_19'     : [-1000, -1000, -1000],
-            'Barn20plus'    : [-1000, -1000, -1000]
-               }
-    if is_kid and not 'Barn18plus' in keys:
-        barn = {
-            'Barn0_3'       : [-1000, -1000, -1000],
-            'Barn4_6'       : [-1000, -1000, -1000],
-            'Barn7_10'      : [-1000, -1000, -1000],
-            'Barn11_15'     : [-1000, -1000, -1000],
-            'Barn16_17'     : [-1000, -1000, -1000],
-            'Barn18plus'    : [-1000, -1000, -1000],
-            'Barn18_19'     : [-1000, -1000, -1000],
-            'Barn20plus'    : [-1000, -1000, -1000]
-               }
-    
-    for key in keys:
-            if len(barn[key]) < 3:
-                for _ in range(3 - len(barn[key])):
-                    barn[key].append(-1000)
+        update_kid_categories(barn, barn['kid_info'], sample_year)
+            
     return barn
 
 
@@ -733,8 +755,36 @@ def make_kid_family_frame(PersonNr, FamId, is_Kid, sample_year):
 
 
 def create_kids_data(sample_year, FamId, kids_info):
-    kids_list = [kids_info['Barn16_17'], kids_info['Barn18_19'], kids_info['Barn18plus'], kids_info['Barn20plus']]
-    kids_list = [sorted([num for num in sublist if num >= 0]) for sublist in kids_list] # Removes all occurances of -1000
+    kids_list = [[],[],[],[]]
+    
+    for k,v in kids_info['kid_info'].items():
+        if int(k) > 15 and int(k) < 18: #Barn16_17
+            for _ in range(v):
+                kids_list[0].append(v)
+    if sample_year <= 2004:
+        for k,v in kids_info['kid_info'].items():
+            if int(k) > 17: #Barn18plus
+                for _ in range(v):
+                    kids_list[2].append(v)
+    else:
+        for k,v in kids_info['kid_info'].items():
+            if int(k) > 17 and int(k) < 20: #Barn18_19
+                for _ in range(v):
+                    kids_list[1].append(v)
+            elif int(k) > 19:
+                for _ in range(v):
+                    kids_list[3].append(v)
+    
+
+    kids_list = [sorted([num for num in sublist]) for sublist in kids_list] # Removes all occurances of -1000
+    
+    kids_in_range = kids_list[:2]    #Barn16_17 and Barn18_19
+    kids_plus = kids_list[2:]
+
+    #Barn16-17
+    all_kids = []
+
+    # ---------------------- ONLY FOR MAXIMUM OF 3 kids per group
 
     kids_in_range = kids_list[:2]    #Barn16_17 and Barn18_19
     kids_plus = kids_list[2:]
@@ -903,14 +953,14 @@ def generate_family(sample_year):
     kids_frames = create_kids_data(sample_year, PersonNr, kids_info) 
     if len(kids_frames) == 0:
         if random.randint(1,100) > 60: # Probability someone is living alone
-            spouse = create_spouse(PersonNr, kids_info)
+            spouse = create_spouse(PersonNr, kids_info.copy())
             family_dicts.append(spouse)
     else:
         family_dicts = family_dicts + kids_frames
         min_family_size = 0
         family_size = random.randint(min_family_size, len(kids_frames)+1) #Bigger family, more likley there's a spouse in the household
         if family_size > 1:
-            spouse = create_spouse(PersonNr, kids_info)
+            spouse = create_spouse(PersonNr, kids_info.copy())
             family_dicts.append(spouse)
     
     return family_dicts
@@ -1351,17 +1401,9 @@ def generate_data(amount, sample_year=2019):
 
 import pandas as pd
 def generate_data_frame(data):
-    original_values = []
-    keys = ['Barn0_3', 'Barn4_6', 'Barn7_10','Barn11_15', 'Barn16_17', 'Barn18_19', 'Barn18plus', 'Barn20plus']
-
-    for i in range(len(data)):
-        t = {}
-        for key in keys:
-            kids_data = data[i][key]
-            t[key] = data[i][key]
-            kids_data = [x for x in kids_data if x >= 0]
-            data[i][key] = len(kids_data)
-        original_values.append(t)
+    kid_info_dicts = []
+    for d in data:
+        kid_info_dicts.append(d.pop('kid_info'))
 
     dataframe = pd.DataFrame(data, columns=[  
                                     'PersonNr', 'Lan', 'Kommun', 'Forsamling', 'Distriktskod', 'FastLopNr', 'FastBet',
@@ -1380,9 +1422,8 @@ def generate_data_frame(data):
                                     'Raks_SummaInk', 'Raks_Huvudanknytning', 'Raks_EtablGrad', 'Raks_Forvink'
                                  ])
     # Revert changes for specified keys
-    for d, original_value in zip(data, original_values):
-        d.update(original_value)
-
+    for d,kid_info in zip(data, kid_info_dicts):
+        d['kid_info'] = kid_info
     return dataframe
 
 import os
@@ -1409,9 +1450,10 @@ def dict_to_csvs(dict_data, sample_year=1990):
     return True
 
 
+
 if __name__ == "__main__":
-    sample_year = 1990
-    number_of_households = 2000000
+    sample_year = 1991
+    number_of_households = 15000
     print(f"Creating data for {number_of_households} households for year {sample_year}")
     a = generate_data(number_of_households, sample_year)
     print("Turning data into csv(s)")
