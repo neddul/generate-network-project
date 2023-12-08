@@ -147,6 +147,39 @@ def find_relationships(subset, current_connections):
     else:
         connections_exist = False
 
+    #age_differences = np.abs(selected['Alder'].values[:, np.newaxis] - selected['Alder'].values)
+
+#     if connections_exist == True:
+#         # Check if siblings_possible for all pairs using broadcasting
+#         siblings_possible = (
+#     (
+#         ((current_connections['personNr1'].values == selected['PersonNr'].values[:, np.newaxis]) & 
+#          (current_connections['personNr2'].values == selected['PersonNr'].values)) |
+#         ((current_connections['personNr1'].values == selected['PersonNr'].values) &
+#          (current_connections['personNr2'].values == selected['PersonNr'].values[:, np.newaxis]))
+#     ) & (current_connections['connection'].values == 'siblings')
+# ).any(axis=1)
+#         mask = (age_differences <= 13) & ~siblings_possible
+
+#         # Find indices where the mask is True
+#         indices = np.where(mask)
+
+#         # Iterate over indices and append the relationships
+#         for i, j in zip(*indices):
+#             person1 = selected.iat[i, 0]
+#             person2 = selected.iat[j, 0]
+#             couple_relationships.append({'personNr1': person1, 'personNr2': person2, 'connection': "partner of"})
+#     else:
+#         mask = (age_differences <= 13)
+
+#         # Find indices where the mask is True
+#         indices = np.where(mask)
+
+#         # Iterate over indices and append the relationships
+#         for i, j in zip(*indices):
+#             person1 = selected.iat[i, 0]
+#             person2 = selected.iat[j, 0]
+#             couple_relationships.append({'personNr1': person1, 'personNr2': person2, 'connection': "partner of"})
 
     for i in range(len(selected)-1):
         for j in range(i+1, len(selected)):
@@ -284,7 +317,7 @@ def data_preprocessing(registry_data, save_directory):
 
 
 
-def create_family_layer(registry_data, current_network = None):
+def create_family_layer(registry_data):
     #connections = pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
     current_year = 1990
     save_directory = 'datastorage_familylayer'
@@ -333,12 +366,9 @@ def create_family_layer(registry_data, current_network = None):
                 relationships = find_relationships(subset, output)
                 if relationships: 
                     connections.extend(relationships)
-    connections = pd.DataFrame(connections)
 
-    #combining the build network of the year with the recent network
-    if current_network is not None: 
-        connections = pd.concat([connections, current_network], ignore_index=True)
-    
+            
+    connections = pd.DataFrame(connections)
     connections = connections.drop_duplicates()
     #sibling relationship
     #dfs_to_concat = find_siblings(connections)
@@ -354,15 +384,6 @@ def create_family_layer(registry_data, current_network = None):
     if not grandparents_connections.empty:
         #grandparents_connections = pd.DataFrame(grandparents_connections, columns=['personNr1', 'personNr2', 'connection'])
         connections = pd.concat([connections] + [grandparents_connections], ignore_index=True)
-
-
-    #this is too find siblings which currently dont live in the same house, it will find all though and then we filter afterwards
-    print("Finding Siblings now")
-    sibling_relations = find_siblings(connections)
-    if not sibling_relations.empty:
-        connections = pd.concat([connections] + [sibling_relations], ignore_index=True)
-
-
     print("Searching aunts and uncles now")
     aunts_uncles = find_aunts_uncles(connections)
 
@@ -381,31 +402,6 @@ def create_family_layer(registry_data, current_network = None):
     return connections
 
 
-def create_multiple_year_network(data):
-
-    #all networks:
-    #specify network directory
-    csv_list = os.listdir(save_directory)
-    for filename in tqdm(csv_list, desc="Processing  years"): 
-        file_path = os.path.join(save_directory, filename)
-        if os.path.isfile(file_path):
-            current_registry_data= pd.read_csv(file_path)
-            #wait this is recursive --> need to think this through  --> or just if output is none --> current network is none
-            output = create_family_layer(data, current_network = None)
-            #save this file 
-    #maybe directory name(?) --> how to get always newest data
-    #get year
-    #read in recent network --> or just save from returns --> way easier
-
-    #how to deal with batches and with the current year --> can have counter and give it as argument
-    # batches for every year, so it stays empty --> avoid having to figure out deleting it 
-    
-    
-    # call function
-    # save returned network 
-    return None
-
-
 if len(sys.argv) < 2:
     print("Missing argument: input file name")
     sys.exit(-1)
@@ -418,18 +414,4 @@ data = pd.read_csv(input_file_name)
 
 #needs to be changed to data again to run through command line --> also the year
 create_family_layer(data)
-
-
-
-#outline for code
-# if no network already exist 
-# create network like previously
-# if network exist -- first part stays the same --> give it to the function --> wrapper function around it
-# and then concat builded relationships with the most recent network
-# check for duplicates and maybe lines that dont make sense?
-# run the last part, this time also including running to check for siblings again --> needs a check for duplicates again 
-# but important to catch siblings that dont work together anymore
-#save network and on to the next one --> maybe first manualy and then go from there 
-
-#also go through possible extensions again
 

@@ -253,29 +253,16 @@ def find_siblings(family_connections):
 
 def find_cousins(family_connections):
     #cousines= pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
-    cousins = []
-    aunt_uncle_rows = family_connections[family_connections['connection'] == 'aunt/uncle of']
-    parent_rows = family_connections[family_connections['connection'] == 'parent of']
+    output2= pd.DataFrame()
+    selection_aunts = family_connections[family_connections["connection"] == "aunt/uncle of"]
+    selection_parents = family_connections[family_connections["connection"] == "parent of"]
     
-    aunt_uncle_rows = aunt_uncle_rows.reset_index(drop=True)
-    parent_rows = parent_rows.reset_index(drop=True)
-    for _, aunt_uncle_row in tqdm(aunt_uncle_rows.iterrows(), total=len(aunt_uncle_rows), desc="Finding cousins"):
-        matching_rows = parent_rows[parent_rows['personNr1'] == aunt_uncle_row['personNr1']]
-        
-        for _, matching_row in matching_rows.iterrows():
+    options = selection_aunts.merge(selection_parents, left_on="personNr1", right_on="personNr1", suffixes=('_aunt', '_parent'))
+    cousin_connection=  options[["personNr2_aunt", "personNr2_parent" ]]
+    cousin_connection.columns = ['personNr1', 'personNr2']
+    cousin_connection['connection'] = 'cousins'
 
-            existing_cousin = cousins[
-                ((cousins['personNr1'] == matching_row['personNr2']) & (cousins['personNr2'] == aunt_uncle_row['personNr2'])) |
-                ((cousins['personNr1'] == aunt_uncle_row['personNr2']) & (cousins['personNr2'] == matching_row['personNr2']))
-            ]
-            if existing_cousin.empty:
-                cousins.extend({
-                    'personNr1': matching_row['personNr2'],
-                    'personNr2': aunt_uncle_row['personNr2'],
-                    'connection': "cousins"
-                }, ignore_index=True)
-            
-    return cousins
+    return cousin_connection
 
 def data_preprocessing(registry_data, save_directory): 
         #fix for column names for now 
@@ -391,8 +378,8 @@ def create_family_layer(registry_data):
         connections = pd.concat([connections] + [aunts_uncles], ignore_index=True)
     print("Searching cousins")
     cousin_connections = find_cousins(connections)
-    if cousin_connections:
-        cousin_connections = pd.DataFrame(cousin_connections)
+    if not cousin_connections.empty:
+        #cousin_connections = pd.DataFrame(cousin_connections)
         connections = pd.concat([connections] + [cousin_connections], ignore_index=True)
     
 
