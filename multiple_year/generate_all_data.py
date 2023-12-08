@@ -778,26 +778,23 @@ def make_triplets(age, sample_year):
 
 def create_kids_data(sample_year, FamId, kids_info):
     kids_list = [[],[],[],[]]
-    
     for k,v in kids_info['kid_info'].items():
-        if int(k) > 15 and int(k) < 18: #Barn16_17
-            for _ in range(v):
-                kids_list[0].append(v)
-    if sample_year <= 2004:
-        for k,v in kids_info['kid_info'].items():
-            if int(k) > 17: #Barn18plus
-                for _ in range(v):
-                    kids_list[2].append(v)
-    else:
-        for k,v in kids_info['kid_info'].items():
-            if int(k) > 17 and int(k) < 20: #Barn18_19
-                for _ in range(v):
-                    kids_list[1].append(v)
-            elif int(k) > 19:
-                for _ in range(v):
-                    kids_list[3].append(v)
-    
+        kid_age = k
+        number_of_kids = v
+        if kid_age > 15 and kid_age < 18: #Barn16_17
+            for _ in range(number_of_kids):
+                kids_list[0].append(kid_age)
+        elif sample_year <= 2004 and kid_age > 17: #Barn18plus
+            for _ in range(number_of_kids):
+                kids_list[2].append(kid_age)
+        elif sample_year > 2004 and kid_age > 17 and kid_age < 20: #Barn18_19
+            for _ in range(number_of_kids):
+                kids_list[1].append(kid_age)
+        elif sample_year > 2004 and kid_age > 19: #Barn20plus
+                for _ in range(number_of_kids):
+                    kids_list[3].append(kid_age)
 
+    
     kids_list = [sorted([num for num in sublist]) for sublist in kids_list] # Removes all occurances of -1000
     
     kids_in_range = kids_list[:2]    #Barn16_17 and Barn18_19
@@ -975,14 +972,14 @@ def generate_family(sample_year):
     kids_frames = create_kids_data(sample_year, PersonNr, kids_info) 
     if len(kids_frames) == 0:
         if random.randint(1,100) > 60: # Probability someone is living alone
-            spouse = create_spouse(PersonNr, kids_info.copy())
+            spouse = create_spouse(PersonNr, kids_info)
             family_dicts.append(spouse)
     else:
         family_dicts = family_dicts + kids_frames
         min_family_size = 0
         family_size = random.randint(min_family_size, len(kids_frames)+1) #Bigger family, more likley there's a spouse in the household
         if family_size > 1:
-            spouse = create_spouse(PersonNr, kids_info.copy())
+            spouse = create_spouse(PersonNr, kids_info)
             family_dicts.append(spouse)
     
     return family_dicts
@@ -1603,16 +1600,20 @@ def simulate_1_year(list_of_dictionaries, sample_year):
     # print(len(list_of_dictionaries))
     list_of_dictionaries = update_kids(list_of_dictionaries, sample_year)
     # print(len(list_of_dictionaries))
+    return list_of_dictionaries
 
 
 
 if __name__ == "__main__":
     sample_year = 1991
-    number_of_households = 15000
+    number_of_households = 2000
     print(f"Creating data for {number_of_households} households for year {sample_year}")
     a = generate_data(number_of_households, sample_year)
-    print("Turning data into csv(s)")
+    print(len(a))
     dict_to_csvs(a, sample_year)
+    print("Turning data into csv(s)")
     print("Simulating 1 year")
-    simulate_1_year(a, sample_year)   
+    a = simulate_1_year(a, sample_year)   
+    print(len(a))
+    dict_to_csvs(a, sample_year+1)
     print("Program finished")
