@@ -392,28 +392,42 @@ def generate_main_labor_connection(YrkStalln):
     return Raks_Huvudanknytning 
 
 
-def generate_economic(sample_year,amount=1):
-    SyssStat = generate_employment_statuses(amount,sample_year)
-    ArbTid = generate_workingtime(SyssStat)
-    YrkStalln = generate_job(ArbTid)
-    KU1lnk, KU2lnk, KU3lnk = generate_income(ArbTid)
-    Raks_SummaInk = generate_total_incomes(KU1lnk,KU2lnk, KU3lnk)
-    Raks_EtablGrad = generate_labor_connection(YrkStalln)
-    Raks_Forvink = generate_Forvink(Raks_SummaInk)
-    Raks_Huvudanknytning = generate_main_labor_connection(YrkStalln)
+def generate_economic(sample_year,amount=1, is_kid=False):
+    if is_kid:
+        employment_data = {
+        'SyssStat'              : 6, #Not working 
+        'ArbTid'                : 1, #1 - 0 hours worked/week
+        'YrkStalln'             : 0, #0 - No information about workplace (have no work)
+        'KU1lnk'                : 0, #Biggest source of income
+        'KU2lnk'                : 0, #Second biggest source of income
+        'KU3lnk'                : 0, #Third biggest source of income
+        'Raks_SummaInk'         : 120, #1000kr/per month for kids in highschool
+        'Raks_Huvudanknytning'  : 7, #Which title, full time employed, newly hired etc, 7 = Without work
+        'Raks_EtablGrad'        : 'NULL', #How well connected the person is to the market, 0 well established, 1 poorly established, NULL don't know
+        'Raks_Forvink'          : 0 #Income from work
+                        }   
+    else:
+        SyssStat = generate_employment_statuses(amount,sample_year)
+        ArbTid = generate_workingtime(SyssStat)
+        YrkStalln = generate_job(ArbTid)
+        KU1lnk, KU2lnk, KU3lnk = generate_income(ArbTid)
+        Raks_SummaInk = generate_total_incomes(KU1lnk,KU2lnk, KU3lnk)
+        Raks_EtablGrad = generate_labor_connection(YrkStalln)
+        Raks_Forvink = generate_Forvink(Raks_SummaInk)
+        Raks_Huvudanknytning = generate_main_labor_connection(YrkStalln)
 
-    employment_data = {
-        'SyssStat'              : SyssStat[0],
-        'ArbTid'                : ArbTid[0],
-        'YrkStalln'             : YrkStalln[0],
-        'KU1lnk'                : KU1lnk[0],
-        'KU2lnk'                : KU2lnk[0],
-        'KU3lnk'                : KU3lnk[0],
-        'Raks_SummaInk'         : Raks_SummaInk[0],
-        'Raks_Huvudanknytning'  : Raks_Huvudanknytning[0],
-        'Raks_EtablGrad'        : Raks_EtablGrad[0],
-        'Raks_Forvink'          : Raks_Forvink[0]
-                        }    
+        employment_data = {
+            'SyssStat'              : SyssStat[0],
+            'ArbTid'                : ArbTid[0],
+            'YrkStalln'             : YrkStalln[0],
+            'KU1lnk'                : KU1lnk[0],
+            'KU2lnk'                : KU2lnk[0],
+            'KU3lnk'                : KU3lnk[0],
+            'Raks_SummaInk'         : Raks_SummaInk[0],
+            'Raks_Huvudanknytning'  : Raks_Huvudanknytning[0],
+            'Raks_EtablGrad'        : Raks_EtablGrad[0],
+            'Raks_Forvink'          : Raks_Forvink[0]
+                            }    
     return employment_data
 
 
@@ -731,13 +745,7 @@ def create_children(sample_year, PersonNr, is_kid=False):
                 barn['kid_info'][kid_age] = 1
         for k, v in barn['kid_info'].items(): #No more than 3 kids per age
             if v > 3:
-                print(number_of_kids)
-                # print("--------------------------------------")
-                # barn = update_kid_categories(barn, barn['kid_info'], sample_year)
-                # print(barn)
                 barn['kid_info'][k] = 3
-                # barn = update_kid_categories(barn, barn['kid_info'], sample_year)
-                # print(barn)
 
         
         update_kid_categories(barn, barn['kid_info'], sample_year)
@@ -752,6 +760,20 @@ def make_kid_family_frame(PersonNr, FamId, is_Kid, sample_year):
     data['PersonNr'] = PersonNr
     data['FamId'] = FamId
     return data
+
+
+def make_twins(age, sample_year):
+    year_born = sample_year - age
+    kid1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}1231")
+    kid2 = person_nummer_creation(sample_year, start_date=kid1[:8], stop_year=kid1[:8])
+    return [kid1, kid2]
+
+def make_triplets(age, sample_year):
+    year_born = sample_year - age
+    kid1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}1231")
+    kid2 = person_nummer_creation(sample_year, start_date=kid1[:8], stop_year=kid1[:8])
+    kid3 = person_nummer_creation(sample_year, start_date=kid1[:8], stop_year=kid1[:8])
+    return [kid1, kid2, kid3]
 
 
 def create_kids_data(sample_year, FamId, kids_info):
@@ -1241,29 +1263,12 @@ def generate_company(personnummer, kommunnamn, lansnamn, prefix="", yrkstallning
     return work_data
 
 
-def generate_work(personnummer, county, economicstatus):
+def generate_work(personnummer, county, economicstatus, is_kid=False):
     Kommun = generate_municipal(county)
-    if economicstatus[0] > 0:
-        Kommun = generate_municipal(county)
-        prefix_working_ties1 = generate_company(personnummer, Kommun, county, prefix="KU1", yrkstallning="1") #Yrkstallning hardcoded needs FIX
-    else:
+    if is_kid:
         prefix_working_ties1 = generate_company(personnummer, Kommun, county, prefix="KU1", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
-
-    if economicstatus[1] > 0:
-        Kommun = generate_municipal(county)
-        prefix_working_ties2 = generate_company(personnummer, Kommun, county, prefix="KU2", yrkstallning="1") #Yrkstallning hardcoded needs FIX
-    else:
-        prefix_working_ties2 = generate_company(personnummer, Kommun, county, prefix="KU2", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
-    if economicstatus[2] > 0:
-        Kommun = generate_municipal(county)
-        prefix_working_ties3 = generate_company(personnummer, Kommun, county, prefix="KU3", yrkstallning="1") #Yrkstallning hardcoded needs FIX
-    else:
-        prefix_working_ties3 = generate_company(personnummer, Kommun, county, prefix="KU3", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
-    
-    biggest_income = economicstatus.index(max(economicstatus))
-    
-
-    if biggest_income == 0:
+        prefix_working_ties2 = generate_company(personnummer, Kommun, county, prefix="KU1", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
+        prefix_working_ties3 = generate_company(personnummer, Kommun, county, prefix="KU1", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
         biggest_data = {
             'CfarNr_LISA' : prefix_working_ties1['KU1CfarNr'],
             'ArbstId' : (prefix_working_ties1['KU1CfarNr'])+(prefix_working_ties1['KU1AstNr'])+(prefix_working_ties1['KU1AstKommun'])+(prefix_working_ties1['KU1PeOrgNr']),
@@ -1271,22 +1276,51 @@ def generate_work(personnummer, county, economicstatus):
             'AstKommun' : prefix_working_ties1['KU1AstKommun'],
             'AstLan' : prefix_working_ties1['KU1AstLan']
         }
-    elif biggest_income == 1:
-        biggest_data = {
-            'CfarNr_LISA' : prefix_working_ties2['KU2CfarNr'],
-            'ArbstId' : (prefix_working_ties2['KU2CfarNr'])+(prefix_working_ties2['KU2AstNr'])+(prefix_working_ties2['KU2AstKommun'])+(prefix_working_ties2['KU2PeOrgNr']),
-            'AstNr_LISA' : prefix_working_ties2['KU2AstNr'],
-            'AstKommun' : prefix_working_ties2['KU2AstKommun'],
-            'AstLan' : prefix_working_ties2['KU2AstLan']
-        }
     else:
-        biggest_data = {
-            'CfarNr_LISA' : prefix_working_ties3['KU3CfarNr'],
-            'ArbstId' : (prefix_working_ties3['KU3CfarNr'])+(prefix_working_ties3['KU3AstNr'])+(prefix_working_ties3['KU3AstKommun'])+(prefix_working_ties3['KU3PeOrgNr']),
-            'AstNr_LISA' : prefix_working_ties3['KU3AstNr'],
-            'AstKommun' : prefix_working_ties3['KU3AstKommun'],
-            'AstLan' : prefix_working_ties3['KU3AstLan']
-        }
+        if economicstatus[0] > 0:
+            Kommun = generate_municipal(county)
+            prefix_working_ties1 = generate_company(personnummer, Kommun, county, prefix="KU1", yrkstallning="1") #Yrkstallning hardcoded needs FIX
+        else:
+            prefix_working_ties1 = generate_company(personnummer, Kommun, county, prefix="KU1", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
+
+        if economicstatus[1] > 0:
+            Kommun = generate_municipal(county)
+            prefix_working_ties2 = generate_company(personnummer, Kommun, county, prefix="KU2", yrkstallning="1") #Yrkstallning hardcoded needs FIX
+        else:
+            prefix_working_ties2 = generate_company(personnummer, Kommun, county, prefix="KU2", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
+        if economicstatus[2] > 0:
+            Kommun = generate_municipal(county)
+            prefix_working_ties3 = generate_company(personnummer, Kommun, county, prefix="KU3", yrkstallning="1") #Yrkstallning hardcoded needs FIX
+        else:
+            prefix_working_ties3 = generate_company(personnummer, Kommun, county, prefix="KU3", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
+
+        biggest_income = economicstatus.index(max(economicstatus))
+
+
+        if biggest_income == 0:
+            biggest_data = {
+                'CfarNr_LISA' : prefix_working_ties1['KU1CfarNr'],
+                'ArbstId' : (prefix_working_ties1['KU1CfarNr'])+(prefix_working_ties1['KU1AstNr'])+(prefix_working_ties1['KU1AstKommun'])+(prefix_working_ties1['KU1PeOrgNr']),
+                'AstNr_LISA' : prefix_working_ties1['KU1AstNr'],
+                'AstKommun' : prefix_working_ties1['KU1AstKommun'],
+                'AstLan' : prefix_working_ties1['KU1AstLan']
+            }
+        elif biggest_income == 1:
+            biggest_data = {
+                'CfarNr_LISA' : prefix_working_ties2['KU2CfarNr'],
+                'ArbstId' : (prefix_working_ties2['KU2CfarNr'])+(prefix_working_ties2['KU2AstNr'])+(prefix_working_ties2['KU2AstKommun'])+(prefix_working_ties2['KU2PeOrgNr']),
+                'AstNr_LISA' : prefix_working_ties2['KU2AstNr'],
+                'AstKommun' : prefix_working_ties2['KU2AstKommun'],
+                'AstLan' : prefix_working_ties2['KU2AstLan']
+            }
+        else:
+            biggest_data = {
+                'CfarNr_LISA' : prefix_working_ties3['KU3CfarNr'],
+                'ArbstId' : (prefix_working_ties3['KU3CfarNr'])+(prefix_working_ties3['KU3AstNr'])+(prefix_working_ties3['KU3AstKommun'])+(prefix_working_ties3['KU3PeOrgNr']),
+                'AstNr_LISA' : prefix_working_ties3['KU3AstNr'],
+                'AstKommun' : prefix_working_ties3['KU3AstKommun'],
+                'AstLan' : prefix_working_ties3['KU3AstLan']
+            }
 
     working_data = merge_dictionaries(merge_dictionaries(merge_dictionaries(biggest_data, prefix_working_ties1), prefix_working_ties2), prefix_working_ties3)
  
@@ -1451,6 +1485,127 @@ def dict_to_csvs(dict_data, sample_year=1990):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# -------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------
+# ---------------------------------------- MULTIPLE YEAR ------------------------------------------
+# -------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------
+
+
+def age_people_one_year(list_of_dictionaries, sample_year):
+    for my_dict in list_of_dictionaries:
+        is_dead = my_dict['DodDatum']
+        if is_dead == None:
+            death_date = dod_datum(sample_year) #Every year the person could've died
+            new_alder = alder(my_dict['PersonNr'], sample_year, death_date)
+            my_dict['Alder'] = new_alder
+            my_dict['DodDatum'] = death_date
+
+def kid_into_row(parent_dict, sample_year, number_of_kids):
+    yearborn = sample_year - 16
+    PersonNr_kids = []
+    if number_of_kids == 1:
+        PersonNr_kid = person_nummer_creation(sample_year, start_date=f"{yearborn}0101", stop_year=f"{yearborn}1231") # Third kid born whenever
+        PersonNr_kids = PersonNr_kids + [PersonNr_kid]
+    elif number_of_kids == 2:
+        PersonNr_kids = PersonNr_kids + make_twins(16, sample_year)
+    else:
+        PersonNr_kids = PersonNr_kids + make_triplets(16, sample_year)
+    
+    kid_dicts = []
+    for PersonNr_kid in PersonNr_kids:
+        kid_dict = make_kid_family_frame(PersonNr_kid, parent_dict['FamId'], is_Kid=True, sample_year=sample_year)
+        kid_dict['Lan']             = parent_dict['Lan']
+        kid_dict['Kommun']          = parent_dict['Kommun']
+        kid_dict['FastBet']         = parent_dict['FastBet']
+        kid_dict['FastLopNr']       = parent_dict['FastLopNr']
+        kid_dict['Forsamling']      = parent_dict['Forsamling']
+        kid_dict['Distriktskod']    = parent_dict['Distriktskod']
+
+        Lan = kid_dict['Lan']
+
+        Demographic = generate_demographic(PersonNr_kid, sample_year)
+        Economic = generate_economic(sample_year, is_kid=True)
+
+        no_income = 1
+        Work = generate_work(PersonNr_kid, Lan, no_income, is_kid=True)
+
+        t = merge_dictionaries(merge_dictionaries(merge_dictionaries(kid_dict, Demographic), Economic), Work)
+        kid_dicts.append(t)    
+    return kid_dicts
+        
+def update_kids(list_of_dictionaries, sample_year):
+    kids_grown_to_adolecents = []
+    for my_dict in list_of_dictionaries:
+        kid_data = my_dict['kid_info']
+        new_kid_data = {}
+        for kid_age,number_of_kids in kid_data.items():
+            if kid_age == 15: #The kid will turn 16 and thus is added as their own row in the dataframe
+                kid_dicts = kid_into_row(my_dict, sample_year, number_of_kids)
+                kids_grown_to_adolecents = kids_grown_to_adolecents + kid_dicts
+            new_kid_data[kid_age+1] = number_of_kids
+        my_dict['kid_info'] = new_kid_data
+    list_of_dictionaries = list_of_dictionaries+kids_grown_to_adolecents
+    return list_of_dictionaries
+
+def simulate_1_year(list_of_dictionaries, sample_year):
+    age_people_one_year(list_of_dictionaries, sample_year)
+    # print(len(list_of_dictionaries))
+    list_of_dictionaries = update_kids(list_of_dictionaries, sample_year)
+    # print(len(list_of_dictionaries))
+
+
+
 if __name__ == "__main__":
     sample_year = 1991
     number_of_households = 15000
@@ -1458,4 +1613,6 @@ if __name__ == "__main__":
     a = generate_data(number_of_households, sample_year)
     print("Turning data into csv(s)")
     dict_to_csvs(a, sample_year)
+    print("Simulating 1 year")
+    simulate_1_year(a, sample_year)   
     print("Program finished")
