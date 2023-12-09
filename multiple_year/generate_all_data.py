@@ -36,7 +36,8 @@ def dod_datum(sample_year=None):
             max_days = (datetime.datetime(sample_year, 12, 31) - start).days #maximum number of days to be added to birthday (using end of previous year)
             random_days = random.randint(min_days, max_days)
             deathday = start + timedelta(days=random_days)
-            return str(deathday.strftime('%Y%m%d'))
+            deathday = deathday.isoformat().replace('-','')
+            return str(deathday)[:8]
         else:
             return None
 
@@ -1532,12 +1533,16 @@ def dict_to_csvs(dict_data, sample_year=1990):
 
 def age_people_one_year(list_of_dictionaries, sample_year):
     for my_dict in list_of_dictionaries:
-        if type(my_dict['DodDatum']) == type(str): #If there is a string saying the death date, then we won't update the age or death date
-            continue
+        is_dead = my_dict['DodDatum']
+        if type(is_dead) != type(None): #If there is a string saying the death date, then we won't update the age or death date
+            c = 2
         else:
             death_date = dod_datum(sample_year) #Every year the person could've died
-            new_alder = alder(my_dict['PersonNr'], sample_year, death_date)
-            my_dict['Alder'] = new_alder
+            if type(death_date) != type(None): # The guy died and we won't update his age
+                c = 2
+            else:
+            # new_alder = alder(my_dict['PersonNr'], sample_year, death_date)
+                my_dict['Alder'] = my_dict['Alder'] + 1
             my_dict['DodDatum'] = death_date
 
 def kid_into_row(parent_dict, sample_year, number_of_kids):
@@ -1619,4 +1624,12 @@ def simulate_x_years(number_of_households, start_year, number_of_years_to_simula
     return True
 
 
-simulate_x_years(150, 1990, 30) #How many households, starting year, number of csvs (years) ((including start year))
+simulate_x_years(200, 1990, 30) #How many households, starting year, number of csvs (years) ((including start year))
+
+# sample_year = 1991
+# number_of_households = 20000
+# print(f"Creating data for {number_of_households} households for year {sample_year}")
+# a = generate_data(number_of_households, sample_year)
+# print("Turning data into csv(s)")
+# dict_to_csvs(a, sample_year)
+# print("Program finished")
