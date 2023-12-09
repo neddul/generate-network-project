@@ -1459,14 +1459,14 @@ def dict_to_csvs(dict_data, sample_year=1990):
         if (i+1) % 15 == 0:
             print(f"{i+1}/{number_of_times}")
 
-        subfolder_name = f"synthetic_scb_data_{sample_year}_part{i}"
+        subfolder_name = f"synthetic_scb_data_{sample_year}"
         subfolder_path = os.path.join(folder_name, subfolder_name)
 
         if not os.path.exists(subfolder_path):
             os.makedirs(subfolder_path)
 
         data = generate_data_frame(chunk, sample_year)
-        data.to_csv(os.path.join(subfolder_path, f"{sample_year}_data.csv"), index=False)
+        data.to_csv(os.path.join(subfolder_path, f"{sample_year}_data_part{i}.csv"), index=False)
         i += 1
     
     return True
@@ -1619,6 +1619,4 @@ def simulate_x_years(number_of_households, start_year, number_of_years_to_simula
     return True
 
 
-
-
-simulate_x_years(500, 1990, 30) #How many households, starting year, number of csvs (years) ((including start year))
+simulate_x_years(150, 1990, 30) #How many households, starting year, number of csvs (years) ((including start year))
