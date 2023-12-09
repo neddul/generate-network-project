@@ -491,7 +491,7 @@ def generate_economic(sample_year,amount=1, is_kid=False):
 
 import random
 import string
-import pandas as pd
+
 
 def random_sampler(start, end, number):
     output = []
@@ -606,8 +606,8 @@ def generate_education(amount=1):
 
 
 import random
-import pandas as pd
-import datetime
+
+
 numbers = [str(x) for x in range(10)]
 def get_date(start_date = '19250101', stop_date='20191231'):
     # datetime for start date
@@ -616,17 +616,9 @@ def get_date(start_date = '19250101', stop_date='20191231'):
     # datetime for stop date
     stop = datetime.date.fromisoformat(stop_date)
 
-    # take random amount of days after the starting date
     max_days = (stop - start).days
-    mean = max_days/2
-    std = max_days/3
-    days_after_start = random.gauss(mean, std)
-
-    # check if the gauss distribution picked a date outside of the range
-    if days_after_start > max_days:
-        days_after_start = max_days
-    elif days_after_start < 0:
-        days_after_start = 0
+    # take random amount of days after the starting date
+    days_after_start = random.randint(0, max_days)
 
     date = start + datetime.timedelta(days = days_after_start)
     date = date.isoformat().replace('-','')
@@ -634,12 +626,14 @@ def get_date(start_date = '19250101', stop_date='20191231'):
 
 
 taken_social_security_numbers = {'0'}
-def person_nummer_creation(sample_year, start_date="19250101", stop_year="", gender=3):        
+def person_nummer_creation(sample_year, start_date=None, stop_year="", gender=3):        
     if stop_year == "":
         end_date = str(sample_year-16) #People need to be atleast 16 to legally live alone in Sweden
         end_date = end_date + "1231"
     else:
         end_date = stop_year
+    if start_date == None:
+        start_date = f"{sample_year-90}0101"
  
     while True:
         if gender == 2: # Girl
@@ -654,56 +648,44 @@ def person_nummer_creation(sample_year, start_date="19250101", stop_year="", gen
             last_4 = last_4 + random.choice(numbers)
         else: # Guy or girl
             last_4 = str(random.randint(10000, 99999))[1:]
+        
         birthdate = get_date(start_date, end_date)
         social_security_number = birthdate + "-" + last_4
         if social_security_number not in taken_social_security_numbers:
             taken_social_security_numbers.add(social_security_number)
             return social_security_number
 
-def update_kid_categories(my_dict, kid_info_dict, sample_year):
+def update_kid_categories(parent_dict, kid_info_dict, sample_year):
+    parent_dict['Barn0_3'], parent_dict['Barn4_6'], parent_dict['Barn7_10'], parent_dict['Barn11_15'] = 0,0,0,0
+    parent_dict['Barn16_17'], parent_dict['Barn18plus'], parent_dict['Barn18_19'], parent_dict['Barn20plus'] = 0,0,0,0
     for k,v in kid_info_dict.items():
-        k = int(k)
-        if v > 3:
-            print("Update dict")
-            print(v)
-            print(my_dict)
-        if k >= 0 and k < 4:
-            for _ in range(v):
-                my_dict['Barn0_3'] +=1
-        elif k > 3 and k < 7:
-            for _ in range(v):
-                my_dict['Barn4_6'] +=1
-        elif k > 6 and k < 11:
-            for _ in range(v):
-                my_dict['Barn7_10'] +=1
-        elif k > 10 and k < 16:
-            for _ in range(v):
-                my_dict['Barn11_15'] +=1
-        elif k > 15 and k < 18:
-            for _ in range(v):
-                my_dict['Barn16_17'] +=1
+        kid_age = int(k)
+        number_of_kids = v
+        if kid_age >= 0 and kid_age < 4:
+            for _ in range(number_of_kids):
+                parent_dict['Barn0_3'] +=1
+        elif kid_age > 3 and kid_age < 7:
+            for _ in range(number_of_kids):
+                parent_dict['Barn4_6'] +=1
+        elif kid_age > 6 and kid_age < 11:
+            for _ in range(number_of_kids):
+                parent_dict['Barn7_10'] +=1
+        elif kid_age > 10 and kid_age < 16:
+            for _ in range(number_of_kids):
+                parent_dict['Barn11_15'] +=1
+        elif kid_age > 15 and kid_age < 18: #Barn16_17
+            for _ in range(number_of_kids):
+                parent_dict['Barn16_17'] +=1
+        elif sample_year <= 2004 and kid_age > 17: #Barn18plus
+            for _ in range(number_of_kids):
+                parent_dict['Barn18plus'] += 1
+        elif sample_year > 2004 and kid_age > 17 and kid_age < 20: #Barn18_19
+            for _ in range(number_of_kids):
+                parent_dict['Barn18plus'] += 1
+        elif sample_year > 2004 and kid_age > 19: #Barn20plus
+            for _ in range(number_of_kids):
+                parent_dict['Barn20plus'] += 1
 
-    if sample_year <= 2004:
-        for k,v in kid_info_dict.items():
-            k = int(k)
-            if v > 3:
-                print("Update dict")
-                print(v)
-                print(kid_info_dict)
-            if k > 17: #Barn18plus
-                for _ in range(v):
-                    my_dict['Barn18plus'] += 1
-    else:
-        for k,v in kid_info_dict.items():
-            k = int(k)
-
-            if k > 17 and k < 20: #Barn18_19
-                for _ in range(v):
-                    my_dict['Barn18plus'] += 1
-            elif k > 19: #Barn20plus
-                for _ in range(v):
-                    my_dict['Barn20plus'] += 1
-    return my_dict
 
 
 
@@ -746,9 +728,6 @@ def create_children(sample_year, PersonNr, is_kid=False):
         for k, v in barn['kid_info'].items(): #No more than 3 kids per age
             if v > 3:
                 barn['kid_info'][k] = 3
-
-        
-        update_kid_categories(barn, barn['kid_info'], sample_year)
             
     return barn
 
@@ -949,10 +928,13 @@ def create_kids_data(sample_year, FamId, kids_info):
 
     return all_kids
 
-
-def create_spouse(FamId, kids_info):
-    spouse_age = int(FamId[:4]) + 7 #The spouse will be as old as the partner or at most 7 years younger
-    PersonNr = person_nummer_creation(1,start_date=FamId[:8], stop_year=f"{spouse_age}1231")
+import math
+def create_spouse(FamId, kids_info, sample_year):
+    spouse_age = sample_year - int(FamId[:4])
+    partner_age = math.ceil((spouse_age/2) + 7) #The spouse will follow half your age + 7 rule
+    if partner_age < 16:
+        partner_age = 16
+    PersonNr = person_nummer_creation(1,start_date=FamId[:8], stop_year=f"{sample_year-partner_age}1231")
     utbildning = generate_education()
     spouse = merge_dictionaries(utbildning, kids_info)
     spouse['PersonNr'] = PersonNr
@@ -972,14 +954,14 @@ def generate_family(sample_year):
     kids_frames = create_kids_data(sample_year, PersonNr, kids_info) 
     if len(kids_frames) == 0:
         if random.randint(1,100) > 60: # Probability someone is living alone
-            spouse = create_spouse(PersonNr, kids_info)
+            spouse = create_spouse(PersonNr, kids_info, sample_year)
             family_dicts.append(spouse)
     else:
         family_dicts = family_dicts + kids_frames
         min_family_size = 0
         family_size = random.randint(min_family_size, len(kids_frames)+1) #Bigger family, more likley there's a spouse in the household
         if family_size > 1:
-            spouse = create_spouse(PersonNr, kids_info)
+            spouse = create_spouse(PersonNr, kids_info, sample_year)
             family_dicts.append(spouse)
     
     return family_dicts
@@ -1044,7 +1026,7 @@ def generate_family(sample_year):
 
 
 import random
-import pandas as pd
+
 import json
 scbinternal_fastlopnr = {}
 scbinternal_fastlopnr_values = set([])
@@ -1430,11 +1412,12 @@ def generate_data(amount, sample_year=2019):
     return data
 
 
-import pandas as pd
-def generate_data_frame(data):
+
+def generate_data_frame(data, sample_year):
     kid_info_dicts = []
     for d in data:
-        kid_info_dicts.append(d.pop('kid_info'))
+        update_kid_categories(d, d['kid_info'], sample_year)
+        kid_info_dicts.append(d.pop('kid_info')) #Remove kid_info temporarily for dataframe creation
 
     dataframe = pd.DataFrame(data, columns=[  
                                     'PersonNr', 'Lan', 'Kommun', 'Forsamling', 'Distriktskod', 'FastLopNr', 'FastBet',
@@ -1452,8 +1435,7 @@ def generate_data_frame(data):
                                     'SyssStat', 'ArbTid', 'YrkStalln', 'KU1lnk', 'KU2lnk', 'KU3lnk',
                                     'Raks_SummaInk', 'Raks_Huvudanknytning', 'Raks_EtablGrad', 'Raks_Forvink'
                                  ])
-    # Revert changes for specified keys
-    for d,kid_info in zip(data, kid_info_dicts):
+    for d,kid_info in zip(data, kid_info_dicts): #Add the kid_info back
         d['kid_info'] = kid_info
     return dataframe
 
@@ -1463,20 +1445,29 @@ def chunk_list(input_list, chunk_size=20000):
 
 
 def dict_to_csvs(dict_data, sample_year=1990):
-    sliced_dict_list = chunk_list(dict_data)
-    folder_name = f"synthetic_scb_data_{sample_year}"
+    folder_name = "synthetic_scb_data"
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
 
+    sliced_dict_list = chunk_list(dict_data)
     number_of_times = len(sliced_dict_list)
-    print(f"{0}/{number_of_times}")
+    
     i = 1
+    print(f"{i}/{number_of_times}")
+    
     for chunk in sliced_dict_list:
         if (i+1) % 15 == 0:
             print(f"{i+1}/{number_of_times}")
-        data = generate_data_frame(chunk)
-        data.to_csv(os.path.join(folder_name, f"{sample_year}_data_part{i}.csv"), index=False)
-        i +=1
+
+        subfolder_name = f"synthetic_scb_data_{sample_year}_part{i}"
+        subfolder_path = os.path.join(folder_name, subfolder_name)
+
+        if not os.path.exists(subfolder_path):
+            os.makedirs(subfolder_path)
+
+        data = generate_data_frame(chunk, sample_year)
+        data.to_csv(os.path.join(subfolder_path, f"{sample_year}_data.csv"), index=False)
+        i += 1
     
     return True
 
@@ -1541,8 +1532,9 @@ def dict_to_csvs(dict_data, sample_year=1990):
 
 def age_people_one_year(list_of_dictionaries, sample_year):
     for my_dict in list_of_dictionaries:
-        is_dead = my_dict['DodDatum']
-        if is_dead == None:
+        if type(my_dict['DodDatum']) == type(str): #If there is a string saying the death date, then we won't update the age or death date
+            continue
+        else:
             death_date = dod_datum(sample_year) #Every year the person could've died
             new_alder = alder(my_dict['PersonNr'], sample_year, death_date)
             my_dict['Alder'] = new_alder
@@ -1590,6 +1582,7 @@ def update_kids(list_of_dictionaries, sample_year):
             if kid_age == 15: #The kid will turn 16 and thus is added as their own row in the dataframe
                 kid_dicts = kid_into_row(my_dict, sample_year, number_of_kids)
                 kids_grown_to_adolecents = kids_grown_to_adolecents + kid_dicts
+
             new_kid_data[kid_age+1] = number_of_kids
         my_dict['kid_info'] = new_kid_data
     list_of_dictionaries = list_of_dictionaries+kids_grown_to_adolecents
@@ -1597,23 +1590,35 @@ def update_kids(list_of_dictionaries, sample_year):
 
 def simulate_1_year(list_of_dictionaries, sample_year):
     age_people_one_year(list_of_dictionaries, sample_year)
-    # print(len(list_of_dictionaries))
     list_of_dictionaries = update_kids(list_of_dictionaries, sample_year)
-    # print(len(list_of_dictionaries))
     return list_of_dictionaries
 
-
-
-if __name__ == "__main__":
-    sample_year = 1991
-    number_of_households = 2000
-    print(f"Creating data for {number_of_households} households for year {sample_year}")
-    a = generate_data(number_of_households, sample_year)
-    print(len(a))
-    dict_to_csvs(a, sample_year)
+def simulate_x_years(number_of_households, start_year, number_of_years_to_simulate):
+    print(f"Creating data for {number_of_households} households in the year {start_year} - {start_year+number_of_years_to_simulate-1}")
+    print(f"Creating start data for year {start_year}")
+    data = generate_data(number_of_households, start_year)
     print("Turning data into csv(s)")
-    print("Simulating 1 year")
-    a = simulate_1_year(a, sample_year)   
-    print(len(a))
-    dict_to_csvs(a, sample_year+1)
+    dict_to_csvs(data, start_year)
+
+    starting_year_simulation = start_year+1
+    stopping_year_simulation = start_year+number_of_years_to_simulate
+
+    for year in range(starting_year_simulation, stopping_year_simulation): #Start year 1990, simulate year 1991 - 1991+years_to_simulate
+        print("--------------------------")
+        print("")
+        print(f"Simulating data for year {year}")
+        data = simulate_1_year(data, year)
+        print("Turning data into csv(s)")
+        dict_to_csvs(data, year)
+        print(f"Finished year {year}")
+    
+    print("--------------------------")
+    print("")
     print("Program finished")
+
+    return True
+
+
+
+
+simulate_x_years(500, 1990, 30) #How many households, starting year, number of csvs (years) ((including start year))
