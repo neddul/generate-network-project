@@ -1593,9 +1593,25 @@ def update_kids(list_of_dictionaries, sample_year):
     list_of_dictionaries = list_of_dictionaries+kids_grown_to_adolecents
     return list_of_dictionaries
 
+def get_babies(list_of_dictionaries):
+    for my_dict in list_of_dictionaries:
+        kid_info = my_dict['kid_info']
+        if 0 not in kid_info: #The person does not have any already existing newborns
+            if sum(kid_info.values()) < 5: #People will not have more than 5 kids living at home at a time
+                #roughly 68% of households are childless 
+                # https://www.scb.se/hitta-statistik/statistik-efter-amne/befolkning/befolkningens-sammansattning/befolkningsstatistik/pong/statistiknyhet/befolkningsstatistik-helaret-20222/
+                if random.random() > 0.65:
+                    kid_probability = random.random()
+                    #The chance of having twins, triplets is 1/250 and 1/62_500 respectively
+                    if kid_probability < 1/62500: kids = 3
+                    elif kid_probability < 1/250: kids = 2
+                    else: kids = 1
+                    kid_info[0] = kids
+
 def simulate_1_year(list_of_dictionaries, sample_year):
     age_people_one_year(list_of_dictionaries, sample_year)
     list_of_dictionaries = update_kids(list_of_dictionaries, sample_year)
+    get_babies(list_of_dictionaries)
     return list_of_dictionaries
 
 def simulate_x_years(number_of_households, start_year, number_of_years_to_simulate):
