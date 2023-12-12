@@ -720,6 +720,8 @@ def make_kid_family_frame(PersonNr, FamId, is_Kid, sample_year):
     data = merge_dictionaries(kids, utbildning)
     data['PersonNr'] = PersonNr
     data['FamId'] = FamId
+    data['spouse'] = dict()
+    data['my_kids_living_at_home'] = dict()
     return data
 
 
@@ -936,8 +938,8 @@ def generate_family(sample_year):
     data['PersonNr'] = PersonNr
     data['FamId'] = PersonNr
     data['kid_info'] = kid_info
-    data['my_kids_living_at_home'] = {}
-    data['spouse'] = {}
+    data['my_kids_living_at_home'] = dict()
+    data['spouse'] = dict()
     family_dicts = [data]
 
 
@@ -946,9 +948,12 @@ def generate_family(sample_year):
     if len(kids_frames) == 0:
         if random.randint(1,100) > 60: # Probability someone is living alone
             spouse = create_spouse(PersonNr, kids_info, sample_year)
-            spouse['kid_info'] = kid_info
             family_dicts.append(spouse)
+            #The spouses will know about each other and share dictionary of people living at home
+            spouse['kid_info'] = kid_info
+            spouse['spouse'] = data
             data['spouse'] = spouse
+            spouse['my_kids_living_at_home'] = data['my_kids_living_at_home']
     else:
         for kid in kids_frames:
             data['my_kids_living_at_home'][kid['PersonNr']] = kid
@@ -957,9 +962,11 @@ def generate_family(sample_year):
         family_size = random.randint(min_family_size, len(kids_frames)+1) #Bigger family, more likley there's a spouse in the household
         if family_size > 1:
             spouse = create_spouse(PersonNr, kids_info, sample_year)
+            #The spouses will know about each other and share dictionary of people living at home
             spouse['kid_info'] = kid_info
-            spouse['my_kids_living_at_home'] = data['my_kids_living_at_home']
             spouse['spouse'] = data
+            data['spouse'] = spouse
+            spouse['my_kids_living_at_home'] = data['my_kids_living_at_home']
             family_dicts.append(spouse)
     
     return family_dicts
@@ -1382,7 +1389,6 @@ def generate_household(sample_year=2019):
     return data
 
 
-from itertools import chain
 def generate_data(amount, sample_year=2019, verbose=False): 
     """
     Parameters
@@ -1409,14 +1415,9 @@ def generate_data(amount, sample_year=2019, verbose=False):
         household = generate_household(sample_year)
         for person_in_household in household:
             PersonNr = person_in_household['PersonNr']
-            data[PersonNr] = person_in_household
+            data[PersonNr] = person_in_household  
     
-
-    # data = list(chain(*people)) #Flattens list     
-    
-
     return data
-
 
 
 def generate_data_frame(data, sample_year):
@@ -1535,18 +1536,43 @@ def dict_to_csvs(dict_data, sample_year=1990):
 # -------------------------------------------------------------------------------------------------
 
 
-def age_people_one_year(list_of_dictionaries, sample_year):
-    for my_dict in list_of_dictionaries:
-        is_dead = my_dict['DodDatum']
-        if is_dead == None: #Death date is 'None' which means the person is alive
+def age_people_one_year(dictionary_data, sample_year):
+    visited_kid_data = set()
+    for PersonNr, dict_data in dictionary_data.items():
+        #If I am not already dead, check and see if I am going to die this year
+        if dict_data['DodDatum'] == None: #Death date is 'None' which means the person is alive
             death_date = dod_datum(sample_year) #Every year the person can die
             if death_date == None: # The person did not die and we update the age
-                my_dict['Alder'] += 1
+                dict_data['Alder'] += 1
             else:
-                my_dict['DodDatum'] = death_date
+                dict_data['DodDatum'] = death_date
+
+        #Make sure your kid data has not already been updated
+        if PersonNr not in visited_kid_data:
+            #Get kid ages information
+            my_kid_info = dict_data['kid_info']
+
+            #Save old values 
+            old_kid_ages = list(my_kid_info.keys())
+            number_of_kids = list(my_kid_info.values())
             
-        else:
-            c = None # If the person was already dead, we do nothing
+            #Clear the dictionary
+            my_kid_info.clear()
+            
+            #Fill the dictionary with new ages 
+            for old_kid_ages,number_of_kids in zip(old_kid_ages, number_of_kids):
+                my_kid_info[old_kid_ages+1] = number_of_kids
+
+            my_spouse = dict_data['spouse']
+            if my_spouse: #Check if I have a spouse
+                #Adding the personnumber of my potential spouse so I won't update the kids from the spouse too
+                spouse_PersonNr = my_spouse['PersonNr']
+                visited_kid_data.add(spouse_PersonNr)
+
+
+
+
+
 
 
 def kid_into_row(parent_dict, sample_year, number_of_kids):
@@ -1675,7 +1701,7 @@ def move_out(list_of_dictionaries, verbose=False):
                         my_kid_info.pop(kid_in_household['Alder'])
 
 
-def simulate_1_year(list_of_dictionaries, sample_year, verbose=False):
+def simulate_1_year(list_of_dictionaries, sample_year):
     age_people_one_year(list_of_dictionaries, sample_year)
     # move_out(list_of_dictionaries, verbose)
     # get_babies(list_of_dictionaries)
@@ -1700,7 +1726,7 @@ def simulate_x_years(number_of_households, start_year, number_of_years_to_simula
                 print("--------------------------")
                 print("")
                 print(f"Simulating data for year {year}")
-            simulate_1_year(data, year, verbose)
+            simulate_1_year(data, year)
             if verbose:
                 print("Turning data into csv(s)")
             dict_to_csvs(data, year)
@@ -1715,10 +1741,10 @@ def simulate_x_years(number_of_households, start_year, number_of_years_to_simula
     return True
 
 
-simulate_x_years(1_000_00, 1990, 0, True) #How many households, starting year, number of csvs (years) ((including start year))
-# for i in range(51):
-#     if i % 10 == 0:
-#         print(i)
+for i in range(2):
+    if i % 10 == 0:
+        print(i)
+    simulate_x_years(1, 1990, 30, True) #How many households, starting year, number of csvs (years) ((including start year))
     
 
 # sample_year = 1991
