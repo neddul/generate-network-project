@@ -250,150 +250,123 @@ import random
 import pandas as pd
 import numpy as np
 
-def generate_employment_statuses(amount,sample_year):
+def generate_employment_statuses(sample_year):
     #1 = Gainfully employed according to the limit, 16-74 years 
     #5 = Not gainfully employed according to the limit, but with control information from employer or business income during the year 
     #6 = Not gainfully employed, without control information from employer or business income during the year 
     #7 = Gainfully employed, 15 years
-    SyssStat = []
-    for i in range(amount):  
-        if sample_year <= 2003:
-            status = [1, 5, 6]
-            probabilities = [0.6, 0.2, 0.2]
-        elif sample_year <= 2011:
-            status = [1, 5, 6]
-            probabilities = [0.7, 0.2, 0.1]
-        else:
-            status = [1, 5, 6, 7]
-            probabilities = [0.69, 0.2, 0.1, 0.01]
-        employ = random.choices(status, probabilities)[0]
-        SyssStat.append(employ)
-
-    return SyssStat
+    if sample_year <= 2003:
+        status = [1, 5, 6]
+        probabilities = [0.6, 0.2, 0.2]
+    elif sample_year <= 2011:
+        status = [1, 5, 6]
+        probabilities = [0.7, 0.2, 0.1]
+    else:
+        status = [1, 5, 6, 7]
+        probabilities = [0.69, 0.2, 0.1, 0.01]
+    return random.choices(status, probabilities)[0]
 
 
-def generate_workingtime(SyssStat):
+def generate_workingtime(SyssStat): #How many work hours/week
     #1 = 0 hours, 2 = 1 – 15 hours, 3 = 16 – 19 hours, 4 = 20 – 34 hours, 5 = 35 – w hours, 9 = Uppgift
-    ArbTid = []
-    for s in SyssStat:
-        if s == 1 or s == 7 or s == 5:
-            status = [1,2,3,4,5,9]
-            probabilities = [0.05, 0.1, 0.15, 0.2, 0.4, 0.1]
-            time = random.choices(status, probabilities)[0]
-            ArbTid.append(time)
-        else:
-            ArbTid.append(" ")
+    if SyssStat == 1 or SyssStat == 7 or SyssStat == 5:
+        status = [2,3,4,5,9]
+        probabilities = [0.1, 0.2, 0.2, 0.4, 0.1]
+        ArbTid = random.choices(status, probabilities)[0]
+    else:
+        ArbTid = 1
     return ArbTid 
 
 
-def generate_job(ArbTid):
-    #0 = Persons without control duties 1 = Sailors 
-    #2 = Employees (excl. seamen) 4 = Entrepreneurs 5 = Entrepreneurs in own AB
-    YrkStalln = []
-    for i in ArbTid:
-        if i == " ":
-            YrkStalln.append(" ")
-        else:
-            status = [0,1,2,4,5]
-            probabilities = [0.1, 0.2, 0.49, 0.2, 0.01]
-            job = random.choices(status, probabilities)[0]
-            YrkStalln.append(job)
+def generate_job(ArbTid): #What kind of work the person is involved in
+    #0 = Persons without control duties 
+    #1 = Sailors 
+    #2 = Employees (excl. seamen) 
+    #4 = Entrepreneurs 
+    #5 = Entrepreneurs in own AB
+    if ArbTid == 1:
+        YrkStalln = 0
+    else:
+        status = [1,2,4,5]
+        probabilities = [0.225, 0.5, 0.225, 0.05]
+        YrkStalln = random.choices(status, probabilities)[0]
     return YrkStalln
 
 
-def generate_income(ArbTid):
+def generate_income(ArbTid): #How much money each() work place generates
     mean=1000
     std_dev=500
-    KU1lnk = []
-    KU2lnk = []
-    KU3lnk = []
+    KU1lnk, KU2lnk, KU3lnk = 0,0,0
 
-    for i in ArbTid:
-        if i == " ":  
-            KU1lnk.append(0)
-            KU2lnk.append(0)
-            KU3lnk.append(0)
-        else:
-            # Generate incomes from a normal distribution with the specified mean and standard deviation
-            ku1 = max(0, int(np.random.normal(mean, std_dev)))
-            ku2 = max(0, int(np.random.normal(mean, std_dev)))
-            ku3 = max(0, int(np.random.normal(mean, std_dev)))
-            
-            # Ensure KU1lnk > KU2lnk > KU3lnk
-            KU1lnk.append(max(ku1, ku2, ku3))
-            generate_ku2 = random.random() < 0.5
-            if generate_ku2:
-                KU2lnk.append(sorted([ku1, ku2, ku3])[1])
-                generate_ku3 = random.random() < 0.1
-                if generate_ku3:
-                    KU3lnk.append(min(ku1, ku2, ku3))
-                else:
-                    KU3lnk.append(0)
-            else:
-                KU2lnk.append(0)
-                KU3lnk.append(0)
-            
+    if ArbTid != 1:  #The person has some income
+        # Generate incomes from a normal distribution with the specified mean and standard deviation
+        random_number = random.random()
+        if random_number < 0.1: # The person will have 3 sources of income
+            incomes = [ max(0, int(np.random.normal(mean, std_dev))), 
+                        max(0, int(np.random.normal(mean, std_dev))),
+                        max(0, int(np.random.normal(mean, std_dev)))]
+            incomes = sorted(incomes)
+            KU1lnk = incomes[0]
+            KU2lnk = incomes[1]
+            KU3lnk = incomes[2]
+        elif random_number < 0.5: #The person will have 2 sources of income
+            incomes = [ max(0, int(np.random.normal(mean, std_dev))), 
+                        max(0, int(np.random.normal(mean, std_dev)))]
+            incomes = sorted(incomes)
+            KU1lnk = incomes[0]
+            KU2lnk = incomes[1]
+        else: # The person has 1 source of income
+            KU1lnk = max(0, int(np.random.normal(mean, std_dev)))
     return KU1lnk, KU2lnk, KU3lnk
 
 
-def generate_total_incomes(KU1lnk, KU2lnk, KU3lnk):
-    
-    median_income = 2753
-    sigma = 0.6  # Adjust as needed for desired skewness
-    
-    mu = np.log(median_income) - 0.5 * sigma**2
-    
-    incomes = np.random.lognormal(mean=mu, sigma=sigma, size=len(KU1lnk))
-    incomes = np.clip(incomes, 0, 1014000)
-    incomes = incomes.astype(int) 
-    Raks_SummaInk = []
-    for i in range(0,len(incomes)):
-        if incomes[i] < KU1lnk[i]+KU2lnk[i]+KU3lnk[i]:
-            Raks_SummaInk.append(KU1lnk[i]+KU2lnk[i]+KU3lnk[i])
-        else:
-            Raks_SummaInk.append(incomes[i])
-                   
+def generate_total_incomes(KU1lnk, KU2lnk, KU3lnk): #Total income from work and other allowances, such as CSN or "bostadsbidrag"
+    total_income = KU1lnk+KU2lnk+KU3lnk
+    if total_income > 0: #You have some income
+        extra_income = random.randint(0, int(total_income*0.2)) #You could have up to 20% of your normal income as extra
+    else: #You have no income, you could be living from some kind of allowance, like CSN
+        extra_income = random.randint(100, 1500) #Up to 15.000 SEK per month 
+
+    Raks_SummaInk = total_income + extra_income
     return Raks_SummaInk
 
 
-def generate_labor_connection(YrkStalln):
-    Raks_EtablGrad = []
-    for i in YrkStalln:
-        if i != 2:
-            Raks_EtablGrad.append('NULL')
-        else:
-            Raks_EtablGrad.append(random.choice([0, 1]))
-            
+def generate_labor_connection(YrkStalln): # How well the person is connected to the market
+    if YrkStalln == 0:
+        Raks_EtablGrad = 'NULL'
+    else:
+        Raks_EtablGrad = 0 if random.random() > 0.5 else 1
     return Raks_EtablGrad   
 
 
-def generate_Forvink(Raks_SummaInk):
-    Raks_Forvink = []
-    for i in Raks_SummaInk:
-        if i > 10000:
-            Raks_Forvink.append(i)
-        else:
-            Raks_Forvink.append(0)
+def generate_Forvink(KU1lnk, KU2lnk, KU3lnk):
+    Raks_Forvink = KU1lnk+KU2lnk+KU3lnk
     return Raks_Forvink
 
-
+#Work ties should be used here
 def generate_main_labor_connection(YrkStalln):
-    Raks_Huvudanknytning = []
-    for i in YrkStalln:
-        if i == 2:
+    #1 Full time employed
+    #2 Newly hired
+    #3 Fired
+    #4 Part time employed
+    #5 Combination
+    #6 Entrepreneur
+    #7 Unemployed
+    Raks_Huvudanknytning = None
+    if YrkStalln == 0:
+        Raks_Huvudanknytning = 7
+    else:
+        if YrkStalln < 4 and YrkStalln > 0:
             status = [1,2,3,4]
             probabilities = [0.5,0.2,0.1,0.2]
-            connection = random.choices(status, probabilities)[0]
-            Raks_Huvudanknytning.append(connection)          
-        elif i == 0:
-            Raks_Huvudanknytning.append(7)
+            Raks_Huvudanknytning = random.choices(status, probabilities)[0]
         else:
-            Raks_Huvudanknytning.append(random.choice([5, 6]))
+            Raks_Huvudanknytning = 5 if random.random() > 0.5 else 6
                 
     return Raks_Huvudanknytning 
 
 
-def generate_economic(sample_year,amount=1, is_kid=False):
+def generate_economic(sample_year, is_kid=False):
     if is_kid:
         employment_data = {
         'SyssStat'              : 6, #Not working 
@@ -402,32 +375,32 @@ def generate_economic(sample_year,amount=1, is_kid=False):
         'KU1lnk'                : 0, #Biggest source of income
         'KU2lnk'                : 0, #Second biggest source of income
         'KU3lnk'                : 0, #Third biggest source of income
-        'Raks_SummaInk'         : 120, #1000kr/per month for kids in highschool
+        'Raks_SummaInk'         : 100, #1000kr/per month for kids in highschool during school season
         'Raks_Huvudanknytning'  : 7, #Which title, full time employed, newly hired etc, 7 = Without work
         'Raks_EtablGrad'        : 'NULL', #How well connected the person is to the market, 0 well established, 1 poorly established, NULL don't know
         'Raks_Forvink'          : 0 #Income from work
                         }   
     else:
-        SyssStat = generate_employment_statuses(amount,sample_year)
+        SyssStat = generate_employment_statuses(sample_year)
         ArbTid = generate_workingtime(SyssStat)
         YrkStalln = generate_job(ArbTid)
         KU1lnk, KU2lnk, KU3lnk = generate_income(ArbTid)
         Raks_SummaInk = generate_total_incomes(KU1lnk,KU2lnk, KU3lnk)
         Raks_EtablGrad = generate_labor_connection(YrkStalln)
-        Raks_Forvink = generate_Forvink(Raks_SummaInk)
+        Raks_Forvink = generate_Forvink(KU1lnk, KU2lnk, KU3lnk)
         Raks_Huvudanknytning = generate_main_labor_connection(YrkStalln)
 
         employment_data = {
-            'SyssStat'              : SyssStat[0],
-            'ArbTid'                : ArbTid[0],
-            'YrkStalln'             : YrkStalln[0],
-            'KU1lnk'                : KU1lnk[0],
-            'KU2lnk'                : KU2lnk[0],
-            'KU3lnk'                : KU3lnk[0],
-            'Raks_SummaInk'         : Raks_SummaInk[0],
-            'Raks_Huvudanknytning'  : Raks_Huvudanknytning[0],
-            'Raks_EtablGrad'        : Raks_EtablGrad[0],
-            'Raks_Forvink'          : Raks_Forvink[0]
+            'SyssStat'              : SyssStat,
+            'ArbTid'                : ArbTid,
+            'YrkStalln'             : YrkStalln,
+            'KU1lnk'                : KU1lnk,
+            'KU2lnk'                : KU2lnk,
+            'KU3lnk'                : KU3lnk,
+            'Raks_SummaInk'         : Raks_SummaInk,
+            'Raks_Huvudanknytning'  : Raks_Huvudanknytning,
+            'Raks_EtablGrad'        : Raks_EtablGrad,
+            'Raks_Forvink'          : Raks_Forvink
                             }    
     return employment_data
 
@@ -501,49 +474,57 @@ def random_sampler(start, end, number):
         
     return output
 
-generate_education_utbildning = pd.read_csv("data/utbildning_cleaner.csv")
 
-def generate_education(amount=1): 
-    Sun2000niva_old = random_sampler(10000,99999, amount)
-    indexes = random_sampler(0,len(generate_education_utbildning)-1, amount)
-    SUN2000Grp = []
-    SUN2000Inr = []
-    SUN2000Niva = []
+
+import csv
+
+# Open the CSV file
+with open('data/utbildning_cleaner.csv', 'r') as csv_file:
+    # Create a CSV reader with DictReader
+    csv_reader = csv.DictReader(csv_file)
+
+    # Convert the CSV data into a list of dictionaries
+    education_list = list(csv_reader)
+
+def generate_education(): 
+    Sun2000niva_old = random.randint(10000,99999)
+    index = Sun2000niva_old % len(education_list)
+    my_education = education_list[index]
+    SUN2000Grp = my_education['Utbildningsgrupper_2020']
+    SUN2000Inr = 0
+    SUN2000Niva = 0
     alphabet = string.ascii_lowercase
-    for i in range(len(indexes)):
-        index = indexes[i]
-        SUN2000Grp.append(generate_education_utbildning.at[index, 'Utbildningsgrupper 2020'])
-        options_inr = generate_education_utbildning.at[index, 'Inriktningskoder SUN 2020']
-        if isinstance(options_inr , int):
-            random_letters = random.choice(alphabet)
-            if options_inr <100: 
-                options_inr=options_inr+100
-            SUN2000Inr.append(str(options_inr)+ random_letters)
+    options_inr = my_education['Inriktningskoder_SUN_2020']
+    if isinstance(options_inr , int):
+        random_letters = random.choice(alphabet)
+        if options_inr <100: 
+            options_inr=options_inr+100
+        SUN2000Inr = str(options_inr)+ random_letters
+    else: 
+        options = [item.strip() for item in options_inr.split(',')]
+        SUN2000Inr = random.choice(options)
+    options_niv = my_education['Nivakoder_SUN_2020']
+    if isinstance(options_niv, int) and options_niv > 100:
+        SUN2000Niva = options_niv
+    elif isinstance(options_niv, int):
+        SUN2000Niva = options_niv*100
+    else: 
+        options = [item.strip() for item in options_niv.split(',')]
+        selection = random.choice(options)
+        if  isinstance(selection, int) and selection <100:
+            SUN2000Niva = selection*100
         else: 
-            options = [item.strip() for item in options_inr.split(',')]
-            SUN2000Inr.append(random.choice(options))
-        options_niv = generate_education_utbildning.at[index, 'Nivåkoder SUN 2020']
-        if isinstance(options_niv, int) and options_niv > 100:
-            SUN2000Niva.append(options_niv)
-        elif isinstance(options_niv, int):
-            SUN2000Niva.append(options_niv*100)
-        else: 
-            options = [item.strip() for item in options_niv.split(',')]
-            selection = random.choice(options)
-            if  isinstance(selection, int) and selection <100:
-                SUN2000Niva.append(selection*100)
-            else: 
-                    
-                SUN2000Niva.append(selection)
+                
+            SUN2000Niva = selection
     #examAr is missing as well 
     
     #examkommun is different 
 
     education = {
-            'Sun2000niva_old'   : Sun2000niva_old[0],
-            'SUN2000niva'       : SUN2000Niva[0],
-            'SUN2000Inr'        : SUN2000Inr[0],
-            'SUN2000Grp'        : SUN2000Grp[0],
+            'Sun2000niva_old'   : Sun2000niva_old,
+            'SUN2000niva'       : SUN2000Niva,
+            'SUN2000Inr'        : SUN2000Inr,
+            'SUN2000Grp'        : SUN2000Grp,
     }
     return education
 
@@ -955,26 +936,32 @@ def generate_family(sample_year):
     data['PersonNr'] = PersonNr
     data['FamId'] = PersonNr
     data['kid_info'] = kid_info
+    data['my_kids_living_at_home'] = {}
+    data['spouse'] = {}
     family_dicts = [data]
 
 
-    # kids_frames = create_kids_data(sample_year, PersonNr, kids_info) 
-    # if len(kids_frames) == 0:
-    #     if random.randint(1,100) > 60: # Probability someone is living alone
-    #         spouse = create_spouse(PersonNr, kids_info, sample_year)
-    #         spouse['kid_info'] = kid_info
-    #         family_dicts.append(spouse)
-    # else:
-    #     family_dicts = family_dicts + kids_frames
-    #     min_family_size = 0
-    #     family_size = random.randint(min_family_size, len(kids_frames)+1) #Bigger family, more likley there's a spouse in the household
-    #     if family_size > 1:
-    #         spouse = create_spouse(PersonNr, kids_info, sample_year)
-    #         spouse['kid_info'] = kid_info
-    #         family_dicts.append(spouse)
-    spouse = create_spouse(PersonNr, kids_info, sample_year)
-    spouse['kid_info'] = kid_info
-    family_dicts.append(spouse)    
+
+    kids_frames = create_kids_data(sample_year, PersonNr, kids_info) 
+    if len(kids_frames) == 0:
+        if random.randint(1,100) > 60: # Probability someone is living alone
+            spouse = create_spouse(PersonNr, kids_info, sample_year)
+            spouse['kid_info'] = kid_info
+            family_dicts.append(spouse)
+            data['spouse'] = spouse
+    else:
+        for kid in kids_frames:
+            data['my_kids_living_at_home'][kid['PersonNr']] = kid
+        family_dicts = family_dicts + kids_frames
+        min_family_size = 0
+        family_size = random.randint(min_family_size, len(kids_frames)+1) #Bigger family, more likley there's a spouse in the household
+        if family_size > 1:
+            spouse = create_spouse(PersonNr, kids_info, sample_year)
+            spouse['kid_info'] = kid_info
+            spouse['my_kids_living_at_home'] = data['my_kids_living_at_home']
+            spouse['spouse'] = data
+            family_dicts.append(spouse)
+    
     return family_dicts
 
 
@@ -1373,7 +1360,7 @@ def generate_work(personnummer, county, economicstatus, is_kid=False):
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
-def generate_person(sample_year=2019):
+def generate_household(sample_year=2019):
     family_members = generate_family(sample_year)
     
 
@@ -1381,7 +1368,6 @@ def generate_person(sample_year=2019):
     Lan = Geographical['Lan']
     data = []
     for member in family_members:
-        
         PersonNr = member['PersonNr']
 
         Demographic = generate_demographic(PersonNr, sample_year)
@@ -1397,7 +1383,7 @@ def generate_person(sample_year=2019):
 
 
 from itertools import chain
-def generate_data(amount, sample_year=2019): 
+def generate_data(amount, sample_year=2019, verbose=False): 
     """
     Parameters
     ----------
@@ -1413,16 +1399,20 @@ def generate_data(amount, sample_year=2019):
         list of dictionaries with data for all variables.
 
     """
-    people = []
-    print(f"{0}/{amount}")
+    data = {}
+    if verbose:
+        print(f"{0}/{amount}")
     for i in range(amount):
-        if (i+1) % 10000 == 0:
-            print(f"{i+1}/{amount}")
-        household = generate_person(sample_year)
-        people.append(household)
+        if verbose:
+            if (i+1) % 10000 == 0:
+                print(f"{i+1}/{amount}")
+        household = generate_household(sample_year)
+        for person_in_household in household:
+            PersonNr = person_in_household['PersonNr']
+            data[PersonNr] = person_in_household
     
 
-    data = list(chain(*people)) #Flattens list     
+    # data = list(chain(*people)) #Flattens list     
     
 
     return data
@@ -1430,31 +1420,28 @@ def generate_data(amount, sample_year=2019):
 
 
 def generate_data_frame(data, sample_year):
-    kid_info_dicts = []
     for d in data:
-        update_kid_categories(d, d['kid_info'], sample_year)
-        kid_info_dicts.append(d.pop('kid_info')) #Remove kid_info temporarily for dataframe creation
-
-    dataframe = pd.DataFrame(data, columns=[  
-                                    'PersonNr', 'Lan', 'Kommun', 'Forsamling', 'Distriktskod', 'FastLopNr', 'FastBet',
-                                    'Barn0_3', 'Barn4_6', 'Barn7_10', 'Barn11_15', 'Barn16_17',
-                                    'Barn18plus', 'Barn18_19', 'Barn20plus', 'FamId', 
-                                    'Sun2000niva_old','SUN2000niva', 'SUN2000Inr', 'SUN2000Grp',
-                                    'CfarNr_LISA', 'ArbstId', 'AstNr_LISA', 'AstKommun', 'AstLan',
-                                    'KU1PeOrgNr', 'KU1CfarNr', 'KU1AstNr', 'KU1AstKommun', 'KU1AstLan',
-                                    'KU1YrkStalln', 'KU2PeOrgNr', 'KU2CfarNr', 'KU2AstNr', 'KU2AstKommun',
-                                    'KU2AstLan', 'KU2YrkStalln', 'KU3PeOrgNr', 'KU3CfarNr', 'KU3AstNr',
-                                    'KU3AstKommun', 'KU3AstLan', 'KU3YrkStalln',
-                                    'FodelseAr', 'DodDatum', 'Alder', 'Kon', 'InvUtvLand', 'InvUtvManad',
-                                    'PostTyp', 'FodelseLandnamn', 'FodelseTidMor', 'FodelseLandnamnMor',
-                                    'FodelseTidFar', 'FodelseLandnamnFar', 'UtlSvBakg',
-                                    'SyssStat', 'ArbTid', 'YrkStalln', 'KU1lnk', 'KU2lnk', 'KU3lnk',
-                                    'Raks_SummaInk', 'Raks_Huvudanknytning', 'Raks_EtablGrad', 'Raks_Forvink'
-                                 ])
-    for d,kid_info in zip(data, kid_info_dicts): #Add the kid_info back
-        d['kid_info'] = kid_info
-    
-    return dataframe
+        update_kid_categories(d, d['kid_info'], sample_year) #Updates kids categories from kid_info dictionary
+    csv_columns =   [ #We will only use these keys in the dictionary when creating the dataframe
+    'PersonNr', 'Lan', 'Kommun', 'Forsamling', 'Distriktskod',
+    'FastLopNr', 'FastBet', 'Barn0_3', 'Barn4_6', 'Barn7_10',
+    'Barn11_15', 'Barn16_17', 'Barn18plus', 'Barn18_19',
+    'Barn20plus', 'FamId', 'Sun2000niva_old', 'SUN2000niva',
+    'SUN2000Inr', 'SUN2000Grp', 'CfarNr_LISA', 'ArbstId',
+    'AstNr_LISA', 'AstKommun', 'AstLan', 'KU1PeOrgNr',
+    'KU1CfarNr', 'KU1AstNr', 'KU1AstKommun', 'KU1AstLan',
+    'KU1YrkStalln', 'KU2PeOrgNr', 'KU2CfarNr', 'KU2AstNr',
+    'KU2AstKommun', 'KU2AstLan', 'KU2YrkStalln', 'KU3PeOrgNr',
+    'KU3CfarNr', 'KU3AstNr', 'KU3AstKommun', 'KU3AstLan',
+    'KU3YrkStalln', 'FodelseAr', 'DodDatum', 'Alder', 'Kon',
+    'InvUtvLand', 'InvUtvManad', 'PostTyp', 'FodelseLandnamn',
+    'FodelseTidMor', 'FodelseLandnamnMor', 'FodelseTidFar',
+    'FodelseLandnamnFar', 'UtlSvBakg', 'SyssStat', 'ArbTid',
+    'YrkStalln', 'KU1lnk', 'KU2lnk', 'KU3lnk',
+    'Raks_SummaInk', 'Raks_Huvudanknytning', 'Raks_EtablGrad',
+    'Raks_Forvink']
+    relevant_data = [{key: d[key] for key in csv_columns} for d in data]
+    return pd.DataFrame(relevant_data)
 
 import os
 def chunk_list(input_list, chunk_size=20000): 
@@ -1465,16 +1452,16 @@ def dict_to_csvs(dict_data, sample_year=1990):
     folder_name = "synthetic_scb_data"
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
-
+    dict_data = list(dict_data.values())
     sliced_dict_list = chunk_list(dict_data)
     number_of_times = len(sliced_dict_list)
     
     i = 1
-    print(f"{i}/{number_of_times}")
+    # print(f"{i}/{number_of_times}")
     
     for chunk in sliced_dict_list:
-        if (i+1) % 15 == 0:
-            print(f"{i+1}/{number_of_times}")
+        # if (i+1) % 15 == 0:
+            # print(f"{i+1}/{number_of_times}")
 
         subfolder_name = f"synthetic_scb_data_{sample_year}"
         subfolder_path = os.path.join(folder_name, subfolder_name)
@@ -1551,25 +1538,21 @@ def dict_to_csvs(dict_data, sample_year=1990):
 def age_people_one_year(list_of_dictionaries, sample_year):
     for my_dict in list_of_dictionaries:
         is_dead = my_dict['DodDatum']
-        if type(is_dead) != type(None): #If there is a string saying the death date, then we won't update the age or death date
-            c = 2
-        else:
-            death_date = dod_datum(sample_year) #Every year the person could've died
-            if type(death_date) != type(None): # The guy died and we won't update his age
-                c = 2
+        if is_dead == None: #Death date is 'None' which means the person is alive
+            death_date = dod_datum(sample_year) #Every year the person can die
+            if death_date == None: # The person did not die and we update the age
+                my_dict['Alder'] += 1
             else:
-            # new_alder = alder(my_dict['PersonNr'], sample_year, death_date)
-                my_dict['Alder'] = my_dict['Alder'] + 1
-            my_dict['DodDatum'] = death_date
-    print()
-    print("Aged people 1 year")
-    print_list_of_dicts(list_of_dictionaries)
-    print()
-    print("----------------------------------")
+                my_dict['DodDatum'] = death_date
+            
+        else:
+            c = None # If the person was already dead, we do nothing
+
 
 def kid_into_row(parent_dict, sample_year, number_of_kids):
     min_age_to_be_in_a_row = 16
     yearborn = sample_year - min_age_to_be_in_a_row
+
     PersonNr_kids = []
     if number_of_kids == 1:
         PersonNr_kid = person_nummer_creation(sample_year, start_date=f"{yearborn}0101", stop_year=f"{yearborn}1231") # Third kid born whenever
@@ -1612,7 +1595,6 @@ def update_kids(list_of_dictionaries, sample_year):
             kid_data.clear()
             for old_kid_ages,number_of_kids in zip(old_kid_ages, number_of_kids):
                 kid_data[old_kid_ages+1] = number_of_kids
-            print(kid_data)
             for age, amount in kid_data.items():
                 if age == 16: #The kid will turn 16 and thus is added as their own row in the dataframe
                     kid_dicts = kid_into_row(my_dict, sample_year, amount)
@@ -1620,17 +1602,13 @@ def update_kids(list_of_dictionaries, sample_year):
             updated_dicts.append(kid_data)
 
     list_of_dictionaries = list_of_dictionaries+kids_grown_to_adolecents
-    print()
-    print("Updated all kids")
-    print_list_of_dicts(list_of_dictionaries)
-    print()
-    print("----------------------------------")
     return list_of_dictionaries
 
 def get_babies(list_of_dictionaries):
     for my_dict in list_of_dictionaries:
         kid_info = my_dict['kid_info']
-        if 0 not in kid_info:
+                                 #Kids living at home can not have children
+        if 0 not in kid_info and my_dict['PersonNr'] == my_dict['FamId']:
             if sum(kid_info.values()) < 5:
                 if random.random() > 0.65 and random.randint(0, sum(kid_info.values())) < 3:
                 # if True:  # Consider adding a meaningful condition here
@@ -1640,12 +1618,6 @@ def get_babies(list_of_dictionaries):
                     else:   kids = 1
 
                     my_dict['kid_info'][0] = kids
-    
-    print()
-    print("People may have gotten preggo")
-    print_list_of_dicts(list_of_dictionaries)
-    print()
-    print("----------------------------------")
 
     
 
@@ -1654,7 +1626,7 @@ def print_list_of_dicts(list_of_dictionaries):
         print(x)
         print()
 
-def move_out(list_of_dictionaries):
+def move_out(list_of_dictionaries, verbose=False):
     #Only the kids can move out
     visited_families = set()
     for my_dict in list_of_dictionaries:
@@ -1665,70 +1637,89 @@ def move_out(list_of_dictionaries):
             people_in_same_household = [d for d in list_of_dictionaries if d['FamId'] == my_famid] #Filtering out all people not living in the house
             kids_in_household = [d for d in people_in_same_household if d['kid_info'] is not my_kid_info] #Filtering out parents by checking kid_info, parents have different from all other kids in the house
             random_number = random.random()
-            for kid in kids_in_household:
-                if random_number > 9/kid['Alder']: #The older you get, the more likely you're to move out from your parents
-                    print("-----------------------------")
-                    print("I am moving out")
-                    print()
-                    print("Parent Dict")
-                    print(my_dict)
-                    print()
-                    print("People in the same household")
-                    print_list_of_dicts(people_in_same_household)
-                    print()
-                    print("Kids in household")
-                    print_list_of_dicts(kids_in_household)
-                    print()
-                    print("My age")
-                    print(kid['Alder'])
-                    print()
-                    print("-----------------------------")
-                    kid['FamId'] = kid['PersonNr']
-                    new_location = generate_geographical()
-                    kid = merge_dictionaries(kid, new_location)
-                    visited_families.add(kid['FamId'])
+            for kid_in_household in kids_in_household:
+                a = kid_in_household['Alder']
+                a = 9/a
+                dead = kid_in_household['DodDatum']
+                #random_number > a and 
+                if dead == None: #The older you get, the more likely you're to move out from your parents:
+                    if verbose:
+                        print("-----------------------------")
+                        print(f"Ages of people that should be living with me {my_kid_info}")
+                        print()
+                        print("I am moving out")
+                        print(kid_in_household)
+                        print()
+                        print(f"I am {kid_in_household['Alder']} years old")
+                        print()
+                        print("Other kids in the house")
+                        print_list_of_dicts(kids_in_household)
+
+                # if True it works???????
+                    # print()
+                    # print("Parent Dict")
+                    # print(my_dict)
+                    # print()
+                    # print("People in the same household")
+                    # print_list_of_dicts(people_in_same_household)
                     
-                    my_kid_info[kid['Alder']] -=1
-                    if my_kid_info[kid['Alder']] < 1: #If there are no more kids of that age, remove the key
-                        my_kid_info.pop(kid['Alder'])
+                    # print()
+                    # print("-----------------------------")
+                    kid_in_household['FamId'] = kid_in_household['PersonNr']
+                    new_location = generate_geographical()
+                    kid_in_household = merge_dictionaries(kid_in_household, new_location)
+                    visited_families.add(kid_in_household['FamId'])
+                    
+                    my_kid_info[kid_in_household['Alder']] -=1
+                    if my_kid_info[kid_in_household['Alder']] < 1: #If there are no more kids of that age, remove the key
+                        my_kid_info.pop(kid_in_household['Alder'])
 
 
-def simulate_1_year(list_of_dictionaries, sample_year):
+def simulate_1_year(list_of_dictionaries, sample_year, verbose=False):
     age_people_one_year(list_of_dictionaries, sample_year)
-    list_of_dictionaries = update_kids(list_of_dictionaries, sample_year)
-    get_babies(list_of_dictionaries)
-    move_out(list_of_dictionaries)
-    return list_of_dictionaries
-
-def simulate_x_years(number_of_households, start_year, number_of_years_to_simulate):
-    print(f"Creating data for {number_of_households} households in the year {start_year} - {start_year+number_of_years_to_simulate-1}")
-    print(f"Creating start data for year {start_year}")
-    data = generate_data(number_of_households, start_year)
+    # move_out(list_of_dictionaries, verbose)
+    # get_babies(list_of_dictionaries)
+    # list_of_dictionaries = update_kids(list_of_dictionaries, sample_year)
     
-    print("Turning data into csv(s)")
+
+def simulate_x_years(number_of_households, start_year, number_of_years_to_simulate, verbose=False):
+    if verbose:
+        print(f"Creating data for {number_of_households} households in the year {start_year} - {start_year+number_of_years_to_simulate-1}")
+        print(f"Creating start data for year {start_year}")
+    data = generate_data(number_of_households, start_year, verbose)
+    if verbose:
+        print("Turning data into csv(s)")
     dict_to_csvs(data, start_year)
 
-    starting_year_simulation = start_year+1
-    stopping_year_simulation = start_year+number_of_years_to_simulate
+    if number_of_years_to_simulate > 0:
+        starting_year_simulation = start_year+1
+        stopping_year_simulation = start_year+number_of_years_to_simulate
 
-    for year in range(starting_year_simulation, stopping_year_simulation): #Start year 1990, simulate year 1991 - 1991+years_to_simulate
+        for year in range(starting_year_simulation, stopping_year_simulation): #Start year 1990, simulate year 1991 - 1991+years_to_simulate
+            if verbose:
+                print("--------------------------")
+                print("")
+                print(f"Simulating data for year {year}")
+            simulate_1_year(data, year, verbose)
+            if verbose:
+                print("Turning data into csv(s)")
+            dict_to_csvs(data, year)
+            if verbose:
+                print(f"Finished year {year}")
+    
+    if verbose:
         print("--------------------------")
         print("")
-        print(f"Simulating data for year {year}")
-        data = simulate_1_year(data, year)
-        print("Turning data into csv(s)")
-        dict_to_csvs(data, year)
-        print(f"Finished year {year}")
-    
-    print("--------------------------")
-    print("")
-    print("Program finished")
+        print("Program finished")
 
     return True
 
 
-for _ in range(200):
-    simulate_x_years(1, 1990, 30) #How many households, starting year, number of csvs (years) ((including start year))
+simulate_x_years(1_000_00, 1990, 0, True) #How many households, starting year, number of csvs (years) ((including start year))
+# for i in range(51):
+#     if i % 10 == 0:
+#         print(i)
+    
 
 # sample_year = 1991
 # number_of_households = 20000
