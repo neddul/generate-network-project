@@ -1,9 +1,12 @@
 import pandas as pd
 from itertools import combinations
 from tqdm import tqdm
-import numpy as np
+#import numpy as np
 import sys
 import os
+import re
+
+pd.options.mode.chained_assignment = None
 
 #from readmulticsv import directory_of_csv_to_df
 
@@ -20,7 +23,7 @@ def find_parent_child_relationship(subset, current_year):
     #probably a more elegant way to do this, but this is to make sure we match parent with a child in a right age group
 
     #could maybe be stored outside of this
-    if current_year == 1990:
+    if current_year <= 2003:
         #parents_exist = len(subset[(subset['Barn18plus']>0) | (subset['Barn11_15']>0) |  (subset['Barn16_17'] >0 )  ]) > 0
         age_conditions_parents = [
         ('parents_18plus', subset['Barn18plus'] > 0),
@@ -213,7 +216,7 @@ def find_siblings(family_connections):
     unique_combinations_df['connection'] = 'siblings'
 
     # Rename columns by removing the suffixes _x and _y
-    unique_combinations_df.columns = unique_combinations_df.columns.str.replace('_x', '').str.replace('_y', '')
+    unique_combinations_df.columns = unique_combinations_df.columns.str.replace('2_x', '1').str.replace('_y', '')
     
     
     return unique_combinations_df
@@ -242,10 +245,10 @@ def data_preprocessing(registry_data, save_directory):
 
     if 'Barn18plus' in registry_data.columns:
         registry_data = registry_data[['FamId','PersonNr', 'Barn18plus', 'Barn11_15', 'Barn16_17', 'Alder' ]]
-        current_year = 1990
+        #current_year = 1990
     else:
         registry_data = registry_data[['FamId','PersonNr', 'Barn11_15', 'Barn16_17', 'Barn18_19', 'Barn20plus', 'Alder' ]]
-        current_year = 2005
+        #current_year = 2005
     
 
     # Specify the batch size (number of groups in each file)
@@ -254,7 +257,7 @@ def data_preprocessing(registry_data, save_directory):
     # Iterate through batches and save each batch to a separate file
     grouped_df = registry_data.groupby('FamId')
     batch_number = 0
-    for _, batch_data in tqdm(grouped_df, desc="Preprocessing batches"):
+    for _, batch_data in tqdm(grouped_df, desc="Preprocessing batches"): 
         #print(batch_data)
         if len(batch_data)> 1: 
             if batch_number % batch_size == 0:
@@ -267,28 +270,28 @@ def data_preprocessing(registry_data, save_directory):
 
             batch_number += 1
     
-    return current_year
+    return None
 
 
 
-def create_family_layer(registry_data, current_network = None):
+def create_family_layer(registry_data, current_year, current_network = None):
     #connections = pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
-    current_year = 1990
-    save_directory = 'datastorage_familylayer'
+    #current_year = 1990
+    save_directory = 'datastorage_familylayer/'+ str(current_year)
     connections = []
     if not os.path.exists(save_directory):
 
         # Create a new directory because it does not exist
         os.makedirs(save_directory)
-        current_year = data_preprocessing(registry_data, save_directory)
-        csv_list = os.listdir(save_directory)
+        data_preprocessing(registry_data, save_directory)
+        #csv_list = os.listdir(save_directory)
     else:
         csv_list = os.listdir(save_directory)
         if len(csv_list)== 0:
     
-            current_year = data_preprocessing(registry_data, save_directory)
-            csv_list = os.listdir(save_directory)
-
+            data_preprocessing(registry_data, save_directory)
+            #csv_list = os.listdir(save_directory)
+    csv_list = os.listdir(save_directory)
     for filename in tqdm(csv_list, desc="Processing  batches "): 
         file_path = os.path.join(save_directory, filename)
         if os.path.isfile(file_path):
@@ -306,7 +309,7 @@ def create_family_layer(registry_data, current_network = None):
                     #work on child-parent relationship 
                     #parents = subset[(subset['Barn18plus'] > 0) | (subset['Barn16_17'] >0 ) | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )].any(axis=1)
                 output = []
-                if current_year == 1990:
+                if current_year <= 2003:
                     parents_exist = len(subset[(subset['Barn18plus']>0) | (subset['Barn11_15']>0) |  (subset['Barn16_17'] >0 )  ]) > 0
                 else:
                     parents_exist = len(subset[(subset['Barn11_15']>0) |  (subset['Barn16_17'] >0 )  | (subset['Barn18_19'] > 0) | (subset['Barn20plus'] >0 )]) > 0
@@ -325,7 +328,8 @@ def create_family_layer(registry_data, current_network = None):
     #combining the build network of the year with the recent network
     if current_network is not None: 
         connections = pd.concat([connections, current_network], ignore_index=True)
-    
+    print(current_network)
+    print(connections)
     connections = connections.drop_duplicates()
     #sibling relationship
     #dfs_to_concat = find_siblings(connections)
@@ -334,20 +338,24 @@ def create_family_layer(registry_data, current_network = None):
 
     #grandparent/ aunts/uncles / niece .. /cousin relationship
     print("Saved a partial network now")
-    connections.to_csv('Partial_network.csv')
+    save_partial_network = "partial_network" + str(current_year) + "csv"
+    connections.to_csv(save_partial_network)
     #can add progress bars here --> but rather quick
     print("Searching possible Grandparents now")
     grandparents_connections = find_grandparents_aunts(connections)
     if not grandparents_connections.empty:
         #grandparents_connections = pd.DataFrame(grandparents_connections, columns=['personNr1', 'personNr2', 'connection'])
+
         connections = pd.concat([connections] + [grandparents_connections], ignore_index=True)
 
 
     #this is too find siblings which currently dont live in the same house, it will find all though and then we filter afterwards
+    print(connections)
     print("Finding Siblings now")
     sibling_relations = find_siblings(connections)
+    print(sibling_relations)
     if not sibling_relations.empty:
-        connections = pd.concat([connections] + [sibling_relations], ignore_index=True)
+        connections = pd.concat([connections] + [sibling_relations])
 
 
     print("Searching aunts and uncles now")
@@ -357,29 +365,46 @@ def create_family_layer(registry_data, current_network = None):
         connections = pd.concat([connections] + [aunts_uncles], ignore_index=True)
     print("Searching cousins")
     cousin_connections = find_cousins(connections)
-    if cousin_connections:
-        cousin_connections = pd.DataFrame(cousin_connections)
+    if not cousin_connections.empty:
+        #cousin_connections = pd.DataFrame(cousin_connections)
         connections = pd.concat([connections] + [cousin_connections], ignore_index=True)
-    
-
-    connections.to_csv('network_100k.csv')
+    save_final_network = "final_network" + str(current_year) + "csv"
+    connections = connections.drop_duplicates()
+    connections.to_csv(save_final_network)
     #os.remove(save_directory)
     print("The network was created. Please dont forget to remove the temporal files in datastorage_family, before rerunning the script.")
     return connections
+    #taken from stackoverflow
 
+def sorted_alphanumeric(data):
+    convert = lambda text: int(text) if text.isdigit() else text.lower()
+    alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', key) ] 
+    return sorted(data, key=alphanum_key)
 
-def create_multiple_year_network(data):
-
+def create_multiple_year_network():
+    count = 1990
     #all networks:
     #specify network directory
-    csv_list = os.listdir(save_directory)
+
+    #path to the data --> will they be in order --> how are we going to do that
+    data_dict =  "FamilyLayer30years/Basic Test Data/Data"
+    csv_list = os.listdir(data_dict)
+    csv_list = sorted_alphanumeric(csv_list)
+
+    print(csv_list)
     for filename in tqdm(csv_list, desc="Processing  years"): 
-        file_path = os.path.join(save_directory, filename)
+        file_path = os.path.join(data_dict, filename)
         if os.path.isfile(file_path):
             current_registry_data= pd.read_csv(file_path)
             #wait this is recursive --> need to think this through  --> or just if output is none --> current network is none
-            output = create_family_layer(data, current_network = None)
+            if count == 1990:
+
+                output = create_family_layer(current_registry_data, count, current_network = None)
             #save this file 
+            else:
+                output = create_family_layer(current_registry_data, count, current_network = output)
+            count+= 1
+
     #maybe directory name(?) --> how to get always newest data
     #get year
     #read in recent network --> or just save from returns --> way easier
@@ -393,18 +418,18 @@ def create_multiple_year_network(data):
     return None
 
 
-if len(sys.argv) < 2:
-    print("Missing argument: input file name")
-    sys.exit(-1)
-input_file_name = sys.argv[1]
+# if len(sys.argv) < 2:
+#     print("Missing argument: input file name")
+#     sys.exit(-1)
+# input_file_name = sys.argv[1]
 
-data = pd.read_csv(input_file_name)
+# data = pd.read_csv(input_file_name)
 
-#data = directory_of_csv_to_df(path="multiple_year/synthetic_scb_data_1990")
-#data = pd.read_csv("100k_rows.csv")
+# #data = directory_of_csv_to_df(path="multiple_year/synthetic_scb_data_1990")
+# #data = pd.read_csv("100k_rows.csv")
 
 #needs to be changed to data again to run through command line --> also the year
-create_family_layer(data)
+create_multiple_year_network()
 
 
 
@@ -419,4 +444,9 @@ create_family_layer(data)
 #save network and on to the next one --> maybe first manualy and then go from there 
 
 #also go through possible extensions again
+
+
+# change saving places for the networks 
+
+#can we be sure everything is read in in the right order --> how to fix that 
 

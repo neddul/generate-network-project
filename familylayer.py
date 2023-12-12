@@ -5,6 +5,8 @@ import numpy as np
 import sys
 import os
 
+pd.options.mode.chained_assignment = None
+
 #from readmulticsv import directory_of_csv_to_df
 
 #import cProfile
@@ -136,109 +138,109 @@ def find_aunts_uncles(family_connections):
     final_output = pd.concat([output1] + [output2], ignore_index=True)
     return final_output
 
-# def find_relationships(subset, current_connections):
-#     #should i change approach here? 
-#     #couple_relationships = pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
-#     couple_relationships = []
-#     selected = subset[['PersonNr', 'Alder']]
-#     if current_connections:
-#         current_connections = pd.DataFrame(current_connections, columns= ["personNr1", "personNr2", "connection"])
-#         connections_exist = True
-#     else:
-#         connections_exist = False
-
-#     #age_differences = np.abs(selected['Alder'].values[:, np.newaxis] - selected['Alder'].values)
-
-# #     if connections_exist == True:
-# #         # Check if siblings_possible for all pairs using broadcasting
-# #         siblings_possible = (
-# #     (
-# #         ((current_connections['personNr1'].values == selected['PersonNr'].values[:, np.newaxis]) & 
-# #          (current_connections['personNr2'].values == selected['PersonNr'].values)) |
-# #         ((current_connections['personNr1'].values == selected['PersonNr'].values) &
-# #          (current_connections['personNr2'].values == selected['PersonNr'].values[:, np.newaxis]))
-# #     ) & (current_connections['connection'].values == 'siblings')
-# # ).any(axis=1)
-# #         mask = (age_differences <= 13) & ~siblings_possible
-
-# #         # Find indices where the mask is True
-# #         indices = np.where(mask)
-
-# #         # Iterate over indices and append the relationships
-# #         for i, j in zip(*indices):
-# #             person1 = selected.iat[i, 0]
-# #             person2 = selected.iat[j, 0]
-# #             couple_relationships.append({'personNr1': person1, 'personNr2': person2, 'connection': "partner of"})
-# #     else:
-# #         mask = (age_differences <= 13)
-
-# #         # Find indices where the mask is True
-# #         indices = np.where(mask)
-
-# #         # Iterate over indices and append the relationships
-# #         for i, j in zip(*indices):
-# #             person1 = selected.iat[i, 0]
-# #             person2 = selected.iat[j, 0]
-# #             couple_relationships.append({'personNr1': person1, 'personNr2': person2, 'connection': "partner of"})
-
-#     for i in range(len(selected)-1):
-#         for j in range(i+1, len(selected)):
-
-#             person1 = selected.iat[i, 0]
-#             person2 = selected.iat[j, 0]
-#             # Calculate age difference
-#             age_difference = abs(selected.iat[i, 1] - selected.iat[j, 1])
-        
-#             #checking if they might be siblings 
-
-#             if connections_exist == True:  
-#                 siblings_possible = (((current_connections['personNr1'] == person1) & (current_connections['personNr2'] == person2) & (current_connections['connection'] == "siblings")) | ((current_connections['personNr1'] == person2) & (current_connections['personNr2'] == person1) & (current_connections['connection'] == "siblings")) ).any()
-#             else:
-#                 siblings_possible=False
-#             #add check for amount of children (?)
-#             if age_difference <= 13 and siblings_possible==False:
-#                 #row_data = pd.DataFrame([{'personNr1':person1 , 'personNr2': person2, 'connection': "partner of"}])
-#                 #couple_relationships = pd.concat([couple_relationships, row_data])
-#                 couple_relationships.append({'personNr1': person1, 'personNr2': person2, 'connection': "partner of"})
-
-       
-#     return couple_relationships
-
 def find_relationships(subset, current_connections):
     #should i change approach here? 
     #couple_relationships = pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
     couple_relationships = []
     selected = subset[['PersonNr', 'Alder']]
-    merged_df = pd.merge(selected.assign(key=1), selected.assign(key=1), on='key').drop('key', axis=1)
-    result_df = merged_df[merged_df['PersonNr_x'] != merged_df['PersonNr_y']]
-    result_df.loc[:,'age_difference'] = abs(result_df['Alder_x'] - result_df['Alder_y'])
-    filtered_df = result_df[result_df['age_difference'] <= 13]
-    
-    
-    filtered_df.loc[:,'tuple_key'] = filtered_df[['PersonNr_x', 'PersonNr_y']].apply(lambda x: tuple(sorted(x)), axis=1)
-    unique_combinations_df = filtered_df.drop_duplicates(subset='tuple_key')
-    
-
-    # Drop the temporary column
-    unique_combinations_df = unique_combinations_df.drop(columns=['tuple_key'])[["PersonNr_x", "PersonNr_y"]]
-    unique_combinations_df.columns = ['personNr1', 'personNr2']
-    if not unique_combinations_df.empty:
-        unique_combinations_df.loc[:,'connection'] = 'partner of'
-    couple_relationships = unique_combinations_df
-    #print(unique_combinations_df)
-    
-    #filter out the partners that are actually siblings
     if current_connections:
-        current_connections_df = pd.DataFrame(current_connections)
-        current_connections_df = current_connections_df[current_connections_df["connection"] == "siblings"]
+        current_connections = pd.DataFrame(current_connections, columns= ["personNr1", "personNr2", "connection"])
+        connections_exist = True
+    else:
+        connections_exist = False
+
+    #age_differences = np.abs(selected['Alder'].values[:, np.newaxis] - selected['Alder'].values)
+
+#     if connections_exist == True:
+#         # Check if siblings_possible for all pairs using broadcasting
+#         siblings_possible = (
+#     (
+#         ((current_connections['personNr1'].values == selected['PersonNr'].values[:, np.newaxis]) & 
+#          (current_connections['personNr2'].values == selected['PersonNr'].values)) |
+#         ((current_connections['personNr1'].values == selected['PersonNr'].values) &
+#          (current_connections['personNr2'].values == selected['PersonNr'].values[:, np.newaxis]))
+#     ) & (current_connections['connection'].values == 'siblings')
+# ).any(axis=1)
+#         mask = (age_differences <= 13) & ~siblings_possible
+
+#         # Find indices where the mask is True
+#         indices = np.where(mask)
+
+#         # Iterate over indices and append the relationships
+#         for i, j in zip(*indices):
+#             person1 = selected.iat[i, 0]
+#             person2 = selected.iat[j, 0]
+#             couple_relationships.append({'personNr1': person1, 'personNr2': person2, 'connection': "partner of"})
+#     else:
+#         mask = (age_differences <= 13)
+
+#         # Find indices where the mask is True
+#         indices = np.where(mask)
+
+#         # Iterate over indices and append the relationships
+#         for i, j in zip(*indices):
+#             person1 = selected.iat[i, 0]
+#             person2 = selected.iat[j, 0]
+#             couple_relationships.append({'personNr1': person1, 'personNr2': person2, 'connection': "partner of"})
+
+    for i in range(len(selected)-1):
+        for j in range(i+1, len(selected)):
+
+            person1 = selected.iat[i, 0]
+            person2 = selected.iat[j, 0]
+            # Calculate age difference
+            age_difference = abs(selected.iat[i, 1] - selected.iat[j, 1])
         
-        unique_pairs_current = set(map(tuple, current_connections_df[['personNr1', 'personNr2']].values))
+            #checking if they might be siblings 
 
-        # Filter out rows in df1 where both 'personNr1' and 'personNr2' match any pair in df2
-        couple_relationships = couple_relationships[~couple_relationships[['personNr1', 'personNr2']].apply(tuple, axis=1).isin(unique_pairs_current)]
-        couple_relationships.values.tolist()
+            if connections_exist == True:  
+                siblings_possible = (((current_connections['personNr1'] == person1) & (current_connections['personNr2'] == person2) & (current_connections['connection'] == "siblings")) | ((current_connections['personNr1'] == person2) & (current_connections['personNr2'] == person1) & (current_connections['connection'] == "siblings")) ).any()
+            else:
+                siblings_possible=False
+            #add check for amount of children (?)
+            if age_difference <= 13 and siblings_possible==False:
+                #row_data = pd.DataFrame([{'personNr1':person1 , 'personNr2': person2, 'connection': "partner of"}])
+                #couple_relationships = pd.concat([couple_relationships, row_data])
+                couple_relationships.append({'personNr1': person1, 'personNr2': person2, 'connection': "partner of"})
 
-    return  couple_relationships
+       
+    return couple_relationships
+
+# def find_relationships(subset, current_connections):
+#     #should i change approach here? 
+#     #couple_relationships = pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
+#     couple_relationships = pd.DataFrame()
+#     selected = subset[['PersonNr', 'Alder']]
+#     merged_df = pd.merge(selected.assign(key=1), selected.assign(key=1), on='key').drop('key', axis=1)
+#     result_df = merged_df[merged_df['PersonNr_x'] != merged_df['PersonNr_y']]
+#     result_df.loc[:,'age_difference'] = abs(result_df['Alder_x'] - result_df['Alder_y'])
+#     filtered_df = result_df[result_df['age_difference'] <= 13]
+    
+    
+#     filtered_df.loc[:,'tuple_key'] = filtered_df[['PersonNr_x', 'PersonNr_y']].apply(lambda x: tuple(sorted(x)), axis=1)
+#     unique_combinations_df = filtered_df.drop_duplicates(subset='tuple_key')
+    
+
+#     # Drop the temporary column
+#     unique_combinations_df = unique_combinations_df.drop(columns=['tuple_key'])[["PersonNr_x", "PersonNr_y"]]
+#     unique_combinations_df.columns = ['personNr1', 'personNr2']
+#     if not unique_combinations_df.empty:
+#         unique_combinations_df.loc[:,'connection'] = 'partner of'
+#     couple_relationships = unique_combinations_df
+#     #print(unique_combinations_df)
+    
+#     #filter out the partners that are actually siblings
+#     if current_connections:
+#         current_connections_df = pd.DataFrame(current_connections)
+#         current_connections_df = current_connections_df[current_connections_df["connection"] == "siblings"]
+        
+#         unique_pairs_current = set(map(tuple, current_connections_df[['personNr1', 'personNr2']].values))
+
+#         # Filter out rows in df1 where both 'personNr1' and 'personNr2' match any pair in df2
+#         couple_relationships = couple_relationships[~couple_relationships[['personNr1', 'personNr2']].apply(tuple, axis=1).isin(unique_pairs_current)]
+#         couple_relationships
+
+#     return  couple_relationships
 
 def find_grandparents_aunts(family_connections):
     output = pd.DataFrame()
@@ -387,8 +389,8 @@ def create_family_layer(registry_data):
                         connections.extend(output)
                 #work on the partner relationship --> we are using the output here to reduce the running time
                 relationships = find_relationships(subset, output)
-                if relationships: 
-                    connections.extend(relationships)
+                if not relationships.empty: 
+                    connections.extend(relationships.values.tolist())
 
             
     connections = pd.DataFrame(connections)
