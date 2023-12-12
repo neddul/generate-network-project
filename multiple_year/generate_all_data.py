@@ -55,7 +55,7 @@ def alder(personnummer, sample_year, death_date=None):
 
     birthday = datetime.date.fromisoformat(personnummer[:8])
     age = dateutil.relativedelta.relativedelta(today, birthday)
-    years = age.years
+    years = int(age.years)
     return years
 
 # #### 4. Kon: 
@@ -155,7 +155,7 @@ def utl_sv_bakg(fodelselandnamn, fodelselandnamnfar, fodelselandnamnmor):
     else:
         return 21
 
-def generate_demographic(PersonNr, sample_year, birthdaymom='19820102-8936', birthdaydad='19790102-8936'):
+def generate_demographic(PersonNr, sample_year, birthdaymom="", birthdaydad="", mom_country="", dad_country=""):
     FodelseAr = fodelse_ar(PersonNr)
     DodDatum = dod_datum() # People can only have died during the sample year and not earlier
     InvUtvLand, Status = get_status()
@@ -165,23 +165,30 @@ def generate_demographic(PersonNr, sample_year, birthdaymom='19820102-8936', bir
     else:
         Alder = alder(PersonNr, sample_year, DodDatum)
         InvUtvManad = inv_ut_manad(Status,PersonNr, sample_year, DodDatum)
+
+    if birthdaymom == "": birthdaymom = '19820102-8936' #Default value
+    if birthdaydad == "": birthdaydad = '19790102-8936' #Default value
     
+    if mom_country == "": mom  = fodelse_landnamn()
+    else: mom = mom_country
+
+    if dad_country == "": dad  = fodelse_landnamn()
+    else: dad = dad_country
+        
     me   = fodelse_landnamn()
-    mom  = fodelse_landnamn()
-    dad  = fodelse_landnamn()
 
     demographic_data = {
         'FodelseAr'             : FodelseAr,
         'DodDatum'              : DodDatum,
-        'Alder'                 : Alder,          #2019 is the last year
+        'Alder'                 : Alder,          
         'Kon'                   : kon(PersonNr),
         'InvUtvLand'            : InvUtvLand,
         'InvUtvManad'           : InvUtvManad,
         'PostTyp'               : Status,
         'FodelseLandnamn'       : me,
-        'FodelseTidMor'         : fodelse_tid(birthdaymom), #Arbitrary needs to be fixed
+        'FodelseTidMor'         : fodelse_tid(birthdaymom), 
         'FodelseLandnamnMor'    : mom,
-        'FodelseTidFar'         : fodelse_tid(birthdaydad), #Arbitrary needs to be fixed
+        'FodelseTidFar'         : fodelse_tid(birthdaydad), 
         'FodelseLandnamnFar'    : dad,
         'UtlSvBakg'             : utl_sv_bakg(me,dad,mom) 
                        }
@@ -250,150 +257,123 @@ import random
 import pandas as pd
 import numpy as np
 
-def generate_employment_statuses(amount,sample_year):
+def generate_employment_statuses(sample_year):
     #1 = Gainfully employed according to the limit, 16-74 years 
     #5 = Not gainfully employed according to the limit, but with control information from employer or business income during the year 
     #6 = Not gainfully employed, without control information from employer or business income during the year 
     #7 = Gainfully employed, 15 years
-    SyssStat = []
-    for i in range(amount):  
-        if sample_year <= 2003:
-            status = [1, 5, 6]
-            probabilities = [0.6, 0.2, 0.2]
-        elif sample_year <= 2011:
-            status = [1, 5, 6]
-            probabilities = [0.7, 0.2, 0.1]
-        else:
-            status = [1, 5, 6, 7]
-            probabilities = [0.69, 0.2, 0.1, 0.01]
-        employ = random.choices(status, probabilities)[0]
-        SyssStat.append(employ)
-
-    return SyssStat
+    if sample_year <= 2003:
+        status = [1, 5, 6]
+        probabilities = [0.6, 0.2, 0.2]
+    elif sample_year <= 2011:
+        status = [1, 5, 6]
+        probabilities = [0.7, 0.2, 0.1]
+    else:
+        status = [1, 5, 6, 7]
+        probabilities = [0.69, 0.2, 0.1, 0.01]
+    return random.choices(status, probabilities)[0]
 
 
-def generate_workingtime(SyssStat):
+def generate_workingtime(SyssStat): #How many work hours/week
     #1 = 0 hours, 2 = 1 – 15 hours, 3 = 16 – 19 hours, 4 = 20 – 34 hours, 5 = 35 – w hours, 9 = Uppgift
-    ArbTid = []
-    for s in SyssStat:
-        if s == 1 or s == 7 or s == 5:
-            status = [1,2,3,4,5,9]
-            probabilities = [0.05, 0.1, 0.15, 0.2, 0.4, 0.1]
-            time = random.choices(status, probabilities)[0]
-            ArbTid.append(time)
-        else:
-            ArbTid.append(" ")
+    if SyssStat == 1 or SyssStat == 7 or SyssStat == 5:
+        status = [2,3,4,5,9]
+        probabilities = [0.1, 0.2, 0.2, 0.4, 0.1]
+        ArbTid = random.choices(status, probabilities)[0]
+    else:
+        ArbTid = 1
     return ArbTid 
 
 
-def generate_job(ArbTid):
-    #0 = Persons without control duties 1 = Sailors 
-    #2 = Employees (excl. seamen) 4 = Entrepreneurs 5 = Entrepreneurs in own AB
-    YrkStalln = []
-    for i in ArbTid:
-        if i == " ":
-            YrkStalln.append(" ")
-        else:
-            status = [0,1,2,4,5]
-            probabilities = [0.1, 0.2, 0.49, 0.2, 0.01]
-            job = random.choices(status, probabilities)[0]
-            YrkStalln.append(job)
+def generate_job(ArbTid): #What kind of work the person is involved in
+    #0 = Persons without control duties 
+    #1 = Sailors 
+    #2 = Employees (excl. seamen) 
+    #4 = Entrepreneurs 
+    #5 = Entrepreneurs in own AB
+    if ArbTid == 1:
+        YrkStalln = 0
+    else:
+        status = [1,2,4,5]
+        probabilities = [0.225, 0.5, 0.225, 0.05]
+        YrkStalln = random.choices(status, probabilities)[0]
     return YrkStalln
 
 
-def generate_income(ArbTid):
+def generate_income(ArbTid): #How much money each() work place generates
     mean=1000
     std_dev=500
-    KU1lnk = []
-    KU2lnk = []
-    KU3lnk = []
+    KU1lnk, KU2lnk, KU3lnk = 0,0,0
 
-    for i in ArbTid:
-        if i == " ":  
-            KU1lnk.append(0)
-            KU2lnk.append(0)
-            KU3lnk.append(0)
-        else:
-            # Generate incomes from a normal distribution with the specified mean and standard deviation
-            ku1 = max(0, int(np.random.normal(mean, std_dev)))
-            ku2 = max(0, int(np.random.normal(mean, std_dev)))
-            ku3 = max(0, int(np.random.normal(mean, std_dev)))
-            
-            # Ensure KU1lnk > KU2lnk > KU3lnk
-            KU1lnk.append(max(ku1, ku2, ku3))
-            generate_ku2 = random.random() < 0.5
-            if generate_ku2:
-                KU2lnk.append(sorted([ku1, ku2, ku3])[1])
-                generate_ku3 = random.random() < 0.1
-                if generate_ku3:
-                    KU3lnk.append(min(ku1, ku2, ku3))
-                else:
-                    KU3lnk.append(0)
-            else:
-                KU2lnk.append(0)
-                KU3lnk.append(0)
-            
+    if ArbTid != 1:  #The person has some income
+        # Generate incomes from a normal distribution with the specified mean and standard deviation
+        random_number = random.random()
+        if random_number < 0.1: # The person will have 3 sources of income
+            incomes = [ max(0, int(np.random.normal(mean, std_dev))), 
+                        max(0, int(np.random.normal(mean, std_dev))),
+                        max(0, int(np.random.normal(mean, std_dev)))]
+            incomes = sorted(incomes)
+            KU1lnk = incomes[0]
+            KU2lnk = incomes[1]
+            KU3lnk = incomes[2]
+        elif random_number < 0.5: #The person will have 2 sources of income
+            incomes = [ max(0, int(np.random.normal(mean, std_dev))), 
+                        max(0, int(np.random.normal(mean, std_dev)))]
+            incomes = sorted(incomes)
+            KU1lnk = incomes[0]
+            KU2lnk = incomes[1]
+        else: # The person has 1 source of income
+            KU1lnk = max(0, int(np.random.normal(mean, std_dev)))
     return KU1lnk, KU2lnk, KU3lnk
 
 
-def generate_total_incomes(KU1lnk, KU2lnk, KU3lnk):
-    
-    median_income = 2753
-    sigma = 0.6  # Adjust as needed for desired skewness
-    
-    mu = np.log(median_income) - 0.5 * sigma**2
-    
-    incomes = np.random.lognormal(mean=mu, sigma=sigma, size=len(KU1lnk))
-    incomes = np.clip(incomes, 0, 1014000)
-    incomes = incomes.astype(int) 
-    Raks_SummaInk = []
-    for i in range(0,len(incomes)):
-        if incomes[i] < KU1lnk[i]+KU2lnk[i]+KU3lnk[i]:
-            Raks_SummaInk.append(KU1lnk[i]+KU2lnk[i]+KU3lnk[i])
-        else:
-            Raks_SummaInk.append(incomes[i])
-                   
+def generate_total_incomes(KU1lnk, KU2lnk, KU3lnk): #Total income from work and other allowances, such as CSN or "bostadsbidrag"
+    total_income = KU1lnk+KU2lnk+KU3lnk
+    if total_income > 0: #You have some income
+        extra_income = random.randint(0, int(total_income*0.2)) #You could have up to 20% of your normal income as extra
+    else: #You have no income, you could be living from some kind of allowance, like CSN
+        extra_income = random.randint(100, 1500) #Up to 15.000 SEK per month 
+
+    Raks_SummaInk = total_income + extra_income
     return Raks_SummaInk
 
 
-def generate_labor_connection(YrkStalln):
-    Raks_EtablGrad = []
-    for i in YrkStalln:
-        if i != 2:
-            Raks_EtablGrad.append('NULL')
-        else:
-            Raks_EtablGrad.append(random.choice([0, 1]))
-            
+def generate_labor_connection(YrkStalln): # How well the person is connected to the market
+    if YrkStalln == 0:
+        Raks_EtablGrad = 'NULL'
+    else:
+        Raks_EtablGrad = 0 if random.random() > 0.5 else 1
     return Raks_EtablGrad   
 
 
-def generate_Forvink(Raks_SummaInk):
-    Raks_Forvink = []
-    for i in Raks_SummaInk:
-        if i > 10000:
-            Raks_Forvink.append(i)
-        else:
-            Raks_Forvink.append(0)
+def generate_Forvink(KU1lnk, KU2lnk, KU3lnk):
+    Raks_Forvink = KU1lnk+KU2lnk+KU3lnk
     return Raks_Forvink
 
-
+#Work ties should be used here
 def generate_main_labor_connection(YrkStalln):
-    Raks_Huvudanknytning = []
-    for i in YrkStalln:
-        if i == 2:
+    #1 Full time employed
+    #2 Newly hired
+    #3 Fired
+    #4 Part time employed
+    #5 Combination
+    #6 Entrepreneur
+    #7 Unemployed
+    Raks_Huvudanknytning = None
+    if YrkStalln == 0:
+        Raks_Huvudanknytning = 7
+    else:
+        if YrkStalln < 4 and YrkStalln > 0:
             status = [1,2,3,4]
             probabilities = [0.5,0.2,0.1,0.2]
-            connection = random.choices(status, probabilities)[0]
-            Raks_Huvudanknytning.append(connection)          
-        elif i == 0:
-            Raks_Huvudanknytning.append(7)
+            Raks_Huvudanknytning = random.choices(status, probabilities)[0]
         else:
-            Raks_Huvudanknytning.append(random.choice([5, 6]))
+            Raks_Huvudanknytning = 5 if random.random() > 0.5 else 6
                 
     return Raks_Huvudanknytning 
 
 
-def generate_economic(sample_year,amount=1, is_kid=False):
+def generate_economic(sample_year, is_kid=False):
     if is_kid:
         employment_data = {
         'SyssStat'              : 6, #Not working 
@@ -402,37 +382,34 @@ def generate_economic(sample_year,amount=1, is_kid=False):
         'KU1lnk'                : 0, #Biggest source of income
         'KU2lnk'                : 0, #Second biggest source of income
         'KU3lnk'                : 0, #Third biggest source of income
-        'Raks_SummaInk'         : 120, #1000kr/per month for kids in highschool
+        'Raks_SummaInk'         : 100, #1000kr/per month for kids in highschool during school season
         'Raks_Huvudanknytning'  : 7, #Which title, full time employed, newly hired etc, 7 = Without work
         'Raks_EtablGrad'        : 'NULL', #How well connected the person is to the market, 0 well established, 1 poorly established, NULL don't know
         'Raks_Forvink'          : 0 #Income from work
                         }   
     else:
-        SyssStat = generate_employment_statuses(amount,sample_year)
+        SyssStat = generate_employment_statuses(sample_year)
         ArbTid = generate_workingtime(SyssStat)
         YrkStalln = generate_job(ArbTid)
         KU1lnk, KU2lnk, KU3lnk = generate_income(ArbTid)
         Raks_SummaInk = generate_total_incomes(KU1lnk,KU2lnk, KU3lnk)
         Raks_EtablGrad = generate_labor_connection(YrkStalln)
-        Raks_Forvink = generate_Forvink(Raks_SummaInk)
+        Raks_Forvink = generate_Forvink(KU1lnk, KU2lnk, KU3lnk)
         Raks_Huvudanknytning = generate_main_labor_connection(YrkStalln)
 
         employment_data = {
-            'SyssStat'              : SyssStat[0],
-            'ArbTid'                : ArbTid[0],
-            'YrkStalln'             : YrkStalln[0],
-            'KU1lnk'                : KU1lnk[0],
-            'KU2lnk'                : KU2lnk[0],
-            'KU3lnk'                : KU3lnk[0],
-            'Raks_SummaInk'         : Raks_SummaInk[0],
-            'Raks_Huvudanknytning'  : Raks_Huvudanknytning[0],
-            'Raks_EtablGrad'        : Raks_EtablGrad[0],
-            'Raks_Forvink'          : Raks_Forvink[0]
+            'SyssStat'              : SyssStat,
+            'ArbTid'                : ArbTid,
+            'YrkStalln'             : YrkStalln,
+            'KU1lnk'                : KU1lnk,
+            'KU2lnk'                : KU2lnk,
+            'KU3lnk'                : KU3lnk,
+            'Raks_SummaInk'         : Raks_SummaInk,
+            'Raks_Huvudanknytning'  : Raks_Huvudanknytning,
+            'Raks_EtablGrad'        : Raks_EtablGrad,
+            'Raks_Forvink'          : Raks_Forvink
                             }    
     return employment_data
-
-
-
 
 
 
@@ -501,49 +478,57 @@ def random_sampler(start, end, number):
         
     return output
 
-generate_education_utbildning = pd.read_csv("data/utbildning_cleaner.csv")
 
-def generate_education(amount=1): 
-    Sun2000niva_old = random_sampler(10000,99999, amount)
-    indexes = random_sampler(0,len(generate_education_utbildning)-1, amount)
-    SUN2000Grp = []
-    SUN2000Inr = []
-    SUN2000Niva = []
+
+import csv
+
+# Open the CSV file
+with open('data/utbildning_cleaner.csv', 'r') as csv_file:
+    # Create a CSV reader with DictReader
+    csv_reader = csv.DictReader(csv_file)
+
+    # Convert the CSV data into a list of dictionaries
+    education_list = list(csv_reader)
+
+def generate_education(): 
+    Sun2000niva_old = random.randint(10000,99999)
+    index = Sun2000niva_old % len(education_list)
+    my_education = education_list[index]
+    SUN2000Grp = my_education['Utbildningsgrupper_2020']
+    SUN2000Inr = 0
+    SUN2000Niva = 0
     alphabet = string.ascii_lowercase
-    for i in range(len(indexes)):
-        index = indexes[i]
-        SUN2000Grp.append(generate_education_utbildning.at[index, 'Utbildningsgrupper 2020'])
-        options_inr = generate_education_utbildning.at[index, 'Inriktningskoder SUN 2020']
-        if isinstance(options_inr , int):
-            random_letters = random.choice(alphabet)
-            if options_inr <100: 
-                options_inr=options_inr+100
-            SUN2000Inr.append(str(options_inr)+ random_letters)
+    options_inr = my_education['Inriktningskoder_SUN_2020']
+    if isinstance(options_inr , int):
+        random_letters = random.choice(alphabet)
+        if options_inr <100: 
+            options_inr=options_inr+100
+        SUN2000Inr = str(options_inr)+ random_letters
+    else: 
+        options = [item.strip() for item in options_inr.split(',')]
+        SUN2000Inr = random.choice(options)
+    options_niv = my_education['Nivakoder_SUN_2020']
+    if isinstance(options_niv, int) and options_niv > 100:
+        SUN2000Niva = options_niv
+    elif isinstance(options_niv, int):
+        SUN2000Niva = options_niv*100
+    else: 
+        options = [item.strip() for item in options_niv.split(',')]
+        selection = random.choice(options)
+        if  isinstance(selection, int) and selection <100:
+            SUN2000Niva = selection*100
         else: 
-            options = [item.strip() for item in options_inr.split(',')]
-            SUN2000Inr.append(random.choice(options))
-        options_niv = generate_education_utbildning.at[index, 'Nivåkoder SUN 2020']
-        if isinstance(options_niv, int) and options_niv > 100:
-            SUN2000Niva.append(options_niv)
-        elif isinstance(options_niv, int):
-            SUN2000Niva.append(options_niv*100)
-        else: 
-            options = [item.strip() for item in options_niv.split(',')]
-            selection = random.choice(options)
-            if  isinstance(selection, int) and selection <100:
-                SUN2000Niva.append(selection*100)
-            else: 
-                    
-                SUN2000Niva.append(selection)
+                
+            SUN2000Niva = selection
     #examAr is missing as well 
     
     #examkommun is different 
 
     education = {
-            'Sun2000niva_old'   : Sun2000niva_old[0],
-            'SUN2000niva'       : SUN2000Niva[0],
-            'SUN2000Inr'        : SUN2000Inr[0],
-            'SUN2000Grp'        : SUN2000Grp[0],
+            'Sun2000niva_old'   : Sun2000niva_old,
+            'SUN2000niva'       : SUN2000Niva,
+            'SUN2000Inr'        : SUN2000Inr,
+            'SUN2000Grp'        : SUN2000Grp,
     }
     return education
 
@@ -682,12 +667,10 @@ def update_kid_categories(parent_dict, kid_info_dict, sample_year):
                 parent_dict['Barn18plus'] += 1
         elif sample_year > 2004 and kid_age > 17 and kid_age < 20: #Barn18_19
             for _ in range(number_of_kids):
-                parent_dict['Barn18plus'] += 1
+                parent_dict['Barn18_19'] += 1
         elif sample_year > 2004 and kid_age > 19: #Barn20plus
             for _ in range(number_of_kids):
                 parent_dict['Barn20plus'] += 1
-
-
 
 
 def create_children(sample_year, PersonNr, is_kid=False):
@@ -739,6 +722,8 @@ def make_kid_family_frame(PersonNr, FamId, is_Kid, sample_year):
     data = merge_dictionaries(kids, utbildning)
     data['PersonNr'] = PersonNr
     data['FamId'] = FamId
+    data['spouse'] = dict()
+    data['my_kids_living_at_home'] = dict()
     return data
 
 
@@ -780,6 +765,8 @@ def create_kids_data(sample_year, FamId, kids_info):
     kids_in_range = kids_list[:2]    #Barn16_17 and Barn18_19
     kids_plus = kids_list[2:]
 
+
+
     #Barn16-17
     all_kids = []
 
@@ -790,6 +777,27 @@ def create_kids_data(sample_year, FamId, kids_info):
 
     #Barn16-17
     all_kids = []
+
+    for k, v in kids_info['kid_info'].items():
+        if k > 15:
+            for _ in range(v):
+                year_born = sample_year - k
+                kid = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}1231")
+                all_kids.append(make_kid_family_frame(kid, FamId, is_Kid=True, sample_year=sample_year))
+
+    return all_kids
+
+    ###########################################################################################
+    ###########################################################################################
+    ###########################################################################################
+    ###########################################################################################
+    ###########################################################################################
+    ################################## NEEDS TO BE FIXED ######################################
+    ###########################################################################################
+    ###########################################################################################
+    ###########################################################################################
+    ###########################################################################################
+    ###########################################################################################
 
     #Barn16_17 and Barn18_19
     for kids in kids_in_range:
@@ -858,6 +866,8 @@ def create_kids_data(sample_year, FamId, kids_info):
                     year_born = sample_year - age2
                     kid1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}0630") # First kid born jan - june year 1
                     kid2 = person_nummer_creation(sample_year, start_date=f"{year_born+1}0401", stop_year=f"{year_born+1}1231") # Second kid born atleast 10 months later
+            all_kids.append(make_kid_family_frame(kid1, FamId, is_Kid=True, sample_year=sample_year))
+            all_kids.append(make_kid_family_frame(kid2, FamId, is_Kid=True, sample_year=sample_year))
 
         elif len(kids) == 3:
             age1, age2, age3 = kids[0], kids[1], kids[2]
@@ -869,11 +879,11 @@ def create_kids_data(sample_year, FamId, kids_info):
 
             elif age1 == age2 and age2 != age3: #The 2 youngest are twins oldest is singlet 
                 if age3 - age1 > 1: #More than 1 year apart 20 20 22
-                    year_born1 = sample_year - age1
-                    year_born2 = sample_year - age3
+                    year_born1 = sample_year - age3
+                    year_born2 = sample_year - age1
                     kid1 = person_nummer_creation(sample_year, start_date=f"{year_born1}0101", stop_year=f"{year_born1}1231")
-                    kid2 = person_nummer_creation(sample_year, start_date=kid1[:8], stop_year=kid1[:8])
-                    kid3 = person_nummer_creation(sample_year, start_date=f"{year_born2}0101", stop_year=f"{year_born2}1231")
+                    kid2 = person_nummer_creation(sample_year, start_date=f"{year_born2}0101", stop_year=f"{year_born2}1231")
+                    kid3 = person_nummer_creation(sample_year, start_date=kid2[:8], stop_year=kid2[:8])
                 else: #Within 1 year apart 20 20 21
                     year_born1 = sample_year - age3
                     year_born2 = sample_year - age1
@@ -883,8 +893,8 @@ def create_kids_data(sample_year, FamId, kids_info):
 
             elif age1 != age2 and age2 == age3: #The 2 oldest are twins youngest is singlet 
                 if age3 - age1 > 1: #More than 1 year apart 20 22 22
-                    year_born1 = sample_year - age1
-                    year_born2 = sample_year - age3
+                    year_born1 = sample_year - age3
+                    year_born2 = sample_year - age1
                     kid1 = person_nummer_creation(sample_year, start_date=f"{year_born1}0101", stop_year=f"{year_born1}1231")
                     kid2 = person_nummer_creation(sample_year, start_date=kid1[:8], stop_year=kid1[:8])
                     kid3 = person_nummer_creation(sample_year, start_date=f"{year_born2}0101", stop_year=f"{year_born2}1231")
@@ -895,31 +905,33 @@ def create_kids_data(sample_year, FamId, kids_info):
                     kid2 = person_nummer_creation(sample_year, start_date=kid1[:8], stop_year=kid1[:8])
                     kid3 = person_nummer_creation(sample_year, start_date=f"{year_born2}0401", stop_year=f"{year_born2}1231") # Third kid born atleast 10 months later
 
-            elif age2 - age1 < 2: 
-                if age3 - age2 < 2: # 20 21 22
-                    year_born = sample_year-age3
-                    kid1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}0210") # First kid born jan - feb year 1
-                    kid2 = person_nummer_creation(sample_year, start_date=f"{year_born}1201", stop_year=f"{year_born+1}0130") # Second kid born atleast 10 months later
-                    kid3 = person_nummer_creation(sample_year, start_date=f"{year_born+1}1101", stop_year=f"{year_born+1}1231") # Third kid born atleast 10 months later
+            elif age2 - age1 == 1: 
+                if age3 - age2 == 1: # 20 21 22
+                    year_born1 = sample_year-age3
+                    year_born2 = sample_year-age2
+                    year_born3 = sample_year-age1
+                    kid1 = person_nummer_creation(sample_year, start_date=f"{year_born1}0101", stop_year=f"{year_born1}0210") # First kid born jan - feb year 1
+                    kid2 = person_nummer_creation(sample_year, start_date=f"{year_born1}1201", stop_year=f"{year_born2}0130") # Second kid born atleast 10 months later
+                    kid3 = person_nummer_creation(sample_year, start_date=f"{year_born2}1101", stop_year=f"{year_born3}1231") # Third kid born atleast 10 months later
                 else: # 20 21 23
-                    year_born3 = sample_year - age3
+                    year_born1 = sample_year - age3
                     year_born2 = sample_year - age2
-                    year_born1 = sample_year - age1
-                    kid1 = person_nummer_creation(sample_year, start_date=f"{year_born2}0101", stop_year=f"{year_born2}0630") # Second kid born jan - june year 1
-                    kid2 = person_nummer_creation(sample_year, start_date=f"{year_born1}0401", stop_year=f"{year_born1}1231") # Third kid born atleast 10 months later
-                    kid3 = person_nummer_creation(sample_year, start_date=f"{year_born3}0101", stop_year=f"{year_born3}1231") # First kid born whenever
+                    year_born3 = sample_year - age1
+                    kid1 = person_nummer_creation(sample_year, start_date=f"{year_born1}0101", stop_year=f"{year_born1}1231") # Second kid born jan - june year 1
+                    kid2 = person_nummer_creation(sample_year, start_date=f"{year_born2}0101", stop_year=f"{year_born2}0630") # Third kid born atleast 10 months later
+                    kid3 = person_nummer_creation(sample_year, start_date=f"{year_born3}0401", stop_year=f"{year_born3}1231") # First kid born whenever
             else:
-                if age3 - age2 < 2: #20 22 23
-                    year_born3 = sample_year - age3
+                if age3 - age2 == 1: #20 22 23
+                    year_born1 = sample_year - age3
                     year_born2 = sample_year - age2
-                    year_born1 = sample_year - age1
-                    kid1 = person_nummer_creation(sample_year, start_date=f"{year_born3}0101", stop_year=f"{year_born3}0630") # First kid born jan - june year 1
+                    year_born3 = sample_year - age1
+                    kid1 = person_nummer_creation(sample_year, start_date=f"{year_born1}0101", stop_year=f"{year_born1}0630") # First kid born jan - june year 1
                     kid2 = person_nummer_creation(sample_year, start_date=f"{year_born2}0401", stop_year=f"{year_born2}1231") # Second kid born atleast 10 months later
-                    kid3 = person_nummer_creation(sample_year, start_date=f"{year_born1}0101", stop_year=f"{year_born1}1231") # Third kid born whenever
+                    kid3 = person_nummer_creation(sample_year, start_date=f"{year_born3}0101", stop_year=f"{year_born3}1231") # Third kid born whenever
                 else: # 20 22 24
-                    year_born3 = sample_year - age3
+                    year_born1 = sample_year - age3
                     year_born2 = sample_year - age2
-                    year_born1 = sample_year - age1
+                    year_born3 = sample_year - age1
                     kid1 = person_nummer_creation(sample_year, start_date=f"{year_born1}0101", stop_year=f"{year_born1}1231") # Third kid born whenever
                     kid2 = person_nummer_creation(sample_year, start_date=f"{year_born2}0101", stop_year=f"{year_born2}1231") # Third kid born whenever
                     kid3 = person_nummer_creation(sample_year, start_date=f"{year_born3}0101", stop_year=f"{year_born3}1231") # Third kid born whenever
@@ -946,23 +958,41 @@ def create_spouse(FamId, kids_info, sample_year):
 def generate_family(sample_year):
     PersonNr = person_nummer_creation(sample_year)
     kids_info = create_children(sample_year, PersonNr)
+    kid_info = kids_info['kid_info']    
     utbildning = generate_education()
     data = merge_dictionaries(utbildning, kids_info)
     data['PersonNr'] = PersonNr
     data['FamId'] = PersonNr
+    data['kid_info'] = kid_info
+    data['my_kids_living_at_home'] = dict()
+    data['spouse'] = dict()
     family_dicts = [data]
+
+
 
     kids_frames = create_kids_data(sample_year, PersonNr, kids_info) 
     if len(kids_frames) == 0:
         if random.randint(1,100) > 60: # Probability someone is living alone
             spouse = create_spouse(PersonNr, kids_info, sample_year)
             family_dicts.append(spouse)
+            #The spouses will know about each other and share dictionary of people living at home
+            spouse['kid_info'] = kid_info
+            spouse['spouse'] = data
+            data['spouse'] = spouse
+            spouse['my_kids_living_at_home'] = data['my_kids_living_at_home']
     else:
+        for kid in kids_frames:
+            data['my_kids_living_at_home'][kid['PersonNr']] = kid
         family_dicts = family_dicts + kids_frames
         min_family_size = 0
         family_size = random.randint(min_family_size, len(kids_frames)+1) #Bigger family, more likley there's a spouse in the household
         if family_size > 1:
             spouse = create_spouse(PersonNr, kids_info, sample_year)
+            #The spouses will know about each other and share dictionary of people living at home
+            spouse['kid_info'] = kid_info
+            spouse['spouse'] = data
+            data['spouse'] = spouse
+            spouse['my_kids_living_at_home'] = data['my_kids_living_at_home']
             family_dicts.append(spouse)
     
     return family_dicts
@@ -1247,8 +1277,8 @@ def generate_work(personnummer, county, economicstatus, is_kid=False):
     Kommun = generate_municipal(county)
     if is_kid:
         prefix_working_ties1 = generate_company(personnummer, Kommun, county, prefix="KU1", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
-        prefix_working_ties2 = generate_company(personnummer, Kommun, county, prefix="KU1", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
-        prefix_working_ties3 = generate_company(personnummer, Kommun, county, prefix="KU1", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
+        prefix_working_ties2 = generate_company(personnummer, Kommun, county, prefix="KU2", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
+        prefix_working_ties3 = generate_company(personnummer, Kommun, county, prefix="KU3", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
         biggest_data = {
             'CfarNr_LISA' : prefix_working_ties1['KU1CfarNr'],
             'ArbstId' : (prefix_working_ties1['KU1CfarNr'])+(prefix_working_ties1['KU1AstNr'])+(prefix_working_ties1['KU1AstKommun'])+(prefix_working_ties1['KU1PeOrgNr']),
@@ -1363,13 +1393,14 @@ def generate_work(personnummer, county, economicstatus, is_kid=False):
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------------------
-def generate_person(sample_year=2019):
+def generate_household(sample_year=2019):
     family_members = generate_family(sample_year)
+    
+
     Geographical = generate_geographical()
     Lan = Geographical['Lan']
     data = []
     for member in family_members:
-        
         PersonNr = member['PersonNr']
 
         Demographic = generate_demographic(PersonNr, sample_year)
@@ -1384,8 +1415,7 @@ def generate_person(sample_year=2019):
     return data
 
 
-from itertools import chain
-def generate_data(amount, sample_year=2019): 
+def generate_data(amount, sample_year=2019, verbose=False): 
     """
     Parameters
     ----------
@@ -1401,44 +1431,44 @@ def generate_data(amount, sample_year=2019):
         list of dictionaries with data for all variables.
 
     """
-    people = []
-    print(f"{0}/{amount}")
+    data = {}
+    if verbose:
+        print(f"{0}/{amount}")
     for i in range(amount):
-        if (i+1) % 10000 == 0:
-            print(f"{i+1}/{amount}")
-        household = generate_person(sample_year)
-        people.append(household)
-
-    data = list(chain(*people)) #Flattens list     
+        if verbose:
+            if (i+1) % 10000 == 0:
+                print(f"{i+1}/{amount}")
+        household = generate_household(sample_year)
+        for person_in_household in household:
+            PersonNr = person_in_household['PersonNr']
+            data[PersonNr] = person_in_household  
+    
     return data
 
 
-
 def generate_data_frame(data, sample_year):
-    kid_info_dicts = []
     for d in data:
-        update_kid_categories(d, d['kid_info'], sample_year)
-        kid_info_dicts.append(d.pop('kid_info')) #Remove kid_info temporarily for dataframe creation
-
-    dataframe = pd.DataFrame(data, columns=[  
-                                    'PersonNr', 'Lan', 'Kommun', 'Forsamling', 'Distriktskod', 'FastLopNr', 'FastBet',
-                                    'Barn0_3', 'Barn4_6', 'Barn7_10', 'Barn11_15', 'Barn16_17',
-                                    'Barn18plus', 'Barn18_19', 'Barn20plus', 'FamId', 
-                                    'Sun2000niva_old','SUN2000niva', 'SUN2000Inr', 'SUN2000Grp',
-                                    'CfarNr_LISA', 'ArbstId', 'AstNr_LISA', 'AstKommun', 'AstLan',
-                                    'KU1PeOrgNr', 'KU1CfarNr', 'KU1AstNr', 'KU1AstKommun', 'KU1AstLan',
-                                    'KU1YrkStalln', 'KU2PeOrgNr', 'KU2CfarNr', 'KU2AstNr', 'KU2AstKommun',
-                                    'KU2AstLan', 'KU2YrkStalln', 'KU3PeOrgNr', 'KU3CfarNr', 'KU3AstNr',
-                                    'KU3AstKommun', 'KU3AstLan', 'KU3YrkStalln',
-                                    'FodelseAr', 'DodDatum', 'Alder', 'Kon', 'InvUtvLand', 'InvUtvManad',
-                                    'PostTyp', 'FodelseLandnamn', 'FodelseTidMor', 'FodelseLandnamnMor',
-                                    'FodelseTidFar', 'FodelseLandnamnFar', 'UtlSvBakg',
-                                    'SyssStat', 'ArbTid', 'YrkStalln', 'KU1lnk', 'KU2lnk', 'KU3lnk',
-                                    'Raks_SummaInk', 'Raks_Huvudanknytning', 'Raks_EtablGrad', 'Raks_Forvink'
-                                 ])
-    for d,kid_info in zip(data, kid_info_dicts): #Add the kid_info back
-        d['kid_info'] = kid_info
-    return dataframe
+        update_kid_categories(d, d['kid_info'], sample_year) #Updates kids categories from kid_info dictionary
+    csv_columns =   [ #We will only use these keys in the dictionary when creating the dataframe
+    'PersonNr', 'Lan', 'Kommun', 'Forsamling', 'Distriktskod',
+    'FastLopNr', 'FastBet', 'Barn0_3', 'Barn4_6', 'Barn7_10',
+    'Barn11_15', 'Barn16_17', 'Barn18plus', 'Barn18_19',
+    'Barn20plus', 'FamId', 'Sun2000niva_old', 'SUN2000niva',
+    'SUN2000Inr', 'SUN2000Grp', 'CfarNr_LISA', 'ArbstId',
+    'AstNr_LISA', 'AstKommun', 'AstLan', 'KU1PeOrgNr',
+    'KU1CfarNr', 'KU1AstNr', 'KU1AstKommun', 'KU1AstLan',
+    'KU1YrkStalln', 'KU2PeOrgNr', 'KU2CfarNr', 'KU2AstNr',
+    'KU2AstKommun', 'KU2AstLan', 'KU2YrkStalln', 'KU3PeOrgNr',
+    'KU3CfarNr', 'KU3AstNr', 'KU3AstKommun', 'KU3AstLan',
+    'KU3YrkStalln', 'FodelseAr', 'DodDatum', 'Alder', 'Kon',
+    'InvUtvLand', 'InvUtvManad', 'PostTyp', 'FodelseLandnamn',
+    'FodelseTidMor', 'FodelseLandnamnMor', 'FodelseTidFar',
+    'FodelseLandnamnFar', 'UtlSvBakg', 'SyssStat', 'ArbTid',
+    'YrkStalln', 'KU1lnk', 'KU2lnk', 'KU3lnk',
+    'Raks_SummaInk', 'Raks_Huvudanknytning', 'Raks_EtablGrad',
+    'Raks_Forvink']
+    relevant_data = [{key: d[key] for key in csv_columns} for d in data]
+    return pd.DataFrame(relevant_data)
 
 import os
 def chunk_list(input_list, chunk_size=20000): 
@@ -1449,7 +1479,7 @@ def dict_to_csvs(dict_data, sample_year=1990):
     folder_name = "synthetic_scb_data"
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
-
+    dict_data = list(dict_data.values())
     sliced_dict_list = chunk_list(dict_data)
     number_of_times = len(sliced_dict_list)
     
@@ -1469,6 +1499,7 @@ def dict_to_csvs(dict_data, sample_year=1990):
         data = generate_data_frame(chunk, sample_year)
         data.to_csv(os.path.join(subfolder_path, f"{sample_year}_data_part{i}.csv"), index=False)
         i += 1
+    
     
     return True
 
@@ -1531,34 +1562,71 @@ def dict_to_csvs(dict_data, sample_year=1990):
 # -------------------------------------------------------------------------------------------------
 
 
-def age_people_one_year(list_of_dictionaries, sample_year):
-    for my_dict in list_of_dictionaries:
-        is_dead = my_dict['DodDatum']
-        if type(is_dead) != type(None): #If there is a string saying the death date, then we won't update the age or death date
-            c = 2
-        else:
-            death_date = dod_datum(sample_year) #Every year the person could've died
-            if type(death_date) != type(None): # The guy died and we won't update his age
-                c = 2
+def age_people_one_year(dictionary_data, sample_year):
+    visited_kid_data = set()
+    
+    for PersonNr, dict_data in dictionary_data.items():
+        #If I am not already dead, check and see if I am going to die this year
+        if dict_data['DodDatum'] == None: #Death date is 'None' which means the person is alive
+            death_date = dod_datum(sample_year) #Every year the person can die
+            if death_date == None: # The person did not die and we update the age
+                dict_data['Alder'] += 1
             else:
-            # new_alder = alder(my_dict['PersonNr'], sample_year, death_date)
-                my_dict['Alder'] = my_dict['Alder'] + 1
-            my_dict['DodDatum'] = death_date
+                dict_data['DodDatum'] = death_date
+
+        #Make sure your kid data has not already been updated
+        if PersonNr not in visited_kid_data:
+            #Get kid ages information
+            my_kid_info = dict_data['kid_info']
+            if my_kid_info:
+                #Save old values 
+                old_values = [(k, v) for k, v in my_kid_info.items()]
+
+                
+                #Clear the dictionary
+                my_kid_info.clear()
+                
+                #Fill the dictionary with new ages 
+                for old_kid_ages,number_of_kids in old_values:
+                    my_kid_info[old_kid_ages+1] = number_of_kids
+
+                my_spouse = dict_data['spouse']
+                if my_spouse: #Check if I have a spouse
+                    #Adding the personnumber of my potential spouse so I won't update the kids from the spouse too
+                    spouse_PersonNr = my_spouse['PersonNr']
+                    visited_kid_data.add(spouse_PersonNr)
+
+
+
+
 
 def kid_into_row(parent_dict, sample_year, number_of_kids):
-    yearborn = sample_year - 16
+    min_age_to_be_in_a_row = 16
+    yearborn = sample_year - min_age_to_be_in_a_row
+
     PersonNr_kids = []
     if number_of_kids == 1:
         PersonNr_kid = person_nummer_creation(sample_year, start_date=f"{yearborn}0101", stop_year=f"{yearborn}1231") # Third kid born whenever
         PersonNr_kids = PersonNr_kids + [PersonNr_kid]
     elif number_of_kids == 2:
-        PersonNr_kids = PersonNr_kids + make_twins(16, sample_year)
+        PersonNr_kids = PersonNr_kids + make_twins(min_age_to_be_in_a_row, sample_year)
     else:
-        PersonNr_kids = PersonNr_kids + make_triplets(16, sample_year)
+        PersonNr_kids = PersonNr_kids + make_triplets(min_age_to_be_in_a_row, sample_year)
     
     kid_dicts = []
+    spouse = parent_dict['spouse']
+    famid = parent_dict['FamId']
+    parent1_birthdate = parent_dict['PersonNr']
+    parent1_country = parent_dict['FodelseLandnamn']
+    parent2_birthdate = ""
+    parent2_country = ""
+    if spouse:
+        parent2_birthdate = spouse['PersonNr']
+        parent2_country = spouse['FodelseLandnamn']
+        
+    
     for PersonNr_kid in PersonNr_kids:
-        kid_dict = make_kid_family_frame(PersonNr_kid, parent_dict['FamId'], is_Kid=True, sample_year=sample_year)
+        kid_dict = make_kid_family_frame(PersonNr_kid, famid, is_Kid=True, sample_year=sample_year)
         kid_dict['Lan']             = parent_dict['Lan']
         kid_dict['Kommun']          = parent_dict['Kommun']
         kid_dict['FastBet']         = parent_dict['FastBet']
@@ -1568,84 +1636,175 @@ def kid_into_row(parent_dict, sample_year, number_of_kids):
 
         Lan = kid_dict['Lan']
 
-        Demographic = generate_demographic(PersonNr_kid, sample_year)
+        Demographic = generate_demographic(PersonNr_kid, sample_year, 
+                                           birthdaymom=parent1_birthdate, birthdaydad=parent2_birthdate,
+                                           mom_country=parent1_country, dad_country=parent2_country)
         Economic = generate_economic(sample_year, is_kid=True)
 
         no_income = 1
         Work = generate_work(PersonNr_kid, Lan, no_income, is_kid=True)
 
         t = merge_dictionaries(merge_dictionaries(merge_dictionaries(kid_dict, Demographic), Economic), Work)
+
         kid_dicts.append(t)    
     return kid_dicts
+
         
-def update_kids(list_of_dictionaries, sample_year):
-    kids_grown_to_adolecents = []
-    for my_dict in list_of_dictionaries:
-        kid_data = my_dict['kid_info']
-        new_kid_data = {}
-        for kid_age,number_of_kids in kid_data.items():
-            if kid_age == 15: #The kid will turn 16 and thus is added as their own row in the dataframe
-                kid_dicts = kid_into_row(my_dict, sample_year, number_of_kids)
-                kids_grown_to_adolecents = kids_grown_to_adolecents + kid_dicts
+def turn_16_year_olds_into_data(dictionary_data, sample_year):
+    visited_kid_data = set()
+    young_adults = []
+    for PersonNr, dict_data in dictionary_data.items():
+        #Making sure I don't make kids into data for people sharing same kid_info
+        if PersonNr not in visited_kid_data:
+            my_kid_info = dict_data['kid_info']
+            
+            for kid_age, number_of_kids in my_kid_info.items():
+                if kid_age == 16: #The kid will turn 16 and thus is added as their own row in the dataframe
+                    kid_dicts = kid_into_row(dict_data, sample_year, number_of_kids)
+                    young_adults = young_adults + kid_dicts
+                    
+                    kids_at_home_data = dict_data['my_kids_living_at_home']
+                    #The newly made kids are added as items in the parent 'my_kids_living_at_home'
+                    for kid in kid_dicts:
+                        kid_PersonNr = kid['PersonNr']
+                        kids_at_home_data[kid_PersonNr] = kid
 
-            new_kid_data[kid_age+1] = number_of_kids
-        my_dict['kid_info'] = new_kid_data
-    list_of_dictionaries = list_of_dictionaries+kids_grown_to_adolecents
-    return list_of_dictionaries
+            my_spouse = dict_data['spouse']
+            if my_spouse: #Check if I have a spouse
+                #Adding the personnumber of my potential spouse so I won't update the kids from the spouse too
+                spouse_PersonNr = my_spouse['PersonNr']
+                visited_kid_data.add(spouse_PersonNr)
+    
+    #All kids that turned 16 this year now have their data stored in the big dictionary with the rest of all other people
+    for kid in young_adults:
+        kid_PersonNr = kid['PersonNr']
+        dictionary_data[kid_PersonNr] = kid
 
-def get_babies(list_of_dictionaries):
-    for my_dict in list_of_dictionaries:
-        kid_info = my_dict['kid_info']
-        if 0 not in kid_info: #The person does not have any already existing newborns
-            if sum(kid_info.values()) < 5: #People will not have more than 5 kids living at home at a time
-                #roughly 68% of households are childless 
-                # https://www.scb.se/hitta-statistik/statistik-efter-amne/befolkning/befolkningens-sammansattning/befolkningsstatistik/pong/statistiknyhet/befolkningsstatistik-helaret-20222/
-                if random.random() > 0.65:
+
+def get_babies(dictionary_data): #Gives each person to have some kids
+    for k, dict_data in dictionary_data.items():
+        my_kid_info = dict_data['kid_info'] #Dict with kid ages
+                                    #Kids living at home can not have children
+        if 0 not in my_kid_info and k == dict_data['FamId']:
+            #No more than 5 kids living at home at a time
+            if sum(my_kid_info.values()) < 5:
+                if random.random() > 0.65 and random.randint(0, sum(my_kid_info.values())) < 3:
                     kid_probability = random.random()
-                    #The chance of having twins, triplets is 1/250 and 1/62_500 respectively
-                    if kid_probability < 1/62500: kids = 3
-                    elif kid_probability < 1/250: kids = 2
-                    else: kids = 1
-                    kid_info[0] = kids
+                    if      kid_probability < 1/62500: kids = 3 #Probability to have triplets
+                    elif    kid_probability < 1/250: kids = 2   #Probability to have twins
+                    else:   kids = 1
+                    my_kid_info[0] = kids       
 
-def simulate_1_year(list_of_dictionaries, sample_year):
+
+def print_list_of_dicts(list_of_dictionaries):
+    for x in list_of_dictionaries:
+        print(x)
+        print()
+
+def kids_move_out(dictionary_data, sample_year, verbose=False):
+    #Only kids in 'my_kids_living_at_home' can move 
+    for k, dict_data in dictionary_data.items():
+        things_to_update = []
+        my_kid_info = dict_data['kid_info']
+        my_kids_living_at_home = dict_data['my_kids_living_at_home']
+        if my_kids_living_at_home: #Checks if you have kids living at home or not
+            for kid_PersonNr, kid_dict in my_kids_living_at_home.items():
+                kid_age = kid_dict['Alder']
+                is_dead = kid_dict['DodDatum']
+                if is_dead == None:
+                    if random.random() > 10/kid_age: #The older you get, the more likely you are to move out
+                        if verbose:
+                            print(kid_dict)
+                            
+                            print("-----------------------------")
+                            print(f"Ages of people that should be living with me {my_kid_info}")
+                            print()
+                            print(f"Kids living at home \n")
+                            print_list_of_dicts(my_kids_living_at_home)
+                            print()
+                       
+
+                        kid_dict['FamId'] = kid_dict['PersonNr'] #New FamId
+                        new_location = generate_geographical()  #New place to live
+                        economics = generate_economic(sample_year) #If you move out, you need some kind of income
+                        kid_dict = merge_dictionaries(merge_dictionaries(kid_dict, new_location), economics)
+                        things_to_update.append((kid_PersonNr, kid_age))
+                        
+        #Removing kids from parent info
+        if verbose:
+            print(things_to_update)
+            print(sample_year)
+        for (kid_PersonNr, kid_age) in things_to_update: 
+            #I can't for the life of me understand what is wrong here
+            #People will temporarily have negative kids
+            if verbose:
+                print()
+                print()
+                print("YAHOOOOOOOOOOOO")
+                print(my_kids_living_at_home)
+                print(my_kid_info)
+            my_kids_living_at_home.pop(kid_PersonNr)
+            my_kid_info[kid_age] -=1
+            if my_kid_info[kid_age] < 1: #If there are no more kids of that age, remove the key
+                my_kid_info.pop(kid_age)
+        if verbose:
+            print("My data kid data at home")
+            print(dict_data['my_kids_living_at_home'])
+            if dict_data['spouse']:
+                print("Spouse data kid data at home")
+                print(dict_data['spouse']['my_kids_living_at_home'])
+
+
+
+
+
+def simulate_1_year(list_of_dictionaries, sample_year, verbose=False):
     age_people_one_year(list_of_dictionaries, sample_year)
-    list_of_dictionaries = update_kids(list_of_dictionaries, sample_year)
+    turn_16_year_olds_into_data(list_of_dictionaries, sample_year)
     get_babies(list_of_dictionaries)
-    return list_of_dictionaries
+    kids_move_out(list_of_dictionaries, sample_year, verbose)
+    
 
-def simulate_x_years(number_of_households, start_year, number_of_years_to_simulate):
-    print(f"Creating data for {number_of_households} households in the year {start_year} - {start_year+number_of_years_to_simulate-1}")
-    print(f"Creating start data for year {start_year}")
-    data = generate_data(number_of_households, start_year)
-    print("Turning data into csv(s)")
+def simulate_x_years(number_of_households, start_year, number_of_years_to_simulate, verbose=False):
+    if verbose:
+        print(f"Creating data for {number_of_households} households in the year {start_year} - {start_year+number_of_years_to_simulate-1}")
+        print(f"Creating start data for year {start_year}")
+    data = generate_data(number_of_households, start_year, verbose)
+    if verbose:
+        print("Turning data into csv(s)")
     dict_to_csvs(data, start_year)
 
-    starting_year_simulation = start_year+1
-    stopping_year_simulation = start_year+number_of_years_to_simulate
+    if number_of_years_to_simulate > 0:
+        starting_year_simulation = start_year+1
+        stopping_year_simulation = start_year+number_of_years_to_simulate
 
-    for year in range(starting_year_simulation, stopping_year_simulation): #Start year 1990, simulate year 1991 - 1991+years_to_simulate
+        for year in range(starting_year_simulation, stopping_year_simulation): #Start year 1990, simulate year 1991 - 1991+years_to_simulate
+            if verbose:
+                print("--------------------------")
+                print("")
+                print(f"Simulating data for year {year}")
+            simulate_1_year(data, year, verbose)
+            if verbose:
+                print("Turning data into csv(s)")
+            dict_to_csvs(data, year)
+            if verbose:
+                print(f"Finished year {year}")
+    
+    if verbose:
         print("--------------------------")
         print("")
-        print(f"Simulating data for year {year}")
-        data = simulate_1_year(data, year)
-        print("Turning data into csv(s)")
-        dict_to_csvs(data, year)
-        print(f"Finished year {year}")
-    
-    print("--------------------------")
-    print("")
-    print("Program finished")
+        print("Program finished")
 
     return True
 
+households = 5000
+start_year = 1990
+years_to_simulate = 30
 
-simulate_x_years(200, 1990, 30) #How many households, starting year, number of csvs (years) ((including start year))
+#How many households, starting year, number of csvs (years) ((including start year))
+simulate_x_years(households, start_year, years_to_simulate) 
 
-# sample_year = 1991
-# number_of_households = 20000
-# print(f"Creating data for {number_of_households} households for year {sample_year}")
-# a = generate_data(number_of_households, sample_year)
-# print("Turning data into csv(s)")
-# dict_to_csvs(a, sample_year)
-# print("Program finished")
+# for i in range(21):
+#     if i % 10 == 0:
+#         print(i)
+    
