@@ -764,8 +764,7 @@ def create_kids_data(sample_year, FamId, kids_info):
     
     kids_in_range = kids_list[:2]    #Barn16_17 and Barn18_19
     kids_plus = kids_list[2:]
-    # print(kids_list)
-    # print(kids_info['kid_info'])
+
 
 
     #Barn16-17
@@ -787,6 +786,18 @@ def create_kids_data(sample_year, FamId, kids_info):
                 all_kids.append(make_kid_family_frame(kid, FamId, is_Kid=True, sample_year=sample_year))
 
     return all_kids
+
+    ###########################################################################################
+    ###########################################################################################
+    ###########################################################################################
+    ###########################################################################################
+    ###########################################################################################
+    ################################## NEEDS TO BE FIXED ######################################
+    ###########################################################################################
+    ###########################################################################################
+    ###########################################################################################
+    ###########################################################################################
+    ###########################################################################################
 
     #Barn16_17 and Barn18_19
     for kids in kids_in_range:
@@ -840,7 +851,6 @@ def create_kids_data(sample_year, FamId, kids_info):
             all_kids.append(make_kid_family_frame(kid, FamId, is_Kid=True, sample_year=sample_year))
         
         elif len(kids) == 2:
-            # print()
             age1, age2 = kids[0], kids[1]
             if age1 == age2: #Twins 22 22
                 year_born = sample_year - age1
@@ -1474,11 +1484,11 @@ def dict_to_csvs(dict_data, sample_year=1990):
     number_of_times = len(sliced_dict_list)
     
     i = 1
-    # print(f"{i}/{number_of_times}")
+    print(f"{i}/{number_of_times}")
     
     for chunk in sliced_dict_list:
-        # if (i+1) % 15 == 0:
-            # print(f"{i+1}/{number_of_times}")
+        if (i+1) % 15 == 0:
+            print(f"{i+1}/{number_of_times}")
 
         subfolder_name = f"synthetic_scb_data_{sample_year}"
         subfolder_path = os.path.join(folder_name, subfolder_name)
@@ -1552,7 +1562,7 @@ def dict_to_csvs(dict_data, sample_year=1990):
 # -------------------------------------------------------------------------------------------------
 
 
-def age_people_one_year(dictionary_data, sample_year, verbose=False):
+def age_people_one_year(dictionary_data, sample_year):
     visited_kid_data = set()
     
     for PersonNr, dict_data in dictionary_data.items():
@@ -1571,8 +1581,7 @@ def age_people_one_year(dictionary_data, sample_year, verbose=False):
             if my_kid_info:
                 #Save old values 
                 old_values = [(k, v) for k, v in my_kid_info.items()]
-                if verbose:
-                    print(old_values)
+
                 
                 #Clear the dictionary
                 my_kid_info.clear()
@@ -1580,8 +1589,7 @@ def age_people_one_year(dictionary_data, sample_year, verbose=False):
                 #Fill the dictionary with new ages 
                 for old_kid_ages,number_of_kids in old_values:
                     my_kid_info[old_kid_ages+1] = number_of_kids
-                if verbose:
-                    print(my_kid_info)
+
                 my_spouse = dict_data['spouse']
                 if my_spouse: #Check if I have a spouse
                     #Adding the personnumber of my potential spouse so I won't update the kids from the spouse too
@@ -1711,22 +1719,10 @@ def kids_move_out(dictionary_data, sample_year, verbose=False):
                             print("-----------------------------")
                             print(f"Ages of people that should be living with me {my_kid_info}")
                             print()
-                            # print("I am moving out")
-                            # print(kid_in_household)
-                            # print()
                             print(f"Kids living at home \n")
                             print_list_of_dicts(my_kids_living_at_home)
                             print()
-                        # print("Other kids in the house")
-                        # print_list_of_dicts(kids_in_household)
-                        # print()
-                        # print("Parent Dict")
-                        # print(my_dict)
-                        # print()
-                        # print("People in the same household")
-                        # print_list_of_dicts(people_in_same_household)
-                        # print()
-                        # print("-----------------------------")
+                       
 
                         kid_dict['FamId'] = kid_dict['PersonNr'] #New FamId
                         new_location = generate_geographical()  #New place to live
@@ -1744,7 +1740,7 @@ def kids_move_out(dictionary_data, sample_year, verbose=False):
             if verbose:
                 print()
                 print()
-                print("JARMO")
+                print("YAHOOOOOOOOOOOO")
                 print(my_kids_living_at_home)
                 print(my_kid_info)
             my_kids_living_at_home.pop(kid_PersonNr)
@@ -1801,17 +1797,14 @@ def simulate_x_years(number_of_households, start_year, number_of_years_to_simula
 
     return True
 
+households = 5000
+start_year = 1990
+years_to_simulate = 30
 
-for i in range(21):
-    if i % 10 == 0:
-        print(i)
-    simulate_x_years(5000, 1990, 30) #How many households, starting year, number of csvs (years) ((including start year))
+#How many households, starting year, number of csvs (years) ((including start year))
+simulate_x_years(households, start_year, years_to_simulate) 
+
+# for i in range(21):
+#     if i % 10 == 0:
+#         print(i)
     
-
-# sample_year = 1991
-# number_of_households = 20000
-# print(f"Creating data for {number_of_households} households for year {sample_year}")
-# a = generate_data(number_of_households, sample_year)
-# print("Turning data into csv(s)")
-# dict_to_csvs(a, sample_year)
-# print("Program finished")
