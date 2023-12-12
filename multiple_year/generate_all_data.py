@@ -663,7 +663,7 @@ def update_kid_categories(parent_dict, kid_info_dict, sample_year):
                 parent_dict['Barn18plus'] += 1
         elif sample_year > 2004 and kid_age > 17 and kid_age < 20: #Barn18_19
             for _ in range(number_of_kids):
-                parent_dict['Barn18plus'] += 1
+                parent_dict['Barn18_19'] += 1
         elif sample_year > 2004 and kid_age > 19: #Barn20plus
             for _ in range(number_of_kids):
                 parent_dict['Barn20plus'] += 1
@@ -1744,7 +1744,7 @@ def simulate_x_years(number_of_households, start_year, number_of_years_to_simula
 for i in range(2):
     if i % 10 == 0:
         print(i)
-    simulate_x_years(1, 1990, 30, True) #How many households, starting year, number of csvs (years) ((including start year))
+    simulate_x_years(100, 1990, 30, True) #How many households, starting year, number of csvs (years) ((including start year))
     
 
 # sample_year = 1991
