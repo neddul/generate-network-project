@@ -155,7 +155,7 @@ def utl_sv_bakg(fodelselandnamn, fodelselandnamnfar, fodelselandnamnmor):
     else:
         return 21
 
-def generate_demographic(PersonNr, sample_year, birthdaymom='19820102-8936', birthdaydad='19790102-8936', mom_country="", dad_country=""):
+def generate_demographic(PersonNr, sample_year, birthdaymom="", birthdaydad='19790102-8936', mom_country="", dad_country=""):
     FodelseAr = fodelse_ar(PersonNr)
     DodDatum = dod_datum() # People can only have died during the sample year and not earlier
     InvUtvLand, Status = get_status()
@@ -165,6 +165,9 @@ def generate_demographic(PersonNr, sample_year, birthdaymom='19820102-8936', bir
     else:
         Alder = alder(PersonNr, sample_year, DodDatum)
         InvUtvManad = inv_ut_manad(Status,PersonNr, sample_year, DodDatum)
+
+    if birthdaymom == "": birthdaymom = '19820102-8936'
+    if birthdaydad == "": birthdaydad = '19790102-8936'
     
     if mom_country == "": mom  = fodelse_landnamn()
     else: mom = mom_country
@@ -1660,20 +1663,25 @@ def turn_16_year_olds_into_data(dictionary_data, sample_year):
 
 
 
-def get_babies(list_of_dictionaries):
-    for my_dict in list_of_dictionaries:
-        kid_info = my_dict['kid_info']
-                                 #Kids living at home can not have children
-        if 0 not in kid_info and my_dict['PersonNr'] == my_dict['FamId']:
-            if sum(kid_info.values()) < 5:
-                if random.random() > 0.65 and random.randint(0, sum(kid_info.values())) < 3:
+def get_babies(dictionary_data): #Gives each person to have some kids
+    for k, dict_data in dictionary_data.items():
+        my_kid_info = dict_data['kid_info'] #Dict with kid ages
 
+                                    #Kids living at home can not have children
+        if 0 not in my_kid_info and k == dict_data['FamId']:
+            #No more than 5 kids living at home at a time
+            if sum(my_kid_info.values()) < 5:
+                if random.random() > 0.65 and random.randint(0, sum(my_kid_info.values())) < 3:
                     kid_probability = random.random()
-                    if      kid_probability < 1/62500: kids = 3
-                    elif    kid_probability < 1/250: kids = 2
+                    if      kid_probability < 1/62500: kids = 3 #Probability to have triplets
+                    elif    kid_probability < 1/250: kids = 2   #Probability to have twins
                     else:   kids = 1
+                    my_kid_info[0] = kids
 
-                    my_dict['kid_info'][0] = kids
+
+
+        
+
 
     
 
@@ -1734,8 +1742,8 @@ def move_out(list_of_dictionaries, verbose=False):
 def simulate_1_year(list_of_dictionaries, sample_year):
     age_people_one_year(list_of_dictionaries, sample_year)
     turn_16_year_olds_into_data(list_of_dictionaries, sample_year)
+    get_babies(list_of_dictionaries)
     # move_out(list_of_dictionaries, verbose)
-    # get_babies(list_of_dictionaries)
     
 
 def simulate_x_years(number_of_households, start_year, number_of_years_to_simulate, verbose=False):
@@ -1771,7 +1779,7 @@ def simulate_x_years(number_of_households, start_year, number_of_years_to_simula
     return True
 
 
-for i in range(501):
+for i in range(1):
     if i % 10 == 0:
         print(i)
     simulate_x_years(100, 1990, 30) #How many households, starting year, number of csvs (years) ((including start year))
