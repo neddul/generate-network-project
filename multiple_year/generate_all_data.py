@@ -155,7 +155,7 @@ def utl_sv_bakg(fodelselandnamn, fodelselandnamnfar, fodelselandnamnmor):
     else:
         return 21
 
-def generate_demographic(PersonNr, sample_year, birthdaymom="", birthdaydad='19790102-8936', mom_country="", dad_country=""):
+def generate_demographic(PersonNr, sample_year, birthdaymom="", birthdaydad="", mom_country="", dad_country=""):
     FodelseAr = fodelse_ar(PersonNr)
     DodDatum = dod_datum() # People can only have died during the sample year and not earlier
     InvUtvLand, Status = get_status()
@@ -166,8 +166,8 @@ def generate_demographic(PersonNr, sample_year, birthdaymom="", birthdaydad='197
         Alder = alder(PersonNr, sample_year, DodDatum)
         InvUtvManad = inv_ut_manad(Status,PersonNr, sample_year, DodDatum)
 
-    if birthdaymom == "": birthdaymom = '19820102-8936'
-    if birthdaydad == "": birthdaydad = '19790102-8936'
+    if birthdaymom == "": birthdaymom = '19820102-8936' #Default value
+    if birthdaydad == "": birthdaydad = '19790102-8936' #Default value
     
     if mom_country == "": mom  = fodelse_landnamn()
     else: mom = mom_country
@@ -175,23 +175,20 @@ def generate_demographic(PersonNr, sample_year, birthdaymom="", birthdaydad='197
     if dad_country == "": dad  = fodelse_landnamn()
     else: dad = dad_country
         
-
-        
-    
     me   = fodelse_landnamn()
 
     demographic_data = {
         'FodelseAr'             : FodelseAr,
         'DodDatum'              : DodDatum,
-        'Alder'                 : Alder,          #2019 is the last year
+        'Alder'                 : Alder,          
         'Kon'                   : kon(PersonNr),
         'InvUtvLand'            : InvUtvLand,
         'InvUtvManad'           : InvUtvManad,
         'PostTyp'               : Status,
         'FodelseLandnamn'       : me,
-        'FodelseTidMor'         : fodelse_tid(birthdaymom), #Arbitrary needs to be fixed
+        'FodelseTidMor'         : fodelse_tid(birthdaymom), 
         'FodelseLandnamnMor'    : mom,
-        'FodelseTidFar'         : fodelse_tid(birthdaydad), #Arbitrary needs to be fixed
+        'FodelseTidFar'         : fodelse_tid(birthdaydad), 
         'FodelseLandnamnFar'    : dad,
         'UtlSvBakg'             : utl_sv_bakg(me,dad,mom) 
                        }
@@ -767,6 +764,9 @@ def create_kids_data(sample_year, FamId, kids_info):
     
     kids_in_range = kids_list[:2]    #Barn16_17 and Barn18_19
     kids_plus = kids_list[2:]
+    # print(kids_list)
+    # print(kids_info['kid_info'])
+
 
     #Barn16-17
     all_kids = []
@@ -778,6 +778,15 @@ def create_kids_data(sample_year, FamId, kids_info):
 
     #Barn16-17
     all_kids = []
+
+    for k, v in kids_info['kid_info'].items():
+        if k > 15:
+            for _ in range(v):
+                year_born = sample_year - k
+                kid = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}1231")
+                all_kids.append(make_kid_family_frame(kid, FamId, is_Kid=True, sample_year=sample_year))
+
+    return all_kids
 
     #Barn16_17 and Barn18_19
     for kids in kids_in_range:
@@ -860,11 +869,11 @@ def create_kids_data(sample_year, FamId, kids_info):
 
             elif age1 == age2 and age2 != age3: #The 2 youngest are twins oldest is singlet 
                 if age3 - age1 > 1: #More than 1 year apart 20 20 22
-                    year_born1 = sample_year - age1
-                    year_born2 = sample_year - age3
+                    year_born1 = sample_year - age3
+                    year_born2 = sample_year - age1
                     kid1 = person_nummer_creation(sample_year, start_date=f"{year_born1}0101", stop_year=f"{year_born1}1231")
-                    kid2 = person_nummer_creation(sample_year, start_date=kid1[:8], stop_year=kid1[:8])
-                    kid3 = person_nummer_creation(sample_year, start_date=f"{year_born2}0101", stop_year=f"{year_born2}1231")
+                    kid2 = person_nummer_creation(sample_year, start_date=f"{year_born2}0101", stop_year=f"{year_born2}1231")
+                    kid3 = person_nummer_creation(sample_year, start_date=kid2[:8], stop_year=kid2[:8])
                 else: #Within 1 year apart 20 20 21
                     year_born1 = sample_year - age3
                     year_born2 = sample_year - age1
@@ -874,8 +883,8 @@ def create_kids_data(sample_year, FamId, kids_info):
 
             elif age1 != age2 and age2 == age3: #The 2 oldest are twins youngest is singlet 
                 if age3 - age1 > 1: #More than 1 year apart 20 22 22
-                    year_born1 = sample_year - age1
-                    year_born2 = sample_year - age3
+                    year_born1 = sample_year - age3
+                    year_born2 = sample_year - age1
                     kid1 = person_nummer_creation(sample_year, start_date=f"{year_born1}0101", stop_year=f"{year_born1}1231")
                     kid2 = person_nummer_creation(sample_year, start_date=kid1[:8], stop_year=kid1[:8])
                     kid3 = person_nummer_creation(sample_year, start_date=f"{year_born2}0101", stop_year=f"{year_born2}1231")
@@ -886,31 +895,33 @@ def create_kids_data(sample_year, FamId, kids_info):
                     kid2 = person_nummer_creation(sample_year, start_date=kid1[:8], stop_year=kid1[:8])
                     kid3 = person_nummer_creation(sample_year, start_date=f"{year_born2}0401", stop_year=f"{year_born2}1231") # Third kid born atleast 10 months later
 
-            elif age2 - age1 < 2: 
-                if age3 - age2 < 2: # 20 21 22
-                    year_born = sample_year-age3
-                    kid1 = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}0210") # First kid born jan - feb year 1
-                    kid2 = person_nummer_creation(sample_year, start_date=f"{year_born}1201", stop_year=f"{year_born+1}0130") # Second kid born atleast 10 months later
-                    kid3 = person_nummer_creation(sample_year, start_date=f"{year_born+1}1101", stop_year=f"{year_born+1}1231") # Third kid born atleast 10 months later
+            elif age2 - age1 == 1: 
+                if age3 - age2 == 1: # 20 21 22
+                    year_born1 = sample_year-age3
+                    year_born2 = sample_year-age2
+                    year_born3 = sample_year-age1
+                    kid1 = person_nummer_creation(sample_year, start_date=f"{year_born1}0101", stop_year=f"{year_born1}0210") # First kid born jan - feb year 1
+                    kid2 = person_nummer_creation(sample_year, start_date=f"{year_born1}1201", stop_year=f"{year_born2}0130") # Second kid born atleast 10 months later
+                    kid3 = person_nummer_creation(sample_year, start_date=f"{year_born2}1101", stop_year=f"{year_born3}1231") # Third kid born atleast 10 months later
                 else: # 20 21 23
-                    year_born3 = sample_year - age3
+                    year_born1 = sample_year - age3
                     year_born2 = sample_year - age2
-                    year_born1 = sample_year - age1
-                    kid1 = person_nummer_creation(sample_year, start_date=f"{year_born2}0101", stop_year=f"{year_born2}0630") # Second kid born jan - june year 1
-                    kid2 = person_nummer_creation(sample_year, start_date=f"{year_born1}0401", stop_year=f"{year_born1}1231") # Third kid born atleast 10 months later
-                    kid3 = person_nummer_creation(sample_year, start_date=f"{year_born3}0101", stop_year=f"{year_born3}1231") # First kid born whenever
+                    year_born3 = sample_year - age1
+                    kid1 = person_nummer_creation(sample_year, start_date=f"{year_born1}0101", stop_year=f"{year_born1}1231") # Second kid born jan - june year 1
+                    kid2 = person_nummer_creation(sample_year, start_date=f"{year_born2}0101", stop_year=f"{year_born2}0630") # Third kid born atleast 10 months later
+                    kid3 = person_nummer_creation(sample_year, start_date=f"{year_born3}0401", stop_year=f"{year_born3}1231") # First kid born whenever
             else:
-                if age3 - age2 < 2: #20 22 23
-                    year_born3 = sample_year - age3
+                if age3 - age2 == 1: #20 22 23
+                    year_born1 = sample_year - age3
                     year_born2 = sample_year - age2
-                    year_born1 = sample_year - age1
-                    kid1 = person_nummer_creation(sample_year, start_date=f"{year_born3}0101", stop_year=f"{year_born3}0630") # First kid born jan - june year 1
+                    year_born3 = sample_year - age1
+                    kid1 = person_nummer_creation(sample_year, start_date=f"{year_born1}0101", stop_year=f"{year_born1}0630") # First kid born jan - june year 1
                     kid2 = person_nummer_creation(sample_year, start_date=f"{year_born2}0401", stop_year=f"{year_born2}1231") # Second kid born atleast 10 months later
-                    kid3 = person_nummer_creation(sample_year, start_date=f"{year_born1}0101", stop_year=f"{year_born1}1231") # Third kid born whenever
+                    kid3 = person_nummer_creation(sample_year, start_date=f"{year_born3}0101", stop_year=f"{year_born3}1231") # Third kid born whenever
                 else: # 20 22 24
-                    year_born3 = sample_year - age3
+                    year_born1 = sample_year - age3
                     year_born2 = sample_year - age2
-                    year_born1 = sample_year - age1
+                    year_born3 = sample_year - age1
                     kid1 = person_nummer_creation(sample_year, start_date=f"{year_born1}0101", stop_year=f"{year_born1}1231") # Third kid born whenever
                     kid2 = person_nummer_creation(sample_year, start_date=f"{year_born2}0101", stop_year=f"{year_born2}1231") # Third kid born whenever
                     kid3 = person_nummer_creation(sample_year, start_date=f"{year_born3}0101", stop_year=f"{year_born3}1231") # Third kid born whenever
@@ -1541,7 +1552,7 @@ def dict_to_csvs(dict_data, sample_year=1990):
 # -------------------------------------------------------------------------------------------------
 
 
-def age_people_one_year(dictionary_data, sample_year):
+def age_people_one_year(dictionary_data, sample_year, verbose=False):
     visited_kid_data = set()
     
     for PersonNr, dict_data in dictionary_data.items():
@@ -1557,23 +1568,25 @@ def age_people_one_year(dictionary_data, sample_year):
         if PersonNr not in visited_kid_data:
             #Get kid ages information
             my_kid_info = dict_data['kid_info']
-
-            #Save old values 
-            old_kid_ages = list(my_kid_info.keys())
-            number_of_kids = list(my_kid_info.values())
-            
-            #Clear the dictionary
-            my_kid_info.clear()
-            
-            #Fill the dictionary with new ages 
-            for old_kid_ages,number_of_kids in zip(old_kid_ages, number_of_kids):
-                my_kid_info[old_kid_ages+1] = number_of_kids
-
-            my_spouse = dict_data['spouse']
-            if my_spouse: #Check if I have a spouse
-                #Adding the personnumber of my potential spouse so I won't update the kids from the spouse too
-                spouse_PersonNr = my_spouse['PersonNr']
-                visited_kid_data.add(spouse_PersonNr)
+            if my_kid_info:
+                #Save old values 
+                old_values = [(k, v) for k, v in my_kid_info.items()]
+                if verbose:
+                    print(old_values)
+                
+                #Clear the dictionary
+                my_kid_info.clear()
+                
+                #Fill the dictionary with new ages 
+                for old_kid_ages,number_of_kids in old_values:
+                    my_kid_info[old_kid_ages+1] = number_of_kids
+                if verbose:
+                    print(my_kid_info)
+                my_spouse = dict_data['spouse']
+                if my_spouse: #Check if I have a spouse
+                    #Adding the personnumber of my potential spouse so I won't update the kids from the spouse too
+                    spouse_PersonNr = my_spouse['PersonNr']
+                    visited_kid_data.add(spouse_PersonNr)
 
 
 
@@ -1627,6 +1640,7 @@ def kid_into_row(parent_dict, sample_year, number_of_kids):
 
         kid_dicts.append(t)    
     return kid_dicts
+
         
 def turn_16_year_olds_into_data(dictionary_data, sample_year):
     visited_kid_data = set()
@@ -1658,15 +1672,10 @@ def turn_16_year_olds_into_data(dictionary_data, sample_year):
         kid_PersonNr = kid['PersonNr']
         dictionary_data[kid_PersonNr] = kid
 
-    
-
-
-
 
 def get_babies(dictionary_data): #Gives each person to have some kids
     for k, dict_data in dictionary_data.items():
         my_kid_info = dict_data['kid_info'] #Dict with kid ages
-
                                     #Kids living at home can not have children
         if 0 not in my_kid_info and k == dict_data['FamId']:
             #No more than 5 kids living at home at a time
@@ -1676,74 +1685,88 @@ def get_babies(dictionary_data): #Gives each person to have some kids
                     if      kid_probability < 1/62500: kids = 3 #Probability to have triplets
                     elif    kid_probability < 1/250: kids = 2   #Probability to have twins
                     else:   kids = 1
-                    my_kid_info[0] = kids
+                    my_kid_info[0] = kids       
 
-
-
-        
-
-
-    
 
 def print_list_of_dicts(list_of_dictionaries):
     for x in list_of_dictionaries:
         print(x)
         print()
 
-def move_out(list_of_dictionaries, verbose=False):
-    #Only the kids can move out
-    visited_families = set()
-    for my_dict in list_of_dictionaries:
-        my_famid = my_dict['FamId']
-        if my_famid not in visited_families:
-            my_kid_info = my_dict['kid_info']
-            visited_families.add(my_famid)
-            people_in_same_household = [d for d in list_of_dictionaries if d['FamId'] == my_famid] #Filtering out all people not living in the house
-            kids_in_household = [d for d in people_in_same_household if d['kid_info'] is not my_kid_info] #Filtering out parents by checking kid_info, parents have different from all other kids in the house
-            random_number = random.random()
-            for kid_in_household in kids_in_household:
-                a = kid_in_household['Alder']
-                a = 9/a
-                dead = kid_in_household['DodDatum']
-                #random_number > a and 
-                if dead == None: #The older you get, the more likely you're to move out from your parents:
-                    if verbose:
-                        print("-----------------------------")
-                        print(f"Ages of people that should be living with me {my_kid_info}")
-                        print()
-                        print("I am moving out")
-                        print(kid_in_household)
-                        print()
-                        print(f"I am {kid_in_household['Alder']} years old")
-                        print()
-                        print("Other kids in the house")
-                        print_list_of_dicts(kids_in_household)
+def kids_move_out(dictionary_data, sample_year, verbose=False):
+    #Only kids in 'my_kids_living_at_home' can move 
+    for k, dict_data in dictionary_data.items():
+        things_to_update = []
+        my_kid_info = dict_data['kid_info']
+        my_kids_living_at_home = dict_data['my_kids_living_at_home']
+        if my_kids_living_at_home: #Checks if you have kids living at home or not
+            for kid_PersonNr, kid_dict in my_kids_living_at_home.items():
+                kid_age = kid_dict['Alder']
+                is_dead = kid_dict['DodDatum']
+                if is_dead == None:
+                    if random.random() > 10/kid_age: #The older you get, the more likely you are to move out
+                        if verbose:
+                            print(kid_dict)
+                            
+                            print("-----------------------------")
+                            print(f"Ages of people that should be living with me {my_kid_info}")
+                            print()
+                            # print("I am moving out")
+                            # print(kid_in_household)
+                            # print()
+                            print(f"Kids living at home \n")
+                            print_list_of_dicts(my_kids_living_at_home)
+                            print()
+                        # print("Other kids in the house")
+                        # print_list_of_dicts(kids_in_household)
+                        # print()
+                        # print("Parent Dict")
+                        # print(my_dict)
+                        # print()
+                        # print("People in the same household")
+                        # print_list_of_dicts(people_in_same_household)
+                        # print()
+                        # print("-----------------------------")
 
-                # if True it works???????
-                    # print()
-                    # print("Parent Dict")
-                    # print(my_dict)
-                    # print()
-                    # print("People in the same household")
-                    # print_list_of_dicts(people_in_same_household)
-                    
-                    # print()
-                    # print("-----------------------------")
-                    kid_in_household['FamId'] = kid_in_household['PersonNr']
-                    new_location = generate_geographical()
-                    kid_in_household = merge_dictionaries(kid_in_household, new_location)
-                    visited_families.add(kid_in_household['FamId'])
-                    
-                    my_kid_info[kid_in_household['Alder']] -=1
-                    if my_kid_info[kid_in_household['Alder']] < 1: #If there are no more kids of that age, remove the key
-                        my_kid_info.pop(kid_in_household['Alder'])
+                        kid_dict['FamId'] = kid_dict['PersonNr'] #New FamId
+                        new_location = generate_geographical()  #New place to live
+                        economics = generate_economic(sample_year) #If you move out, you need some kind of income
+                        kid_dict = merge_dictionaries(merge_dictionaries(kid_dict, new_location), economics)
+                        things_to_update.append((kid_PersonNr, kid_age))
+                        
+        #Removing kids from parent info
+        if verbose:
+            print(things_to_update)
+            print(sample_year)
+        for (kid_PersonNr, kid_age) in things_to_update: 
+            #I can't for the life of me understand what is wrong here
+            #People will temporarily have negative kids
+            if verbose:
+                print()
+                print()
+                print("JARMO")
+                print(my_kids_living_at_home)
+                print(my_kid_info)
+            my_kids_living_at_home.pop(kid_PersonNr)
+            my_kid_info[kid_age] -=1
+            if my_kid_info[kid_age] < 1: #If there are no more kids of that age, remove the key
+                my_kid_info.pop(kid_age)
+        if verbose:
+            print("My data kid data at home")
+            print(dict_data['my_kids_living_at_home'])
+            if dict_data['spouse']:
+                print("Spouse data kid data at home")
+                print(dict_data['spouse']['my_kids_living_at_home'])
 
 
-def simulate_1_year(list_of_dictionaries, sample_year):
+
+
+
+def simulate_1_year(list_of_dictionaries, sample_year, verbose=False):
     age_people_one_year(list_of_dictionaries, sample_year)
     turn_16_year_olds_into_data(list_of_dictionaries, sample_year)
     get_babies(list_of_dictionaries)
-    # move_out(list_of_dictionaries, verbose)
+    kids_move_out(list_of_dictionaries, sample_year, verbose)
     
 
 def simulate_x_years(number_of_households, start_year, number_of_years_to_simulate, verbose=False):
@@ -1764,7 +1787,7 @@ def simulate_x_years(number_of_households, start_year, number_of_years_to_simula
                 print("--------------------------")
                 print("")
                 print(f"Simulating data for year {year}")
-            simulate_1_year(data, year)
+            simulate_1_year(data, year, verbose)
             if verbose:
                 print("Turning data into csv(s)")
             dict_to_csvs(data, year)
@@ -1779,10 +1802,10 @@ def simulate_x_years(number_of_households, start_year, number_of_years_to_simula
     return True
 
 
-for i in range(1):
+for i in range(21):
     if i % 10 == 0:
         print(i)
-    simulate_x_years(100, 1990, 30) #How many households, starting year, number of csvs (years) ((including start year))
+    simulate_x_years(5000, 1990, 30) #How many households, starting year, number of csvs (years) ((including start year))
     
 
 # sample_year = 1991
