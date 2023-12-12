@@ -1,9 +1,10 @@
 import pandas as pd
 from itertools import combinations
 from tqdm import tqdm
-import numpy as np
+#import numpy as np
 import sys
 import os
+import re
 
 pd.options.mode.chained_assignment = None
 
@@ -215,7 +216,7 @@ def find_siblings(family_connections):
     unique_combinations_df['connection'] = 'siblings'
 
     # Rename columns by removing the suffixes _x and _y
-    unique_combinations_df.columns = unique_combinations_df.columns.str.replace('_x', '').str.replace('_y', '')
+    unique_combinations_df.columns = unique_combinations_df.columns.str.replace('2_x', '1').str.replace('_y', '')
     
     
     return unique_combinations_df
@@ -327,7 +328,8 @@ def create_family_layer(registry_data, current_year, current_network = None):
     #combining the build network of the year with the recent network
     if current_network is not None: 
         connections = pd.concat([connections, current_network], ignore_index=True)
-    
+    print(current_network)
+    print(connections)
     connections = connections.drop_duplicates()
     #sibling relationship
     #dfs_to_concat = find_siblings(connections)
@@ -343,12 +345,15 @@ def create_family_layer(registry_data, current_year, current_network = None):
     grandparents_connections = find_grandparents_aunts(connections)
     if not grandparents_connections.empty:
         #grandparents_connections = pd.DataFrame(grandparents_connections, columns=['personNr1', 'personNr2', 'connection'])
+
         connections = pd.concat([connections] + [grandparents_connections], ignore_index=True)
 
 
     #this is too find siblings which currently dont live in the same house, it will find all though and then we filter afterwards
+    print(connections)
     print("Finding Siblings now")
     sibling_relations = find_siblings(connections)
+    print(sibling_relations)
     if not sibling_relations.empty:
         connections = pd.concat([connections] + [sibling_relations])
 
@@ -364,11 +369,17 @@ def create_family_layer(registry_data, current_year, current_network = None):
         #cousin_connections = pd.DataFrame(cousin_connections)
         connections = pd.concat([connections] + [cousin_connections], ignore_index=True)
     save_final_network = "final_network" + str(current_year) + "csv"
+    connections = connections.drop_duplicates()
     connections.to_csv(save_final_network)
     #os.remove(save_directory)
     print("The network was created. Please dont forget to remove the temporal files in datastorage_family, before rerunning the script.")
     return connections
+    #taken from stackoverflow
 
+def sorted_alphanumeric(data):
+    convert = lambda text: int(text) if text.isdigit() else text.lower()
+    alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', key) ] 
+    return sorted(data, key=alphanum_key)
 
 def create_multiple_year_network():
     count = 1990
@@ -376,9 +387,11 @@ def create_multiple_year_network():
     #specify network directory
 
     #path to the data --> will they be in order --> how are we going to do that
-    data_dict =  "FamilyLayer30years/Basic Test Data"
+    data_dict =  "FamilyLayer30years/Basic Test Data/Data"
     csv_list = os.listdir(data_dict)
+    csv_list = sorted_alphanumeric(csv_list)
 
+    print(csv_list)
     for filename in tqdm(csv_list, desc="Processing  years"): 
         file_path = os.path.join(data_dict, filename)
         if os.path.isfile(file_path):
@@ -431,4 +444,9 @@ create_multiple_year_network()
 #save network and on to the next one --> maybe first manualy and then go from there 
 
 #also go through possible extensions again
+
+
+# change saving places for the networks 
+
+#can we be sure everything is read in in the right order --> how to fix that 
 
