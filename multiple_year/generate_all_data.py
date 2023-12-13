@@ -278,7 +278,7 @@ def generate_workingtime(SyssStat): #How many work hours/week
     #1 = 0 hours, 2 = 1 – 15 hours, 3 = 16 – 19 hours, 4 = 20 – 34 hours, 5 = 35 – w hours, 9 = Uppgift
     if SyssStat == 1 or SyssStat == 7 or SyssStat == 5:
         status = [2,3,4,5,9]
-        probabilities = [0.1, 0.2, 0.2, 0.4, 0.1]
+        probabilities = [0.1, 0.15, 0.25, 0.45, 0.05]
         ArbTid = random.choices(status, probabilities)[0]
     else:
         ArbTid = 1
@@ -295,7 +295,7 @@ def generate_job(ArbTid): #What kind of work the person is involved in
         YrkStalln = 0
     else:
         status = [1,2,4,5]
-        probabilities = [0.225, 0.5, 0.225, 0.05]
+        probabilities = [0.05, 0.7, 0.2, 0.05]
         YrkStalln = random.choices(status, probabilities)[0]
     return YrkStalln
 
@@ -363,7 +363,7 @@ def generate_main_labor_connection(YrkStalln):
     if YrkStalln == 0:
         Raks_Huvudanknytning = 7
     else:
-        if YrkStalln < 4 and YrkStalln > 0:
+        if 0 < YrkStalln < 4:
             status = [1,2,3,4]
             probabilities = [0.5,0.2,0.1,0.2]
             Raks_Huvudanknytning = random.choices(status, probabilities)[0]
@@ -1162,85 +1162,108 @@ def generate_geographical():
 
 
 CfarNumbers = {}
-CfarNumbers_values = set([])
+CfarNumbers_values = set()
 def generate_CfarNr_LISA(PeOrgNr): #Will generate an arbitrary unique 8 digit number
     if PeOrgNr in CfarNumbers:
         return CfarNumbers[PeOrgNr]
     else:
         while True:
-            CfarNr_LISA = str(random.randint(100000000, 999999999))
+            CfarNr_LISA = str(random.randint(100_000_000, 999_999_999))
             if CfarNr_LISA not in CfarNumbers_values:
                 CfarNumbers_values.add(CfarNr_LISA)
                 CfarNumbers[PeOrgNr] = CfarNr_LISA
                 return CfarNr_LISA
 
+#Numbers taken from SCB, from year 2000 and onward it's pretty stable at 5.1%
+AstNr_percentages_by_year = {
+                            1990: 0.107, 1991: 0.093, 1992: 0.097, 
+                            1993: 0.090, 1994: 0.080, 1995: 0.076,
+                            1996: 0.070, 1997: 0.075, 1998: 0.069,
+                            1999: 0.050}
 
-AstNumbers = set([])
-def generate_AstNr_LISA(): #Gives a number to specify what job the person has, like a contractor, teacher, accountant etc
-    generate_new_AstNr = random.randint(1,100)
-    if generate_new_AstNr > 95: #5% of people have a number in these lines
-        special_numbers = ["99980","99981","99982","99983","99984","99985","99986","99987","99988","99989","99990","99991","99992","99993","99994","99996","99998","99999"]
+AstNumbers = set()
+def generate_AstNr_LISA(YrkStalln, sample_year): #Gives a number to specify what job the person has, like a contractor, teacher, accountant etc
+    if YrkStalln == 1: #The person is a sailor
+        return "99993"
+    percentage = 0.051
+    if 1989 < sample_year < 2000:
+        percentage = AstNr_percentages_by_year[sample_year]
+    
+    random_number = random.random()
+    if random_number < percentage and YrkStalln > 2: #5% of people have a number in these lines
+        special_numbers = ["99980","99981","99982","99983","99984","99985","99986","99987","99988","99989","99990","99991","99992","99994","99996","99998","99999"]
         return special_numbers[random.randint(0,len(special_numbers)-1)]
-    else:
-        AstNr_LISA = str(random.randint(100001, 999979))[1:]
-        AstNumbers.add(AstNr_LISA)
-        return AstNr_LISA
+    
+    number_of_jobs = len(AstNumbers)
+    if number_of_jobs > 0: # Chance to use an already existing number
+        if random_number < number_of_jobs / (number_of_jobs + 100):
+            AstNr_LISA = AstNumbers.pop() #Takes random item in the set
+            AstNumbers.add(AstNr_LISA) #Put it back in
+            return AstNr_LISA
+    #Create new AstNr
+    AstNr_LISA = str(random.randint(100001, 999979))[1:]
+    AstNumbers.add(AstNr_LISA)
+    return AstNr_LISA
 
 
-PeOrgNumbers = []
-def generate_PeOrgNr(personnummer): # 000000-0000 - 999999-9999
-    number = random.randint(0,100)
-    if number > 87: #The person is a selfstarter and the organisation number is the person's personnumber
-        PeOrgNumbers.append(personnummer[2:])
+PeOrgNumbers = set()
+def generate_PeOrgNr(personnummer, YrkStalln): # 000000-0000 - 999999-9999
+    if YrkStalln == 5: #The person is an Entrepreneur in own AB and the organisation number is the person's personnumber
+        PeOrgNumbers.add(personnummer[2:])
         return personnummer[2:]
-    number = random.randint(0, len(PeOrgNumbers)-1 if len(PeOrgNumbers) > 0 else 0)
+    
+    number_of_jobs = len(PeOrgNumbers)
+    random_number = random.random()
+    if number_of_jobs > 0: # Chance to use an already existing number
+        if random_number < number_of_jobs / (number_of_jobs + 100):
+            PeOrgNr = PeOrgNumbers.pop() #Takes random item in the set
+            PeOrgNumbers.add(PeOrgNr) #Put it back in
+            return PeOrgNr
 
-    if number > 50: # Use an existing job number 
-        existing_job_numbers = PeOrgNumbers
-        return existing_job_numbers[random.randint(0, len(existing_job_numbers)-1)]
-    else: #Generate a new job or accidentaly choose already existing
-        PeOrgNr = str(random.randint(10000000000, 99999999999))
-        PeOrgNr = PeOrgNr[1:7] + "-" + PeOrgNr[7:]
-        PeOrgNumbers.append(PeOrgNr)
-        return PeOrgNr
+    #Generate a new job or accidentaly choose an already existing
+    PeOrgNr = str(random.randint(10000000000, 99999999999))
+    PeOrgNr = PeOrgNr[1:7] + "-" + PeOrgNr[7:]
+    PeOrgNumbers.add(PeOrgNr)
+    return PeOrgNr
 
 
-def generate_company(personnummer, kommunnamn, lansnamn, prefix="", yrkstallning="", no_income=False):
+def generate_company(personnummer, kommunnamn, lansnamn, sample_year, prefix="", YrkStalln="", no_income=False):
     #If you have no income, then you will not be working for a company either
     if no_income:
         work_data = {
-                        f'{prefix}PeOrgNr'   : "-",
-                        f'{prefix}CfarNr'    : "-",
-                        f'{prefix}AstNr'     : "-",
-                        f'{prefix}AstKommun' : "0000",
-                        f'{prefix}AstLan'    : "00",
-                        f'{prefix}YrkStalln' : "-",
-                        }     
+                    f'{prefix}PeOrgNr'   : "-",
+                    f'{prefix}CfarNr'    : "-",
+                    f'{prefix}AstNr'     : "-",
+                    f'{prefix}AstKommun' : "0000",
+                    f'{prefix}AstLan'    : "00",
+                    f'{prefix}YrkStalln' : "0",
+                    }     
     else:
-        PeOrgNr = generate_PeOrgNr(personnummer)
+        PeOrgNr = generate_PeOrgNr(personnummer, YrkStalln)
         Cfar_Nr = generate_CfarNr_LISA(PeOrgNr)
-        AstNr = generate_AstNr_LISA()
+        AstNr = generate_AstNr_LISA(YrkStalln, sample_year)
+        if  1 < YrkStalln < 5:
+            YrkStalln = 2 if random.random() > 0.8 else 4 #Most people are employes
+
         work_data = {
-                        f'{prefix}PeOrgNr'   : PeOrgNr,
-                        f'{prefix}CfarNr'    : Cfar_Nr,
-                        f'{prefix}AstNr'     : AstNr,
-                        f'{prefix}AstKommun' : kommunnamn,
-                        f'{prefix}AstLan'    : lansnamn,
-                        f'{prefix}YrkStalln' : yrkstallning,
-                        }     
+                    f'{prefix}PeOrgNr'   : PeOrgNr,
+                    f'{prefix}CfarNr'    : Cfar_Nr,
+                    f'{prefix}AstNr'     : AstNr,
+                    f'{prefix}AstKommun' : kommunnamn,
+                    f'{prefix}AstLan'    : lansnamn,
+                    f'{prefix}YrkStalln' : YrkStalln,
+                    }     
     return work_data
 
-
-def generate_work(personnummer, county, economicstatus, is_kid=False):
-    
+def generate_work(personnummer, county, economicstatus, sample_year, YrkStalln, is_kid=False):
     #Generates which municipal(s) the person works in based on county
     Kommun = generate_municipal(county)
     
     #If it is a newly turned 16 year old, they will have no workplace(s)
     if is_kid:
-        prefix_working_ties1 = generate_company(personnummer, Kommun, county, prefix="KU1", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
-        prefix_working_ties2 = generate_company(personnummer, Kommun, county, prefix="KU2", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
-        prefix_working_ties3 = generate_company(personnummer, Kommun, county, prefix="KU3", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
+        prefix_working_ties1 = generate_company(personnummer, Kommun, county, sample_year, prefix="KU1", YrkStalln="0", no_income=True) #Yrkstallning hardcoded needs FIX
+        prefix_working_ties2 = generate_company(personnummer, Kommun, county, sample_year, prefix="KU2", YrkStalln="0", no_income=True) #Yrkstallning hardcoded needs FIX
+        prefix_working_ties3 = generate_company(personnummer, Kommun, county, sample_year, prefix="KU3", YrkStalln="0", no_income=True) #Yrkstallning hardcoded needs FIX
         biggest_data = {
             'CfarNr_LISA' : prefix_working_ties1['KU1CfarNr'],
             'ArbstId' : (prefix_working_ties1['KU1CfarNr'])+(prefix_working_ties1['KU1AstNr'])+(prefix_working_ties1['KU1AstKommun'])+(prefix_working_ties1['KU1PeOrgNr']),
@@ -1251,20 +1274,20 @@ def generate_work(personnummer, county, economicstatus, is_kid=False):
     else:
         if economicstatus[0] > 0:
             Kommun = generate_municipal(county)
-            prefix_working_ties1 = generate_company(personnummer, Kommun, county, prefix="KU1", yrkstallning="1") #Yrkstallning hardcoded needs FIX
+            prefix_working_ties1 = generate_company(personnummer, Kommun, county, sample_year, prefix="KU1", YrkStalln=YrkStalln) #Yrkstallning hardcoded needs FIX
         else:
-            prefix_working_ties1 = generate_company(personnummer, Kommun, county, prefix="KU1", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
+            prefix_working_ties1 = generate_company(personnummer, Kommun, county, sample_year, prefix="KU1", YrkStalln="0", no_income=True) #Yrkstallning hardcoded needs FIX
 
         if economicstatus[1] > 0:
             Kommun = generate_municipal(county)
-            prefix_working_ties2 = generate_company(personnummer, Kommun, county, prefix="KU2", yrkstallning="1") #Yrkstallning hardcoded needs FIX
+            prefix_working_ties2 = generate_company(personnummer, Kommun, county, sample_year, prefix="KU2", YrkStalln=YrkStalln) #Yrkstallning hardcoded needs FIX
         else:
-            prefix_working_ties2 = generate_company(personnummer, Kommun, county, prefix="KU2", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
+            prefix_working_ties2 = generate_company(personnummer, Kommun, county, sample_year, prefix="KU2", YrkStalln="0", no_income=True) #Yrkstallning hardcoded needs FIX
         if economicstatus[2] > 0:
             Kommun = generate_municipal(county)
-            prefix_working_ties3 = generate_company(personnummer, Kommun, county, prefix="KU3", yrkstallning="1") #Yrkstallning hardcoded needs FIX
+            prefix_working_ties3 = generate_company(personnummer, Kommun, county, sample_year, prefix="KU3", YrkStalln=YrkStalln) #Yrkstallning hardcoded needs FIX
         else:
-            prefix_working_ties3 = generate_company(personnummer, Kommun, county, prefix="KU3", yrkstallning="1", no_income=True) #Yrkstallning hardcoded needs FIX
+            prefix_working_ties3 = generate_company(personnummer, Kommun, county, sample_year, prefix="KU3", YrkStalln="0", no_income=True) #Yrkstallning hardcoded needs FIX
 
         #KU1 will never be lower than KU2 and KU3
         biggest_data = {
@@ -1348,7 +1371,7 @@ def generate_household(sample_year=2019):
         Economic = generate_economic(sample_year) #What kind of income does the person have
 
         income = [Economic['KU1lnk'], Economic['KU2lnk'], Economic['KU3lnk']]
-        Work = generate_work(PersonNr, Lan, income) #Where, if the person works, does the person work
+        Work = generate_work(PersonNr, Lan, income, sample_year, Economic['YrkStalln'], is_kid=False) #Where, if the person works, does the person work
 
         t = merge_dictionaries(merge_dictionaries(merge_dictionaries(merge_dictionaries(member,Geographical), Demographic), Economic), Work) #Turn it all into a single dictionary
         data.append(t)    
@@ -1588,7 +1611,8 @@ def kid_into_row(parent_dict, sample_year, number_of_kids):
 
         no_income = 1
         #Will have no workplace
-        Work = generate_work(PersonNr_kid, Lan, no_income, is_kid=True)
+        Work = generate_work(PersonNr_kid, Lan, no_income, sample_year, Economic['YrkStalln'], is_kid=True)
+        
 
         t = merge_dictionaries(merge_dictionaries(merge_dictionaries(kid_dict, Demographic), Economic), Work)
 
@@ -1656,8 +1680,11 @@ def kids_move_out(dictionary_data, sample_year):
                     if random.random() > 10/kid_age: #The older you get, the more likely you are to move out
                         kid_dict['FamId'] = kid_dict['PersonNr'] #New FamId
                         new_location = generate_geographical()  #New place to live
-                        economics = generate_economic(sample_year) #If you move out, you need some kind of income
-                        kid_dict = merge_dictionaries(merge_dictionaries(kid_dict, new_location), economics)
+                        Economic = generate_economic(sample_year) #If you move out, you need some kind of income
+                        income = [Economic['KU1lnk'], Economic['KU2lnk'], Economic['KU3lnk']]
+                        Lan = new_location['Lan']
+                        Work = generate_work(kid_dict['PersonNr'], Lan, income, sample_year, Economic['YrkStalln']) #Where, if the person works, does the person work
+                        kid_dict = merge_dictionaries(merge_dictionaries(merge_dictionaries(kid_dict, new_location), Work), Economic)
                         things_to_update.append((kid_PersonNr, kid_age))
                         
         #Removing kids from parent info
@@ -1731,7 +1758,7 @@ def simulate_x_years(number_of_households, start_year, number_of_years_to_simula
         print("Program finished")
     return None
 
-households = 1000
+households = 100
 start_year = 1990
 years_to_simulate = 30
 chunk_csv = False
