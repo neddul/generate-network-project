@@ -402,7 +402,7 @@ def create_family_layer(registry_data):
 
     #grandparent/ aunts/uncles / niece .. /cousin relationship
     print("Saved a partial network now")
-    connections.to_csv('Partial_network.csv')
+    connections.to_csv('network_produced_csvs/Partial_network.csv')
     #can add progress bars here --> but rather quick
     print("Searching possible Grandparents now")
     grandparents_connections = find_grandparents_aunts(connections)
@@ -421,7 +421,7 @@ def create_family_layer(registry_data):
         connections = pd.concat([connections] + [cousin_connections], ignore_index=True)
     
 
-    connections.to_csv('network_100k.csv')
+    connections.to_csv('network_produced_csvs/network_100k.csv')
     #os.remove(save_directory)
     print("The network was created. Please dont forget to remove the temporal files in datastorage_family, before rerunning the script.")
     return connections

@@ -4,7 +4,7 @@ import pandas as pd
 
 
 #data read in 
-data = pd.read_csv("network_100k.csv")
+data = pd.read_csv("network_produced_csvs/network_100k.csv")
 
 
 #basic relationship counts 
