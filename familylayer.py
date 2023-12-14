@@ -11,8 +11,8 @@ pd.options.mode.chained_assignment = None
 
 #import cProfile
 
-#small_testdata = pd.read_csv("100k_rows.csv")
-#small_testdata = pd.read_csv("pretty_good_family_data.csv")
+#small_testdata = pd.read_csv("basictestdata/100k_rows.csv")
+#small_testdata = pd.read_csv("basictestdata/pretty_good_family_data.csv")
 #def create_inner_family_relationships():
 
 def find_parent_child_relationship(subset, current_year):
@@ -435,7 +435,7 @@ input_file_name = sys.argv[1]
 data = pd.read_csv(input_file_name)
 
 #data = directory_of_csv_to_df(path="multiple_year/synthetic_scb_data_1990")
-#data = pd.read_csv("100k_rows.csv")
+#data = pd.read_csv("basictestdata/100k_rows.csv")
 
 #needs to be changed to data again to run through command line --> also the year
 create_family_layer(data)

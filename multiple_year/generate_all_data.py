@@ -1054,7 +1054,7 @@ def generate_synthetic_FastLopNr(FastBet):
         return scbinternal_fastlopnr[FastBet]
     else:
         while True:
-            FastLopNr = random.randrange(1000000000, 9999999999) # Limited to 100k households
+            FastLopNr = random.randrange(100_0000_000, 9_999_999_999) # Limited to 100 million households
             FastLopNr = str(FastLopNr)[1:]
             if FastLopNr not in scbinternal_fastlopnr_values:
                 scbinternal_fastlopnr_values.add(FastLopNr)
