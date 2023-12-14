@@ -471,55 +471,82 @@ def generate_economic(sample_year, is_kid=False):
 
 
 import csv
-# Open the CSV file
-with open('data/utbildning_cleaner.csv', 'r') as csv_file:
-    # Create a CSV reader with DictReader
-    csv_reader = csv.DictReader(csv_file)
+def utbildning_csv_to_dict(file_path):
+    # Open the CSV file
+    file_path = file_path + ".csv"
+    with open(file_path, 'r') as csv_file:
+        # Create a CSV reader with DictReader
+        csv_reader = csv.DictReader(csv_file)
+        # Convert the CSV data into a list of dictionaries
+        education_list = list(csv_reader)
+    for item in education_list:
+        item['Inriktningskoder_SUN_2020'] = item['Inriktningskoder_SUN_2020'].split(', ')
+        item['Nivakoder_SUN_2020'] = item['Nivakoder_SUN_2020'].split(', ')
+    return education_list
 
-    # Convert the CSV data into a list of dictionaries
-    education_list = list(csv_reader)
+possible_educations_by_length = ["data/utbildning3yearsorless", "data/utbildning5yearsorless", "data/utbildning6yearsorless"]
+all_educations = [utbildning_csv_to_dict(k) for k in possible_educations_by_length]
+
 
 import random
-import string
-def generate_education(): 
-    Sun2000niva_old = random.randint(10000,99999)
-    index = Sun2000niva_old % len(education_list)
-    my_education = education_list[index]
-    SUN2000Grp = my_education['Utbildningsgrupper_2020']
-    SUN2000Inr = 0
-    SUN2000Niva = 0
-    alphabet = string.ascii_lowercase
-    options_inr = my_education['Inriktningskoder_SUN_2020']
-    if isinstance(options_inr , int):
-        random_letters = random.choice(alphabet)
-        if options_inr <100: 
-            options_inr=options_inr+100
-        SUN2000Inr = str(options_inr)+ random_letters
-    else: 
-        options = [item.strip() for item in options_inr.split(',')]
-        SUN2000Inr = random.choice(options)
-    options_niv = my_education['Nivakoder_SUN_2020']
-    if isinstance(options_niv, int) and options_niv > 100:
-        SUN2000Niva = options_niv
-    elif isinstance(options_niv, int):
-        SUN2000Niva = options_niv*100
-    else: 
-        options = [item.strip() for item in options_niv.split(',')]
-        selection = random.choice(options)
-        if  isinstance(selection, int) and selection <100:
-            SUN2000Niva = selection*100
-        else: 
-                
-            SUN2000Niva = selection
-    #examAr is missing as well 
+def generate_education(sample_year, PersonNr, Kommun, is_kid=False): 
+    age = sample_year - int(PersonNr[:4])
+    if is_kid or age < 17: #Kid will have elementary school education at most
+        education = {
+            'Sun2000niva_old'   : 2,
+            'SUN2000niva'       : "2",
+            'SUN2000Inr'        : "010a" if random.random() > 0.5 else "010x",
+            'SUN2000Grp'        : "Grundskoleutbildning och motsvarande",
+            'ExamAr'            : sample_year, #You graduate elementary at the age of 15/16 in sweden (depending on which part of the year you're born)
+            'ExamKommun'        : Kommun                                       
+        }
+        return education
+    if age > 24: #The person could have any education in the list
+        examAge = age-24
+        education = all_educations[2]
+    elif age > 23: #The person could have any education that requires 5 years or less
+        examAge = age-23
+        education = all_educations[1]
+    else: #The person has the an education that requires 3 years or less after elementary
+        examAge = age-18
+        education = all_educations[0] 
+
+    random_number = int(random.random() * 10000000)
+
+    number_of_educations = len(education)
+    my_education = education[random_number % number_of_educations]
     
-    #examkommun is different 
+
+    codes = my_education['Nivakoder_SUN_2020']
+    number_of_codes = len(my_education['Nivakoder_SUN_2020'])
+
+    level = codes[random_number % number_of_codes]
+    Sun2000niva_old = int(level[0])
+    
+    SUN2000Niva = level
+    SUN2000Grp = my_education['Utbildningsgrupper_2020']
+    
+    
+    number_of_specials = len(my_education['Inriktningskoder_SUN_2020'])
+    specials = my_education['Inriktningskoder_SUN_2020']
+    speciality_code = specials[random_number % number_of_specials]
+    SUN2000Inr = speciality_code
+    if sample_year - (sample_year-examAge) < 1:
+        ExamAr = sample_year
+    else:
+        ExamAr = random.randint(sample_year-(examAge),sample_year)
+
+    #FANID IS PARTNER SIBLING 
+
+    #FIND PARENT CHILD and find relationsships
 
     education = {
             'Sun2000niva_old'   : Sun2000niva_old,
             'SUN2000niva'       : SUN2000Niva,
             'SUN2000Inr'        : SUN2000Inr,
             'SUN2000Grp'        : SUN2000Grp,
+            'ExamAr'            : ExamAr,
+            'ExamKommun'        : Kommun
     }
     return education
 
@@ -707,8 +734,7 @@ def create_children(sample_year, PersonNr, is_kid=False):
 
 def make_kid_family_frame(PersonNr, FamId, is_Kid, sample_year): #Used for kids that just turned 16 and have special work/economic
     kids = create_children(sample_year, PersonNr, is_kid=is_Kid)
-    utbildning = generate_education()
-    data = merge_dictionaries(kids, utbildning)
+    data = kids
     data['PersonNr'] = PersonNr
     data['FamId'] = FamId
     data['spouse'] = dict()
@@ -906,8 +932,7 @@ def create_spouse(FamId, kids_info, sample_year):
     if partner_age < 16:
         partner_age = 16
     PersonNr = person_nummer_creation(1,start_date=FamId[:8], stop_year=f"{sample_year-partner_age}1231")
-    utbildning = generate_education()
-    spouse = merge_dictionaries(utbildning, kids_info)
+    spouse = kids_info
     spouse['PersonNr'] = PersonNr
     spouse['FamId'] = FamId
     return spouse
@@ -917,8 +942,7 @@ def generate_family(sample_year): #Creates a household
     PersonNr = person_nummer_creation(sample_year) #What social security number does the person have
     kids_info = create_children(sample_year, PersonNr) #Does the person have kids
     kid_info = kids_info['kid_info']    
-    utbildning = generate_education() #What education does the person have
-    data = merge_dictionaries(utbildning, kids_info)
+    data = kids_info
     data['PersonNr'] = PersonNr
     data['FamId'] = PersonNr
     data['kid_info'] = kid_info
@@ -1366,6 +1390,7 @@ def generate_household(sample_year=2019):
     data = []
     for member in family_members:
         PersonNr = member['PersonNr']
+        Utbildning = generate_education(sample_year, PersonNr, Geographical['Kommun']) #Every person in the house will have graduated from the same Kommun
 
         Demographic = generate_demographic(PersonNr, sample_year) #Demographic data, where they are born, when parents were born etc
         Economic = generate_economic(sample_year) #What kind of income does the person have
@@ -1373,7 +1398,7 @@ def generate_household(sample_year=2019):
         income = [Economic['KU1lnk'], Economic['KU2lnk'], Economic['KU3lnk']]
         Work = generate_work(PersonNr, Lan, income, sample_year, Economic['YrkStalln'], is_kid=False) #Where, if the person works, does the person work
 
-        t = merge_dictionaries(merge_dictionaries(merge_dictionaries(merge_dictionaries(member,Geographical), Demographic), Economic), Work) #Turn it all into a single dictionary
+        t = merge_dictionaries(merge_dictionaries(merge_dictionaries(merge_dictionaries(merge_dictionaries(member, Utbildning),Geographical), Demographic), Economic), Work) #Turn it all into a single dictionary
         data.append(t)    
     return data
 
@@ -1416,7 +1441,8 @@ def generate_data_frame(data, sample_year):
     'FastLopNr', 'FastBet', 'Barn0_3', 'Barn4_6', 'Barn7_10',
     'Barn11_15', 'Barn16_17', 'Barn18plus', 'Barn18_19',
     'Barn20plus', 'FamId', 'Sun2000niva_old', 'SUN2000niva',
-    'SUN2000Inr', 'SUN2000Grp', 'CfarNr_LISA', 'ArbstId',
+    'SUN2000Inr', 'SUN2000Grp', 'ExamAr', 'ExamKommun', 
+    'CfarNr_LISA', 'ArbstId',
     'AstNr_LISA', 'AstKommun', 'AstLan', 'KU1PeOrgNr',
     'KU1CfarNr', 'KU1AstNr', 'KU1AstKommun', 'KU1AstLan',
     'KU1YrkStalln', 'KU2PeOrgNr', 'KU2CfarNr', 'KU2AstNr',
@@ -1601,6 +1627,8 @@ def kid_into_row(parent_dict, sample_year, number_of_kids):
         kid_dict['Distriktskod']    = parent_dict['Distriktskod']
 
         Lan = kid_dict['Lan']
+        
+        Utbildning = generate_education(sample_year, PersonNr_kid, parent_dict['Kommun'], is_kid=True) #Kid will have its education in the same kommun as parents live
 
         #Using parent info, if they have any
         Demographic = generate_demographic(PersonNr_kid, sample_year, 
@@ -1614,7 +1642,7 @@ def kid_into_row(parent_dict, sample_year, number_of_kids):
         Work = generate_work(PersonNr_kid, Lan, no_income, sample_year, Economic['YrkStalln'], is_kid=True)
         
 
-        t = merge_dictionaries(merge_dictionaries(merge_dictionaries(kid_dict, Demographic), Economic), Work)
+        t = merge_dictionaries(merge_dictionaries(merge_dictionaries(merge_dictionaries(kid_dict, Utbildning), Demographic), Economic), Work)
 
         kid_dicts.append(t)    
     return kid_dicts
@@ -1680,11 +1708,12 @@ def kids_move_out(dictionary_data, sample_year):
                     if random.random() > 10/kid_age: #The older you get, the more likely you are to move out
                         kid_dict['FamId'] = kid_dict['PersonNr'] #New FamId
                         new_location = generate_geographical()  #New place to live
+                        Utbildning = generate_education(sample_year, kid_dict['PersonNr'], new_location['Kommun']) #Kid will have its education in the same kommun as parents live
                         Economic = generate_economic(sample_year) #If you move out, you need some kind of income
                         income = [Economic['KU1lnk'], Economic['KU2lnk'], Economic['KU3lnk']]
                         Lan = new_location['Lan']
                         Work = generate_work(kid_dict['PersonNr'], Lan, income, sample_year, Economic['YrkStalln']) #Where, if the person works, does the person work
-                        kid_dict = merge_dictionaries(merge_dictionaries(merge_dictionaries(kid_dict, new_location), Work), Economic)
+                        kid_dict = merge_dictionaries(merge_dictionaries(merge_dictionaries(merge_dictionaries(kid_dict, Utbildning), new_location), Work), Economic)
                         things_to_update.append((kid_PersonNr, kid_age))
                         
         #Removing kids from parent info
@@ -1758,7 +1787,7 @@ def simulate_x_years(number_of_households, start_year, number_of_years_to_simula
         print("Program finished")
     return None
 
-households = 100
+households = 300
 start_year = 1990
 years_to_simulate = 30
 chunk_csv = False
