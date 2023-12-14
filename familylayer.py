@@ -376,7 +376,7 @@ def create_family_layer(registry_data):
 
 # data = pd.read_csv(input_file_name)
 
-data = directory_of_csv_to_df(path="multiple_year/synthetic_scb_data_1990")
+#data = directory_of_csv_to_df(path="multiple_year/synthetic_scb_data_1990")
 #data = pd.read_csv("100k_rows.csv")
 
 #needs to be changed to data again to run through command line --> also the year

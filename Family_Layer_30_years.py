@@ -352,7 +352,7 @@ def create_family_layer(registry_data, current_year, current_network = None):
 
     #grandparent/ aunts/uncles / niece .. /cousin relationship
     print("Saved a partial network now")
-    save_partial_network = "partial_network/" + str(current_year) + ".csv"
+    save_partial_network = "network_produced_csvs/" + str(current_year) + ".csv"
     connections.to_csv(save_partial_network)
     #can add progress bars here --> but rather quick
     print("Searching possible Grandparents now")
