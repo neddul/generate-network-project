@@ -61,7 +61,8 @@ def find_parent_child_relationship(subset, current_year):
         if not children.empty and not parents.empty:
             for _, parent in parents.iterrows():
                 age_difference = parent["Alder"] - children["Alder"]
-                eligible_children = children[age_difference > 15]
+                #also top, to not get grandparents and parents mixed up --> in theory possible to be a dad but very unlikely
+                eligible_children = children[(age_difference > 15) & (age_difference < 60)]
                 if not eligible_children.empty:
                     for _,child in eligible_children.iterrows():
                     # Assuming "Kön" is a column indicating gender
@@ -139,37 +140,38 @@ def find_aunts_uncles(family_connections):
     final_output = pd.concat([output1] + [output2], ignore_index=True)
     return final_output
 
-def find_relationships(subset, current_connections):
+def find_relationships(subset):
     #should i change approach here? 
     #couple_relationships = pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
     couple_relationships = []
     selected = subset[['PersonNr', 'Alder']]
-    if current_connections:
-        current_connections = pd.DataFrame(current_connections, columns= ["personNr1", "personNr2", "connection"])
-        connections_exist = True
-    else:
-        connections_exist = False
+    selected = selected.sort_values(by="PersonNr")
+    #if current_connections:
+    #    current_connections = pd.DataFrame(current_connections, columns= ["personNr1", "personNr2", "connection"])
+    #    connections_exist = True
+    #else:
+    #    connections_exist = False
 
 
     for i in range(len(selected)-1):
-        for j in range(i+1, len(selected)):
+        person1 = selected.iat[i, 0]
+        person2 = selected.iat[i+1, 0]
 
-            person1 = selected.iat[i, 0]
-            person2 = selected.iat[j, 0]
-            # Calculate age difference
-            age_difference = abs(selected.iat[i, 1] - selected.iat[j, 1])
+        # Calculate age difference
+        age_difference = abs(selected.iat[i, 1] - selected.iat[i+1, 1])
         
             #checking if they might be siblings 
 
-            if connections_exist == True:  
-                siblings_possible = (((current_connections['personNr1'] == person1) & (current_connections['personNr2'] == person2) & (current_connections['connection'] == "siblings")) | ((current_connections['personNr1'] == person2) & (current_connections['personNr2'] == person1) & (current_connections['connection'] == "siblings")) ).any()
-            else:
-                siblings_possible=False
+        #if connections_exist == True:  
+            #siblings_possible = (((current_connections['personNr1'] == person1) & (current_connections['personNr2'] == person2) & (current_connections['connection'] == "siblings")) | ((current_connections['personNr1'] == person2) & (current_connections['personNr2'] == person1) & (current_connections['connection'] == "siblings")) ).any()
+        #else:
+        #    siblings_possible=False
             #add check for amount of children (?)
-            if age_difference <= 13 and siblings_possible==False:
+        if age_difference <= 13:
                 #row_data = pd.DataFrame([{'personNr1':person1 , 'personNr2': person2, 'connection': "partner of"}])
                 #couple_relationships = pd.concat([couple_relationships, row_data])
-                couple_relationships.append({'personNr1': person1, 'personNr2': person2, 'connection': "partner of"})
+            row_data = {'personNr1': person1, 'personNr2': person2, 'connection': "partner of"}
+            couple_relationships.extend([row_data])
 
        
     return couple_relationships
@@ -212,14 +214,17 @@ def find_siblings(family_connections):
     unique_combinations_df = siblings_df.drop_duplicates(subset='tuple_key')
 
     # Drop the temporary column
-    unique_combinations_df = unique_combinations_df.drop(columns=['tuple_key'])
-    unique_combinations_df['connection'] = 'siblings'
+    #unique_combinations_df = unique_combinations_df.drop(columns=['personNr2_x', 'personNr2_y'])
+    #unique_combinations_df['connection'] = 'siblings'
 
     # Rename columns by removing the suffixes _x and _y
-    unique_combinations_df.columns = unique_combinations_df.columns.str.replace('2_x', '1').str.replace('_y', '')
+    #unique_combinations_df.columns = unique_combinations_df.columns.str.replace('2_x', '1').str.replace('_y', '')
+    final_df = pd.DataFrame(unique_combinations_df['tuple_key'].tolist(), columns=['personNr1', 'personNr2'])
+
+    # Add the 'connection' column
+    final_df['connection'] = 'siblings'
     
-    
-    return unique_combinations_df
+    return final_df
 
 def find_cousins(family_connections):
     #cousines= pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
@@ -229,12 +234,17 @@ def find_cousins(family_connections):
     
     options = selection_aunts.merge(selection_parents, left_on="personNr1", right_on="personNr1", suffixes=('_aunt', '_parent'))
     cousin_connection=  options[["personNr2_aunt", "personNr2_parent" ]]
-    cousin_connection.columns = ['personNr1', 'personNr2']
+    
+    cousin_connection['tuple_key'] = cousin_connection[["personNr2_aunt", "personNr2_parent"]].apply(lambda x: tuple(sorted(x)), axis=1)
+    cousin_connection = cousin_connection.drop_duplicates(subset='tuple_key')
+
+    cousin_connection = pd.DataFrame(cousin_connection['tuple_key'].tolist(), columns=['personNr1', 'personNr2'])
+    #cousin_connection.columns = ['personNr1', 'personNr2']
     cousin_connection['connection'] = 'cousins'
 
     return cousin_connection
 
-def data_preprocessing(registry_data, save_directory): 
+def data_preprocessing(registry_data, save_directory, current_year): 
         #fix for column names for now 
     if 'LopNr' in registry_data.columns and 'LopNr_FamId' in registry_data.columns:
         # Create a dictionary for column name mapping
@@ -243,10 +253,12 @@ def data_preprocessing(registry_data, save_directory):
         # Use the rename method to rename columns
         registry_data.rename(columns=column_mapping, inplace=True)
 
-    if 'Barn18plus' in registry_data.columns:
+    if current_year <= 2003:
         registry_data = registry_data[['FamId','PersonNr', 'Barn18plus', 'Barn11_15', 'Barn16_17', 'Alder' ]]
+        print("wrong")
         #current_year = 1990
     else:
+        print("We are in 2004!")
         registry_data = registry_data[['FamId','PersonNr', 'Barn11_15', 'Barn16_17', 'Barn18_19', 'Barn20plus', 'Alder' ]]
         #current_year = 2005
     
@@ -283,13 +295,13 @@ def create_family_layer(registry_data, current_year, current_network = None):
 
         # Create a new directory because it does not exist
         os.makedirs(save_directory)
-        data_preprocessing(registry_data, save_directory)
+        data_preprocessing(registry_data, save_directory, current_year)
         #csv_list = os.listdir(save_directory)
     else:
         csv_list = os.listdir(save_directory)
         if len(csv_list)== 0:
     
-            data_preprocessing(registry_data, save_directory)
+            data_preprocessing(registry_data, save_directory, current_year)
             #csv_list = os.listdir(save_directory)
     csv_list = os.listdir(save_directory)
     for filename in tqdm(csv_list, desc="Processing  batches "): 
@@ -320,16 +332,18 @@ def create_family_layer(registry_data, current_year, current_network = None):
                     if output: 
                         connections.extend(output)
                 #work on the partner relationship --> we are using the output here to reduce the running time
-                relationships = find_relationships(subset, output)
+                relationships = find_relationships(subset)
                 if relationships: 
                     connections.extend(relationships)
     connections = pd.DataFrame(connections)
 
     #combining the build network of the year with the recent network
     if current_network is not None: 
+
+        #we are dropping all the partners to only have current partners, this can be extended by trying to keep them as expartners
+        current_network = current_network[current_network["connection"] != "partner of"]
         connections = pd.concat([connections, current_network], ignore_index=True)
-    print(current_network)
-    print(connections)
+    #print(current_network)
     connections = connections.drop_duplicates()
     #sibling relationship
     #dfs_to_concat = find_siblings(connections)
@@ -350,12 +364,11 @@ def create_family_layer(registry_data, current_year, current_network = None):
 
 
     #this is too find siblings which currently dont live in the same house, it will find all though and then we filter afterwards
-    print(connections)
     print("Finding Siblings now")
     sibling_relations = find_siblings(connections)
     print(sibling_relations)
     if not sibling_relations.empty:
-        connections = pd.concat([connections] + [sibling_relations])
+        connections = pd.concat([connections] + [sibling_relations], ignore_index= True)
 
 
     print("Searching aunts and uncles now")
@@ -368,8 +381,11 @@ def create_family_layer(registry_data, current_year, current_network = None):
     if not cousin_connections.empty:
         #cousin_connections = pd.DataFrame(cousin_connections)
         connections = pd.concat([connections] + [cousin_connections], ignore_index=True)
-    save_final_network = "final_network" + str(current_year) + "csv"
+    save_final_network = "final_network/final_network" + str(current_year) + ".csv"
     connections = connections.drop_duplicates()
+
+    #drop duplicates --> if people are connected in multiple ways always drop the partner row
+    connections = connections[~((connections.duplicated(subset=['personNr1', 'personNr2'])) & (connections['connection'] == 'partner of'))]
     connections.to_csv(save_final_network)
     #os.remove(save_directory)
     print("The network was created. Please dont forget to remove the temporal files in datastorage_family, before rerunning the script.")
@@ -382,17 +398,22 @@ def sorted_alphanumeric(data):
     return sorted(data, key=alphanum_key)
 
 def create_multiple_year_network():
+    if not os.path.exists("final_network"):
+        os.makedirs("final_network")
+    if not os.path.exists("partial_network"):
+        os.makedirs("partial_network")
     count = 1990
     #all networks:
     #specify network directory
 
     #path to the data --> will they be in order --> how are we going to do that
-    data_dict =  "FamilyLayer30years/Basic Test Data/Data"
+    data_dict =  "FamilyLayer30years/Basic Test Data/Data_30years"
     csv_list = os.listdir(data_dict)
     csv_list = sorted_alphanumeric(csv_list)
 
-    print(csv_list)
+    #print(csv_list)
     for filename in tqdm(csv_list, desc="Processing  years"): 
+        print("We are processing" + str(count))
         file_path = os.path.join(data_dict, filename)
         if os.path.isfile(file_path):
             current_registry_data= pd.read_csv(file_path)
@@ -433,20 +454,12 @@ create_multiple_year_network()
 
 
 
-#outline for code
-# if no network already exist 
-# create network like previously
-# if network exist -- first part stays the same --> give it to the function --> wrapper function around it
-# and then concat builded relationships with the most recent network
-# check for duplicates and maybe lines that dont make sense?
-# run the last part, this time also including running to check for siblings again --> needs a check for duplicates again 
-# but important to catch siblings that dont work together anymore
-#save network and on to the next one --> maybe first manualy and then go from there 
+
 
 #also go through possible extensions again
 
 
 # change saving places for the networks 
 
-#can we be sure everything is read in in the right order --> how to fix that 
 
+# if we have multigenerational household --> have counter for amount of children and if there is too many --> take the oldest one maybe? 
