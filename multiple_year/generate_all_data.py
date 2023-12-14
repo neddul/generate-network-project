@@ -484,7 +484,7 @@ def utbildning_csv_to_dict(file_path):
         item['Nivakoder_SUN_2020'] = item['Nivakoder_SUN_2020'].split(', ')
     return education_list
 
-possible_educations_by_length = ["data/utbildning3yearsorless", "data/utbildning5yearsorless", "data/utbildning6yearsorless"]
+possible_educations_by_length = ["resources/utbildning3yearsorless", "resources/utbildning5yearsorless", "resources/utbildning6yearsorless"]
 all_educations = [utbildning_csv_to_dict(k) for k in possible_educations_by_length]
 
 
@@ -1044,19 +1044,19 @@ scbinternal_fastlopnr = {}
 scbinternal_fastlopnr_values = set([])
 
 
-with open('data/county_dict.json', 'r') as json_file:
+with open('resources/county_dict.json', 'r') as json_file:
     counties_with_municipals = json.load(json_file)
 
 
-with open('data/tatorter_in_municipals_dict.json', 'r') as json_file:
+with open('resources/tatorter_in_municipals_dict.json', 'r') as json_file:
     tatorter_in_municipals = json.load(json_file)
 
 
-with open('data/forsamling_dict.json', 'r') as json_file:
+with open('resources/forsamling_dict.json', 'r') as json_file:
     forsamlingar_in_municipals = json.load(json_file)
 
 
-with open('data/district_codes_from_Forsamling_dict.json', 'r') as json_file:
+with open('resources/district_codes_from_Forsamling_dict.json', 'r') as json_file:
     districtcodes_from_Forsamling = json.load(json_file)
 
 
@@ -1441,16 +1441,16 @@ def generate_data_frame(data, sample_year):
     'FastLopNr', 'FastBet', 'Barn0_3', 'Barn4_6', 'Barn7_10',
     'Barn11_15', 'Barn16_17', 'Barn18plus', 'Barn18_19',
     'Barn20plus', 'FamId', 'Sun2000niva_old', 'SUN2000niva',
-    'SUN2000Inr', 'SUN2000Grp', 'ExamAr', 'ExamKommun', 
-    'CfarNr_LISA', 'ArbstId',
-    'AstNr_LISA', 'AstKommun', 'AstLan', 'KU1PeOrgNr',
-    'KU1CfarNr', 'KU1AstNr', 'KU1AstKommun', 'KU1AstLan',
-    'KU1YrkStalln', 'KU2PeOrgNr', 'KU2CfarNr', 'KU2AstNr',
-    'KU2AstKommun', 'KU2AstLan', 'KU2YrkStalln', 'KU3PeOrgNr',
-    'KU3CfarNr', 'KU3AstNr', 'KU3AstKommun', 'KU3AstLan',
-    'KU3YrkStalln', 'FodelseAr', 'DodDatum', 'Alder', 'Kon',
-    'InvUtvLand', 'InvUtvManad', 'PostTyp', 'FodelseLandnamn',
-    'FodelseTidMor', 'FodelseLandnamnMor', 'FodelseTidFar',
+    'SUN2000Inr', 'SUN2000Grp', 'ExamAr', 'ExamKommun',
+    'CfarNr_LISA', 'ArbstId', 'AstNr_LISA', 'AstKommun',
+    'AstLan', 'KU1PeOrgNr', 'KU1CfarNr', 'KU1AstNr',
+    'KU1AstKommun', 'KU1AstLan', 'KU1YrkStalln', 'KU2PeOrgNr',
+    'KU2CfarNr', 'KU2AstNr', 'KU2AstKommun', 'KU2AstLan',
+    'KU2YrkStalln', 'KU3PeOrgNr', 'KU3CfarNr', 'KU3AstNr',
+    'KU3AstKommun', 'KU3AstLan', 'KU3YrkStalln', 'FodelseAr',
+    'DodDatum', 'Alder', 'Kon', 'InvUtvLand', 'InvUtvManad',
+    'PostTyp', 'FodelseLandnamn', 'FodelseTidMor',
+    'FodelseLandnamnMor', 'FodelseTidFar',
     'FodelseLandnamnFar', 'UtlSvBakg', 'SyssStat', 'ArbTid',
     'YrkStalln', 'KU1lnk', 'KU2lnk', 'KU3lnk',
     'Raks_SummaInk', 'Raks_Huvudanknytning', 'Raks_EtablGrad',
@@ -1641,7 +1641,6 @@ def kid_into_row(parent_dict, sample_year, number_of_kids):
         #Will have no workplace
         Work = generate_work(PersonNr_kid, Lan, no_income, sample_year, Economic['YrkStalln'], is_kid=True)
         
-
         t = merge_dictionaries(merge_dictionaries(merge_dictionaries(merge_dictionaries(kid_dict, Utbildning), Demographic), Economic), Work)
 
         kid_dicts.append(t)    
@@ -1790,7 +1789,7 @@ def simulate_x_years(number_of_households, start_year, number_of_years_to_simula
 households = 300
 start_year = 1990
 years_to_simulate = 30
-chunk_csv = False
+chunk_csv = True
 
 #How many households, starting year, number of csvs (years) ((including start year))
-simulate_x_years(households, start_year, years_to_simulate) 
+simulate_x_years(households, start_year, years_to_simulate, chunk_csv=True) 
