@@ -7,9 +7,9 @@ import os
 
 pd.options.mode.chained_assignment = None
 
-from readmulticsv import directory_of_csv_to_df
+#from readmulticsv import directory_of_csv_to_df
 
-#import cProfile
+import cProfile
 
 #small_testdata = pd.read_csv("basictestdata/100k_rows.csv")
 #small_testdata = pd.read_csv("basictestdata/pretty_good_family_data.csv")
@@ -138,41 +138,50 @@ def find_aunts_uncles(family_connections):
     final_output = pd.concat([output1] + [output2], ignore_index=True)
     return final_output
 
-def find_relationships(subset):
-    #should i change approach here? 
-    #couple_relationships = pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
-    couple_relationships = []
-    selected = subset[['PersonNr', 'Alder']]
-    selected = selected.sort_values(by="PersonNr")
-    #if current_connections:
-    #    current_connections = pd.DataFrame(current_connections, columns= ["personNr1", "personNr2", "connection"])
-    #    connections_exist = True
-    #else:
-    #    connections_exist = False
+# def find_relationships(subset):
+#     #should i change approach here? 
+#     #couple_relationships = pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
+#     couple_relationships = []
+#     selected = subset[['PersonNr', 'Alder']].sort_values(by="PersonNr")
 
+#     for i in range(len(selected)-1):
+#         #person1 = selected.iat[i, 0]
+#         #person2 = selected.iat[i+1, 0]
 
-    for i in range(len(selected)-1):
-        person1 = selected.iat[i, 0]
-        person2 = selected.iat[i+1, 0]
-
-        # Calculate age difference
-        age_difference = abs(selected.iat[i, 1] - selected.iat[i+1, 1])
+#         # Calculate age difference
+#         age_difference = abs(selected.iat[i, 1] - selected.iat[i+1, 1])
         
-            #checking if they might be siblings 
 
-        #if connections_exist == True:  
-            #siblings_possible = (((current_connections['personNr1'] == person1) & (current_connections['personNr2'] == person2) & (current_connections['connection'] == "siblings")) | ((current_connections['personNr1'] == person2) & (current_connections['personNr2'] == person1) & (current_connections['connection'] == "siblings")) ).any()
-        #else:
-        #    siblings_possible=False
-            #add check for amount of children (?)
-        if age_difference <= 13:
-                #row_data = pd.DataFrame([{'personNr1':person1 , 'personNr2': person2, 'connection': "partner of"}])
-                #couple_relationships = pd.concat([couple_relationships, row_data])
-            row_data = {'personNr1': person1, 'personNr2': person2, 'connection': "partner of"}
-            couple_relationships.extend([row_data])
+#         if age_difference <= 13:
+#                 #row_data = pd.DataFrame([{'personNr1':person1 , 'personNr2': person2, 'connection': "partner of"}])
+#                 #couple_relationships = pd.concat([couple_relationships, row_data])
+#             row_data = {'personNr1': selected.iat[i, 0], 'personNr2': selected.iat[i+1, 0], 'connection': "partner of"}
+#             couple_relationships.extend([row_data])
 
        
+#     return couple_relationships
+
+def find_relationships_grouped(group):
+    couple_relationships = pd.DataFrame()
+
+    # Assuming the DataFrame is already sorted by 'PersonNr' within each group
+    selected = group[['PersonNr', 'Alder']]
+
+    for i in range(len(selected) - 1):
+        age_difference = abs(selected.iloc[i, 1] - selected.iloc[i+1, 1])
+
+        if age_difference <= 13:
+            relationship_row = pd.DataFrame({
+                'personNr1': selected.iloc[i, 0],
+                'personNr2': selected.iloc[i+1, 0],
+                'connection': "partner of"
+            }, index=[0])
+
+            couple_relationships = pd.concat([couple_relationships, relationship_row], ignore_index=True)
+
     return couple_relationships
+
+
 
 
 def find_grandparents_aunts(family_connections):
@@ -261,7 +270,7 @@ def data_preprocessing(registry_data, save_directory):
     
 
     # Specify the batch size (number of groups in each file)
-    batch_size = 30000
+    batch_size = 50000
 
     # Iterate through batches and save each batch to a separate file
     grouped_df = registry_data.groupby('FamId')
@@ -288,6 +297,9 @@ def create_family_layer(registry_data):
     current_year = 1990
     save_directory = 'datastorage_familylayer_onelayer'
     connections = []
+    connections_relationships = pd.DataFrame()
+
+
     if not os.path.exists(save_directory):
 
         # Create a new directory because it does not exist
@@ -329,12 +341,19 @@ def create_family_layer(registry_data):
                     if output: 
                         connections.extend(output)
                 #work on the partner relationship --> we are using the output here to reduce the running time
-                relationships = find_relationships(subset)
-                if relationships: 
-                    connections.extend(relationships)
+                #relationships = find_relationships(subset)
+                #if relationships: 
+                #    connections.extend(relationships)
 
-            
+            #result_per_group = grouped_data.apply(find_relationships_grouped)
+            # Concatenate the lists into a single list
+            result_df = grouped_data.apply(find_relationships_grouped).reset_index(drop=True)
+            connections_relationships = pd.concat([connections_relationships, result_df])
+
+    # Concatenate the results into a single list or DataFrame if needed
+    #result = pd.concat(result_per_group, ignore_index=True)      
     connections = pd.DataFrame(connections)
+    connections = pd.concat([connections, connections_relationships])
     connections = connections.drop_duplicates()
     #sibling relationship
     #dfs_to_concat = find_siblings(connections)
@@ -369,16 +388,20 @@ def create_family_layer(registry_data):
     return connections
 
 
-# if len(sys.argv) < 2:
-#     print("Missing argument: input file name")
-#     sys.exit(-1)
-# input_file_name = sys.argv[1]
+if len(sys.argv) < 2:
+     print("Missing argument: input file name")
+     sys.exit(-1)
+input_file_name = sys.argv[1]
 
-# data = pd.read_csv(input_file_name)
+data = pd.read_csv(input_file_name)
 
 #data = directory_of_csv_to_df(path="multiple_year/synthetic_scb_data_1990")
 #data = pd.read_csv("basictestdata/100k_rows.csv")
 
 #needs to be changed to data again to run through command line --> also the year
-create_family_layer(data)
+
+with cProfile.Profile() as profiler:
+    create_family_layer(data)
+
+profiler.print_stats()
 
