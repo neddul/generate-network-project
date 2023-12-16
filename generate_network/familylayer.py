@@ -7,19 +7,30 @@ import os
 
 pd.options.mode.chained_assignment = None
 
-from generate_test_data.readmulticsv import directory_of_csv_to_df
+
+#from readmulticsv import directory_of_csv_to_df
 
 #import cProfile
+
 
 #small_testdata = pd.read_csv("basictestdata/100k_rows.csv")
 #small_testdata = pd.read_csv("basictestdata/pretty_good_family_data.csv")
 #def create_inner_family_relationships():
 
 def find_parent_child_relationship(subset, current_year):
-    parent_relationships = []
-    #also checking for 15, as some 15 year olds have been present in the data
 
-    #probably a more elegant way to do this, but this is to make sure we match parent with a child in a right age group
+    """
+    Finds Parent-Child and Siblings relationships within a dataframe of a family. 
+
+    Parameters:
+    - Subset: dataframe holding information on the family, including age, and amount of children per age category
+    - current_year: a variable to indicate the age we are looking at, to deal with variable changes
+
+    Returns:
+    pandas.DataFrame: A List containing relationships with columns 'personNr1',
+                     'personNr2', and 'connection'.
+    """
+    parent_relationships = []
 
     #could maybe be stored outside of this
     if current_year <= 2003:
@@ -78,20 +89,24 @@ def find_parent_child_relationship(subset, current_year):
                         
                         #parent_relationships.extend([pd.DataFrame(child_data), pd.DataFrame(parent_data)])
                             #print(eligible_children)
-                    if len(eligible_children)>1:
-                        personNr2_list = eligible_children['PersonNr'].tolist()
-                        personNr2_list = sorted(personNr2_list)
-                        if len(personNr2_list) == 2:
-                            # If length is 2, create a single row with 'siblings' as the connection
-                            row_data = {'personNr1': personNr2_list[0], 'personNr2': personNr2_list[1], 'connection': 'siblings'}
-                            parent_relationships.extend([row_data])
+
+
+                    # #this only finds children of same age I realised --> need to fix this 
+                    # if len(eligible_children)>1:
+                    #     personNr2_list = eligible_children['PersonNr'].tolist()
+                    #     personNr2_list = sorted(personNr2_list)
+                    #     if len(personNr2_list) == 2:
+                    #         # If length is 2, create a single row with 'siblings' as the connection
+                    #         row_data = {'personNr1': personNr2_list[0], 'personNr2': personNr2_list[1], 'connection': 'siblings'}
+                    #         parent_relationships.extend([row_data])
                                     
-                        elif len(personNr2_list) > 2:
-                            # If length is greater than 2, create rows for all combinations
-                            for pair in combinations(personNr2_list, 2):
-                                row_data = {'personNr1': pair[0], 'personNr2': pair[1], 'connection': 'siblings'}
-                                #dfs_to_concat.extend([pd.DataFrame(row_data)])
-                                parent_relationships.extend([row_data])
+                    #     elif len(personNr2_list) > 2:
+                    #         # If length is greater than 2, create rows for all combinations
+                    #         for pair in combinations(personNr2_list, 2):
+                    #             row_data = {'personNr1': pair[0], 'personNr2': pair[1], 'connection': 'siblings'}
+                    #             #dfs_to_concat.extend([pd.DataFrame(row_data)])
+                    #             parent_relationships.extend([row_data])
+
 
 
     if not parent_relationships:
@@ -101,6 +116,18 @@ def find_parent_child_relationship(subset, current_year):
     return parent_relationships
 
 def find_aunts_uncles(family_connections):
+
+    """
+    Finds Aunt/uncle - niece/nephew relationships within a dataframe of family connections between people. 
+
+    Parameters:
+    - Family_connections: a dataframe inlcuding three columns named "personNr1", "personNr2" and "connection"
+
+    Returns:
+    pandas.DataFrame: A DataFrame containing relationships with columns 'personNr1',
+                     'personNr2', and 'connection'.
+    """
+
     output1 = pd.DataFrame()
     output2= pd.DataFrame()
     selection_parent = family_connections[family_connections["connection"] == "parent of"]
@@ -139,43 +166,79 @@ def find_aunts_uncles(family_connections):
     return final_output
 
 def find_relationships(subset):
+
+
+    """
+    Finds relationship connections in a dataframe of family connections. 
+
+    Parameters:
+    - subset: a dataframe inlcuding information of a family living together
+
+    Returns:
+    pandas.DataFrame: A DataFrame containing relationships with columns 'personNr1',
+                     'personNr2', and 'connection'.
+    """
     #should i change approach here? 
     #couple_relationships = pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
     couple_relationships = []
-    selected = subset[['PersonNr', 'Alder']]
-    selected = selected.sort_values(by="PersonNr")
-    #if current_connections:
-    #    current_connections = pd.DataFrame(current_connections, columns= ["personNr1", "personNr2", "connection"])
-    #    connections_exist = True
-    #else:
-    #    connections_exist = False
-
+    selected = subset[['PersonNr', 'Alder']].sort_values(by="PersonNr")
 
     for i in range(len(selected)-1):
-        person1 = selected.iat[i, 0]
-        person2 = selected.iat[i+1, 0]
+        #person1 = selected.iat[i, 0]
+        #person2 = selected.iat[i+1, 0]
+
 
         # Calculate age difference
         age_difference = abs(selected.iat[i, 1] - selected.iat[i+1, 1])
         
-            #checking if they might be siblings 
 
-        #if connections_exist == True:  
-            #siblings_possible = (((current_connections['personNr1'] == person1) & (current_connections['personNr2'] == person2) & (current_connections['connection'] == "siblings")) | ((current_connections['personNr1'] == person2) & (current_connections['personNr2'] == person1) & (current_connections['connection'] == "siblings")) ).any()
-        #else:
-        #    siblings_possible=False
-            #add check for amount of children (?)
+
         if age_difference <= 13:
                 #row_data = pd.DataFrame([{'personNr1':person1 , 'personNr2': person2, 'connection': "partner of"}])
                 #couple_relationships = pd.concat([couple_relationships, row_data])
-            row_data = {'personNr1': person1, 'personNr2': person2, 'connection': "partner of"}
+            row_data = {'personNr1': selected.iat[i, 0], 'personNr2': selected.iat[i+1, 0], 'connection': "partner of"}
+
             couple_relationships.extend([row_data])
 
        
     return couple_relationships
 
 
+# def find_relationships_grouped(group):
+#     couple_relationships = pd.DataFrame()
+
+#     # Assuming the DataFrame is already sorted by 'PersonNr' within each group
+#     selected = group[['PersonNr', 'Alder']]
+
+#     for i in range(len(selected) - 1):
+#         age_difference = abs(selected.iloc[i, 1] - selected.iloc[i+1, 1])
+
+#         if age_difference <= 13:
+#             relationship_row = pd.DataFrame({
+#                 'personNr1': selected.iloc[i, 0],
+#                 'personNr2': selected.iloc[i+1, 0],
+#                 'connection': "partner of"
+#             }, index=[0])
+
+#             couple_relationships = pd.concat([couple_relationships, relationship_row], ignore_index=True)
+
+#     return couple_relationships
+
+
+
+
 def find_grandparents_aunts(family_connections):
+    """
+    Finds Grandparent - grandchild relationships within a dataframe of family connections between people. 
+
+    Parameters:
+    - Family_connections: a dataframe inlcuding three columns named "personNr1", "personNr2" and "connection"
+
+    Returns:
+    pandas.DataFrame: A DataFrame containing relationships with columns 'personNr1',
+                     'personNr2', and 'connection'.
+    """
+
     output = pd.DataFrame()
     selection = family_connections[family_connections["connection"] == "parent of"]
     
@@ -198,8 +261,19 @@ def find_grandparents_aunts(family_connections):
 
     return   output
             
-    
+
 def find_siblings(family_connections):
+    """
+    Finds sibling relationships within a dataframe of family connections between people. 
+
+    Parameters:
+    - Family_connections: a dataframe inlcuding three columns named "personNr1", "personNr2" and "connection"
+
+    Returns:
+    pandas.DataFrame: A DataFrame containing relationships with columns 'personNr1',
+                     'personNr2', and 'connection'.
+    """
+
     unique_combinations_df = pd.DataFrame()
     selection = family_connections[family_connections["connection"] == "parent of"]
     siblings = selection.merge(selection, how='left', on='personNr1')
@@ -224,9 +298,22 @@ def find_siblings(family_connections):
     final_df['connection'] = 'siblings'
     
     return final_df
+
+
 def find_cousins(family_connections):
+    """
+    Finds cousins relationships within a dataframe of family connections between people. 
+
+    Parameters:
+    - Family_connections: a dataframe inlcuding three columns named "personNr1", "personNr2" and "connection"
+
+    Returns:
+    pandas.DataFrame: A DataFrame containing relationships with columns 'personNr1',
+                     'personNr2', and 'connection'.
+    """
     #cousines= pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
-    output2= pd.DataFrame()
+    #output2= pd.DataFrame()
+
     selection_aunts = family_connections[family_connections["connection"] == "aunt/uncle of"]
     selection_parents = family_connections[family_connections["connection"] == "parent of"]
     
@@ -244,6 +331,20 @@ def find_cousins(family_connections):
 
 
 def data_preprocessing(registry_data, save_directory): 
+
+
+    """
+    This code preprocesses the data, by correcting column names, preselecting columns and then grouping the dataframe and saving the 
+    grouped dataframe in batches.
+
+    Parameters:
+    - registry_data = The swedish registration data. 
+    - save_directory = the directory to save the batches to
+
+    Returns:
+    current_year: a year indicating an approximate of which year we are dealing with, to later know which columns are present
+    """
+
         #fix for column names for now 
     if 'LopNr' in registry_data.columns and 'LopNr_FamId' in registry_data.columns:
         # Create a dictionary for column name mapping
@@ -261,7 +362,9 @@ def data_preprocessing(registry_data, save_directory):
     
 
     # Specify the batch size (number of groups in each file)
-    batch_size = 30000
+
+    batch_size = 50000
+
 
     # Iterate through batches and save each batch to a separate file
     grouped_df = registry_data.groupby('FamId')
@@ -284,10 +387,26 @@ def data_preprocessing(registry_data, save_directory):
 
 
 def create_family_layer(registry_data):
+
+    """
+    This function creates a family layer based on registry data for a social network for one year. 
+
+    Parameters:
+    - registry_data = The registry data for one year.
+
+    Returns:
+    A Dataframe with the information for the family layer. 
+    """
+
     #connections = pd.DataFrame(columns=['personNr1', 'personNr2', 'connection'])
     current_year = 1990
     save_directory = 'datastorage_familylayer_onelayer'
     connections = []
+
+    #connections_relationships = pd.DataFrame()
+
+
+
     if not os.path.exists(save_directory):
 
         # Create a new directory because it does not exist
@@ -331,10 +450,19 @@ def create_family_layer(registry_data):
                 #work on the partner relationship --> we are using the output here to reduce the running time
                 relationships = find_relationships(subset)
                 if relationships: 
-                    connections.extend(relationships)
 
-            
+                   connections.extend(relationships)
+
+            #result_per_group = grouped_data.apply(find_relationships_grouped)
+            # Concatenate the lists into a single list
+            # result_df = grouped_data.apply(find_relationships_grouped).reset_index(drop=True)
+            # connections_relationships = pd.concat([connections_relationships, result_df])
+
+    # Concatenate the results into a single list or DataFrame if needed
+    #result = pd.concat(result_per_group, ignore_index=True)      
     connections = pd.DataFrame(connections)
+    #connections = pd.concat([connections, connections_relationships])
+
     connections = connections.drop_duplicates()
     #sibling relationship
     #dfs_to_concat = find_siblings(connections)
@@ -344,6 +472,15 @@ def create_family_layer(registry_data):
     #grandparent/ aunts/uncles / niece .. /cousin relationship
     print("Saved a partial network now")
     connections.to_csv('network_produced_csvs/Partial_network.csv')
+
+
+    print("Finding Siblings now")
+    sibling_relations = find_siblings(connections)
+    #print(sibling_relations)
+    if not sibling_relations.empty:
+        connections = pd.concat([connections] + [sibling_relations], ignore_index= True)
+
+
     #can add progress bars here --> but rather quick
     print("Searching possible Grandparents now")
     grandparents_connections = find_grandparents_aunts(connections)
@@ -360,7 +497,9 @@ def create_family_layer(registry_data):
     if not cousin_connections.empty:
         #cousin_connections = pd.DataFrame(cousin_connections)
         connections = pd.concat([connections] + [cousin_connections], ignore_index=True)
-    connections = connections.drop_duplicates()
+
+    connections = connections.drop_duplicates(['personNr1', 'personNr2', 'connection'])
+
     connections = connections[~((connections.duplicated(subset=['personNr1', 'personNr2'])) & (connections['connection'] == 'partner of'))]
 
     connections.to_csv('network_produced_csvs/network_100k.csv')
@@ -369,16 +508,21 @@ def create_family_layer(registry_data):
     return connections
 
 
-# if len(sys.argv) < 2:
-#     print("Missing argument: input file name")
-#     sys.exit(-1)
-# input_file_name = sys.argv[1]
 
-# data = pd.read_csv(input_file_name)
+if len(sys.argv) < 2:
+     print("Missing argument: input file name")
+     sys.exit(-1)
+input_file_name = sys.argv[1]
+
+data = pd.read_csv(input_file_name)
+
 
 #data = directory_of_csv_to_df(path="multiple_year/synthetic_scb_data_1990")
 #data = pd.read_csv("basictestdata/100k_rows.csv")
 
 #needs to be changed to data again to run through command line --> also the year
+
+
 create_family_layer(data)
+
 
