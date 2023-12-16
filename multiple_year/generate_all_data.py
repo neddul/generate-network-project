@@ -630,7 +630,7 @@ def get_date(start_date = '19250101', stop_date='20191231'):
 taken_social_security_numbers = {'0'}
 def person_nummer_creation(sample_year, start_date=None, stop_year="", gender=3):        
     if stop_year == "":
-        end_date = str(sample_year-16) #People need to be atleast 16 to legally live alone in Sweden
+        end_date = str(sample_year-15) #People need to be atleast 15 to legally live alone in Sweden
         end_date = end_date + "1231"
     else:
         end_date = stop_year
@@ -715,7 +715,7 @@ def create_children(sample_year, PersonNr, is_kid=False):
 
         person_age = int(sample_year) - int(PersonNr[:4])
         min_age = (person_age - 60) if person_age > 60 else 0 #Max age to get newborns is 60
-        max_age = person_age - 15
+        max_age = person_age - 14
         for _ in range(number_of_kids):
             kid_age = random.randint(min_age, max_age)
             kid_age_t = (kid_age - min_age) / ((max_age - min_age))
@@ -732,7 +732,7 @@ def create_children(sample_year, PersonNr, is_kid=False):
     return barn
 
 
-def make_kid_family_frame(PersonNr, FamId, is_Kid, sample_year): #Used for kids that just turned 16 and have special work/economic
+def make_kid_family_frame(PersonNr, FamId, is_Kid, sample_year): #Used for kids that just turned 15 and have special work/economic
     kids = create_children(sample_year, PersonNr, is_kid=is_Kid)
     data = kids
     data['PersonNr'] = PersonNr
@@ -757,7 +757,7 @@ def make_triplets(age, sample_year):
 
 
 def create_kids_data(sample_year, FamId, kids_info):
-    kids_list = [[],[],[],[]]
+    kids_list = [[],[],[],[],[]]
     for k,v in kids_info['kid_info'].items():
         kid_age = k
         number_of_kids = v
@@ -771,14 +771,36 @@ def create_kids_data(sample_year, FamId, kids_info):
             for _ in range(number_of_kids):
                 kids_list[1].append(kid_age)
         elif sample_year > 2004 and kid_age > 19: #Barn20plus
-                for _ in range(number_of_kids):
-                    kids_list[3].append(kid_age)
+            for _ in range(number_of_kids):
+                kids_list[3].append(kid_age)
+        elif kid_age == 15: #Barn 15
+            for _ in range(number_of_kids):
+                kids_list[4].append(kid_age)
+
     kids_list = [sorted([num for num in sublist]) for sublist in kids_list] # Sorts the kids by age for each group
     kids_in_range = kids_list[:2]       #Barn16_17 and Barn18_19
-    kids_plus = kids_list[2:]           #Barn18plus and Barn20plus
-
-
+    kids_plus = kids_list[2:4]           #Barn18plus and Barn20plus
+    kids_15 = kids_list[-1] #Barn 15
+    
     all_kids = []
+    if len(kids_15) == 1:
+        kid_age = kids_15[0]
+        year_born = sample_year - kid_age
+        kid = person_nummer_creation(sample_year, start_date=f"{year_born}0101", stop_year=f"{year_born}1231")
+        all_kids.append(make_kid_family_frame(kid, FamId, is_Kid=True, sample_year=sample_year))
+    elif len(kids_15) == 2:
+        kid_age = kids_15[0]
+        kid_numbers = make_twins(kid_age, sample_year)
+        for kid_number in kid_numbers:
+            all_kids.append(make_kid_family_frame(kid_number, FamId, is_Kid=True, sample_year=sample_year))
+    elif len(kids_15) == 3:
+        kid_age = kids_15[0]
+        kid_numbers = make_triplets(kid_age, sample_year)
+        for kid_number in kid_numbers:
+            all_kids.append(make_kid_family_frame(kid_number, FamId, is_Kid=True, sample_year=sample_year))
+
+
+
     #Barn16_17 and Barn18_19
     for kids in kids_in_range:
         if len(kids) == 1:
@@ -929,8 +951,8 @@ import math
 def create_spouse(FamId, kids_info, sample_year):
     spouse_age = sample_year - int(FamId[:4])
     partner_age = math.ceil((spouse_age/2) + 7) #The spouse will follow half your age + 7 rule
-    if partner_age < 16:
-        partner_age = 16
+    if partner_age < 15:
+        partner_age = 15
     PersonNr = person_nummer_creation(1,start_date=FamId[:8], stop_year=f"{sample_year-partner_age}1231")
     spouse = kids_info
     spouse['PersonNr'] = PersonNr
@@ -952,7 +974,7 @@ def generate_family(sample_year): #Creates a household
     family_dicts = [data]
 
 
-    kids_frames = create_kids_data(sample_year, PersonNr, kids_info) #Creates data for people living at home age > 16
+    kids_frames = create_kids_data(sample_year, PersonNr, kids_info) #Creates data for people living at home age > 15
     if len(kids_frames) == 0:
         if random.randint(1,100) > 60: # Probability someone is living alone
             spouse = create_spouse(PersonNr, kids_info, sample_year)
@@ -1283,7 +1305,7 @@ def generate_work(personnummer, county, economicstatus, sample_year, YrkStalln, 
     #Generates which municipal(s) the person works in based on county
     Kommun = generate_municipal(county)
     
-    #If it is a newly turned 16 year old, they will have no workplace(s)
+    #If it is a newly turned 15 year old, they will have no workplace(s)
     if is_kid:
         prefix_working_ties1 = generate_company(personnummer, Kommun, county, sample_year, prefix="KU1", YrkStalln="0", no_income=True) #Yrkstallning hardcoded needs FIX
         prefix_working_ties2 = generate_company(personnummer, Kommun, county, sample_year, prefix="KU2", YrkStalln="0", no_income=True) #Yrkstallning hardcoded needs FIX
@@ -1592,7 +1614,7 @@ def age_people_one_year(dictionary_data, sample_year):
 
 
 def kid_into_row(parent_dict, sample_year, number_of_kids):
-    min_age_to_be_in_a_row = 16
+    min_age_to_be_in_a_row = 15
     yearborn = sample_year - min_age_to_be_in_a_row
 
     PersonNr_kids = []
@@ -1618,7 +1640,7 @@ def kid_into_row(parent_dict, sample_year, number_of_kids):
     #Generates all the data a person should have when they appear as a datapoint
     for PersonNr_kid in PersonNr_kids:
         kid_dict = make_kid_family_frame(PersonNr_kid, famid, is_Kid=True, sample_year=sample_year)
-        #Newly turned 16 year olds will always live in the same place as the parent as a start
+        #Newly turned 15 year olds will always live in the same place as the parent as a start
         kid_dict['Lan']             = parent_dict['Lan']
         kid_dict['Kommun']          = parent_dict['Kommun']
         kid_dict['FastBet']         = parent_dict['FastBet']
@@ -1647,7 +1669,7 @@ def kid_into_row(parent_dict, sample_year, number_of_kids):
     return kid_dicts
 
         
-def turn_16_year_olds_into_data(dictionary_data, sample_year):
+def turn_kid_into_row(dictionary_data, sample_year):
     visited_kid_data = set()
     young_adults = []
     for PersonNr, dict_data in dictionary_data.items():
@@ -1656,7 +1678,7 @@ def turn_16_year_olds_into_data(dictionary_data, sample_year):
             my_kid_info = dict_data['kid_info']
             
             for kid_age, number_of_kids in my_kid_info.items():
-                if kid_age == 16: #The kid will turn 16 and thus is added as their own row in the dataframe
+                if kid_age == 15: #The kid will turn 16 and thus is added as their own row in the dataframe
                     kid_dicts = kid_into_row(dict_data, sample_year, number_of_kids)
                     young_adults = young_adults + kid_dicts
                     
@@ -1672,7 +1694,7 @@ def turn_16_year_olds_into_data(dictionary_data, sample_year):
                 spouse_PersonNr = my_spouse['PersonNr']
                 visited_kid_data.add(spouse_PersonNr)
     
-    #All kids that turned 16 this year now have their data stored in the big dictionary with the rest of all other people
+    #All kids that turned 15 this year now have their data stored in the big dictionary with the rest of all other people
     for kid in young_adults:
         kid_PersonNr = kid['PersonNr']
         dictionary_data[kid_PersonNr] = kid
@@ -1725,7 +1747,7 @@ def kids_move_out(dictionary_data, sample_year):
 
 def simulate_1_year(list_of_dictionaries, sample_year):
     age_people_one_year(list_of_dictionaries, sample_year)
-    turn_16_year_olds_into_data(list_of_dictionaries, sample_year)
+    turn_kid_into_row(list_of_dictionaries, sample_year)
     get_babies(list_of_dictionaries)
     kids_move_out(list_of_dictionaries, sample_year)
     
