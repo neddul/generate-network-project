@@ -23,4 +23,9 @@ The other is using the same data for several years, creating the layers over mul
 ## Work Layer: 
 Ruvimbo
 
-This code creates the layer regarding work relations. As the years are independent, it can simply be used for any year to create a layer for the social network from it. 
+This code creates the layer regarding work relations using two approaches. As the years are independent, it can simply be used for any year to create a layer for the social network from it. 
+
+## Education Layer:
+Ruvimbo
+
+This code creates a layer linking individuals based shared educational experiences. As the years are independent, it can simply be used for any year to create a layer for the social network from it. 
